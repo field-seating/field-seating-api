@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - stg-deploy 
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      with:
+        github-token: ${{ secrets.PAT_TOKEN }}
+        script: |
+          await github.rest.actions.createWorkflowDispatch({
+            owner: 'field-seating',
+            repo: 'devops-ansible',
+            workflow_id: 'api-stg-deployment.yml',
+            ref: 'main'
+          })
