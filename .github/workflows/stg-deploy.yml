@@ -15,5 +15,7 @@ jobs:
             repo: 'devops-ansible',
             workflow_id: 'api-stg-deployment.yml',
             ref: 'main',
-            inputs: 'production'
+            inputs: {
+              deployEnv: 'production'
+            }
           })
