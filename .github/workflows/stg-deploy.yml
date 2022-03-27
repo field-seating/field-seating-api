@@ -14,5 +14,6 @@ jobs:
             owner: 'field-seating',
             repo: 'devops-ansible',
             workflow_id: 'api-stg-deployment.yml',
-            ref: 'main'
+            ref: 'main',
+            inputs: 'production'
           })
