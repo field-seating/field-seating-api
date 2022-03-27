@@ -16,6 +16,6 @@ jobs:
             workflow_id: 'api-deployment.yml',
             ref: 'main',
             inputs: {
-              deployEnv: 'production'
+              deployEnv: 'staging'
             }
           })
