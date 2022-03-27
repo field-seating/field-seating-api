@@ -13,7 +13,7 @@ jobs:
           await github.rest.actions.createWorkflowDispatch({
             owner: 'field-seating',
             repo: 'devops-ansible',
-            workflow_id: 'api-stg-deployment.yml',
+            workflow_id: 'api-deployment.yml',
             ref: 'main',
             inputs: {
               deployEnv: 'production'
