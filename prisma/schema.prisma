@@ -10,4 +10,145 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
+// user model
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(255)
+  name      String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  role      String   @db.VarChar(255) @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  records   Record[]
+  photos    Photo[]
+  collections Collection[]
+  reviews Review[]
+}
+// field model
+model Field {
+  id        Int      @id @default(autoincrement())
+  orientations Orientation[]
+  levels    Level[]
+  name      String   @db.VarChar(255)
+  img       String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zone[]
+}
+//orientation model
+model Orientation {
+  id        Int      @id @default(autoincrement())
+  fields    Field[]
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zone[]
+}
+//level model
+model Level {
+  id        Int      @id @default(autoincrement())
+  fields    Field[]
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zone[]
+}
+//zone model
+model Zone {
+  id        Int      @id @default(autoincrement())
+  field     Field    @relation(fields: [fieldId], references: [id])
+  fieldId   Int
+  orientation    Orientation    @relation(fields: [orientationId], references: [id])
+  orientationId   Int
+  level    Level    @relation(fields: [levelId], references: [id])
+  levelId   Int
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  spaces    Space[]
+}
+//space model
+model Space {
+  id        Int      @id @default(autoincrement())
+  zone     Zone    @relation(fields: [zoneId], references: [id])
+  zoneId   Int
+  spaceType String   @db.VarChar(255)
+  version   String   @db.VarChar(255)
+  colNumber String   @db.VarChar(10)
+  rowNumber String   @db.VarChar(10)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  seats    Seat[]
+  pillars    Pillar[]
+  records   Record[]
+  photos    Photo[]
+  collections Collection[]
+  @@unique([id, spaceType])
+}
+//seat model
+model Seat {
+  space    Space    @relation(fields: [spaceId, spaceType], references: [id, spaceType])
+  spaceId   Int  @id
+  spaceType String   @default("seat")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+//pillar model
+model Pillar {
+  space    Space   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
+  spaceId   Int    @id
+  spaceType String   @default("pillar")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// record model
+model Record {
+  id        Int      @id @default(autoincrement())
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Space    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  date      DateTime @db.Date
+  score   String   @db.VarChar(10)
+  comment String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  photos    Photo[]
+}
+// photo model
+model Photo {
+  id        Int      @id @default(autoincrement())
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Space    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  record     Record    @relation(fields: [recordId], references: [id])
+  recordId   Int
+  date      DateTime @db.Date
+  path   String   @db.VarChar(255)
+  thumbnail_path String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews Review[]
+}
+// collection model
+model Collection {
+  id        Int      @id @default(autoincrement())
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Space    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// review model
+model Review {
+  id        Int      @id @default(autoincrement())
+  user     User    @relation(fields: [userId], references: [id])
+  userId   Int
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  photoId   Int
+  useful    String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
