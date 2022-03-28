@@ -1,5 +1,5 @@
-const { createLogger, format, transports } = require('winston')
-const level = ['error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly']
+const { createLogger, format, transports } = require('winston');
+const level = ['error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'];
 
 const logger = createLogger({
   level: level[6],
@@ -10,12 +10,11 @@ const logger = createLogger({
   ],
 });
 if (process.env.NODE_ENV !== 'production') {
-  logger.add(new transports.Console({
-    format: format.combine(
-      format.colorize({ all: true }),
-      format.simple()
-    )
-  }));
+  logger.add(
+    new transports.Console({
+      format: format.combine(format.colorize({ all: true }), format.simple()),
+    })
+  );
 }
 
-module.exports = logger 
+module.exports = logger;
