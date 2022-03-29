@@ -1,11 +1,9 @@
-// eslint-disable-next-line no-undef
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
 const express = require('express');
 const app = express();
-// eslint-disable-next-line no-undef
 const port = process.env.PORT || 3000;
 const logger = require('./middleware/winston');
 
