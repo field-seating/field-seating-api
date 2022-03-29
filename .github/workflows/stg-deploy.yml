@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - stg-deploy 
+      - main
 jobs:
   dispatch:
     runs-on: ubuntu-latest
