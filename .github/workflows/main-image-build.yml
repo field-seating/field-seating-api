@@ -3,7 +3,7 @@ name: main image build
 on:
   push:
     branches:
-      - dockerize-and-push-image
+      - main
 
 env:
   REGISTRY: ghcr.io
