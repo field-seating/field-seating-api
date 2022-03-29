@@ -11,7 +11,7 @@
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "db:migrate": "npx prisma migrate deploy"
+    "db:deploy": "npx prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
