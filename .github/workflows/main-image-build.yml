@@ -1,7 +1,12 @@
+name: main image build
+
 on:
   push:
     branches:
-      - CU-2hjybmt-dockerize-and-push-image
+      - dockerize-and-push-image
+  pull_request:
+    branches:
+      - main
 
 env:
   REGISTRY: ghcr.io
