@@ -40,6 +40,7 @@ CREATE TABLE `FieldOnOrientations` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `FieldOnOrientations_orientationId_fieldId_key`(`orientationId`, `fieldId`),
     PRIMARY KEY (`orientationId`, `fieldId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -60,6 +61,7 @@ CREATE TABLE `FieldOnLevels` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `FieldOnLevels_levelId_fieldId_key`(`levelId`, `fieldId`),
     PRIMARY KEY (`levelId`, `fieldId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
