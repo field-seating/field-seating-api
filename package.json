@@ -9,10 +9,9 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-
     "test": "echo \"Error: no test specified\" && exit 0",
     "prepare": "husky install",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
     "db:deploy": "npx prisma migrate deploy"
   },
   "engines": {
