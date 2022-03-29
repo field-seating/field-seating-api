@@ -10,4 +10,168 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// user model
+model Users {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(255)
+  name      String   @db.VarChar(255)
+  password  String   @db.VarChar(255)
+  role      String   @db.VarChar(255) @default("user")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  records   Records[]
+  photos    Photos[]
+  collections Collections[]
+  reviews Reviews[]
+}
+// field model
+model Fields {
+  id        Int      @id @default(autoincrement())
+  orientations FieldOnOrientations[]
+  levels    FieldOnLevels[]
+  name      String   @db.VarChar(255)
+  img       String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zones[]
+}
+//orientation model
+model Orientations {
+  id        Int      @id @default(autoincrement())
+  fields    FieldOnOrientations[]
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zones[]
+}
+model FieldOnOrientations {
+  orientation  Orientations @relation(fields: [orientationId], references: [id])
+  orientationId     Int 
+  field   Fields @relation(fields: [fieldId], references: [id])
+  fieldId Int 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
+  @@unique([orientationId, fieldId])
+  @@id([orientationId, fieldId])
+}
+//level model
+model Levels {
+  id        Int      @id @default(autoincrement())
+  fields    FieldOnLevels[]
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  zones     Zones[]
+}
+model FieldOnLevels {
+  level  Levels @relation(fields: [levelId], references: [id])
+  levelId     Int 
+  field   Fields @relation(fields: [fieldId], references: [id])
+  fieldId Int 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([levelId, fieldId])
+  @@id([levelId, fieldId])
+}
+//zone model
+model Zones {
+  id        Int      @id @default(autoincrement())
+  field     Fields    @relation(fields: [fieldId], references: [id])
+  fieldId   Int
+  orientation    Orientations    @relation(fields: [orientationId], references: [id])
+  orientationId   Int
+  level    Levels    @relation(fields: [levelId], references: [id])
+  levelId   Int
+  name      String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  spaces    Spaces[]
+}
+//space model
+model Spaces {
+  id        Int      @id @default(autoincrement())
+  zone     Zones    @relation(fields: [zoneId], references: [id])
+  zoneId   Int
+  spaceType String   @db.VarChar(255)
+  version   String   @db.VarChar(255)
+  colNumber String   @db.VarChar(10)
+  rowNumber String   @db.VarChar(10)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  seats    Seats[]
+  pillars    Pillars[]
+  records   Records[]
+  photos    Photos[]
+  collections Collections[]
+  @@unique([id, spaceType])
+}
+//seat model
+model Seats {
+  space    Spaces    @relation(fields: [spaceId, spaceType], references: [id, spaceType])
+  spaceId   Int  @id
+  spaceType String   @default("seat")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+//pillar model
+model Pillars {
+  space    Spaces   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
+  spaceId   Int    @id
+  spaceType String   @default("pillar")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// record model
+model Records {
+  id        Int      @id @default(autoincrement())
+  user     Users    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Spaces    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  date      DateTime @db.Date
+  score   String   @db.VarChar(10)
+  comment String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  photos    Photos[]
+}
+// photo model
+model Photos {
+  id        Int      @id @default(autoincrement())
+  user     Users    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Spaces    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  record     Records    @relation(fields: [recordId], references: [id])
+  recordId   Int
+  date      DateTime @db.Date
+  path   String   @db.VarChar(255)
+  thumbnail_path String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews Reviews[]
+}
+// collection model
+model Collections {
+  id        Int      @id @default(autoincrement())
+  user     Users    @relation(fields: [userId], references: [id])
+  userId   Int
+  space     Spaces    @relation(fields: [spaceId], references: [id])
+  spaceId   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+// review model
+model Reviews {
+  id        Int      @id @default(autoincrement())
+  user     Users    @relation(fields: [userId], references: [id])
+  userId   Int
+  photo     Photos    @relation(fields: [photoId], references: [id])
+  photoId   Int
+  useful    String   @db.VarChar(255)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([photoId, useful])
+}
