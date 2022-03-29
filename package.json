@@ -9,9 +9,15 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "test": "echo \"Error: no test specified\" && exit 0",
     "prepare": "husky install",
+    "lint": "npx eslint ."
     "db:deploy": "npx prisma migrate deploy"
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=16.0.0"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +40,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
     "lint-staged": "^12.3.7",
+    "prettier": "^2.6.1",
     "prisma": "^3.11.1"
   }
 }
