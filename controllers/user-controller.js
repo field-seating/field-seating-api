@@ -1,10 +1,14 @@
 const userServices = require('../services/user-service');
 
 const userController = {
-  signUp: (req, res, next) => {
-    userServices.signUp(req, (err, data) =>
-      err ? next(err) : res.status(200).json({ status: 'success', data })
-    );
+  signUp: async (req, res, next) => {
+    try {
+      const { name, email, password } = req.body;
+      const user = await userServices.signUp(name, email, password);
+      res.status(200).json({ status: 'success', data: user });
+    } catch (err) {
+      next(err);
+    }
   },
 };
 
