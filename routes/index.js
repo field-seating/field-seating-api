@@ -1,11 +1,9 @@
-const { apiErrorHandler } = require('../middleware/error-handler');
-const testController = require('../controllers/test-controller');
 const express = require('express');
-const router = express.Router();
+const testController = require('../controllers/test-controller');
 const user = require('./modules/user');
+const router = express.Router();
 
 router.post('/api/echo', testController.postEcho);
 router.use('/api/users', user);
-router.use('/', apiErrorHandler);
 
 module.exports = router;
