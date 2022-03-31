@@ -2,7 +2,6 @@ const prisma = require('../config/prisma');
 
 class UserModel {
   constructor() {}
-  // 原型方法
   async createUser(data) {
     const createUser = await prisma.users.create({
       data: {
@@ -17,12 +16,6 @@ class UserModel {
       },
     });
     return createUser;
-  }
-  async findDuplicateUser(email) {
-    const findDuplicateUser = await prisma.users.findUnique({
-      where: { email: email },
-    });
-    return findDuplicateUser;
   }
 }
 
