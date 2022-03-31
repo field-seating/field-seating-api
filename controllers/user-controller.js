@@ -1,5 +1,5 @@
 const userServices = require('../services/user-service');
-const resSuccess = require('../models/response');
+const resSuccess = require('./helpers/response');
 
 const userController = {
   signUp: async (req, res, next) => {

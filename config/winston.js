@@ -1,6 +1,5 @@
 const { createLogger, format, transports } = require('winston');
 const appRoot = require('app-root-path');
-const level = ['error', 'warn', 'info', 'http', 'verbose', 'debug', 'silly'];
 
 // define the custom settings for each transport (file, console)
 const options = {
@@ -14,21 +13,28 @@ const options = {
     colorize: false,
   },
   console: {
-    level: 'debug',
+    level: 'info',
     handleExceptions: true,
     json: false,
     colorize: true,
   },
 };
+// change level while prd or not
+if (process.env.NODE_ENV === 'production') {
+  options.file.level = 'debug';
+  options.console.level = 'debug';
+} else {
+  options.file.level = 'info';
+  options.console.level = 'info';
+}
 
 const logger = createLogger({
-  level: level[6],
-  format: format.json(),
   transports: [
     new transports.File(options.file),
     new transports.Console(options.console),
   ],
 });
+// for dev
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new transports.Console({
