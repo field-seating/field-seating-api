@@ -38,8 +38,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 logger.stream = {
-  write: function (message) {
-    logger.info(message);
+  write: function (message, encoding) {
+    logger.info(message, encoding);
   },
 };
 
