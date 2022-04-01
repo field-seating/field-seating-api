@@ -13,12 +13,14 @@ const signUpSchema = yup.object({
   body: yup.object({
     email: yup
       .string()
-      .email(alwaysThrow(new GeneralError(signUpErrorMap.emailRequired))),
+      .required(alwaysThrow(new GeneralError(signUpErrorMap.emailRequired)))
+      .email(alwaysThrow(new GeneralError(signUpErrorMap.emailFormat))),
     name: yup
       .string()
       .required(alwaysThrow(new GeneralError(signUpErrorMap.nameRequired))),
     password: yup
       .string()
+      .required(alwaysThrow(new GeneralError(signUpErrorMap.passwordRequired)))
       .min(8, alwaysThrow(new GeneralError(signUpErrorMap.passwordLength)))
       .max(30, alwaysThrow(new GeneralError(signUpErrorMap.passwordLength))),
   }),

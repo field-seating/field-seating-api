@@ -19,6 +19,10 @@ const signUpErrorMap = {
     message: '密碼長度為8 至20',
     code: 's005',
   },
+  emailFormat: {
+    message: 'Email 格式不符合',
+    code: 's006',
+  },
 };
 
 module.exports = signUpErrorMap;
