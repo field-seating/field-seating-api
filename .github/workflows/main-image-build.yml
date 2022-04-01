@@ -1,10 +1,5 @@
 name: main image build
 
-on:
-  push:
-    branches:
-      - main
-
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
