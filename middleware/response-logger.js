@@ -8,6 +8,6 @@ module.exports = {
         req.method
       } - ${req.ip}`
     );
-    next;
+    next();
   },
 };
