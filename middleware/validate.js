@@ -14,6 +14,7 @@ const validate = (schema) => async (req, res, next) => {
 
     if (isGeneralError) {
       next(err);
+      return;
     }
 
     const validationError = new GeneralError({
