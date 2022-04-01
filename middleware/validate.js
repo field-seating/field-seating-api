@@ -1,4 +1,4 @@
-const generalError = require('../controllers/helpers/general-error');
+const GeneralError = require('../controllers/helpers/general-error');
 
 const validate = (schema) => async (req, res, next) => {
   try {
@@ -10,7 +10,13 @@ const validate = (schema) => async (req, res, next) => {
 
     next();
   } catch (err) {
-    const validationError = new generalError({
+    const isGeneralError = err instanceof GeneralError;
+
+    if (isGeneralError) {
+      next(err);
+    }
+
+    const validationError = new GeneralError({
       message: `[${err.errors.join(', ')}]`,
       code: '001',
     });

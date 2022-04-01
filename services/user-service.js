@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const generalError = require('../controllers/helpers/general-error');
+const GeneralError = require('../controllers/helpers/general-error');
 const signUpErrorMap = require('../errors/signUpError');
 const UserModel = require('../models/user');
 
@@ -21,7 +21,7 @@ const userServices = {
       return postUser;
     } catch (err) {
       if (err.code === 'P2002') {
-        throw new generalError(signUpErrorMap['duplicateEmail']);
+        throw new GeneralError(signUpErrorMap['duplicateEmail']);
       }
       throw err;
     }

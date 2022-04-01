@@ -1,4 +1,4 @@
-class generalError extends Error {
+class GeneralError extends Error {
   constructor({ message, code }) {
     super(message);
     this.message = message;
@@ -8,4 +8,4 @@ class generalError extends Error {
   }
 }
 
-module.exports = generalError;
+module.exports = GeneralError;
