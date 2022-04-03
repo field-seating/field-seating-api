@@ -14,6 +14,8 @@ services:
       #- ./package.json:/var/app/package.json
     networks:
       - application
+    depends_on:
+      - database
 
   database:
     image: mysql:8
