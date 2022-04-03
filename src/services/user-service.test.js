@@ -19,13 +19,14 @@ describe('user-service.signUp', () => {
         name,
         email,
       };
+
       expect(newUser).toMatchObject(expectedResult);
-      expect(newUser).not.toMatchObject({ password });
+      expect(newUser).not.toHaveProperty('password');
     });
   });
 
-  describe('when create user with duplicate email', () => {
-    it('should return desired values without password', async () => {
+  describe('when create users with duplicate email', () => {
+    it('should throw a duplicate error', async () => {
       const email = 'example@example.com';
 
       await userServices.signUp('user1', email, 'password1');
