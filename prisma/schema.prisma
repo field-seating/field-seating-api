@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native"]
 }
 
 datasource db {
@@ -46,9 +47,9 @@ model Orientations {
 }
 model FieldOnOrientations {
   orientation  Orientations @relation(fields: [orientationId], references: [id])
-  orientationId     Int 
+  orientationId     Int
   field   Fields @relation(fields: [fieldId], references: [id])
-  fieldId Int 
+  fieldId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -66,9 +67,9 @@ model Levels {
 }
 model FieldOnLevels {
   level  Levels @relation(fields: [levelId], references: [id])
-  levelId     Int 
+  levelId     Int
   field   Fields @relation(fields: [fieldId], references: [id])
-  fieldId Int 
+  fieldId Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
