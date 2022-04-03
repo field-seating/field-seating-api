@@ -17,6 +17,10 @@ class UserModel {
     });
     return createUser;
   }
+
+  async _truncate() {
+    await prisma.users.deleteMany({});
+  }
 }
 
 module.exports = UserModel;

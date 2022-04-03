@@ -7,8 +7,10 @@ services:
     container_name: field-seating-test-server
     working_dir: /var/app
     volumes:
-      - ./:/var/app
+      - ./src:/var/app/src
       - ./.env.test:/var/app/.env
+      #- ./scripts:/var/app/scripts
+      #- ./package.json:/var/app/package.json
     networks:
       - application
     depends_on:

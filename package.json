@@ -10,9 +10,10 @@
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
     "test": "jest -i --passWithNoTests",
-    "test:watch": "jest -i --passWithNoTests --watch",
-    "container:test": "docker-compose -f ./docker-compose.test.yml run --rm server sh 'scripts/container-test.sh'",
-    "container:test:watch": "docker-compose -f ./docker-compose.test.yml run --rm server sh 'scripts/container-test-watch.sh'",
+    "test:watch": "jest -i --passWithNoTests --watchAll",
+    "container:test": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test.sh' && npm run container:down",
+    "container:test:watch": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test-watch.sh' && npm run container:down",
+    "container:down": "docker-compose -f ./docker-compose.test.yml down",
     "lint": "npx eslint .",
     "db:deploy": "npx prisma migrate deploy"
   },

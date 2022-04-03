@@ -1,4 +1,10 @@
 const userServices = require('./user-service');
+const UserModel = require('../models/user');
+
+afterEach(async () => {
+  const userModel = new UserModel();
+  await userModel._truncate();
+});
 
 describe('user-service.signUp', () => {
   describe('with regular input', () => {
@@ -12,7 +18,7 @@ describe('user-service.signUp', () => {
         name,
         email,
       };
-      expect(newUser).toEqual(expectedResult);
+      expect(newUser).toMatchObject(expectedResult);
     });
   });
 });
