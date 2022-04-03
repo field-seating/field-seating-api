@@ -1,14 +1,14 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const GeneralError = require('../controllers/helpers/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const UserModel = require('../models/user');
 const { jwtLife } = require('../constants/jwt-constant');
+const { hashPassword } = require('../controllers/helpers/password');
 
 const userServices = {
   signUp: async (name, email, password) => {
     // hash password
-    const hash = await bcrypt.hash(password, 10);
+    const hash = await hashPassword(password);
 
     // create user
     const userModel = new UserModel();

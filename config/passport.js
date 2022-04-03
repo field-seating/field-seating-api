@@ -3,11 +3,12 @@ const LocalStrategy = require('passport-local').Strategy;
 const passportJWT = require('passport-jwt');
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
-const bcrypt = require('bcryptjs');
 const prisma = require('../config/prisma');
 const GeneralError = require('../controllers/helpers/general-error');
 const signInErrorMap = require('../errors/sign-in-error');
 const authErrorMap = require('../errors/auth-error');
+const { comparePassword } = require('../controllers/helpers/password');
+const { env } = require('../config/config');
 
 passport.use(
   new LocalStrategy({ usernameField: 'email' }, async function (
@@ -24,7 +25,7 @@ passport.use(
     // email not exist
     if (!user) return done(new GeneralError(signInErrorMap['wrongInput']));
     // password wrong
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await comparePassword(password, user.password);
     if (!isMatch) return done(new GeneralError(signInErrorMap['wrongInput']));
     return done(null, user);
   })
@@ -32,7 +33,7 @@ passport.use(
 // jwt
 const jwtOptions = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
+  secretOrKey: env.JWT_SECRET,
 };
 passport.use(
   new JWTStrategy(jwtOptions, async function (jwtPayload, done) {

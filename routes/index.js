@@ -3,7 +3,6 @@ const yup = require('yup');
 
 const validate = require('../middleware/validate');
 const passport = require('../config/passport');
-const testController = require('../controllers/test-controller');
 const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
 const GeneralError = require('../controllers/helpers/general-error');
@@ -24,7 +23,6 @@ const signInSchema = yup.object({
   }),
 });
 
-router.post('/api/echo', testController.postEcho);
 router.post(
   '/api/signin',
   validate(signInSchema),
