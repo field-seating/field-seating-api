@@ -10,6 +10,7 @@ class UserModel {
         password: data.password,
       },
       select: {
+        id: true,
         email: true,
         name: true,
         role: true,
@@ -17,7 +18,20 @@ class UserModel {
     });
     return createUser;
   }
-
+  async getUser(id) {
+    const getUser = await prisma.users.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+      },
+    });
+    return getUser;
+  }
   async _truncate() {
     await prisma.users.deleteMany({});
   }

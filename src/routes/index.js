@@ -1,9 +1,34 @@
 const express = require('express');
-const testController = require('../controllers/test-controller');
+const yup = require('yup');
+
+const validate = require('../middleware/validate');
+const passport = require('../config/passport');
+const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
+const GeneralError = require('../controllers/helpers/general-error');
+const signUpErrorMap = require('../errors/sign-up-error');
+const alwaysThrow = require('../utils/func/always-throw');
 const router = express.Router();
 
-router.post('/api/echo', testController.postEcho);
+// use by signIn
+const signInSchema = yup.object({
+  body: yup.object({
+    email: yup
+      .string()
+      .required(alwaysThrow(new GeneralError(signUpErrorMap.emailRequired)))
+      .email(alwaysThrow(new GeneralError(signUpErrorMap.emailFormat))),
+    password: yup
+      .string()
+      .required(alwaysThrow(new GeneralError(signUpErrorMap.passwordRequired))),
+  }),
+});
+
+router.post(
+  '/api/signin',
+  validate(signInSchema),
+  passport.authenticate('local', { session: false }),
+  userController.signIn
+);
 router.use('/api/users', user);
 
 module.exports = router;

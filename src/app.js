@@ -8,8 +8,9 @@ const logger = require('./config/winston');
 const { apiErrorHandler } = require('./middleware/error-handler');
 const { resLogger } = require('./middleware/response-logger');
 const routes = require('./routes');
+const { port } = require('./config/config');
 const app = express();
-const port = process.env.PORT || 3000;
+const usedPort = port || 3000;
 
 morgan.token('body', (req) => {
   return JSON.stringify(req.body);
@@ -22,4 +23,6 @@ app.use(routes);
 app.use(apiErrorHandler);
 app.use(resLogger);
 app.get('/', (req, res) => res.send('Hello field-seating!'));
-app.listen(port, () => logger.info(`example app listening on port ${port}!`));
+app.listen(usedPort, () =>
+  logger.info(`example app listening on port ${usedPort}!`)
+);
