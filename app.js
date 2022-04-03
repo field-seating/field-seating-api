@@ -8,9 +8,9 @@ const logger = require('./config/winston');
 const { apiErrorHandler } = require('./middleware/error-handler');
 const { resLogger } = require('./middleware/response-logger');
 const routes = require('./routes');
-const { env } = require('./config/config');
+const { configFromEnv } = require('./config/config');
 const app = express();
-const port = env.PORT || 3000;
+const port = configFromEnv.port || 3000;
 
 morgan.token('body', (req) => {
   return JSON.stringify(req.body);

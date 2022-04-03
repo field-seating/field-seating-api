@@ -8,7 +8,7 @@ const GeneralError = require('../controllers/helpers/general-error');
 const signInErrorMap = require('../errors/sign-in-error');
 const authErrorMap = require('../errors/auth-error');
 const { comparePassword } = require('../controllers/helpers/password');
-const { env } = require('../config/config');
+const { configFromEnv } = require('../config/config');
 
 passport.use(
   new LocalStrategy({ usernameField: 'email' }, async function (
@@ -33,7 +33,7 @@ passport.use(
 // jwt
 const jwtOptions = {
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: env.JWT_SECRET,
+  secretOrKey: configFromEnv.jwtSecret,
 };
 passport.use(
   new JWTStrategy(jwtOptions, async function (jwtPayload, done) {

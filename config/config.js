@@ -1,24 +1,12 @@
-const env = process.env;
-
+const configFromEnv = {
+  port: process.env.PORT,
+  jwtSecret: process.env.JWT_SECRET,
+  dataBase: process.env.DATABASE_URL,
+};
 const config = {
-  development: {
-    username: 'root',
-    password: 'password',
-    dialect: 'mysql',
-  },
-  test: {
-    username: 'root',
-    password: 'password',
-    dialect: 'mysql',
-  },
-  production: {
-    username: 'root',
-    password: 'password',
-    dialect: 'mysql',
-  },
+  development: {},
+  production: {},
 };
-
-module.exports = {
-  env,
-  config,
-};
+const isProduction = process.env.NODE_MODULE === 'production';
+const configByEnv = isProduction ? config.production : config.development;
+module.exports = { configByEnv, configFromEnv };
