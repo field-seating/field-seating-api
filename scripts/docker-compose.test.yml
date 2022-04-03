@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  server:
+    image: node:16-alpine
+    command: tail -f .env
+    working_dir: /var/app
+    volumes:
+      - ../:/var/app
+      - ../.env.test:/var/app/.env
+    networks:
+      - application
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    networks:
+      - application
+networks:
+  application:
