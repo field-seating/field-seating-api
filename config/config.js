@@ -1,7 +1,7 @@
 const configFromEnv = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
-  dataBase: process.env.DATABASE_URL,
+  databaseUrl: process.env.DATABASE_URL,
 };
 const config = {
   development: {},
@@ -9,4 +9,4 @@ const config = {
 };
 const isProduction = process.env.NODE_MODULE === 'production';
 const configByEnv = isProduction ? config.production : config.development;
-module.exports = { configByEnv, configFromEnv };
+module.exports = { ...configByEnv, ...configFromEnv };
