@@ -16,9 +16,6 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v2
 
-      - name: install
-        run: npm install
-
       - name: test
         run: npm run container:test
 
