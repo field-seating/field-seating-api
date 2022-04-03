@@ -3,7 +3,8 @@ version: "3.9"
 services:
   server:
     build:
-      dockerfile: ./scripts/test.Dockerfile
+      context: ./scripts
+      dockerfile: test.Dockerfile
     container_name: field-seating-test-server
     working_dir: /var/app
     volumes:
