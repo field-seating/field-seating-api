@@ -17,6 +17,21 @@ class UserModel {
     });
     return createUser;
   }
+
+  async getUser(id) {
+    const getUser = await prisma.users.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+      },
+    });
+    return getUser;
+  }
 }
 
 module.exports = UserModel;

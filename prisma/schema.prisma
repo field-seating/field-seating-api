@@ -3,6 +3,8 @@
 
 generator client {
   provider = "prisma-client-js"
+  // 要使用transaction 新增的，根據git issue需執行 npx prisma generate
+  previewFeatures = ["interactiveTransactions"] 
 }
 
 datasource db {
@@ -30,7 +32,7 @@ model Fields {
   orientations FieldOnOrientations[]
   levels    FieldOnLevels[]
   name      String   @db.VarChar(255)
-  img       String   @db.VarChar(255)
+  img       String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   zones     Zones[]
@@ -131,8 +133,8 @@ model Records {
   space     Spaces    @relation(fields: [spaceId], references: [id])
   spaceId   Int
   date      DateTime @db.Date
-  score   String   @db.VarChar(10)
-  comment String   @db.VarChar(255)
+  score   String?   @db.VarChar(10)
+  comment String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   photos    Photos[]
