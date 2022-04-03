@@ -4,7 +4,6 @@ services:
   server:
     image: node:16
     container_name: field-seating-test-server
-    command: sh -c "npm run db:deploy && git init && npm run test:watch"
     working_dir: /var/app
     volumes:
       - ../:/var/app

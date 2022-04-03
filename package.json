@@ -11,6 +11,8 @@
     "dev": "nodemon app.js",
     "test": "jest -i --passWithNoTests",
     "test:watch": "jest -i --passWithNoTests --watch",
+    "container:test": "docker-compose -f ./scripts/docker-compose.test.yml run --rm server sh 'scripts/container-test.sh'",
+    "container:test:watch": "docker-compose -f ./scripts/docker-compose.test.yml run --rm server sh 'scripts/container-test-watch.sh'",
     "lint": "npx eslint .",
     "db:deploy": "npx prisma migrate deploy"
   },
