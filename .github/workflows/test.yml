@@ -1,4 +1,4 @@
-name: Unit Test
+name: Test
 
 on:
   push:
@@ -20,5 +20,5 @@ jobs:
         run: npm install
 
       - name: test
-        run: npm run container:tset
+        run: npm run container:test
 
