@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./scripts/test.Dockerfile
+    container_name: field-seating-test-server
+    working_dir: /var/app
+    volumes:
+      - ./src:/var/app/src
+      - ./.env.test:/var/app/.env
+      #- ./scripts:/var/app/scripts
+      #- ./package.json:/var/app/package.json
+    networks:
+      - application
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8
+    container_name: field-seating-test-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    networks:
+      - application
+networks:
+  application:
