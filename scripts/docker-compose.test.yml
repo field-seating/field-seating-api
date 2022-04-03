@@ -2,8 +2,9 @@ version: "3.9"
 
 services:
   server:
-    image: node:16-alpine
-    command: tail -f .env
+    image: node:16
+    container_name: field-seating-test-server
+    command: sh -c "npm run db:deploy && git init && npm run test:watch"
     working_dir: /var/app
     volumes:
       - ../:/var/app
@@ -15,6 +16,7 @@ services:
 
   database:
     image: mysql:8
+    container_name: field-seating-test-db
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
