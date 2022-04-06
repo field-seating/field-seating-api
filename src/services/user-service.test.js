@@ -1,12 +1,12 @@
 const userServices = require('./user-service');
 const UserModel = require('../models/user');
-const signUpErrorMap = require('../errors/signUpError');
+const signUpErrorMap = require('../errors/sign-up-error');
 
 afterEach(async () => {
   const userModel = new UserModel();
   await userModel._truncate();
 });
-
+// signUp
 describe('user-service.signUp', () => {
   describe('with regular input', () => {
     it('should return desired values without password', async () => {
@@ -36,6 +36,25 @@ describe('user-service.signUp', () => {
       } catch (e) {
         expect(e.code).toBe(signUpErrorMap.duplicateEmail.code);
       }
+    });
+  });
+});
+
+// signIn
+describe('user-service.signIn', () => {
+  describe('with regular input', () => {
+    it('should return desired values without password', async () => {
+      const email = 'example@example.com';
+      const newUser = await userServices.signUp('user1', email, 'password1');
+      const expectedResult = {
+        user: newUser,
+      };
+      console.log(newUser.id);
+      const signInUser = await userServices.signIn(newUser.id);
+      console.log(signInUser.user);
+      expect(signInUser).toMatchObject(expectedResult);
+      expect(signInUser.user).not.toHaveProperty('password');
+      expect(signInUser).toHaveProperty('token');
     });
   });
 });
