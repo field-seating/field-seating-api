@@ -49,9 +49,20 @@ describe('user-service.signIn', () => {
       const expectedResult = {
         user: newUser,
       };
-      console.log(newUser.id);
       const signInUser = await userServices.signIn(newUser.id);
-      console.log(signInUser.user);
+      expect(signInUser).toMatchObject(expectedResult);
+      expect(signInUser.user).not.toHaveProperty('password');
+      expect(signInUser).toHaveProperty('token');
+    });
+  });
+  describe('token validity', () => {
+    it('should return same user', async () => {
+      const email = 'example@example.com';
+      const newUser = await userServices.signUp('user1', email, 'password1');
+      const signInUser = await userServices.signIn(newUser.id);
+      const expectedResult = {
+        user: newUser,
+      };
       expect(signInUser).toMatchObject(expectedResult);
       expect(signInUser.user).not.toHaveProperty('password');
       expect(signInUser).toHaveProperty('token');
