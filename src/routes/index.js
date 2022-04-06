@@ -9,6 +9,7 @@ const record = require('./modules/record');
 const GeneralError = require('../controllers/helpers/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const alwaysThrow = require('../utils/func/always-throw');
+const { authenticated } = require('../middleware/auth');
 const router = express.Router();
 
 // use by signIn
@@ -31,6 +32,6 @@ router.post(
   userController.signIn
 );
 router.use('/api/users', user);
-router.use('/api/records', record);
+router.use('/api/records', authenticated, record);
 
 module.exports = router;
