@@ -10,6 +10,7 @@ class UserModel {
         password: data.password,
       },
       select: {
+        id: true,
         email: true,
         name: true,
         role: true,
@@ -31,6 +32,9 @@ class UserModel {
       },
     });
     return getUser;
+  }
+  async _truncate() {
+    await prisma.users.deleteMany({});
   }
 }
 

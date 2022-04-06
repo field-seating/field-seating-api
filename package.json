@@ -7,11 +7,15 @@
     "seed": "node prisma/seed.js"
   },
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest -i --passWithNoTests",
+    "test:watch": "jest -i --passWithNoTests --watchAll",
+    "container:test": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test.sh' && npm run container:down",
+    "container:test:watch": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test-watch.sh' && npm run container:down",
+    "container:down": "docker-compose -f ./docker-compose.test.yml down",
     "lint": "npx eslint .",
-    "db:deploy": "npx prisma migrate deploy"
+    "db:deploy": "npx prisma generate && npx prisma migrate deploy"
   },
   "engines": {
     "npm": ">=7.0.0",
@@ -42,8 +46,10 @@
   "devDependencies": {
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-jest": "^26.1.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
+    "jest": "^27.5.1",
     "lint-staged": "^12.3.7",
     "nodemon": "^2.0.15",
     "prettier": "^2.6.1",

@@ -4,7 +4,7 @@ const yup = require('yup');
 const validate = require('../../middleware/validate');
 const userController = require('../../controllers/user-controller');
 const GeneralError = require('../../controllers/helpers/general-error');
-const signUpErrorMap = require('../../errors/signUpError');
+const signUpErrorMap = require('../../errors/sign-up-error');
 const alwaysThrow = require('../../utils/func/always-throw');
 
 const router = express.Router();
