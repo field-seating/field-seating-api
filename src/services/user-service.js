@@ -4,6 +4,7 @@ const signUpErrorMap = require('../errors/sign-up-error');
 const UserModel = require('../models/user');
 const { jwtLife } = require('../constants/jwt-constant');
 const { hashPassword } = require('../controllers/helpers/password');
+const { jwtSecret } = require('../config/config');
 
 const userServices = {
   signUp: async (name, email, password) => {
@@ -30,7 +31,7 @@ const userServices = {
   signIn: async (id) => {
     const userModel = new UserModel();
     const getUser = await userModel.getUser(id);
-    const token = jwt.sign(getUser, process.env.JWT_SECRET, {
+    const token = jwt.sign(getUser, jwtSecret, {
       expiresIn: jwtLife,
     });
     const user = {
