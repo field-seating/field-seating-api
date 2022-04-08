@@ -2,6 +2,7 @@ const configFromEnv = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
+  sibKey: process.env.SIB_KEY,
 };
 const config = {
   development: {},

@@ -1,4 +1,5 @@
 const prisma = require('../config/prisma');
+const sendEmail = require('../middleware/send-email');
 
 class UserModel {
   constructor() {}
@@ -16,6 +17,7 @@ class UserModel {
         role: true,
       },
     });
+    sendEmail;
     return createUser;
   }
   async getUser(id) {
