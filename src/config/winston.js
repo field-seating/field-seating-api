@@ -30,8 +30,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const logger = createLogger({
   transports: [
-    // new transports.File(options.file),
-    // new transports.Console(options.console),
+    new transports.File(options.file),
+    new transports.Console(options.console),
   ],
 });
 // for dev
