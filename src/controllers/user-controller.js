@@ -1,4 +1,5 @@
 const userServices = require('../services/user-service');
+const emailService = require('../services/email-service');
 const resSuccess = require('./helpers/response');
 
 const userController = {
@@ -6,6 +7,9 @@ const userController = {
     try {
       const { name, email, password } = req.body;
       const user = await userServices.signUp(name, email, password);
+      if (user) {
+        await emailService.sendVerifyEmail(user);
+      }
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
@@ -15,6 +19,15 @@ const userController = {
     try {
       const { id } = req.user;
       const user = await userServices.signIn(id);
+      res.status(200).json(resSuccess(user));
+    } catch (err) {
+      next(err);
+    }
+  },
+  verifyUser: async (req, res, next) => {
+    try {
+      const token = req.params.token;
+      const user = await userServices.verifyUser(token);
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);

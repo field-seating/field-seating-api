@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const logger = require('./config/winston');
 const { apiErrorHandler } = require('./middleware/error-handler');
@@ -15,9 +16,10 @@ const usedPort = port || 3000;
 morgan.token('body', (req) => {
   return JSON.stringify(req.body);
 });
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // POST json格式
+app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
+app.set('view engine', 'hbs');
 app.use(morgan(':method :url :body', { stream: logger.stream }));
 app.use(routes);
 app.use(apiErrorHandler);

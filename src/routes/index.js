@@ -30,5 +30,8 @@ router.post(
   userController.signIn
 );
 router.use('/api/users', user);
+router.get('/verify-email/:token', userController.verifyUser); // 後端測試郵件用
+router.patch('/api/verify-email/:token', userController.verifyUser);
+router.use('/testemail', (req, res) => res.render('verify-email')); // 檢視email格式使用
 
 module.exports = router;

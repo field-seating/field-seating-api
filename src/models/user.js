@@ -1,5 +1,4 @@
 const prisma = require('../config/prisma');
-const sendEmail = require('../middleware/send-email');
 
 class UserModel {
   constructor() {}
@@ -9,15 +8,17 @@ class UserModel {
         email: data.email,
         name: data.name,
         password: data.password,
+        // token: data.token,
       },
       select: {
         id: true,
         email: true,
         name: true,
         role: true,
+        status: true,
+        // token: true,
       },
     });
-    sendEmail;
     return createUser;
   }
   async getUser(id) {
@@ -30,9 +31,26 @@ class UserModel {
         email: true,
         name: true,
         role: true,
+        status: true,
       },
     });
     return getUser;
+  }
+  async verifyUser(id) {
+    const verifyUser = await prisma.users.update({
+      where: {
+        id: id,
+      },
+      data: { status: 'verified' },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+    return verifyUser;
   }
   async _truncate() {
     await prisma.users.deleteMany({});
