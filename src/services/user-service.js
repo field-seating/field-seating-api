@@ -11,17 +11,12 @@ const userServices = {
   signUp: async (name, email, password) => {
     // hash password
     const hash = await hashPassword(password);
-    // verify token
-    // const token = jwt.sign(email, jwtSecret, {
-    //   expiresIn: verifyTokenLife,
-    // });
-    // create user
+
     const userModel = new UserModel();
     const data = {
       name: name,
       email: email,
       password: hash,
-      // token: token,
     };
     try {
       const postUser = await userModel.createUser(data);
