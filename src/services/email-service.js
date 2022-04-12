@@ -14,12 +14,9 @@ const emailService = {
       email: user.email,
       token: token,
     };
-    try {
-      const sendEmail = await sendVerifyEmail(data);
-      sendEmail;
-    } catch (err) {
-      throw new err();
-    }
+    const sendEmail = await sendVerifyEmail(data);
+    console.log(sendEmail);
+    return sendEmail;
   },
 };
 module.exports = emailService;

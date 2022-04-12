@@ -6,6 +6,7 @@ const userController = require('../../controllers/user-controller');
 const GeneralError = require('../../controllers/helpers/general-error');
 const signUpErrorMap = require('../../errors/sign-up-error');
 const alwaysThrow = require('../../utils/func/always-throw');
+const { authenticated } = require('../../middleware/auth');
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ const signUpSchema = yup.object({
 });
 
 router.post('/', validate(signUpSchema), userController.signUp);
+router.post('/verify-email', authenticated, userController.sendVerifyEmail);
 
 module.exports = router;

@@ -7,10 +7,15 @@ const userController = {
     try {
       const { name, email, password } = req.body;
       const user = await userServices.signUp(name, email, password);
+      let sendVerifyEamil = '';
       if (user) {
-        await emailService.sendVerifyEmail(user);
+        sendVerifyEamil = await emailService.sendVerifyEmail(user);
       }
-      res.status(200).json(resSuccess(user));
+      const newUser = {
+        ...user,
+        sendEmail: sendVerifyEamil,
+      };
+      res.status(200).json(resSuccess(newUser));
     } catch (err) {
       next(err);
     }
@@ -29,6 +34,19 @@ const userController = {
       const token = req.params.token;
       const user = await userServices.verifyUser(token);
       res.status(200).json(resSuccess(user));
+    } catch (err) {
+      next(err);
+    }
+  },
+  sendVerifyEmail: async (req, res, next) => {
+    try {
+      const user = req.user;
+      const sendVerifyEamil = await emailService.sendVerifyEmail(user);
+      const newUser = {
+        ...user,
+        sendEmail: sendVerifyEamil,
+      };
+      res.status(200).json(resSuccess(newUser));
     } catch (err) {
       next(err);
     }
