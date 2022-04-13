@@ -23,19 +23,6 @@ const signInSchema = yup.object({
   }),
 });
 
-router.get('/api/log-test', async (req, res, next) => {
-  const wait = () =>
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
-
-  await wait();
-  next(new Error(123));
-  //res.json({});
-});
-
 router.post(
   '/api/signin',
   validate(signInSchema),

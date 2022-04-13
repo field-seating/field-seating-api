@@ -16,7 +16,7 @@ const usedPort = port || 3000;
 
 app.use(requestIdMiddleware);
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // POST json格式
+app.use(express.json());
 
 app.use(requestLogger);
 app.use(responseLogger);
