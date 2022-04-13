@@ -5,7 +5,7 @@ class GeneralError extends Error {
     this.name = this.constructor.name;
     this.code = code;
     this.httpCode = httpCode;
-    Error.captureStackTrace(this, this.constructor.name);
+    //Error.captureStackTrace(this, this.constructor.name);
   }
 }
 
