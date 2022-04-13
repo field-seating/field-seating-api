@@ -1,13 +1,25 @@
-const logger = require('../config/winston');
+const logger = require('../config/logger');
+const { bodySanitizer } = require('./helpers');
 
-module.exports = {
-  resLogger(err, req, res, next) {
-    // add this line to include winston logging
-    logger.error(
-      `${err.code || 500} - ${err.message} - ${req.originalUrl} - ${
-        req.method
-      } - ${req.ip}`
-    );
-    next();
-  },
+const responesLogger = (req, res, next) => {
+  const originalSend = res.send;
+  const url = req.url;
+  const requestId = req.requestId;
+
+  res.send = function (content) {
+    const body = JSON.parse(content);
+    logger.info('response out', {
+      url,
+      requestId,
+      body: {
+        ...body,
+        data: bodySanitizer(body.data),
+      },
+    });
+    originalSend.call(this, content);
+  };
+
+  next();
 };
+
+module.exports = responesLogger;
