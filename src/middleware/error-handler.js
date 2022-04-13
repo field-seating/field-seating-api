@@ -1,17 +1,19 @@
-module.exports = {
-  apiErrorHandler(err, req, res, next) {
-    if (err instanceof Error) {
-      res.status(401).json({
-        status: 'error',
-        code: `${err.code}`,
-        message: `${err.message}`,
-      });
-    } else {
-      res.status(500).json({
-        status: 'error',
-        message: `${err}`,
-      });
-    }
-    next(err);
-  },
+//const logger = require('../config/logger');
+
+const errorHandler = (err, req, res, next) => {
+  if (err instanceof Error) {
+    res.status(401).json({
+      status: 'error',
+      code: `${err.code}`,
+      message: `${err.message}`,
+    });
+  } else {
+    res.status(500).json({
+      status: 'error',
+      message: `${err}`,
+    });
+  }
+  next(err);
 };
+
+module.exports = errorHandler;

@@ -3,7 +3,8 @@ require('winston-daily-rotate-file');
 
 const appRoot = require('app-root-path');
 
-const config = require('./config');
+const config = require('../config');
+const { timestampFormatter, jsonStructureFormatter } = require('./helper');
 
 const { log: logConfig } = config;
 const isProduction = process.env.NODE_ENV === 'production';
@@ -16,6 +17,7 @@ const fileTransport = new transports.DailyRotateFile({
   zippedArchive: true,
   maxSize: '20m',
   maxFiles: `${logConfig.maxFilesDays}d`,
+  format: format.combine(timestampFormatter, jsonStructureFormatter),
 });
 
 const fileErrorTransport = new transports.DailyRotateFile({
@@ -26,15 +28,16 @@ const fileErrorTransport = new transports.DailyRotateFile({
   zippedArchive: true,
   maxSize: '20m',
   maxFiles: `${logConfig.maxFilesDays}d`,
+  format: format.combine(timestampFormatter, jsonStructureFormatter),
 });
 
 const consoleTransport = new transports.Console({
   level: logConfig.maxLevel,
   handleExceptions: true,
   format: format.combine(
-    format.json(),
-    format.colorize({ all: true }),
-    format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' })
+    timestampFormatter,
+    jsonStructureFormatter,
+    format.colorize({ all: true })
   ),
 });
 
