@@ -19,10 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // POST json格式
 
 app.use(requestLogger);
+app.use(responseLogger);
 
 app.use(routes);
 app.use(errorHandler);
-app.use(responseLogger);
 
 app.get('/', (req, res) => res.send('Hello field-seating!'));
 
