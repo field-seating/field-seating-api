@@ -1,16 +1,20 @@
-//const logger = require('../config/logger');
+const logger = require('../config/logger');
 
 const errorHandler = (err, req, res, next) => {
   if (err instanceof Error) {
-    res.status(401).json({
+    const { code, message, httpCode } = err;
+
+    res.status(httpCode || 400).json({
       status: 'error',
-      code: `${err.code}`,
-      message: `${err.message}`,
+      code: `${code}`,
+      message: `${message}`,
     });
   } else {
+    logger.error('uncaught error', { err });
+
     res.status(500).json({
       status: 'error',
-      message: `${err}`,
+      message: 'unexpected error',
     });
   }
   next(err);

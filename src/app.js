@@ -27,8 +27,5 @@ app.use(responseLogger);
 app.get('/', (req, res) => res.send('Hello field-seating!'));
 
 app.listen(usedPort, () => {
-  logger.info(`example app listening on port ${usedPort}!`, {
-    msg: 'obj msg',
-  });
-  logger.error('error demo');
+  logger.info(`App listening on port ${usedPort}`);
 });
