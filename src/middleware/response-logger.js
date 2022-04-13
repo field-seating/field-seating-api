@@ -5,7 +5,7 @@ const responesLogger = (req, res, next) => {
   const originalSend = res.send;
 
   res.send = function (body) {
-    logger.info('response out', { body: bodySanitizer });
+    logger.info('response out', { body: bodySanitizer(JSON.parse(body)) });
     originalSend.call(this, body);
   };
 
