@@ -1,6 +1,6 @@
 const { evolve, reduce, always } = require('ramda');
 
-const sensitiveKeyList = ['password'];
+const sensitiveKeyList = ['password', 'token'];
 const transformations = reduce(
   (acc, key) => ({
     ...acc,

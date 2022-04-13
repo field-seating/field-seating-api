@@ -6,13 +6,17 @@ const responesLogger = (req, res, next) => {
   const url = req.url;
   const requestId = req.requestId;
 
-  res.send = function (body) {
+  res.send = function (content) {
+    const body = JSON.parse(content);
     logger.info('response out', {
       url,
       requestId,
-      body: bodySanitizer(JSON.parse(body)),
+      body: {
+        ...body,
+        data: bodySanitizer(body.data),
+      },
     });
-    originalSend.call(this, body);
+    originalSend.call(this, content);
   };
 
   next();
