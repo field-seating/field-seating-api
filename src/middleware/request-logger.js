@@ -1,8 +1,7 @@
-const morgan = require('morgan');
 const logger = require('../config/logger');
 const { bodySanitizer } = require('./helpers');
 
-const requestLogger = morgan((token, req) => {
+const requestLogger = (req, res, next) => {
   const body = req.body;
   const url = req.url;
   const requestId = req.requestId;
@@ -12,6 +11,7 @@ const requestLogger = morgan((token, req) => {
     body: bodySanitizer(body),
     url,
   });
-});
+  next();
+};
 
 module.exports = requestLogger;
