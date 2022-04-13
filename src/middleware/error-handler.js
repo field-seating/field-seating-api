@@ -1,7 +1,8 @@
 const logger = require('../config/logger');
+const GeneralError = require('../errors/error/general-error');
 
 const errorHandler = (err, req, res, next) => {
-  if (err instanceof Error) {
+  if (err instanceof GeneralError) {
     const { code, message, httpCode, stack } = err;
 
     logger.error('got an error', { code, message, stack });
