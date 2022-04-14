@@ -28,6 +28,6 @@ const signUpSchema = yup.object({
 });
 
 router.post('/', validate(signUpSchema), userController.signUp);
-router.post('/verify-email', authenticated, userController.sendVerifyEmail);
+router.get('/verify-email', authenticated, userController.sendVerifyEmail);
 
 module.exports = router;

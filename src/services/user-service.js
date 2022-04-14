@@ -57,7 +57,7 @@ const userServices = {
       } else if (err.name === 'JsonWebTokenError') {
         throw new GeneralError(verifyErrorMap['invalidToken']);
       } else {
-        throw new err();
+        throw new GeneralError();
       }
     }
   },

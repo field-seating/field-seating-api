@@ -5,7 +5,9 @@ const configFromEnv = {
   sibKey: process.env.SIB_KEY,
 };
 const config = {
-  development: {},
+  development: {
+    baseUrl: 'http://localhost:3000',
+  },
   production: {},
 };
 const isProduction = process.env.NODE_MODULE === 'production';
