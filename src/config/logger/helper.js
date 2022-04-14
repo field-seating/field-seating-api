@@ -49,7 +49,7 @@ const fileErrorTransport = new transports.DailyRotateFile({
 
 const consoleTransport = new transports.Console({
   level: logConfig.maxLevel,
-  handleExceptions: true,
+  handleExceptions: logConfig.handleExceptions,
   format: format.combine(
     jsonStructureFormatter,
     format.colorize({ all: true })

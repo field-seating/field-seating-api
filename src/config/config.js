@@ -9,12 +9,14 @@ const config = {
     log: {
       maxFilesDays: 3,
       maxLevel: 'debug',
+      handleExceptions: false,
     },
   },
   production: {
     log: {
       maxFilesDays: 30,
       maxLevel: 'info',
+      handleExceptions: true,
     },
   },
 };
