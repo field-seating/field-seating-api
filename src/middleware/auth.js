@@ -1,5 +1,5 @@
 const passport = require('../config/passport');
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 const authErrorMap = require('../errors/auth-error');
 
 const authenticated = (req, res, next) => {

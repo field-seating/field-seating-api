@@ -1,4 +1,4 @@
-const GeneralError = require('../helpers/general-error');
+const GeneralError = require('../../errors/error/general-error');
 
 async function retry(func) {
   let count = 0;
@@ -8,7 +8,6 @@ async function retry(func) {
     try {
       await func;
     } catch (err) {
-      // console.log(count);
       count += 1;
       if (count === maxTries)
         throw new GeneralError({

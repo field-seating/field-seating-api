@@ -8,6 +8,8 @@ const configFromEnv = {
 const config = {
   development: {
     baseUrl: 'http://localhost:3000',
+    emailSender: 'ronnychiang1164@gmail.com',
+    emailReceiver: 'ronnychiang1164@gmail.com',
     log: {
       maxFilesDays: 3,
       maxLevel: 'debug',

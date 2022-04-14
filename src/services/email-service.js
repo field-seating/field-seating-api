@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { verifyTokenLife } = require('../constants/jwt-constant');
 const { jwtSecret, baseUrl } = require('../config/config');
 const sendEmail = require('../controllers/helpers/send-email');
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 const sendEmailErrorMap = require('../errors/send-email-error');
 const retry = require('../controllers/helpers/retry');
 

@@ -68,8 +68,10 @@ describe('user-service.signIn', () => {
 describe('user-service.verifyUser', () => {
   describe('with regular input', () => {
     it('should return user with status: verified', async () => {
+      // create user
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+      // create mock sib return
       sendEmail.mockImplementation(() => {
         return {
           sendEmail: {
@@ -80,8 +82,10 @@ describe('user-service.verifyUser', () => {
           },
         };
       });
+      // send email and get verify token
       const sendVerifyEmail = await emailServices.sendVerifyEmail(newUser);
       const verifyUser = await userService.verifyUser(sendVerifyEmail.token);
+      // make sure the user to be verified
       const expectedResult = {
         status: 'verified',
       };
@@ -90,8 +94,10 @@ describe('user-service.verifyUser', () => {
   });
   describe('with wrong token', () => {
     it('should return error: invalidToken', async () => {
+      // create user
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+      // create mock sib return
       sendEmail.mockImplementation(() => {
         return {
           sendEmail: {
@@ -102,7 +108,9 @@ describe('user-service.verifyUser', () => {
           },
         };
       });
+      // send email and get verify token
       const sendVerifyEmail = await emailServices.sendVerifyEmail(newUser);
+      // use fake token
       const wrongToken = {
         ...sendVerifyEmail,
         token: 'xxx',
@@ -110,6 +118,7 @@ describe('user-service.verifyUser', () => {
       try {
         await userService.verifyUser(wrongToken.token);
       } catch (e) {
+        // make sure get the right err code
         expect(e.code).toBe(verifyErrorMap.invalidToken.code);
       }
     });

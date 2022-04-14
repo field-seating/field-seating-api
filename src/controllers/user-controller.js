@@ -1,7 +1,7 @@
 const emailService = require('../services/email-service');
 const UserService = require('../services/user-service');
 const resSuccess = require('./helpers/response');
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 const verifyErrorMap = require('../errors/verify-error');
 
 const userController = {
