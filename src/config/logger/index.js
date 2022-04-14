@@ -7,7 +7,6 @@ let transportList = [consoleTransport];
 
 const logger = createLogger({
   transports: transportList,
-  exceptionHandlers: [consoleTransport],
 });
 
 module.exports = logger;
