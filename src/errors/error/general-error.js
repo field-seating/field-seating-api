@@ -1,10 +1,10 @@
 class GeneralError extends Error {
-  constructor({ message, code }) {
+  constructor({ message, code, httpCode }) {
     super(message);
     this.message = message;
     this.name = this.constructor.name;
     this.code = code;
-    // Error.captureStackTrace(this, this.constructor.name);
+    this.httpCode = httpCode;
   }
 }
 

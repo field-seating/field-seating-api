@@ -1,5 +1,5 @@
 const emailServices = require('./email-service');
-const userServices = require('./user-service');
+const UserService = require('./user-service');
 const UserModel = require('../models/user');
 const sendEmail = require('../controllers/helpers/send-email');
 
@@ -8,12 +8,14 @@ afterEach(async () => {
   await userModel._truncate();
 });
 jest.mock('../controllers/helpers/send-email');
+
+const userService = new UserService({ req: { requestId: '' } });
 //  sendVerifyEmail
 describe('email-service.sendVerifyEmail', () => {
   describe('with regular input', () => {
     it('should return user and sendEmail info', async () => {
       const email = 'example@example.com';
-      const newUser = await userServices.signUp('user1', email, 'password1');
+      const newUser = await userService.signUp('user1', email, 'password1');
       sendEmail.mockImplementation(() => {
         return {
           sendEmail: {
@@ -42,7 +44,7 @@ describe('email-service.sendVerifyEmail', () => {
   describe('with error', () => {
     it('should return the error which as same in sendinblue ', async () => {
       const email = 'example@example.com';
-      const newUser = await userServices.signUp('user1', email, 'password1');
+      const newUser = await userService.signUp('user1', email, 'password1');
       const code = 500;
       sendEmail.mockImplementation(() => {
         const error = new Error();

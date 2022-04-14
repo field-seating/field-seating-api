@@ -1,5 +1,5 @@
-const userServices = require('../services/user-service');
 const emailService = require('../services/email-service');
+const UserService = require('../services/user-service');
 const resSuccess = require('./helpers/response');
 const GeneralError = require('../controllers/helpers/general-error');
 const verifyErrorMap = require('../errors/verify-error');
@@ -7,8 +7,9 @@ const verifyErrorMap = require('../errors/verify-error');
 const userController = {
   signUp: async (req, res, next) => {
     try {
+      const userService = new UserService({ req });
       const { name, email, password } = req.body;
-      const user = await userServices.signUp(name, email, password);
+      const user = await userService.signUp(name, email, password);
       let sendVerifyEamil = '';
       if (user) {
         sendVerifyEamil = await emailService.sendVerifyEmail(user);
@@ -25,7 +26,8 @@ const userController = {
   signIn: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const user = await userServices.signIn(id);
+      const userService = new UserService({ req });
+      const user = await userService.signIn(id);
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
@@ -35,7 +37,8 @@ const userController = {
     try {
       const token = req.params.token;
       // update user status
-      const user = await userServices.verifyUser(token);
+      const userService = new UserService({ req });
+      const user = await userService.verifyUser(token);
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
