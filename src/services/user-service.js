@@ -3,9 +3,9 @@ const jwt = require('jsonwebtoken');
 const GeneralError = require('../errors/error/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
-const UserModel = require('../models/user');
+const UserModel = require('../models/user/index');
 const { jwtLife } = require('../constants/jwt-constant');
-const { hashPassword } = require('../controllers/helpers/password');
+const { hashPassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
 
@@ -47,7 +47,7 @@ class UserService extends BaseService {
     return user;
   }
 
-  async verifyUser(token) {
+  async verifyEmail(token) {
     try {
       // jwt驗證
       const SECRET = jwtSecret;
@@ -64,7 +64,7 @@ class UserService extends BaseService {
       } else if (err.name === 'JsonWebTokenError') {
         throw new GeneralError(verifyErrorMap['invalidToken']);
       } else {
-        throw new GeneralError();
+        throw err;
       }
     }
   }

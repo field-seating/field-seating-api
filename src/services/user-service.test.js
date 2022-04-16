@@ -1,17 +1,19 @@
-const emailServices = require('./email-service');
+const EmailService = require('./email-service');
 const UserService = require('./user-service');
-const UserModel = require('../models/user');
+const UserModel = require('../models/user/index');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
-const sendEmail = require('../controllers/helpers/send-email');
+const sendEmail = require('../services/helpers/send-email');
+const { statusMap } = require('../models/user/constants');
 
 afterEach(async () => {
   const userModel = new UserModel();
   await userModel._truncate();
 });
-jest.mock('../controllers/helpers/send-email');
+jest.mock('../services/helpers/send-email');
 
 const userService = new UserService({ req: { requestId: '' } });
+const emailService = new EmailService({ req: { requestId: '' } });
 // signUp
 describe('user-service.signUp', () => {
   describe('with regular input', () => {
@@ -24,7 +26,7 @@ describe('user-service.signUp', () => {
       const expectedResult = {
         name,
         email,
-        status: 'notVerify',
+        status: statusMap.unverified,
       };
 
       expect(newUser).toMatchObject(expectedResult);
@@ -83,11 +85,11 @@ describe('user-service.verifyUser', () => {
         };
       });
       // send email and get verify token
-      const sendVerifyEmail = await emailServices.sendVerifyEmail(newUser);
-      const verifyUser = await userService.verifyUser(sendVerifyEmail.token);
+      const sendVerifyEmail = await emailService.sendVerifyEmail(newUser);
+      const verifyUser = await userService.verifyEmail(sendVerifyEmail.token);
       // make sure the user to be verified
       const expectedResult = {
-        status: 'verified',
+        status: statusMap.active,
       };
       expect(verifyUser).toMatchObject(expectedResult);
     });
@@ -109,14 +111,14 @@ describe('user-service.verifyUser', () => {
         };
       });
       // send email and get verify token
-      const sendVerifyEmail = await emailServices.sendVerifyEmail(newUser);
+      const sendVerifyEmail = await emailService.sendVerifyEmail(newUser);
       // use fake token
       const wrongToken = {
         ...sendVerifyEmail,
         token: 'xxx',
       };
       try {
-        await userService.verifyUser(wrongToken.token);
+        await userService.verifyEmail(wrongToken.token);
       } catch (e) {
         // make sure get the right err code
         expect(e.code).toBe(verifyErrorMap.invalidToken.code);

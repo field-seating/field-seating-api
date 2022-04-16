@@ -1,47 +1,54 @@
-const emailServices = require('./email-service');
-const UserService = require('./user-service');
-const UserModel = require('../models/user');
-const sendEmail = require('../controllers/helpers/send-email');
+const EmailService = require('./email-service');
+const sendEmail = require('../services/helpers/send-email');
+const { baseUrl } = require('../config/config');
 
-afterEach(async () => {
-  const userModel = new UserModel();
-  await userModel._truncate();
-});
-jest.mock('../controllers/helpers/send-email');
-
-const userService = new UserService({ req: { requestId: '' } });
+jest.mock('../services/helpers/send-email');
+const emailService = new EmailService({ req: { requestId: '' } });
 //  sendVerifyEmail
 describe('email-service.sendVerifyEmail', () => {
   describe('with regular input', () => {
     it('should return user and sendEmail info', async () => {
       // create user
-      const email = 'example@example.com';
-      const newUser = await userService.signUp('user1', email, 'password1');
+      const newUser = {
+        name: 'user1',
+        email: 'example@example.com',
+      };
+
+      const result = await emailService.sendVerifyEmail(newUser);
+
       // create mock sib return
       sendEmail.mockImplementation(() => {
         return {
           sendEmail: {
             name: 'user1',
             email: 'example@example.com',
-            url: 'http://test/token',
+            url: `${baseUrl}/verify-email/${result.token}`,
             sibMessage: ['<202204131533.30577521883.1@smtp-relay.mailin.fr>'],
           },
         };
       });
-      const result = await emailServices.sendVerifyEmail(newUser);
-      const expectedResult = {
-        email: newUser.email,
+      const expectedTemplate = 'verify-email';
+      const expectedMeta = {
+        emailList: [
+          {
+            email: newUser.email,
+            name: newUser.name,
+          },
+        ],
+        subject: '球場坐座帳號驗證信',
+      };
+      const expectedData = {
         name: newUser.name,
+        email: newUser.email,
+        url: `${baseUrl}/verify-email/${result.token}`,
       };
       // 確認有呼叫sib
       expect(sendEmail).toHaveBeenCalled();
       // 確認回傳資訊
-      expect(result.sendEmail).toMatchObject(expectedResult);
-      expect(result.sendEmail).toHaveProperty(
-        'name',
-        'email',
-        'url',
-        'sibMessage'
+      expect(sendEmail).toBeCalledWith(
+        expectedTemplate,
+        expectedMeta,
+        expectedData
       );
     });
   });
@@ -49,8 +56,10 @@ describe('email-service.sendVerifyEmail', () => {
   describe('with error', () => {
     it('should return the error which as same in sendinblue ', async () => {
       // create user
-      const email = 'example@example.com';
-      const newUser = await userService.signUp('user1', email, 'password1');
+      const newUser = {
+        name: 'user1',
+        email: 'example@example.com',
+      };
       // create mock error code
       const code = 500;
       // create mock error
@@ -60,10 +69,10 @@ describe('email-service.sendVerifyEmail', () => {
         throw error;
       });
       try {
-        await emailServices.sendVerifyEmail(newUser);
+        await emailService.sendVerifyEmail(newUser);
       } catch (e) {
         // 確認回傳error與sib回傳的相同
-        expect(e.code).toBe(code);
+        expect(e.status).toBe(code);
       }
     });
   });

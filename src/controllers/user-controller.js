@@ -1,8 +1,9 @@
-const emailService = require('../services/email-service');
+const EmailService = require('../services/email-service');
 const UserService = require('../services/user-service');
 const resSuccess = require('./helpers/response');
 const GeneralError = require('../errors/error/general-error');
 const verifyErrorMap = require('../errors/verify-error');
+const { statusMap } = require('../models/user/constants');
 
 const userController = {
   signUp: async (req, res, next) => {
@@ -10,15 +11,9 @@ const userController = {
       const userService = new UserService({ req });
       const { name, email, password } = req.body;
       const user = await userService.signUp(name, email, password);
-      let sendVerifyEamil = '';
-      if (user) {
-        sendVerifyEamil = await emailService.sendVerifyEmail(user);
-      }
-      const newUser = {
-        ...user,
-        sendEmail: sendVerifyEamil,
-      };
-      res.status(200).json(resSuccess(newUser));
+      const emailService = new EmailService({ req });
+      await emailService.sendVerifyEmail(user);
+      res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
     }
@@ -33,12 +28,12 @@ const userController = {
       next(err);
     }
   },
-  verifyUser: async (req, res, next) => {
+  verifyEmail: async (req, res, next) => {
     try {
-      const token = req.params.token;
+      const token = req.body.token;
       // update user status
       const userService = new UserService({ req });
-      const user = await userService.verifyUser(token);
+      const user = await userService.verifyEmail(token);
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
@@ -48,16 +43,14 @@ const userController = {
     try {
       const user = req.user;
       // 判斷是否verified
-      if (user.status === 'verified')
+
+      if (user.status === statusMap.active)
         throw new GeneralError(verifyErrorMap['alreadyVerified']);
       // send verify email
-      const sendVerifyEamil = await emailService.sendVerifyEmail(user);
-      // return info
-      const newUser = {
-        ...user,
-        sendEmail: sendVerifyEamil,
-      };
-      res.status(200).json(resSuccess(newUser));
+      const emailService = new EmailService({ req });
+      await emailService.sendVerifyEmail(user);
+
+      res.status(200).json(resSuccess());
     } catch (err) {
       next(err);
     }

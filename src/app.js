@@ -17,9 +17,14 @@ const usedPort = port || 3000;
 
 app.use(requestIdMiddleware);
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json()); // POST json格式
-app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' })); // for check email format
-app.set('view engine', 'hbs'); // for check email format
+
+// for check email format
+if (process.env.NODE_ENV !== 'production') {
+  app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
+  app.set('view engine', 'hbs');
+}
 
 app.use(requestLogger);
 app.use(responseLogger);

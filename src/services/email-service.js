@@ -1,25 +1,35 @@
 const jwt = require('jsonwebtoken');
-const { verifyTokenLife } = require('../constants/jwt-constant');
-const { jwtSecret, baseUrl } = require('../config/config');
-const sendEmail = require('../controllers/helpers/send-email');
-const GeneralError = require('../errors/error/general-error');
+const { jwtSecret, baseUrl, verifyEmail } = require('../config/config');
+const sendEmail = require('./helpers/send-email');
+const PrivateError = require('../errors/error/private-error');
 const sendEmailErrorMap = require('../errors/send-email-error');
-const retry = require('../controllers/helpers/retry');
+const withRetry = require('../utils/func/retry');
+const BaseService = require('./base');
 
-const emailService = {
-  sendVerifyEmail: async (user) => {
+class EmailService extends BaseService {
+  async sendVerifyEmail(user) {
     // create token
     const token = jwt.sign(user, jwtSecret, {
-      expiresIn: verifyTokenLife,
+      expiresIn: verifyEmail.verifyTokenLife,
     });
+    const meta = {
+      emailList: [
+        {
+          email: user.email,
+          name: user.name,
+        },
+      ],
+      subject: '球場坐座帳號驗證信',
+    };
     const data = {
       name: user.name,
       email: user.email,
       url: `${baseUrl}/verify-email/${token}`,
     };
+    const template = 'verify-email';
     // send email
     async function send() {
-      const sendInfo = await sendEmail(data);
+      const sendInfo = await sendEmail(template, meta, data);
       const result = {
         ...sendInfo,
         token: token,
@@ -27,17 +37,20 @@ const emailService = {
       return result;
     }
     try {
-      return await send();
+      const emailInfo = await withRetry(send, { maxTries: 3 });
+      this.logger.info('sent email', {});
+      return emailInfo;
     } catch (err) {
       //developers.sendinblue.com/docs/how-it-works#endpoints
       if (err.status === 401)
-        throw new GeneralError(sendEmailErrorMap['apiKeyError']);
+        throw new PrivateError(sendEmailErrorMap['apiKeyError']);
       if (err.status === 400)
-        throw new GeneralError(sendEmailErrorMap['badRequestError']);
+        throw new PrivateError(sendEmailErrorMap['badRequestError']);
       if (err.status === 429)
-        throw new GeneralError(sendEmailErrorMap['toManyRequestError']);
-      return retry(send());
+        throw new PrivateError(sendEmailErrorMap['toManyRequestError']);
+      throw err;
     }
-  },
-};
-module.exports = emailService;
+  }
+}
+
+module.exports = EmailService;

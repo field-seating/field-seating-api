@@ -4,7 +4,7 @@ const authErrorMap = require('../errors/auth-error');
 
 const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
-    if (err || !user) throw new GeneralError(authErrorMap['noAuth']);
+    if (err || !user) throw new GeneralError(authErrorMap['unauthorized']);
     req.user = user;
     next();
   })(req, res, next);

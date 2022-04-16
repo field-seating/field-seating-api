@@ -3,13 +3,15 @@ const configFromEnv = {
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
+  email: process.env.EMAIL,
 };
 
 const config = {
   development: {
-    baseUrl: 'http://localhost:3000',
-    emailSender: 'ronnychiang1164@gmail.com',
-    emailReceiver: 'ronnychiang1164@gmail.com',
+    baseUrl: 'https://fieldseating.wendellatman.com/',
+    verifyEmail: {
+      verifyTokenLife: '5m', //5min
+    },
     log: {
       maxFilesDays: 3,
       maxLevel: 'debug',
@@ -17,6 +19,10 @@ const config = {
     },
   },
   production: {
+    baseUrl: 'https://fieldseating.wendellatman.com/',
+    verifyEmail: {
+      verifyTokenLife: '1d', //24h
+    },
     log: {
       maxFilesDays: 30,
       maxLevel: 'info',

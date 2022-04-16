@@ -1,4 +1,5 @@
-const prisma = require('../config/prisma');
+const prisma = require('../../config/prisma');
+const { statusMap } = require('../user/constants');
 
 class UserModel {
   constructor() {}
@@ -41,7 +42,7 @@ class UserModel {
       where: {
         id: id,
       },
-      data: { status: 'verified' },
+      data: { status: statusMap.active },
       select: {
         id: true,
         email: true,
