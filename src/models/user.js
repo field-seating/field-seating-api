@@ -28,6 +28,22 @@ class UserModel {
         email: true,
         name: true,
         role: true,
+        status: true,
+      },
+    });
+    return getUser;
+  }
+  async getUserInfo(id) {
+    const getUser = await prisma.users.count({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
       },
     });
     return getUser;

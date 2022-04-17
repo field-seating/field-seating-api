@@ -22,6 +22,16 @@ const userController = {
       next(err);
     }
   },
+  getUserInfo: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const userService = new UserService({ req });
+      const user = await userService.getUserInfo(id);
+      res.status(200).json(resSuccess(user));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = userController;
