@@ -129,7 +129,7 @@ describe('user-service.verifyUser', () => {
 
 // getUserInfo
 describe('user-service.gerUserInfo', () => {
-  describe('with correct user', () => {
+  describe('with correct user and no password in return', () => {
     it('should return desired values which same with request user', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
@@ -137,7 +137,6 @@ describe('user-service.gerUserInfo', () => {
       const expectedResult = {
         id: newUser.id,
       };
-      console.log(userInfo);
       expect(userInfo).toMatchObject(expectedResult);
       expect(userInfo).not.toHaveProperty('password');
     });

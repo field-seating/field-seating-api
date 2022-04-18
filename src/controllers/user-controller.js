@@ -59,8 +59,8 @@ const userController = {
     try {
       const { id } = req.user;
       const userService = new UserService({ req });
-      const user = await userService.getUserInfo(id);
-      res.status(200).json(resSuccess(user));
+      const userInfo = await userService.getUserInfo(id);
+      res.status(200).json(resSuccess(userInfo));
     } catch (err) {
       next(err);
     }
