@@ -11,6 +11,14 @@ const sendEmailErrorMap = {
     message: 'The expected rate limit is exceeded',
     code: 'se003',
   },
+  templateNameError: {
+    message: 'need valid template name',
+    code: 'se004',
+  },
+  noEmailAddressError: {
+    message: 'need an email address',
+    code: 'se005',
+  },
 };
 
 module.exports = sendEmailErrorMap;

@@ -6,7 +6,6 @@ async function withRetry(func, options) {
     try {
       return await func();
     } catch (err) {
-      console.log(count);
       count += 1;
       if (count === maxTries) throw err;
     }

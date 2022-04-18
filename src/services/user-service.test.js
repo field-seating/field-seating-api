@@ -1,6 +1,6 @@
 const EmailService = require('./email-service');
 const UserService = require('./user-service');
-const UserModel = require('../models/user/index');
+const UserModel = require('../models/user');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
 const sendEmail = require('../services/helpers/send-email');

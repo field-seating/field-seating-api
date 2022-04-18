@@ -13,7 +13,7 @@ class EmailService extends BaseService {
       expiresIn: verifyEmail.verifyTokenLife,
     });
     const meta = {
-      emailList: [
+      receiverList: [
         {
           email: user.email,
           name: user.name,
@@ -38,7 +38,7 @@ class EmailService extends BaseService {
     }
     try {
       const emailInfo = await withRetry(send, { maxTries: 3 });
-      this.logger.info('sent email', {});
+      this.logger.info('sent email', { emailInfo });
       return emailInfo;
     } catch (err) {
       //developers.sendinblue.com/docs/how-it-works#endpoints

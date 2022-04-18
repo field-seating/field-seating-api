@@ -3,12 +3,11 @@ const configFromEnv = {
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
-  email: process.env.EMAIL,
 };
 
 const config = {
   development: {
-    baseUrl: 'https://fieldseating.wendellatman.com/',
+    baseUrl: 'https://fieldseating.wendellatman.com',
     verifyEmail: {
       verifyTokenLife: '5m', //5min
     },
@@ -19,7 +18,7 @@ const config = {
     },
   },
   production: {
-    baseUrl: 'https://fieldseating.wendellatman.com/',
+    baseUrl: 'https://fieldseating.wendellatman.com',
     verifyEmail: {
       verifyTokenLife: '1d', //24h
     },

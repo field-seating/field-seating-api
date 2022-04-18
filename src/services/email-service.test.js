@@ -29,7 +29,7 @@ describe('email-service.sendVerifyEmail', () => {
       });
       const expectedTemplate = 'verify-email';
       const expectedMeta = {
-        emailList: [
+        receiverList: [
           {
             email: newUser.email,
             name: newUser.name,
