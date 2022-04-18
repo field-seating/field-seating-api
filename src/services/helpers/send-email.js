@@ -12,7 +12,8 @@ defaultClient.authentications['api-key'].apiKey = sibKey;
 
 async function sendEmail(templateName, meta, data) {
   // check
-  const isInvalidEmail = (user) => R.isNil(user.email) || R.isEmpty(user.email);
+  const isInvalidEmail = (receiver) =>
+    R.isNil(receiver.email) || R.isEmpty(receiver.email);
   if (meta.receiverList.some(isInvalidEmail))
     throw new PrivateError(sendEmailErrorMap['noEmailAddressError']);
   if (!R.is(String, meta.subject) || R.isEmpty(meta.subject))
