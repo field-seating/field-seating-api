@@ -58,3 +58,20 @@ describe('user-service.signIn', () => {
     });
   });
 });
+
+// getUserInfo
+describe('user-service.gerUserInfo', () => {
+  describe('with correct user', () => {
+    it('should return desired values which same with request user', async () => {
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
+      const userInfo = await userService.getUserInfo(newUser.id);
+      const expectedResult = {
+        id: newUser.id,
+      };
+      console.log(userInfo);
+      expect(userInfo).toMatchObject(expectedResult);
+      expect(userInfo).not.toHaveProperty('password');
+    });
+  });
+});

@@ -18,6 +18,7 @@ class UserModel {
     });
     return createUser;
   }
+
   async getUser(id) {
     const getUser = await prisma.users.findUnique({
       where: {
@@ -28,13 +29,12 @@ class UserModel {
         email: true,
         name: true,
         role: true,
-        status: true,
       },
     });
     return getUser;
   }
   async getUserInfo(id) {
-    const getUser = await prisma.users.count({
+    const userInfo = await prisma.users.findUnique({
       where: {
         id: id,
       },
@@ -46,7 +46,7 @@ class UserModel {
         status: true,
       },
     });
-    return getUser;
+    return userInfo;
   }
   async _truncate() {
     await prisma.users.deleteMany({});
