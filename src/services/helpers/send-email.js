@@ -12,13 +12,12 @@ defaultClient.authentications['api-key'].apiKey = sibKey;
 
 async function sendEmail(templateName, meta, data) {
   // check
-  for (let i = 0; i < meta.receiverList.length; i++) {
-    if (
-      R.isNil(meta.receiverList[i].email) ||
-      R.isEmpty(meta.receiverList[i].email)
-    )
-      throw new PrivateError(sendEmailErrorMap['noEmailAddressError']);
-  }
+  const wrongMetaEmail = (event) =>
+    R.isNil(event.email) || R.isEmpty(event.email);
+  if (meta.receiverList.every(wrongMetaEmail))
+    throw new PrivateError(sendEmailErrorMap['noEmailAddressError']);
+  if (!R.is(String, meta.subject) || R.isEmpty(meta.subject))
+    throw new PrivateError(sendEmailErrorMap['noSubjectError']);
   if (!R.is(String, templateName) || R.isEmpty(templateName))
     throw new PrivateError(sendEmailErrorMap['templateNameError']);
 
@@ -31,8 +30,6 @@ async function sendEmail(templateName, meta, data) {
   const receiver = meta.receiverList;
 
   const result = template(data);
-  console.log(result);
-  console.log(receiver);
   const sib = new SibApiV3Sdk.TransactionalEmailsApi();
   const sendInfo = await sib.sendTransacEmail({
     sender: { email: 'ronnychiang1164@gmail.com', name: '球場坐座Team' },

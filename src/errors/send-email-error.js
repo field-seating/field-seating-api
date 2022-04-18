@@ -19,6 +19,10 @@ const sendEmailErrorMap = {
     message: 'need an email address',
     code: 'se005',
   },
+  noSubjectError: {
+    message: 'need an email subject',
+    code: 'se005',
+  },
 };
 
 module.exports = sendEmailErrorMap;
