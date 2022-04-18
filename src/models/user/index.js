@@ -1,4 +1,5 @@
-const prisma = require('../config/prisma');
+const prisma = require('../../config/prisma');
+const { statusMap } = require('../user/constants');
 
 class UserModel {
   constructor() {}
@@ -8,12 +9,15 @@ class UserModel {
         email: data.email,
         name: data.name,
         password: data.password,
+        // token: data.token,
       },
       select: {
         id: true,
         email: true,
         name: true,
         role: true,
+        status: true,
+        // token: true,
       },
     });
     return createUser;
@@ -29,9 +33,26 @@ class UserModel {
         email: true,
         name: true,
         role: true,
+        status: true,
       },
     });
     return getUser;
+  }
+  async verifyUser(id) {
+    const verifyUser = await prisma.users.update({
+      where: {
+        id: id,
+      },
+      data: { status: statusMap.active },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+    return verifyUser;
   }
   async getUserInfo(id) {
     const userInfo = await prisma.users.findUnique({

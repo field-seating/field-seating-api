@@ -18,6 +18,7 @@ model Users {
   name      String   @db.VarChar(255)
   password  String   @db.VarChar(255)
   role      String   @db.VarChar(255) @default("user")
+  status    String   @db.VarChar(255) @default("unverified")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   records   Records[]

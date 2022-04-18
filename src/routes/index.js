@@ -30,5 +30,11 @@ router.post(
   userController.signIn
 );
 router.use('/api/users', user);
+router.patch('/api/verify-email', userController.verifyEmail);
+
+// 檢視email格式使用
+if (process.env.NODE_ENV !== 'production') {
+  router.use('/testemail', (req, res) => res.render('verify-email'));
+}
 
 module.exports = router;
