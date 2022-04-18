@@ -4,9 +4,9 @@ const passportJWT = require('passport-jwt');
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const prisma = require('../config/prisma');
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 const signInErrorMap = require('../errors/sign-in-error');
-const { comparePassword } = require('../controllers/helpers/password');
+const { comparePassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 
 passport.use(

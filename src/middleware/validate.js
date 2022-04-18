@@ -1,4 +1,4 @@
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 
 const validate = (schema) => async (req, res, next) => {
   try {
