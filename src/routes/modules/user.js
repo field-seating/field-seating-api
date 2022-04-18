@@ -6,6 +6,7 @@ const userController = require('../../controllers/user-controller');
 const GeneralError = require('../../errors/error/general-error');
 const signUpErrorMap = require('../../errors/sign-up-error');
 const alwaysThrow = require('../../utils/func/always-throw');
+const { authenticated } = require('../../middleware/auth');
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ const signUpSchema = yup.object({
 });
 
 router.post('/', validate(signUpSchema), userController.signUp);
+router.get('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
 
 module.exports = router;

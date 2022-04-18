@@ -6,8 +6,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const prisma = require('../config/prisma');
 const GeneralError = require('../errors/error/general-error');
 const signInErrorMap = require('../errors/sign-in-error');
-const authErrorMap = require('../errors/auth-error');
-const { comparePassword } = require('../controllers/helpers/password');
+const { comparePassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 
 passport.use(
@@ -43,8 +42,6 @@ passport.use(
         id: jwtPayload.id,
       },
     });
-    // not find
-    if (!user) return done(new GeneralError(authErrorMap['noAuth']));
     return done(null, user);
   })
 );

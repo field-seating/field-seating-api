@@ -1,5 +1,5 @@
 const authErrorMap = {
-  noAuth: {
+  unauthorized: {
     message: '請先登入！',
     code: 'A001',
   },
