@@ -1,9 +1,10 @@
 name: staging site deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflows: ["Test"]
+    branches: [main]
+    types:
+      - completed
 
 env:
   REGISTRY: ghcr.io
