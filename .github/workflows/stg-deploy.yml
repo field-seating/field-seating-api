@@ -1,10 +1,10 @@
 name: staging site deploy
 
 on:
-  workflows: ["Test"]
+  workflow_run:
+    workflow: [Test]
+    types: [completed]
     branches: [main]
-    types:
-      - completed
 
 env:
   REGISTRY: ghcr.io
