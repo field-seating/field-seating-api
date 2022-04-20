@@ -6,10 +6,16 @@ const responesLogger = (req, res, next) => {
   const httpUrl = req.url;
   const requestId = req.requestId;
   const httpMethod = req.method;
+  const requestTime = req.requestTime;
 
   res.send = function (content) {
     const body = JSON.parse(content);
+    const responseTime = new Date();
+
+    const duration = responseTime - requestTime;
+
     logger.info('response out', {
+      duration,
       requestId,
       httpUrl,
       httpMethod,
