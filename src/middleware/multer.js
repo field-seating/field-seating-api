@@ -1,9 +1,11 @@
 const multer = require('multer');
 const sharp = require('sharp');
+const randomFilename = require('../middleware/random-filename');
 
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
+  console.log(file);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -36,8 +38,10 @@ const resizeImages = async (req, res, next) => {
   req.body.images = [];
   await Promise.all(
     req.files.map(async (file) => {
-      const filename = file.originalname.replace(/\..+$/, '');
-      const newFilename = `${filename}-${Date.now()}.jpeg`;
+      console.log(file);
+      const filename = await randomFilename();
+      console.log(filename);
+      const newFilename = `${filename}.jpeg`;
 
       await sharp(file.buffer)
         .resize(640)

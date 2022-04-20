@@ -1,5 +1,5 @@
 const prisma = require('../config/prisma');
-const GeneralError = require('../controllers/helpers/general-error');
+const GeneralError = require('../errors/error/general-error');
 const postRecordErrorMap = require('../errors/post-record-error');
 const PhotoModel = require('../models/photo');
 const generatePath = require('../controllers/helpers/path-generator');
