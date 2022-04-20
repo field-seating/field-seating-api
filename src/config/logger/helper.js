@@ -5,7 +5,7 @@ const config = require('../config');
 const { log: logConfig } = config;
 
 const jsonStructureFormatter = format.printf(
-  ({ level, message, httpUrl, httpMethod, requestId, ...rest }) => {
+  ({ level, message, httpUrl, httpMethod, requestId, duration, ...rest }) => {
     const output = {
       level,
       httpUrl,
@@ -13,6 +13,7 @@ const jsonStructureFormatter = format.printf(
       message,
       ...rest,
       requestId,
+      duration,
     };
 
     return `${JSON.stringify(output)}`;

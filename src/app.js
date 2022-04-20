@@ -9,6 +9,7 @@ const errorHandler = require('./middleware/error-handler');
 const responseLogger = require('./middleware/response-logger');
 const requestLogger = require('./middleware/request-logger');
 const requestIdMiddleware = require('./middleware/request-id');
+const requestTimeMiddleware = require('./middleware/request-time');
 const routes = require('./routes');
 const { port } = require('./config/config');
 
@@ -16,6 +17,7 @@ const app = express();
 const usedPort = port || 3000;
 
 app.use(requestIdMiddleware);
+app.use(requestTimeMiddleware);
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json()); // POST json格式
