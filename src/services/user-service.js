@@ -70,7 +70,6 @@ class UserService extends BaseService {
   async getUserInfo(id) {
     const userModel = new UserModel();
     const userInfo = await userModel.getUserInfo(id);
-    // demo for local logger
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }
