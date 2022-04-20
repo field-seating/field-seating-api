@@ -1,9 +1,6 @@
 name: staging site deploy
 
 on:
-  push:
-    branches:
-      - CU-2trk70m_refine-api-log
   workflow_run:
     workflows: [Test]
     types: [completed]
