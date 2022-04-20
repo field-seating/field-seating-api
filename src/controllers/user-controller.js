@@ -55,6 +55,16 @@ const userController = {
       next(err);
     }
   },
+  getUserInfo: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const userService = new UserService({ req });
+      const userInfo = await userService.getUserInfo(id);
+      res.status(200).json(resSuccess(userInfo));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = userController;

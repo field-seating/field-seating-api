@@ -126,3 +126,24 @@ describe('user-service.verifyUser', () => {
     });
   });
 });
+
+// getUserInfo
+describe('user-service.gerUserInfo', () => {
+  describe('with correct user and no password in return', () => {
+    it('should return desired values which same with request user', async () => {
+      const data = {
+        name: 'user1',
+        email: 'example@example.com',
+        password: 'password1',
+      };
+      const userModel = new UserModel();
+      const newUser = await userModel.createUser(data);
+      const userInfo = await userService.getUserInfo(newUser.id);
+      const expectedResult = {
+        id: newUser.id,
+      };
+      expect(userInfo).toMatchObject(expectedResult);
+      expect(userInfo).not.toHaveProperty('password');
+    });
+  });
+});

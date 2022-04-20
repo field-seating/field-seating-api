@@ -46,7 +46,6 @@ class UserService extends BaseService {
     };
     return user;
   }
-
   async verifyEmail(token) {
     try {
       // jwt驗證
@@ -67,6 +66,12 @@ class UserService extends BaseService {
         throw err;
       }
     }
+  }
+  async getUserInfo(id) {
+    const userModel = new UserModel();
+    const userInfo = await userModel.getUserInfo(id);
+    this.logger.debug('got a userInfo', { userInfo });
+    return userInfo;
   }
 }
 
