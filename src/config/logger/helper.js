@@ -47,13 +47,16 @@ const fileErrorTransport = new transports.DailyRotateFile({
   format: format.combine(jsonStructureFormatter),
 });
 
+let consoleFormatList = [jsonStructureFormatter];
+
+if (process.env.NODE_ENV !== 'production') {
+  consoleFormatList = consoleFormatList.concat(format.colorize({ all: true }));
+}
+
 const consoleTransport = new transports.Console({
   level: logConfig.maxLevel,
   handleExceptions: logConfig.handleExceptions,
-  format: format.combine(
-    jsonStructureFormatter,
-    format.colorize({ all: true })
-  ),
+  format: format.combine(...consoleFormatList),
 });
 
 module.exports = {
