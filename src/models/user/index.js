@@ -54,6 +54,21 @@ class UserModel {
     });
     return verifyUser;
   }
+  async getUserInfo(id) {
+    const userInfo = await prisma.users.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+    return userInfo;
+  }
   async _truncate() {
     await prisma.users.deleteMany({});
   }
