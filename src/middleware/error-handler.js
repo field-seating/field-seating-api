@@ -6,7 +6,7 @@ const errorHandler = (err, req, res, next) => {
   if (err instanceof GeneralError) {
     const { code, message, httpCode, stack } = err;
 
-    logger.error('got an error', { code, message, stack });
+    logger.info('error response', { code, message, stack });
     res.status(httpCode || 400).json({
       status: 'error',
       code: `${code}`,
@@ -14,7 +14,7 @@ const errorHandler = (err, req, res, next) => {
     });
   } else if (err instanceof PrivateError) {
     const { code, message, httpCode, stack } = err;
-    logger.error('got an error', { code, message, stack });
+    logger.error('known exception', { code, message, stack });
 
     res.status(httpCode || 400).json({
       status: 'error',
@@ -22,7 +22,7 @@ const errorHandler = (err, req, res, next) => {
     });
   } else {
     const { code, message, stack } = err;
-    logger.error('got an error', { code, message, stack });
+    logger.error('unknown exception', { code, message, stack });
 
     res.status(500).json({
       status: 'error',
