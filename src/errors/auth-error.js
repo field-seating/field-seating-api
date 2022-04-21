@@ -1,6 +1,6 @@
 const authErrorMap = {
   unauthorized: {
-    message: '請先登入！',
+    message: '無法認證',
     code: 'A001',
   },
 };
