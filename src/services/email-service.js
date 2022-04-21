@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { jwtSecret, baseUrl, verifyEmail } = require('../config/config');
 const sendEmail = require('./helpers/send-email');
-const PrivateError = require('../errors/error/private-error');
-const sendEmailErrorMap = require('../errors/send-email-error');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
 
@@ -36,20 +34,9 @@ class EmailService extends BaseService {
       };
       return result;
     }
-    try {
-      const emailInfo = await withRetry(send, { maxTries: 3 });
-      this.logger.info('sent email', { emailInfo });
-      return emailInfo;
-    } catch (err) {
-      //developers.sendinblue.com/docs/how-it-works#endpoints
-      if (err.status === 401)
-        throw new PrivateError(sendEmailErrorMap['apiKeyError']);
-      if (err.status === 400)
-        throw new PrivateError(sendEmailErrorMap['badRequestError']);
-      if (err.status === 429)
-        throw new PrivateError(sendEmailErrorMap['toManyRequestError']);
-      throw err;
-    }
+    const emailInfo = await withRetry(send, { maxTries: 3 });
+    this.logger.info('sent email', { emailInfo });
+    return emailInfo;
   }
 }
 
