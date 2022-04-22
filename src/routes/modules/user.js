@@ -29,6 +29,6 @@ const signUpSchema = yup.object({
 
 router.get('/info', authenticated, userController.getUserInfo);
 router.post('/', validate(signUpSchema), userController.signUp);
-router.get('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
+router.post('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
 
 module.exports = router;
