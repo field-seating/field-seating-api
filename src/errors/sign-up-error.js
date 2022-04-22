@@ -23,6 +23,18 @@ const signUpErrorMap = {
     message: 'Email 格式不符合',
     code: 's006',
   },
+  duplicateName: {
+    message: '名稱已經有人使用！',
+    code: 's007',
+  },
+  tooLongName: {
+    message: '名稱不可超過20字',
+    code: 's008',
+  },
+  tooLongNameForDb: {
+    message: '名稱超過資料庫限制',
+    code: 's009',
+  },
 };
 
 module.exports = signUpErrorMap;

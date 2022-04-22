@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const GeneralError = require('../errors/error/general-error');
+const PrivateError = require('../errors/error/private-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
 const UserModel = require('../models/user');
@@ -24,8 +25,14 @@ class UserService extends BaseService {
       const postUser = await userModel.createUser(data);
       return postUser;
     } catch (err) {
-      if (err.code === 'P2002') {
+      if (err.code === 'P2000') {
+        throw new PrivateError(signUpErrorMap['tooLongNameForDb']);
+      }
+      if (err.meta.target === 'Users_email_key') {
         throw new GeneralError(signUpErrorMap['duplicateEmail']);
+      }
+      if (err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
       }
       throw err;
     }

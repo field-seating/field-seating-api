@@ -15,7 +15,7 @@ datasource db {
 model Users {
   id        Int      @id @default(autoincrement())
   email     String   @unique @db.VarChar(255)
-  name      String   @db.VarChar(255)
+  name      String   @unique @db.VarChar(40)
   password  String   @db.VarChar(255)
   role      String   @db.VarChar(255) @default("user")
   status    String   @db.VarChar(255) @default("unverified")
