@@ -1,15 +1,11 @@
-const jwt = require('jsonwebtoken');
-const { jwtSecret, baseUrl, verifyEmail } = require('../config/config');
+const { baseUrl } = require('../config/config');
 const sendEmail = require('./helpers/send-email');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
 
 class EmailService extends BaseService {
   async sendVerifyEmail(user) {
-    // create token
-    const token = jwt.sign(user, jwtSecret, {
-      expiresIn: verifyEmail.verifyTokenLife,
-    });
+    console.log(user);
     const meta = {
       receiverList: [
         {
@@ -22,7 +18,7 @@ class EmailService extends BaseService {
     const data = {
       name: user.name,
       email: user.email,
-      url: `${baseUrl}/verify-email/${token}`,
+      url: `${baseUrl}/verify-email/${user.verification_token}`,
     };
     const template = 'verify-email';
     // send email
@@ -30,7 +26,7 @@ class EmailService extends BaseService {
       const sendInfo = await sendEmail(template, meta, data);
       const result = {
         ...sendInfo,
-        token: token,
+        token: user.verification_token,
       };
       return result;
     }

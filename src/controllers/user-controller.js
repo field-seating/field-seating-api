@@ -13,6 +13,7 @@ const userController = {
       const user = await userService.signUp(name, email, password);
       const emailService = new EmailService({ req });
       await emailService.sendVerifyEmail(user);
+      delete user.verification_token;
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);

@@ -11,6 +11,10 @@ const verifyErrorMap = {
     message: '此帳號已經開通囉',
     code: 't003',
   },
+  inactive: {
+    message: '此帳號已遭封存',
+    code: 't004',
+  },
 };
 
 module.exports = verifyErrorMap;

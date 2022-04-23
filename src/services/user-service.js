@@ -8,17 +8,19 @@ const { jwtLife } = require('../constants/jwt-constant');
 const { hashPassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
+const tokenGenerator = require('./helpers/token-generator');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {
     // hash password
     const hash = await hashPassword(password);
-
+    const token = await tokenGenerator();
     const userModel = new UserModel();
     const data = {
       name: name,
       email: email,
       password: hash,
+      token: token,
     };
     try {
       const postUser = await userModel.createUser(data);
@@ -48,12 +50,9 @@ class UserService extends BaseService {
   }
   async verifyEmail(token) {
     try {
-      // jwt驗證
-      const SECRET = jwtSecret;
-      const user = jwt.verify(token, SECRET);
       // update user
       const userModel = new UserModel();
-      const verifyUser = await userModel.verifyUser(user.id);
+      const verifyUser = await userModel.verifyUser(token);
       return verifyUser;
     } catch (err) {
       // token到期
