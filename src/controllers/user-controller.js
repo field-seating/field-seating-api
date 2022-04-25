@@ -13,7 +13,7 @@ const userController = {
       const user = await userService.signUp(name, email, password);
       const emailService = new EmailService({ req });
       await emailService.sendVerifyEmail(user);
-      delete user.verification_token;
+      delete user.verificationToken;
       res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
@@ -35,23 +35,34 @@ const userController = {
       // update user status
       const userService = new UserService({ req });
       const user = await userService.verifyEmail(token);
-      res.status(200).json(resSuccess(user));
+      user;
+      res.status(200).json(resSuccess());
     } catch (err) {
       next(err);
     }
   },
-  sendVerifyEmail: async (req, res, next) => {
+  resendVerifyEmail: async (req, res, next) => {
     try {
       const user = req.user;
-      // 判斷是否verified
-
+      // 判斷status
       if (user.status === statusMap.active)
         throw new GeneralError(verifyErrorMap['alreadyVerified']);
-      // send verify email
-      const emailService = new EmailService({ req });
-      await emailService.sendVerifyEmail(user);
-
-      res.status(200).json(resSuccess());
+      if (user.status === statusMap.inactive)
+        throw new GeneralError(verifyErrorMap['inactive']);
+      // 判斷是否符合resend資格
+      const userService = new UserService({ req });
+      const newToken = await userService.refreshToken(user.id);
+      if (newToken) {
+        const userData = {
+          email: user.email,
+          name: user.name,
+          verificationToken: newToken.verificationToken,
+        };
+        // send verify email
+        const emailService = new EmailService({ req });
+        await emailService.sendVerifyEmail(userData);
+        res.status(200).json(resSuccess());
+      }
     } catch (err) {
       next(err);
     }

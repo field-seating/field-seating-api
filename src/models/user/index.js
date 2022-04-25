@@ -2,6 +2,11 @@ const prisma = require('../../config/prisma');
 const { statusMap } = require('../user/constants');
 const GeneralError = require('../../errors/error/general-error');
 const verifyErrorMap = require('../../errors/verify-error');
+const {
+  verificationTokenLife,
+} = require('../../constants/token-life-constant');
+const PrivateError = require('../../errors/error/private-error');
+// const { R } = require('ramda');
 
 class UserModel {
   constructor() {}
@@ -11,7 +16,8 @@ class UserModel {
         email: data.email,
         name: data.name,
         password: data.password,
-        verification_token: data.token,
+        verificationToken: data.token,
+        tokenCreatedAt: data.date,
       },
       select: {
         id: true,
@@ -19,7 +25,7 @@ class UserModel {
         name: true,
         role: true,
         status: true,
-        verification_token: true,
+        verificationToken: true,
       },
     });
     return createUser;
@@ -41,38 +47,37 @@ class UserModel {
     return getUser;
   }
   async verifyUser(token) {
-    const targetUser = await prisma.users.findUnique({
+    const targetUser = await prisma.users.findMany({
       where: {
-        verification_token: token,
+        verificationToken: token,
+        status: statusMap.unverified,
+      },
+      select: {
+        id: true,
+        tokenCreatedAt: true,
       },
     });
-    if (targetUser === null)
+    if (!targetUser[0] || targetUser.length > 1)
       throw new GeneralError(verifyErrorMap['invalidToken']);
-    if (targetUser) {
-      const nowDate = await new Date().getTime();
-      const tokenDate = await targetUser.updatedAt.getTime();
-      console.log(nowDate - tokenDate);
-      if (nowDate - tokenDate > 86400000)
-        throw new GeneralError(verifyErrorMap['expiredToken']);
-      if (targetUser.status === statusMap.active)
-        throw new GeneralError(verifyErrorMap['alreadyVerified']);
-      if (targetUser.status === statusMap.inactive)
-        throw new GeneralError(verifyErrorMap['inactive']);
-      const verifyUser = await prisma.users.update({
-        where: {
-          id: targetUser.id,
-        },
-        data: { status: statusMap.active },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          role: true,
-          status: true,
-        },
-      });
-      return verifyUser;
-    }
+    const nowDate = await new Date().getTime();
+    const tokenDate = targetUser[0].tokenCreatedAt;
+    if (nowDate - tokenDate > verificationTokenLife)
+      throw new GeneralError(verifyErrorMap['expiredToken']);
+    const verifyUser = await prisma.users.updateMany({
+      where: {
+        id: targetUser[0].id,
+        verificationToken: token,
+        status: statusMap.unverified,
+      },
+      data: {
+        status: statusMap.active,
+        verificationToken: null,
+        tokenCreatedAt: null,
+      },
+    });
+    if (verifyUser.count === 0)
+      throw new PrivateError(verifyErrorMap['updateFailed']);
+    return true;
   }
   async getUserInfo(id) {
     const userInfo = await prisma.users.findUnique({
@@ -88,6 +93,34 @@ class UserModel {
       },
     });
     return userInfo;
+  }
+  async getVerificationTokenCreatedAt(id) {
+    const tokenCreatedAt = await prisma.users.findUnique({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+        tokenCreatedAt: true,
+      },
+    });
+    return tokenCreatedAt;
+  }
+  async refreshVerificationToken(data) {
+    const newToken = await prisma.users.update({
+      where: {
+        id: data.id,
+      },
+      data: { verificationToken: data.token, tokenCreatedAt: data.date },
+      select: {
+        verificationToken: true,
+      },
+    });
+    return newToken;
   }
   async _truncate() {
     await prisma.users.deleteMany({});

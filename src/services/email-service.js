@@ -5,7 +5,6 @@ const BaseService = require('./base');
 
 class EmailService extends BaseService {
   async sendVerifyEmail(user) {
-    console.log(user);
     const meta = {
       receiverList: [
         {
@@ -18,7 +17,7 @@ class EmailService extends BaseService {
     const data = {
       name: user.name,
       email: user.email,
-      url: `${baseUrl}/verify-email/${user.verification_token}`,
+      url: `${baseUrl}/verify-email/${user.verificationToken}`,
     };
     const template = 'verify-email';
     // send email
@@ -26,7 +25,7 @@ class EmailService extends BaseService {
       const sendInfo = await sendEmail(template, meta, data);
       const result = {
         ...sendInfo,
-        token: user.verification_token,
+        token: user.verificationToken,
       };
       return result;
     }

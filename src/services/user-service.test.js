@@ -28,8 +28,8 @@ describe('user-service.signUp', () => {
         email,
         status: statusMap.unverified,
       };
-
       expect(newUser).toMatchObject(expectedResult);
+      expect(newUser).toHaveProperty('verificationToken');
       expect(newUser).not.toHaveProperty('password');
     });
   });
@@ -49,12 +49,13 @@ describe('user-service.signUp', () => {
   });
 });
 
-// signIn
+// signIn;
 describe('user-service.signIn', () => {
   describe('with regular input', () => {
     it('should return desired values without password', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+      delete newUser.verificationToken;
       const expectedResult = {
         user: newUser,
       };
@@ -88,10 +89,8 @@ describe('user-service.verifyUser', () => {
       const sendVerifyEmail = await emailService.sendVerifyEmail(newUser);
       const verifyUser = await userService.verifyEmail(sendVerifyEmail.token);
       // make sure the user to be verified
-      const expectedResult = {
-        status: statusMap.active,
-      };
-      expect(verifyUser).toMatchObject(expectedResult);
+      const expectedResult = true;
+      expect(verifyUser).toBe(expectedResult);
     });
   });
   describe('with wrong token', () => {

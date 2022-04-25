@@ -2,13 +2,17 @@ const jwt = require('jsonwebtoken');
 
 const GeneralError = require('../errors/error/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
-const verifyErrorMap = require('../errors/verify-error');
 const UserModel = require('../models/user');
-const { jwtLife } = require('../constants/jwt-constant');
+const {
+  jwtLife,
+  verificationTokenLife,
+  resendLimitTime,
+} = require('../constants/token-life-constant');
 const { hashPassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
 const tokenGenerator = require('./helpers/token-generator');
+const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {
@@ -21,6 +25,7 @@ class UserService extends BaseService {
       email: email,
       password: hash,
       token: token,
+      date: new Date(),
     };
     try {
       const postUser = await userModel.createUser(data);
@@ -48,29 +53,39 @@ class UserService extends BaseService {
     };
     return user;
   }
+
   async verifyEmail(token) {
-    try {
-      // update user
-      const userModel = new UserModel();
-      const verifyUser = await userModel.verifyUser(token);
-      return verifyUser;
-    } catch (err) {
-      // token到期
-      if (err.name === 'TokenExpiredError') {
-        throw new GeneralError(verifyErrorMap['expiredToken']);
-        // token錯誤
-      } else if (err.name === 'JsonWebTokenError') {
-        throw new GeneralError(verifyErrorMap['invalidToken']);
-      } else {
-        throw err;
-      }
-    }
+    // update user
+    const userModel = new UserModel();
+    const verifyUser = await userModel.verifyUser(token);
+    return verifyUser;
   }
+
   async getUserInfo(id) {
     const userModel = new UserModel();
     const userInfo = await userModel.getUserInfo(id);
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
+  }
+
+  async refreshToken(id) {
+    const nowDate = await new Date().getTime();
+    const userModel = new UserModel();
+    const tokenInfo = await userModel.getVerificationTokenCreatedAt(id);
+    const tokenDate = tokenInfo.tokenCreatedAt;
+    if (
+      nowDate - tokenDate < verificationTokenLife &&
+      nowDate - tokenDate < resendLimitTime
+    )
+      throw new GeneralError(resendVerifyEmailErrorMap['duplicateSend']);
+    const token = await tokenGenerator();
+    const data = {
+      id: id,
+      token: token,
+      date: new Date(),
+    };
+    const refreshToken = await userModel.refreshVerificationToken(data);
+    return refreshToken;
   }
 }
 

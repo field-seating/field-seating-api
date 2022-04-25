@@ -3,17 +3,13 @@ const verifyErrorMap = {
     message: '無效的連結，請重新申請',
     code: 't001',
   },
-  expiredToken: {
-    message: '此連結已經過期，請重新申請',
+  updateFailed: {
+    message: '使用者狀態更新失敗',
     code: 't002',
   },
-  alreadyVerified: {
-    message: '此帳號已經開通囉',
+  expiredToken: {
+    message: '連結已過期，請重新申請',
     code: 't003',
-  },
-  inactive: {
-    message: '此帳號已遭封存',
-    code: 't004',
   },
 };
 
