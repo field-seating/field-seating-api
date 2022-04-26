@@ -6,17 +6,17 @@ const { getClient } = require('../config/redis');
 const prefix = `fs-${getEnv()}`;
 
 class CacheBase {
-  #key;
-  #expiredTime;
+  key;
+  expiredTime;
 
   constructor() {
-    this.#expiredTime = this.#getExpiredTime();
-    this.#key = `${prefix}-${this.#getKeyName()}-${this.#getVersion()}`;
+    this.expiredTime = this.getExpiredTime();
+    this.key = `${prefix}-${this.getKeyName()}-${this.getVersion()}`;
   }
 
   async get() {
     const client = await getClient();
-    let cachedData = client.get(this.#key);
+    let cachedData = await client.get(this.key);
 
     if (isNil(cachedData)) {
       cachedData = await this.#store();
@@ -29,36 +29,42 @@ class CacheBase {
 
   async purge() {
     const client = await getClient();
-    client.del(this.#key);
+    await client.del(this.key);
+  }
+
+  async reload() {
+    this.store();
   }
 
   async #store() {
-    const source = this.#fetch();
+    const source = await this.fetch();
     const value = JSON.stringify(source);
 
     const client = await getClient();
-    await client.set(this.#key, value, {
-      EX: this.#expiredTime,
+
+    await client.set(this.key, value, {
+      EX: this.expiredTime,
+      NX: false,
     });
 
     return value;
   }
 
-  #fetch() {
+  async fetch() {
     throw new Error('unimplemented');
   }
 
-  #getKeyName() {
+  getKeyName() {
     throw new Error('unimplemented');
   }
 
-  #getVersion() {
+  getVersion() {
     throw new Error('unimplemented');
   }
 
-  #getExpiredTime() {
+  getExpiredTime() {
     // TTL default to one day
-    return 86400;
+    return 60 * 60 * 24;
   }
 }
 

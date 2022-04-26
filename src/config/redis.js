@@ -6,13 +6,15 @@ const logger = require('./logger');
 let client;
 
 const init = async () => {
-  const client = createClient({
+  const redisClient = createClient({
     url: config.redisUrl,
   });
 
-  client.on('error', (err) => logger.error('Redis Client Error', err));
+  redisClient.on('error', (err) => logger.error('Redis Client Error', err));
 
-  await client.connect();
+  await redisClient.connect();
+
+  client = redisClient;
 };
 
 const getClient = async () => {
