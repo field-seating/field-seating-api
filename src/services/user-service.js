@@ -1,18 +1,12 @@
 const jwt = require('jsonwebtoken');
-
 const GeneralError = require('../errors/error/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const UserModel = require('../models/user');
-const {
-  jwtLife,
-  verificationTokenLife,
-  resendLimitTime,
-} = require('../constants/token-life-constant');
+const { jwtLife } = require('../constants/token-life-constant');
 const { hashPassword } = require('../utils/func/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
 const tokenGenerator = require('./helpers/token-generator');
-const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {
@@ -69,23 +63,15 @@ class UserService extends BaseService {
   }
 
   async refreshToken(id) {
-    const nowDate = await new Date().getTime();
     const userModel = new UserModel();
-    const tokenInfo = await userModel.getVerificationTokenCreatedAt(id);
-    const tokenDate = tokenInfo.tokenCreatedAt;
-    if (
-      nowDate - tokenDate < verificationTokenLife &&
-      nowDate - tokenDate < resendLimitTime
-    )
-      throw new GeneralError(resendVerifyEmailErrorMap['duplicateSend']);
     const token = await tokenGenerator();
     const data = {
       id: id,
       token: token,
       date: new Date(),
     };
-    const refreshToken = await userModel.refreshVerificationToken(data);
-    return refreshToken;
+    await userModel.refreshVerificationToken(data);
+    return token;
   }
 }
 

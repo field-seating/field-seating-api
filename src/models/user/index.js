@@ -2,11 +2,12 @@ const prisma = require('../../config/prisma');
 const { statusMap } = require('../user/constants');
 const GeneralError = require('../../errors/error/general-error');
 const verifyErrorMap = require('../../errors/verify-error');
+const resendVerifyEmailErrorMap = require('../../errors/resend-verify-email-error');
 const {
   verificationTokenLife,
+  resendLimitTime,
 } = require('../../constants/token-life-constant');
-const PrivateError = require('../../errors/error/private-error');
-// const { R } = require('ramda');
+const { subDays, subMinutes } = require('date-fns');
 
 class UserModel {
   constructor() {}
@@ -47,27 +48,15 @@ class UserModel {
     return getUser;
   }
   async verifyUser(token) {
-    const targetUser = await prisma.users.findMany({
-      where: {
-        verificationToken: token,
-        status: statusMap.unverified,
-      },
-      select: {
-        id: true,
-        tokenCreatedAt: true,
-      },
-    });
-    if (!targetUser[0] || targetUser.length > 1)
-      throw new GeneralError(verifyErrorMap['invalidToken']);
-    const nowDate = await new Date().getTime();
-    const tokenDate = targetUser[0].tokenCreatedAt;
-    if (nowDate - tokenDate > verificationTokenLife)
-      throw new GeneralError(verifyErrorMap['expiredToken']);
+    const expiredTime = subDays(new Date(), verificationTokenLife);
     const verifyUser = await prisma.users.updateMany({
       where: {
-        id: targetUser[0].id,
         verificationToken: token,
         status: statusMap.unverified,
+        tokenCreatedAt: {
+          // 原發送時間需晚於 expiredTime
+          gte: expiredTime,
+        },
       },
       data: {
         status: statusMap.active,
@@ -76,7 +65,7 @@ class UserModel {
       },
     });
     if (verifyUser.count === 0)
-      throw new PrivateError(verifyErrorMap['updateFailed']);
+      throw new GeneralError(verifyErrorMap['invalidToken']);
     return true;
   }
   async getUserInfo(id) {
@@ -94,33 +83,22 @@ class UserModel {
     });
     return userInfo;
   }
-  async getVerificationTokenCreatedAt(id) {
-    const tokenCreatedAt = await prisma.users.findUnique({
-      where: {
-        id: id,
-      },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        role: true,
-        status: true,
-        tokenCreatedAt: true,
-      },
-    });
-    return tokenCreatedAt;
-  }
   async refreshVerificationToken(data) {
-    const newToken = await prisma.users.update({
+    const resendTime = subMinutes(new Date(), resendLimitTime);
+    const newToken = await prisma.users.updateMany({
       where: {
         id: data.id,
+        status: statusMap.unverified,
+        tokenCreatedAt: {
+          // 原發送時間需小於 resendTime
+          lte: resendTime,
+        },
       },
       data: { verificationToken: data.token, tokenCreatedAt: data.date },
-      select: {
-        verificationToken: true,
-      },
     });
-    return newToken;
+    if (newToken.count === 0)
+      throw new GeneralError(resendVerifyEmailErrorMap['duplicateSend']);
+    return true;
   }
   async _truncate() {
     await prisma.users.deleteMany({});

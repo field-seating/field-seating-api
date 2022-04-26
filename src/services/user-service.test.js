@@ -67,7 +67,7 @@ describe('user-service.signIn', () => {
   });
 });
 
-// verifyUser
+// verifyEmail
 describe('user-service.verifyUser', () => {
   describe('with regular input', () => {
     it('should return user with status: verified', async () => {
