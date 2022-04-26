@@ -8,6 +8,7 @@ const configFromEnv = {
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
+  redisUrl: process.env.REDIS_URL,
 };
 
 const envMap = {

@@ -1,4 +1,4 @@
-const { isDevelopment } = require('../../context');
+const { isDevelopmentBuild } = require('../../context');
 
 const { format, transports } = require('winston');
 
@@ -24,7 +24,7 @@ const jsonStructureFormatter = format.printf(
 
 let consoleFormatList = [jsonStructureFormatter];
 
-if (isDevelopment()) {
+if (isDevelopmentBuild()) {
   consoleFormatList = consoleFormatList.concat(format.colorize({ all: true }));
 }
 

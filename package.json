@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node src/app.js",
-    "dev": "nodemon src/app.js",
+    "dev": "APP_ENV=development nodemon src/app.js",
     "test": "jest -i --passWithNoTests",
     "test:watch": "jest -i --passWithNoTests --watchAll",
     "container:test": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test.sh' && npm run container:down",
