@@ -1,9 +1,8 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 const express = require('express');
 const exphbs = require('express-handlebars'); // for check email format
+
 const logger = require('./config/logger');
 const errorHandler = require('./middleware/error-handler');
 const responseLogger = require('./middleware/response-logger');
@@ -12,6 +11,7 @@ const requestIdMiddleware = require('./middleware/request-id');
 const requestTimeMiddleware = require('./middleware/request-time');
 const routes = require('./routes');
 const { port } = require('./config/config');
+const { isDevelopmentBuild, getEnv } = require('./context');
 
 const app = express();
 const usedPort = port || 3000;
@@ -23,7 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // POST json格式
 
 // for check email format
-if (process.env.NODE_ENV !== 'production') {
+if (isDevelopmentBuild()) {
   app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
   app.set('view engine', 'hbs');
 }
@@ -36,6 +36,6 @@ app.use(errorHandler);
 
 app.get('/', (req, res) => res.send('Hello field-seating!'));
 
-app.listen(usedPort, () => {
-  logger.info(`App listening on port ${usedPort}`);
+app.listen(usedPort, async () => {
+  logger.info(`App listening on port ${usedPort}`, { appEnv: getEnv() });
 });
