@@ -10,7 +10,7 @@ const requestIdMiddleware = require('./middleware/request-id');
 const requestTimeMiddleware = require('./middleware/request-time');
 const routes = require('./routes');
 const { port } = require('./config/config');
-const { isDevelopment } = require('./context');
+const { isDevelopment, getEnv } = require('./context');
 
 const app = express();
 const usedPort = port || 3000;
@@ -36,5 +36,5 @@ app.use(errorHandler);
 app.get('/', (req, res) => res.send('Hello field-seating!'));
 
 app.listen(usedPort, () => {
-  logger.info(`App listening on port ${usedPort}`);
+  logger.info(`App listening on port ${usedPort}`, { appEnv: getEnv() });
 });

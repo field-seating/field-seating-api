@@ -1,8 +1,7 @@
-const context = require('../context');
-
 const developmentConfig = require('./config.development');
 const stagingConfig = require('./config.staging');
 const productionConfig = require('./config.production');
+const context = require('../context');
 
 const configFromEnv = {
   port: process.env.PORT,
@@ -17,4 +16,16 @@ const envMap = {
   production: productionConfig,
 };
 
-module.exports = { ...envMap[context.getEnv()], ...configFromEnv };
+const getConfigByEnv = () => {
+  const appEnv = context.getEnv();
+
+  const envConfig = envMap[appEnv];
+
+  if (!envConfig) {
+    return developmentConfig;
+  }
+
+  return envConfig;
+};
+
+module.exports = { ...getConfigByEnv(), ...configFromEnv };
