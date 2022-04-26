@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require('dotenv').config();
 
 const express = require('express');
 const exphbs = require('express-handlebars'); // for check email format
@@ -12,6 +10,7 @@ const requestIdMiddleware = require('./middleware/request-id');
 const requestTimeMiddleware = require('./middleware/request-time');
 const routes = require('./routes');
 const { port } = require('./config/config');
+const { isDevelopment } = require('./context');
 
 const app = express();
 const usedPort = port || 3000;
@@ -23,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // POST json格式
 
 // for check email format
-if (process.env.NODE_ENV !== 'production') {
+if (isDevelopment()) {
   app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: '.hbs' }));
   app.set('view engine', 'hbs');
 }

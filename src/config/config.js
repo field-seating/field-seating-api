@@ -1,3 +1,9 @@
+const context = require('../context');
+
+const developmentConfig = require('./config.development');
+const stagingConfig = require('./config.staging');
+const productionConfig = require('./config.production');
+
 const configFromEnv = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
@@ -5,32 +11,10 @@ const configFromEnv = {
   sibKey: process.env.SIB_KEY,
 };
 
-const config = {
-  development: {
-    baseUrl: 'https://fieldseating.wendellatman.com',
-    verifyEmail: {
-      verifyTokenLife: '5m', //5min
-    },
-    log: {
-      maxFilesDays: 3,
-      maxLevel: 'debug',
-      handleExceptions: false,
-    },
-  },
-  production: {
-    baseUrl: 'https://fieldseating.wendellatman.com',
-    verifyEmail: {
-      verifyTokenLife: '1d', //24h
-    },
-    log: {
-      maxFilesDays: 30,
-      maxLevel: 'info',
-      handleExceptions: true,
-    },
-  },
+const envMap = {
+  development: developmentConfig,
+  staging: stagingConfig,
+  production: productionConfig,
 };
 
-const isProduction = process.env.NODE_MODULE === 'production';
-const configByEnv = isProduction ? config.production : config.development;
-
-module.exports = { ...configByEnv, ...configFromEnv };
+module.exports = { ...envMap[context.getEnv()], ...configFromEnv };

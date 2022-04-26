@@ -1,3 +1,5 @@
+const { isDevelopment } = require('../../context');
+
 const { format, transports } = require('winston');
 
 const config = require('../config');
@@ -22,7 +24,7 @@ const jsonStructureFormatter = format.printf(
 
 let consoleFormatList = [jsonStructureFormatter];
 
-if (process.env.NODE_ENV !== 'production') {
+if (isDevelopment()) {
   consoleFormatList = consoleFormatList.concat(format.colorize({ all: true }));
 }
 
