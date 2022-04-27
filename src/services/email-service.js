@@ -39,7 +39,8 @@ class EmailService extends BaseService {
     this.logger.info('sent email', { emailInfo });
     return emailInfo;
   }
-  async sendPasswordResetMail(user, token, requestTime) {
+  async sendPasswordResetMail(user, passwordResetTokenEntity, requestTime) {
+    const { token } = passwordResetTokenEntity;
     const meta = {
       receiverList: [
         {

@@ -2,7 +2,6 @@ const { isNil } = require('ramda');
 
 const resSuccess = require('./helpers/response');
 const PasswordService = require('../services/password-service');
-const EmailService = require('../services/email-service');
 const UserService = require('../services/user-service');
 const GeneralError = require('../errors/error/general-error');
 const passwordErrorMap = require('../errors/password-error');
@@ -13,7 +12,6 @@ const passwordController = {
 
     const userService = new UserService({ req });
     const passwordService = new PasswordService({ req });
-    const emailService = new EmailService({ req });
 
     try {
       const user = await userService.getUserByEmail(email);
@@ -22,8 +20,7 @@ const passwordController = {
         throw new GeneralError(passwordErrorMap.emailInvalid);
       }
 
-      const token = await passwordService.createPasswordResetToken(user.id);
-      await emailService.sendPasswordResetMail(user, token, req.requestTime);
+      await passwordService.createPasswordResetToken(user);
 
       res.status(200).json(resSuccess());
     } catch (err) {
@@ -32,6 +29,9 @@ const passwordController = {
   },
 
   updatePassword: async (req, res, next) => {
+    const { token, newPassword } = req.body;
+
+    console.log({ token, newPassword });
     try {
       res.status(200).json(resSuccess());
     } catch (err) {
