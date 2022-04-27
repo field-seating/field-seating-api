@@ -73,6 +73,15 @@ class UserService extends BaseService {
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }
+
+  async updateUser(id, payload) {
+    const userModel = new UserModel();
+    const user = await userModel.updateUser(id, payload);
+
+    this.logger.debug('update the user', { user });
+
+    return user;
+  }
 }
 
 module.exports = UserService;

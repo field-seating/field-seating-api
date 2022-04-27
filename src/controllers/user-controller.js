@@ -65,6 +65,19 @@ const userController = {
       next(err);
     }
   },
+  updateMe: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const { name } = req.body;
+
+      const userService = new UserService({ logger: req.logger });
+      const user = await userService.updateUser(id, { name });
+
+      res.status(200).json(resSuccess(user));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = userController;
