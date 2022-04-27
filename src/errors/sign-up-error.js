@@ -27,12 +27,12 @@ const signUpErrorMap = {
     message: '名稱已經有人使用！',
     code: 's007',
   },
-  tooLongName: {
+  maximumExceededName: {
     message: '名稱不可超過20字',
     code: 's008',
   },
-  tooLongNameForDb: {
-    message: '名稱超過資料庫限制',
+  maximumExceededNameForDev: {
+    message: '名稱不可超過20字',
     code: 's009',
   },
 };

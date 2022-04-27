@@ -26,13 +26,19 @@ class UserService extends BaseService {
       return postUser;
     } catch (err) {
       if (err.code === 'P2000') {
-        throw new PrivateError(signUpErrorMap['tooLongNameForDb']);
+        if (err.meta.target === 'Users_name_key') {
+          throw new PrivateError(signUpErrorMap['maximumExceededNameForDev']);
+        }
+        throw err;
       }
-      if (err.meta.target === 'Users_email_key') {
-        throw new GeneralError(signUpErrorMap['duplicateEmail']);
-      }
-      if (err.meta.target === 'Users_name_key') {
-        throw new GeneralError(signUpErrorMap['duplicateName']);
+      if (err.code === 'P2002') {
+        if (err.meta.target === 'Users_email_key') {
+          throw new GeneralError(signUpErrorMap['duplicateEmail']);
+        }
+        if (err.meta.target === 'Users_name_key') {
+          throw new GeneralError(signUpErrorMap['duplicateName']);
+        }
+        throw err;
       }
       throw err;
     }

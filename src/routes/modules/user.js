@@ -19,7 +19,10 @@ const signUpSchema = yup.object({
     name: yup
       .string()
       .required(alwaysThrow(new GeneralError(signUpErrorMap.nameRequired)))
-      .max(20, alwaysThrow(new GeneralError(signUpErrorMap.tooLongName))),
+      .max(
+        20,
+        alwaysThrow(new GeneralError(signUpErrorMap.maximumExceededName))
+      ),
     password: yup
       .string()
       .required(alwaysThrow(new GeneralError(signUpErrorMap.passwordRequired)))
