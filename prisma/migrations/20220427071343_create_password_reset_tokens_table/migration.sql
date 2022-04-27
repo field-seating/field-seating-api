@@ -8,7 +8,6 @@ CREATE TABLE `PasswordResetTokens` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    UNIQUE INDEX `PasswordResetTokens_userId_key`(`userId`),
     UNIQUE INDEX `PasswordResetTokens_token_key`(`token`),
     INDEX `PasswordResetTokens_state_idx`(`state`),
     PRIMARY KEY (`id`)
