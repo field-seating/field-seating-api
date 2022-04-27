@@ -147,3 +147,24 @@ describe('user-service.gerUserInfo', () => {
     });
   });
 });
+
+describe('user-service.updateUser', () => {
+  it('should update properly', async () => {
+    const data = {
+      name: 'user1',
+      email: 'example@example.com',
+      password: 'password1',
+    };
+    const userModel = new UserModel();
+    const user = await userModel.createUser(data);
+
+    const newName = 'new user';
+    const newUser = await userService.updateUser(user.id, { name: newName });
+
+    expect(newUser.name).toBe(newName);
+
+    const userFromDB = await userModel.getUser(user.id);
+
+    expect(userFromDB.name).toBe(newName);
+  });
+});
