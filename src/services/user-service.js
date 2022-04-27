@@ -18,8 +18,8 @@ class UserService extends BaseService {
       name: name,
       email: email,
       password: hash,
-      token: token,
-      date: new Date(),
+      token: token.token,
+      date: token.date,
     };
     try {
       const postUser = await userModel.createUser(data);
@@ -65,13 +65,14 @@ class UserService extends BaseService {
   async refreshToken(id) {
     const userModel = new UserModel();
     const token = await tokenGenerator();
+    console.log(token);
     const data = {
       id: id,
-      token: token,
-      date: new Date(),
+      token: token.token,
+      date: token.date,
     };
     await userModel.refreshVerificationToken(data);
-    return token;
+    return token.token;
   }
 }
 
