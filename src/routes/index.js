@@ -5,6 +5,7 @@ const validate = require('../middleware/validate');
 const passport = require('../config/passport');
 const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
+const password = require('./modules/password');
 const GeneralError = require('../errors/error/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const alwaysThrow = require('../utils/func/always-throw');
@@ -32,6 +33,7 @@ router.post(
   userController.signIn
 );
 router.use('/api/users', user);
+router.use('/api/password', password);
 router.patch('/api/verify-email', userController.verifyEmail);
 
 // 檢視email格式使用
