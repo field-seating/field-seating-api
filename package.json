@@ -15,7 +15,8 @@
     "container:test:watch": "docker-compose -f ./docker-compose.test.yml run --rm server sh -c 'sh scripts/wait-for field-seating-test-db:3306 -- sh scripts/container-test-watch.sh' && npm run container:down",
     "container:down": "docker-compose -f ./docker-compose.test.yml down",
     "lint": "npx eslint .",
-    "db:deploy": "npx prisma generate && npx prisma migrate deploy"
+    "db:deploy": "npx prisma generate && npx prisma migrate deploy",
+    "db:migration:generate": "npx prisma migrate dev"
   },
   "engines": {
     "npm": ">=7.0.0",
