@@ -4,9 +4,7 @@ const { stateMap } = require('./constants');
 const prisma = require('../../config/prisma');
 
 class PasswordResetToken {
-  async createAndInvalidateOthers(userId, token) {
-    const current = new Date();
-
+  async createAndInvalidateOthers(userId, token, tokenSignedAt) {
     const [newPasswordResetToken] = await prisma.$transaction([
       prisma.passwordResetTokens.updateMany({
         data: { state: stateMap.invalid },
@@ -20,13 +18,28 @@ class PasswordResetToken {
             },
           },
           token,
-          tokenSignedAt: current,
+          tokenSignedAt,
           state: stateMap.valid,
         },
       }),
     ]);
 
     return omit(['createdAt', 'updatedAt'])(newPasswordResetToken);
+  }
+
+  async updateStateByTokenAndSignedAfter(token, signedBefore) {
+    const { count } = await prisma.passwordResetTokens.updateMany({
+      data: { state: stateMap.invalid },
+      where: {
+        state: stateMap.valid,
+        token,
+        tokenSignedAt: {
+          gte: signedBefore,
+        },
+      },
+    });
+
+    return count;
   }
 
   async _truncate() {
