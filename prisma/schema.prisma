@@ -185,7 +185,16 @@ model PasswordResetTokens {
   user          Users     @relation(fields: [userId], references: [id])
   userId        Int       @unique
   token         String?   @unique @db.VarChar(255)
+  state         PasswordResetTokenState @default(INVALID)
   tokenSignedAt DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  @@index([state])
 }
+
+enum PasswordResetTokenState {
+  INVALID
+  VALID
+}
+
