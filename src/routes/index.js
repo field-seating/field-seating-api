@@ -38,7 +38,9 @@ router.patch('/api/verify-email', userController.verifyEmail);
 
 // 檢視email格式使用
 if (isDevelopmentBuild()) {
-  router.use('/testemail', (req, res) => res.render('verify-email'));
+  router.get('/test-email/:emailTemplate', (req, res) => {
+    res.render(req.params.emailTemplate);
+  });
 }
 
 module.exports = router;

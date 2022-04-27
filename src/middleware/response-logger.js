@@ -9,7 +9,13 @@ const responesLogger = (req, res, next) => {
   const requestTime = req.requestTime;
 
   res.send = function (content) {
-    const body = JSON.parse(content);
+    let body = {};
+    try {
+      body = JSON.parse(content);
+    } catch (e) {
+      logger.info(e);
+    }
+
     const responseTime = new Date();
 
     const duration = responseTime - requestTime;
