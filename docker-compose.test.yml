@@ -10,12 +10,13 @@ services:
     volumes:
       - ./src:/var/app/src
       - ./.env.test:/var/app/.env
-      #- ./scripts:/var/app/scripts
-      #- ./package.json:/var/app/package.json
     networks:
       - application
     depends_on:
       - database
+      - redis
+    environment:
+      APP_ENV: staging
 
   database:
     image: mysql:8
@@ -24,6 +25,16 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    networks:
+      - application
+
+  redis:
+    image: redis:6.2
+    container_name: field-seating-test-redis
+    platform: linux/amd64
+    restart: always
     expose:
       - 3306
     networks:
