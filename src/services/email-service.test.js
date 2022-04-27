@@ -3,7 +3,7 @@ const sendEmail = require('../services/helpers/send-email');
 const { baseUrl } = require('../config/config');
 
 jest.mock('../services/helpers/send-email');
-const emailService = new EmailService({ req: { requestId: '' } });
+const emailService = new EmailService({ logger: console });
 //  sendVerifyEmail
 describe('email-service.sendVerifyEmail', () => {
   describe('with regular input', () => {

@@ -8,10 +8,10 @@ const { statusMap } = require('../models/user/constants');
 const userController = {
   signUp: async (req, res, next) => {
     try {
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const { name, email, password } = req.body;
       const user = await userService.signUp(name, email, password);
-      const emailService = new EmailService({ req });
+      const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(user);
       res.status(200).json(resSuccess(user));
     } catch (err) {
@@ -21,7 +21,7 @@ const userController = {
   signIn: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const user = await userService.signIn(id);
       res.status(200).json(resSuccess(user));
     } catch (err) {
@@ -32,7 +32,7 @@ const userController = {
     try {
       const token = req.body.token;
       // update user status
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const user = await userService.verifyEmail(token);
       res.status(200).json(resSuccess(user));
     } catch (err) {
@@ -47,7 +47,7 @@ const userController = {
       if (user.status === statusMap.active)
         throw new GeneralError(verifyErrorMap['alreadyVerified']);
       // send verify email
-      const emailService = new EmailService({ req });
+      const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(user);
 
       res.status(200).json(resSuccess());
@@ -58,7 +58,7 @@ const userController = {
   getUserInfo: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const userInfo = await userService.getUserInfo(id);
       res.status(200).json(resSuccess(userInfo));
     } catch (err) {

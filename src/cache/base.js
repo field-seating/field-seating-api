@@ -8,8 +8,10 @@ const prefix = `fs-${getEnv()}`;
 class CacheBase {
   key;
   expiredTime;
+  logger;
 
-  constructor() {
+  constructor({ logger }) {
+    this.logger = logger;
     this.expiredTime = this.getExpiredTime();
     this.key = `${prefix}-${this.getKeyName()}-${this.getVersion()}`;
   }

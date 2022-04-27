@@ -12,8 +12,12 @@ afterEach(async () => {
 });
 jest.mock('../services/helpers/send-email');
 
-const userService = new UserService({ req: { requestId: '' } });
-const emailService = new EmailService({ req: { requestId: '' } });
+const userService = new UserService({
+  logger: console,
+});
+const emailService = new EmailService({
+  logger: console,
+});
 // signUp
 describe('user-service.signUp', () => {
   describe('with regular input', () => {
