@@ -73,6 +73,12 @@ class UserService extends BaseService {
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }
+  async getUserByEmail(email) {
+    const userModel = new UserModel();
+    const user = userModel.getUserByEmail(email);
+
+    return user;
+  }
 }
 
 module.exports = UserService;

@@ -38,6 +38,7 @@ class UserModel {
     });
     return getUser;
   }
+
   async verifyUser(id) {
     const verifyUser = await prisma.users.update({
       where: {
@@ -54,6 +55,7 @@ class UserModel {
     });
     return verifyUser;
   }
+
   async getUserInfo(id) {
     const userInfo = await prisma.users.findUnique({
       where: {
@@ -69,6 +71,24 @@ class UserModel {
     });
     return userInfo;
   }
+
+  async getUserByEmail(email) {
+    const user = await prisma.users.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
   async _truncate() {
     await prisma.users.deleteMany({});
   }

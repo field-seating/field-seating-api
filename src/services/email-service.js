@@ -38,6 +38,38 @@ class EmailService extends BaseService {
     this.logger.info('sent email', { emailInfo });
     return emailInfo;
   }
+  async sendPasswordResetMail(user, token) {
+    const meta = {
+      receiverList: [
+        {
+          email: user.email,
+          name: user.name,
+        },
+      ],
+      subject: '球場坐座 - 密碼重置',
+    };
+
+    const data = {
+      name: user.name,
+      email: user.email,
+      url: `${baseUrl}/password-reset/${token}`,
+    };
+
+    const template = 'password-reset';
+
+    async function send() {
+      const sendInfo = await sendEmail(template, meta, data);
+      const result = {
+        ...sendInfo,
+        token: token,
+      };
+      return result;
+    }
+
+    const emailInfo = await withRetry(send, { maxTries: 3 });
+
+    this.logger.info('sent email', { emailInfo });
+  }
 }
 
 module.exports = EmailService;

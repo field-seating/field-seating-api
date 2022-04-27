@@ -147,3 +147,20 @@ describe('user-service.gerUserInfo', () => {
     });
   });
 });
+
+describe('user-service.getUserByEmail', () => {
+  it('should return user when email matched', async () => {
+    const email = 'example@example.com';
+
+    const userModel = new UserModel();
+    const newUser = await userModel.createUser({
+      name: 'user',
+      email,
+      password: 'password',
+    });
+
+    const user = await userService.getUserByEmail(email);
+
+    expect(user.id).toBe(newUser.id);
+  });
+});
