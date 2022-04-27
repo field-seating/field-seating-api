@@ -41,7 +41,8 @@ describe('createAndInvalidateOthers', () => {
       'thirdToken',
       current
     );
-    await passwordResetTokenModel.createAndInvalidateOthers(
+
+    const entity = await passwordResetTokenModel.createAndInvalidateOthers(
       userId,
       lastToken,
       current
@@ -61,6 +62,7 @@ describe('createAndInvalidateOthers', () => {
       },
     });
 
+    expect(entity.token).toBe(lastToken);
     expect(totalValid).toBe(1);
     expect(firstValidToken.token).toBe(lastToken);
   });

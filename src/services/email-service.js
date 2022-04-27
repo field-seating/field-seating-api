@@ -3,6 +3,7 @@ const { jwtSecret, baseUrl, verifyEmail } = require('../config/config');
 const sendEmail = require('./helpers/send-email');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
+const { EFFECTIVE_PERIOD_IN_HOURS } = require('./password-service/constants');
 
 class EmailService extends BaseService {
   async sendVerifyEmail(user) {
@@ -38,7 +39,7 @@ class EmailService extends BaseService {
     this.logger.info('sent email', { emailInfo });
     return emailInfo;
   }
-  async sendPasswordResetMail(user, token) {
+  async sendPasswordResetMail(user, token, requestTime) {
     const meta = {
       receiverList: [
         {
@@ -51,8 +52,9 @@ class EmailService extends BaseService {
 
     const data = {
       name: user.name,
-      email: user.email,
       url: `${baseUrl}/password-reset/${token}`,
+      time: requestTime,
+      effectiveHours: EFFECTIVE_PERIOD_IN_HOURS,
     };
 
     const template = 'password-reset';
