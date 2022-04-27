@@ -76,11 +76,20 @@ class UserService extends BaseService {
 
   async updateUser(id, payload) {
     const userModel = new UserModel();
-    const user = await userModel.updateUser(id, payload);
 
-    this.logger.debug('update the user', { user });
+    try {
+      const user = await userModel.updateUser(id, payload);
 
-    return user;
+      this.logger.debug('update the user', { user });
+
+      return user;
+    } catch (err) {
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
+      }
+
+      throw err;
+    }
   }
 }
 
