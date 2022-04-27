@@ -38,7 +38,7 @@ const updateMeSchema = yup.object({
   }),
 });
 
-router.get('/info', authenticated, userController.getUserInfo);
+router.get('/me', authenticated, userController.getUserMe);
 router.post('/', validate(signUpSchema), userController.signUp);
 router.post('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
 router.put(

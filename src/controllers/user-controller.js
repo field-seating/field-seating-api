@@ -55,7 +55,7 @@ const userController = {
       next(err);
     }
   },
-  getUserInfo: async (req, res, next) => {
+  getUserMe: async (req, res, next) => {
     try {
       const { id } = req.user;
       const userService = new UserService({ logger: req.logger });

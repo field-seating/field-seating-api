@@ -167,7 +167,7 @@ describe('user-service.updateUser', () => {
 
     expect(newUser.name).toBe(newName);
 
-    const userFromDB = await userModel.getUser(user.id);
+    const userFromDB = await userModel.getUserById(user.id);
 
     expect(userFromDB.name).toBe(newName);
   });
