@@ -5,7 +5,7 @@ const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
 const UserModel = require('../models/user');
 const { jwtLife } = require('../constants/jwt-constant');
-const { hashPassword } = require('../utils/func/password');
+const { hashPassword } = require('../utils/crypto/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
 
