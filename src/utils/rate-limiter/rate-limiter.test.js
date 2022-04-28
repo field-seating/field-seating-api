@@ -2,11 +2,6 @@ const rateLimiterHelper = require('./');
 const { getClient } = require('../../config/redis');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
 
-afterEach(async () => {
-  const client = await getClient();
-  await client.sendCommand(['FLUSHALL']);
-});
-
 describe('rateLimiterHelper', () => {
   it('should generate the proper key', async () => {
     const func = jest.fn(async () => {});

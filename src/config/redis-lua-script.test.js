@@ -1,10 +1,5 @@
 const { getClient } = require('./redis');
 
-afterEach(async () => {
-  const client = await getClient();
-  await client.sendCommand(['FLUSHALL']);
-});
-
 describe('incr', () => {
   it('should increase', async () => {
     const client = await getClient();
