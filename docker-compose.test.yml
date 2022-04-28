@@ -16,7 +16,7 @@ services:
       - database
       - redis
     environment:
-      APP_ENV: staging
+      APP_ENV: test
 
   database:
     image: mysql:8
