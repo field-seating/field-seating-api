@@ -19,11 +19,6 @@ afterEach(async () => {
   await client.sendCommand(['FLUSHALL']);
 });
 
-afterAll(async () => {
-  const client = await getClient();
-  await client.disconnect();
-});
-
 describe('cache base', () => {
   class FieldsCache extends CacheBase {
     async fetch() {

@@ -7,11 +7,6 @@ afterEach(async () => {
   await client.sendCommand(['FLUSHALL']);
 });
 
-afterAll(async () => {
-  const client = await getClient();
-  await client.disconnect();
-});
-
 describe('rateLimiterHelper', () => {
   it('should generate the proper key', async () => {
     const func = jest.fn(async () => {});

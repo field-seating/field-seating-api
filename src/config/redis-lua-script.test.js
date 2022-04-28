@@ -5,11 +5,6 @@ afterEach(async () => {
   await client.sendCommand(['FLUSHALL']);
 });
 
-afterAll(async () => {
-  const client = await getClient();
-  await client.disconnect();
-});
-
 describe('incr', () => {
   it('should increase', async () => {
     const client = await getClient();
