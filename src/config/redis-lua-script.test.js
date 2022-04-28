@@ -16,6 +16,9 @@ describe('incr', () => {
     const key = 'key';
     let tmpCount = await client.incr(key, 3600);
 
+    const ttl = await client.sendCommand(['ttl', key]);
+
+    expect(ttl).not.toBeLessThan(0);
     expect(tmpCount).toBe(1);
 
     tmpCount = await client.incr(key, 3600);
@@ -34,6 +37,9 @@ describe('decr', () => {
     const key = 'key';
     let tmpCount = await client.decr(key, 3600);
 
+    const ttl = await client.sendCommand(['ttl', key]);
+
+    expect(ttl).not.toBeLessThan(0);
     expect(tmpCount).toBe(-1);
 
     tmpCount = await client.decr(key, 3600);
