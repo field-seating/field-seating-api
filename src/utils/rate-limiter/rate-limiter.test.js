@@ -21,11 +21,11 @@ describe('rateLimiterHelper', () => {
     const withRateLimiter = rateLimiterHelper({
       windowSize: 60,
       limit: 2,
+      key: '1',
     });
 
     const withRateLimiterFunc = withRateLimiter(func, {
       current: triggerTime1,
-      key: '1',
     });
 
     await withRateLimiterFunc();
@@ -47,11 +47,11 @@ describe('rateLimiterHelper', () => {
     const withRateLimiter = rateLimiterHelper({
       windowSize: 60,
       limit: 2,
+      key: '1',
     });
 
     let withRateLimiterFunc = withRateLimiter(func, {
       current: triggerTime1,
-      key: '1',
     });
 
     await withRateLimiterFunc();
@@ -59,7 +59,6 @@ describe('rateLimiterHelper', () => {
 
     withRateLimiterFunc = withRateLimiter(func, {
       current: triggerTime1,
-      key: '1',
     });
 
     try {
@@ -70,7 +69,6 @@ describe('rateLimiterHelper', () => {
 
     withRateLimiterFunc = withRateLimiter(func, {
       current: triggerTime2,
-      key: '1',
     });
 
     await withRateLimiterFunc();

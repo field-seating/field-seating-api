@@ -46,8 +46,8 @@ const toTimestamp = compose(Math.floor, divide(__, 1000), (dateTime) =>
 const isPositveInteger = (num) => Number.isInteger(num) && num > 0;
 
 const rateLimiterHelper =
-  ({ windowSize, limit }) =>
-  (func, { current, key }) =>
+  ({ windowSize, limit, key }) =>
+  (func, { current = new Date() } = { current: new Date() }) =>
   async (...args) => {
     if (!isPositveInteger(windowSize)) {
       throw new PrivateError(rateLimiterErrorMap.windowSizeInvalid);
