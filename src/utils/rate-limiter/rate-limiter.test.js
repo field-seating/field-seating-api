@@ -13,6 +13,29 @@ afterAll(async () => {
 });
 
 describe('rateLimiterHelper', () => {
+  it('should generate the proper key', async () => {
+    const func = jest.fn(async () => {});
+
+    const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
+
+    const withRateLimit = rateLimiterHelper({
+      windowSize: 60,
+      limit: 2,
+      key: 'key',
+    });
+
+    const withRateLimitFunc = withRateLimit(func, {
+      current: triggerTime1,
+    });
+
+    await withRateLimitFunc();
+
+    const client = await getClient();
+    const keys = await client.keys('*:key:*');
+
+    expect(keys).toHaveLength(1);
+  });
+
   it('should get error when exceeding the limit', async () => {
     const func = jest.fn(async () => {});
 

@@ -24,7 +24,8 @@ const generateIndex = (key) => {
   return prependPrefix(localKey);
 };
 
-const timestampToIndex = compose(generateIndex, toString);
+const timestampToIndex = (actionKey) =>
+  compose(generateIndex, (timeStr) => `${actionKey}:${timeStr}`, toString);
 
 const getCurrentWindowTimestamp = (windowSize) => (currentTimestamp) =>
   Math.ceil(currentTimestamp / windowSize) * windowSize;
@@ -64,12 +65,12 @@ const rateLimiterHelper =
     const currentTimestamp = toTimestamp(current);
 
     const getLastWindowIndex = compose(
-      timestampToIndex,
+      timestampToIndex(key),
       getLastWindowTimestamp(windowSize)
     );
 
     const getCurrentWindowIndex = compose(
-      timestampToIndex,
+      timestampToIndex(key),
       getCurrentWindowTimestamp(windowSize)
     );
 
