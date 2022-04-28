@@ -1,9 +1,6 @@
 const { isNil } = require('ramda');
 
-const { getEnv } = require('../context');
-const { getClient } = require('../config/redis');
-
-const prefix = `fs-${getEnv()}`;
+const { getClient, prependPrefix } = require('../config/redis');
 
 class CacheBase {
   key;
@@ -11,7 +8,7 @@ class CacheBase {
 
   constructor() {
     this.expiredTime = this.getExpiredTime();
-    this.key = `${prefix}-${this.getKeyName()}-${this.getVersion()}`;
+    this.key = prependPrefix(`${this.getKeyName()}:v${this.getVersion()}`);
   }
 
   async get() {
