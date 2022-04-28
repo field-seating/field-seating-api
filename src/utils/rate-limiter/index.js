@@ -21,8 +21,8 @@ const recordWindowsCount = (client) => async (currentIndex, lastIndex) => {
 
 // need redis connection
 const decrWindowCount = (client) => async (windowIndex) => {
-  const result = await client.sendCommand(['DECR', windowIndex]);
-  return Number(result);
+  const result = await client.decr(windowIndex);
+  return result;
 };
 
 const getWeight = (windowSize) => (currentTimestamp) => {

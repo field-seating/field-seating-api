@@ -1,9 +1,13 @@
 const rateLimiterHelper = require('./');
 const { getClient } = require('../../config/redis');
 
-afterAll(async () => {
+afterEach(async () => {
   const client = await getClient();
   await client.sendCommand(['FLUSHALL']);
+});
+
+afterAll(async () => {
+  const client = await getClient();
   await client.disconnect();
 });
 

@@ -23,6 +23,17 @@ const init = async () => {
           return reply;
         },
       }),
+      decr: defineScript({
+        NUMBER_OF_KEYS: 1,
+        SCRIPT:
+          'local current = redis.call("DECR",KEYS[1]);' + 'return current;',
+        transformArguments(key) {
+          return [key];
+        },
+        transformReply(reply) {
+          return reply;
+        },
+      }),
     },
   });
 
