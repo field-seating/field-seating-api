@@ -9,6 +9,7 @@ const responseLogger = require('./middleware/response-logger');
 const requestLogger = require('./middleware/request-logger');
 const requestIdMiddleware = require('./middleware/request-id');
 const requestTimeMiddleware = require('./middleware/request-time');
+const reqRateLimitMiddleware = require('./middleware/req-rate-limit-middleware');
 const routes = require('./routes');
 const { port } = require('./config/config');
 const { isDevelopmentBuild, getEnv } = require('./context');
@@ -16,6 +17,7 @@ const { isDevelopmentBuild, getEnv } = require('./context');
 const app = express();
 const usedPort = port || 3000;
 
+app.use(reqRateLimitMiddleware);
 app.use(requestIdMiddleware);
 app.use(requestTimeMiddleware);
 app.use(express.urlencoded({ extended: true }));
