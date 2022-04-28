@@ -18,21 +18,21 @@ describe('rateLimiterHelper', () => {
 
     const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
 
-    const withRateLimiter = rateLimiterHelper({
+    const withRateLimit = rateLimiterHelper({
       windowSize: 60,
       limit: 2,
       key: '1',
     });
 
-    const withRateLimiterFunc = withRateLimiter(func, {
+    const withRateLimitFunc = withRateLimit(func, {
       current: triggerTime1,
     });
 
-    await withRateLimiterFunc();
-    await withRateLimiterFunc();
+    await withRateLimitFunc();
+    await withRateLimitFunc();
 
     try {
-      await withRateLimiterFunc();
+      await withRateLimitFunc();
     } catch (err) {
       expect(err.code).toBe(rateLimiterErrorMap.exceedLimit.code);
     }
@@ -44,30 +44,30 @@ describe('rateLimiterHelper', () => {
     const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
     const triggerTime2 = new Date(2010, 1, 1, 0, 2, 2);
 
-    const withRateLimiter = rateLimiterHelper({
+    const withRateLimit = rateLimiterHelper({
       windowSize: 60,
       limit: 2,
       key: '1',
     });
 
-    let withRateLimiterFunc = withRateLimiter(func, {
+    let withRateLimitFunc = withRateLimit(func, {
       current: triggerTime1,
     });
 
-    await withRateLimiterFunc();
-    await withRateLimiterFunc();
+    await withRateLimitFunc();
+    await withRateLimitFunc();
 
     try {
-      await withRateLimiterFunc();
+      await withRateLimitFunc();
     } catch (err) {
       expect(err.code).toBe(rateLimiterErrorMap.exceedLimit.code);
     }
 
-    withRateLimiterFunc = withRateLimiter(func, {
+    withRateLimitFunc = withRateLimit(func, {
       current: triggerTime2,
     });
 
-    await withRateLimiterFunc();
+    await withRateLimitFunc();
 
     expect(func.mock.calls).toHaveLength(3);
   });
@@ -80,18 +80,18 @@ describe('rateLimiterHelper', () => {
 
     const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
 
-    const withRateLimiter = rateLimiterHelper({
+    const withRateLimit = rateLimiterHelper({
       windowSize: 60,
       limit: 2,
       key: '1',
     });
 
-    let withRateLimiterFunc = withRateLimiter(func, {
+    let withRateLimitFunc = withRateLimit(func, {
       current: triggerTime1,
     });
 
     try {
-      await withRateLimiterFunc();
+      await withRateLimitFunc();
     } catch (err) {
       expect(err.code).toBe(errorCode);
     }
