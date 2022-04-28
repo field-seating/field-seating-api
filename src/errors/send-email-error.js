@@ -21,7 +21,11 @@ const sendEmailErrorMap = {
   },
   noSubjectError: {
     message: 'need an email subject',
-    code: 'se005',
+    code: 'se006',
+  },
+  exceedLimitError: {
+    message: '近期內已寄出信，請稍後再試',
+    code: 'se007',
   },
 };
 

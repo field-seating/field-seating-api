@@ -8,7 +8,7 @@ const config = {
     },
   },
   log: {
-    maxLevel: 'info',
+    maxLevel: 'error',
     handleExceptions: true,
   },
 };
