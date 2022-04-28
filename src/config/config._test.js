@@ -3,8 +3,8 @@ const config = {
   verifyEmail: {
     verifyTokenLife: '1d', //24h
     rateLimit: {
-      windowSize: 60,
-      limit: 1,
+      windowSize: 1,
+      limit: 1000,
     },
   },
   log: {
