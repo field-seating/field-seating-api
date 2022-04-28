@@ -15,9 +15,11 @@ const init = async () => {
       incr: defineScript({
         NUMBER_OF_KEYS: 1,
         SCRIPT:
-          'local current = redis.call("INCR",KEYS[1]);' + 'return current;',
-        transformArguments(key) {
-          return [key];
+          'local current = redis.call("INCR",KEYS[1]);' +
+          'redis.call("expire",KEYS[1],ARGV[1]);' +
+          'return current;',
+        transformArguments(key, expired) {
+          return [key, expired];
         },
         transformReply(reply) {
           return reply;
@@ -26,9 +28,11 @@ const init = async () => {
       decr: defineScript({
         NUMBER_OF_KEYS: 1,
         SCRIPT:
-          'local current = redis.call("DECR",KEYS[1]);' + 'return current;',
-        transformArguments(key) {
-          return [key];
+          'local current = redis.call("DECR",KEYS[1]);' +
+          'redis.call("expire",KEYS[1],ARGV[1]);' +
+          'return current;',
+        transformArguments(key, expired) {
+          return [key, expired];
         },
         transformReply(reply) {
           return reply;
