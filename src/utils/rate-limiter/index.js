@@ -1,5 +1,8 @@
 const { compose, multiply, divide, __, toString, isNil } = require('ramda');
+
 const { getClient, prependPrefix } = require('../../config/redis');
+const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const PrivateError = require('../../errors/error/private-error');
 
 const generateIndex = (key) => {
   const localKey = `rate_limiter:${key}`;
@@ -19,7 +22,6 @@ const recordWindowsCount = (client) => async (currentIndex, lastIndex) => {
   return result.map((str) => Number(str));
 };
 
-// need redis connection
 const decrWindowCount = (client) => async (windowIndex) => {
   const result = await client.decr(windowIndex);
   return result;
@@ -43,15 +45,15 @@ const rateLimiterHelper =
   (func, { current, key }) =>
   async (...args) => {
     if (!isPositveInteger(windowSize)) {
-      throw new Error('windowSize should be a positive integer');
+      throw new PrivateError(rateLimiterErrorMap.windowSizeInvalid);
     }
 
     if (!isPositveInteger(limit)) {
-      throw new Error('limit should be a positive integer');
+      throw new PrivateError(rateLimiterErrorMap.limitInvalid);
     }
 
     if (isNil(key)) {
-      throw new Error('key is required');
+      throw new PrivateError(rateLimiterErrorMap.keyInvalid);
     }
 
     const currentTimestamp = toTimestamp(current);
@@ -80,13 +82,14 @@ const rateLimiterHelper =
     const exceed = currentCount + weighted(lastCount) > limit;
 
     if (exceed) {
-      throw new Error('exceed rate limit');
+      throw new PrivateError(rateLimiterErrorMap.exceedLimit);
     }
 
     try {
       return await func(...args);
     } catch (err) {
       decrWindowCount(client)(currentIndex);
+
       throw err;
     }
   };
