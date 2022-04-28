@@ -57,7 +57,7 @@ class EmailService extends BaseService {
       this.logger.info('sent email', { emailInfo });
       return emailInfo;
     } catch (err) {
-      if (err.code === rateLimiterErrorMap.exceedLimit) {
+      if (err.code === rateLimiterErrorMap.exceedLimit.code) {
         throw new GeneralError(sendEmailErrorMap.exceedLimitError);
       }
       throw err;
