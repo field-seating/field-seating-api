@@ -14,7 +14,7 @@ afterAll(async () => {
 
 describe('rateLimiterHelper', () => {
   it('should get error when exceeding the limit', async () => {
-    const func = jest.fn(async (x) => x);
+    const func = jest.fn(async () => {});
 
     const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
 
@@ -39,7 +39,7 @@ describe('rateLimiterHelper', () => {
   });
 
   it('should pass when execute cross the window', async () => {
-    const func = jest.fn(async (x) => x);
+    const func = jest.fn(async () => {});
 
     const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
     const triggerTime2 = new Date(2010, 1, 1, 0, 2, 2);
@@ -57,10 +57,6 @@ describe('rateLimiterHelper', () => {
     await withRateLimiterFunc();
     await withRateLimiterFunc();
 
-    withRateLimiterFunc = withRateLimiter(func, {
-      current: triggerTime1,
-    });
-
     try {
       await withRateLimiterFunc();
     } catch (err) {
@@ -74,5 +70,30 @@ describe('rateLimiterHelper', () => {
     await withRateLimiterFunc();
 
     expect(func.mock.calls).toHaveLength(3);
+  });
+
+  it('should throw the exact error when function reject', async () => {
+    const err = new Error();
+    const errorCode = 'errorCode';
+    err.code = errorCode;
+    const func = jest.fn(() => Promise.reject(err));
+
+    const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
+
+    const withRateLimiter = rateLimiterHelper({
+      windowSize: 60,
+      limit: 2,
+      key: '1',
+    });
+
+    let withRateLimiterFunc = withRateLimiter(func, {
+      current: triggerTime1,
+    });
+
+    try {
+      await withRateLimiterFunc();
+    } catch (err) {
+      expect(err.code).toBe(errorCode);
+    }
   });
 });
