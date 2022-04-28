@@ -8,6 +8,10 @@ const config = {
       limit: 1,
     },
   },
+  reqRateLimit: {
+    windowSize: 60,
+    limit: 300,
+  },
   log: {
     maxLevel: 'info',
     handleExceptions: true,

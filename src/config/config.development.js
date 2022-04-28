@@ -7,6 +7,10 @@ const config = {
       limit: 5,
     },
   },
+  reqRateLimit: {
+    windowSize: 1,
+    limit: 50,
+  },
   log: {
     maxLevel: 'debug',
     handleExceptions: false,
