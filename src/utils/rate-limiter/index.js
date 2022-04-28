@@ -14,10 +14,10 @@ const recordWindowsCount =
     return result.map((str) => Number(str));
   };
 
-const decrWindowCount = (client) => async (windowIndex, expired) => {
-  const result = await client.decr(windowIndex, expired);
-  return result;
-};
+//const decrWindowCount = (client) => async (windowIndex, expired) => {
+//const result = await client.decr(windowIndex, expired);
+//return result;
+//};
 
 const generateIndex = (key) => {
   const localKey = `rate_limiter:${key}`;
@@ -92,13 +92,7 @@ const rateLimiterHelper =
       throw new PrivateError(rateLimiterErrorMap.exceedLimit);
     }
 
-    try {
-      return await func(...args);
-    } catch (err) {
-      decrWindowCount(client)(currentIndex, 2 * windowSize);
-
-      throw err;
-    }
+    return await func(...args);
   };
 
 module.exports = rateLimiterHelper;
