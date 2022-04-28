@@ -1,5 +1,4 @@
 const CacheBase = require('./base');
-const { getClient } = require('../config/redis');
 
 const getFieldsData = jest.fn(() =>
   Promise.resolve({
@@ -13,11 +12,6 @@ const getFieldsData = jest.fn(() =>
     },
   })
 );
-
-afterAll(async () => {
-  const client = await getClient();
-  await client.disconnect();
-});
 
 describe('cache base', () => {
   class FieldsCache extends CacheBase {
