@@ -4,7 +4,7 @@ const config = {
     verifyTokenLife: '5m', //5min
     rateLimit: {
       windowSize: 60,
-      limit: 1,
+      limit: 5,
     },
   },
   log: {
