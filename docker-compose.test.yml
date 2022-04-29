@@ -9,13 +9,18 @@ services:
     working_dir: /var/app
     volumes:
       - ./src:/var/app/src
-      - ./.env.test:/var/app/.env
-      #- ./scripts:/var/app/scripts
-      #- ./package.json:/var/app/package.json
     networks:
       - application
     depends_on:
       - database
+      - redis
+    environment:
+      APP_ENV: test
+      DATABASE_URL: mysql://root:root@field-seating-test-db:3306/field_seating_test
+      JWT_SECRET: jwt_secret
+      SIB_KEY: "sibKey"
+      EMAIL: YOUR_EMAIL
+      REDIS_URL: redis://field-seating-test-redis:6379
 
   database:
     image: mysql:8
@@ -24,6 +29,16 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    networks:
+      - application
+
+  redis:
+    image: redis:6.2
+    container_name: field-seating-test-redis
+    platform: linux/amd64
+    restart: always
     expose:
       - 3306
     networks:

@@ -1,36 +1,34 @@
+const developmentConfig = require('./config.development');
+const stagingConfig = require('./config.staging');
+const testConfig = require('./config._test');
+const productionConfig = require('./config.production');
+const context = require('../context');
+
 const configFromEnv = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
+  redisUrl: process.env.REDIS_URL,
 };
 
-const config = {
-  development: {
-    baseUrl: 'https://fieldseating.wendellatman.com',
-    verifyEmail: {
-      verifyTokenLife: '5m', //5min
-    },
-    log: {
-      maxFilesDays: 3,
-      maxLevel: 'debug',
-      handleExceptions: false,
-    },
-  },
-  production: {
-    baseUrl: 'https://fieldseating.wendellatman.com',
-    verifyEmail: {
-      verifyTokenLife: '1d', //24h
-    },
-    log: {
-      maxFilesDays: 30,
-      maxLevel: 'info',
-      handleExceptions: true,
-    },
-  },
+const envMap = {
+  development: developmentConfig,
+  staging: stagingConfig,
+  production: productionConfig,
+  test: testConfig,
 };
 
-const isProduction = process.env.NODE_MODULE === 'production';
-const configByEnv = isProduction ? config.production : config.development;
+const getConfigByEnv = () => {
+  const appEnv = context.getEnv();
 
-module.exports = { ...configByEnv, ...configFromEnv };
+  const envConfig = envMap[appEnv];
+
+  if (!envConfig) {
+    return developmentConfig;
+  }
+
+  return envConfig;
+};
+
+module.exports = { ...getConfigByEnv(), ...configFromEnv };
