@@ -1,4 +1,4 @@
-const { addMilliseconds } = require('date-fns');
+const { addSeconds } = require('date-fns');
 const UserModel = require('../models/user');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
@@ -104,7 +104,7 @@ describe('user-service.verifyEmail', () => {
       const newUser = await userService.signUp('user1', email, 'password1');
 
       // make a fake day which expired token life
-      const mockDate = addMilliseconds(new Date(), verificationTokenLife);
+      const mockDate = addSeconds(new Date(), verificationTokenLife);
       const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
       try {
         await userService.verifyEmail(newUser.verificationToken);
