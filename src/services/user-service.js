@@ -38,7 +38,7 @@ class UserService extends BaseService {
 
   async signIn(id) {
     const userModel = new UserModel();
-    const getUser = await userModel.getUser(id);
+    const getUser = await userModel.getUserById(id);
 
     // demo for local logger
     this.logger.debug('got a user', { user: getUser });
@@ -65,7 +65,7 @@ class UserService extends BaseService {
 
   async getUserInfo(id) {
     const userModel = new UserModel();
-    const userInfo = await userModel.getUserInfo(id);
+    const userInfo = await userModel.getUserById(id);
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }

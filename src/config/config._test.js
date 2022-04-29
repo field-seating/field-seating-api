@@ -3,16 +3,16 @@ const config = {
   verifyEmail: {
     verifyTokenLife: '1d', //24h
     rateLimit: {
-      windowSize: 60 * 60 * 3,
-      limit: 2,
+      windowSize: 1,
+      limit: 1000,
     },
   },
   reqRateLimit: {
-    windowSize: 60,
-    limit: 300,
+    windowSize: 1,
+    limit: 50,
   },
   log: {
-    maxLevel: 'info',
+    maxLevel: 'error',
     handleExceptions: true,
   },
 };

@@ -1,5 +1,6 @@
 const developmentConfig = require('./config.development');
 const stagingConfig = require('./config.staging');
+const testConfig = require('./config._test');
 const productionConfig = require('./config.production');
 const context = require('../context');
 
@@ -15,6 +16,7 @@ const envMap = {
   development: developmentConfig,
   staging: stagingConfig,
   production: productionConfig,
+  test: testConfig,
 };
 
 const getConfigByEnv = () => {

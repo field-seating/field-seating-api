@@ -24,7 +24,7 @@ class UserModel {
     return createUser;
   }
 
-  async getUser(id) {
+  async getUserById(id) {
     const getUser = await prisma.users.findUnique({
       where: {
         id: id,
