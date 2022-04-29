@@ -1,6 +1,6 @@
 const resendVerifyEmailErrorMap = {
-  duplicateSend: {
-    message: '尚未超過可重新寄送之時間，請稍候！',
+  flushFailed: {
+    message: 'token更新失敗',
     code: 'rs001',
   },
   alreadyVerified: {

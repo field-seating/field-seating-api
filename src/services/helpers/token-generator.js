@@ -2,11 +2,7 @@ const { randomUUID } = require('crypto');
 
 async function tokenGenerator() {
   const token = await randomUUID();
-  const date = new Date();
-  const result = {
-    token,
-    date,
-  };
+  const result = token;
   return result;
 }
 

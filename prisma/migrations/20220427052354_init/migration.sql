@@ -5,10 +5,14 @@ CREATE TABLE `Users` (
     `name` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `role` VARCHAR(255) NOT NULL DEFAULT 'user',
+    `status` VARCHAR(255) NOT NULL DEFAULT 'unverified',
+    `verificationToken` VARCHAR(255) NULL,
+    `tokenCreatedAt` DATETIME(3) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `Users_email_key`(`email`),
+    UNIQUE INDEX `Users_verificationToken_key`(`verificationToken`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

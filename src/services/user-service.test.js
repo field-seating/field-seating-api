@@ -1,25 +1,20 @@
-const UserService = require('./user-service');
+const { addMilliseconds } = require('date-fns');
 const UserModel = require('../models/user');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
-const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
 const { statusMap } = require('../models/user/constants');
-const { subDays, subMinutes } = require('date-fns');
-const tokenGenerator = require('../services/helpers/token-generator');
-const {
-  verificationTokenLife,
-  resendLimitTime,
-} = require('../constants/token-life-constant');
+const UserService = require('./user-service');
+const userService = new UserService({ req: { requestId: '' } });
+const { verificationTokenLife } = require('../constants/token-life-constant');
 
+beforeEach(async () => {
+  jest.resetModules();
+});
 afterEach(async () => {
   const userModel = new UserModel();
   await userModel._truncate();
 });
-jest.mock('../services/helpers/token-generator');
 
-const userService = new UserService({ req: { requestId: '' } });
-
-// signUp
 describe('user-service.signUp', () => {
   describe('with regular input', () => {
     it('should return desired values without password', async () => {
@@ -27,20 +22,13 @@ describe('user-service.signUp', () => {
       const name = 'user1';
       const email = 'example@example.com';
       const password = 'qwerasdf';
-      tokenGenerator.mockImplementation(() => {
-        return {
-          token: 'xxx',
-          date: new Date(),
-        };
-      });
       const newUser = await userService.signUp(name, email, password);
-
       const expectedResult = {
         name,
         email,
         status: statusMap.unverified,
       };
-      expect(tokenGenerator).toHaveBeenCalled();
+
       expect(newUser).toMatchObject(expectedResult);
       expect(newUser).toHaveProperty('verificationToken');
       expect(newUser).not.toHaveProperty('password');
@@ -51,7 +39,6 @@ describe('user-service.signUp', () => {
     it('should throw a duplicate error', async () => {
       const email = 'example@example.com';
       await userService.signUp('user1', email, 'password1');
-
       try {
         await userService.signUp('user2', email, 'password2');
       } catch (e) {
@@ -61,15 +48,17 @@ describe('user-service.signUp', () => {
   });
 });
 
-// signIn;
 describe('user-service.signIn', () => {
   describe('with regular input', () => {
     it('should return desired values without password', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
-      delete newUser.verificationToken;
       const expectedResult = {
-        user: newUser,
+        user: {
+          id: newUser.id,
+          email: newUser.email,
+          name: newUser.name,
+        },
       };
       const signInUser = await userService.signIn(newUser.id);
       expect(signInUser).toMatchObject(expectedResult);
@@ -79,35 +68,26 @@ describe('user-service.signIn', () => {
   });
 });
 
-// verifyEmail
 describe('user-service.verifyEmail', () => {
   describe('with regular input', () => {
     it('should return user with status: verified', async () => {
-      // create user and mock token
-      tokenGenerator.mockImplementation(() => {
-        return {
-          token: '123',
-          date: new Date(),
-        };
-      });
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
-
       // verifyUser
       const verifyUser = await userService.verifyEmail(
         newUser.verificationToken
       );
-
       // make sure the user to be verified
-      const expectedResult = true;
-      expect(verifyUser).toBe(expectedResult);
+      expect(verifyUser).toBe(true);
     });
   });
 
   describe('with wrong token', () => {
     it('should return error: invalidToken', async () => {
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
       // create wrong token
-      const wrongToken = 'wrongToken';
+      const wrongToken = `${newUser.verificationToken}xx`;
 
       try {
         await userService.verifyEmail(wrongToken);
@@ -120,28 +100,23 @@ describe('user-service.verifyEmail', () => {
 
   describe('with expired token', () => {
     it('should return error: invalidToken', async () => {
-      // create user and expired token
       const email = 'example@example.com';
-      const expiredTime = subDays(new Date(), verificationTokenLife);
-      tokenGenerator.mockImplementation(() => {
-        return {
-          token: 'expiredToken',
-          date: expiredTime,
-        };
-      });
       const newUser = await userService.signUp('user1', email, 'password1');
 
+      // make a fake day which expired token life
+      const mockDate = addMilliseconds(new Date(), verificationTokenLife);
+      const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
       try {
         await userService.verifyEmail(newUser.verificationToken);
       } catch (e) {
         // make sure get the right err code
         expect(e.code).toBe(verifyErrorMap.invalidToken.code);
       }
+      spy.mockRestore();
     });
   });
 });
 
-// getUserInfo
 describe('user-service.gerUserInfo', () => {
   describe('with correct user and no password in return', () => {
     it('should return desired values which same with request user', async () => {
@@ -162,56 +137,28 @@ describe('user-service.gerUserInfo', () => {
   });
 });
 
-// refreshToken
-describe('user-service.refreshToken', () => {
+describe('user-service.flushToken', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
+      const UserService = require('./user-service');
+      const userService = new UserService({ req: { requestId: '' } });
       // create user and mock token
-      const expiredTime = subDays(new Date(), verificationTokenLife);
+      jest.mock('../services/helpers/token-generator');
+      const tokenGenerator = require('../services/helpers/token-generator');
       tokenGenerator.mockImplementation(() => {
-        return {
-          token: 'expiredTokenToRefresh',
-          date: expiredTime,
-        };
+        return 'expiredTokenToRefresh';
       });
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
-
       // verifyUser
       tokenGenerator.mockImplementation(() => {
-        return {
-          token: 'refreshToken',
-          date: new Date(),
-        };
+        return 'flushToken';
       });
-      const verifyUser = await userService.refreshToken(newUser.id);
-
+      const verifyUser = await userService.flushToken(newUser.id);
       // make sure get a new token
-      const expectedResult = 'refreshToken';
+      const expectedResult = 'flushToken';
       expect(tokenGenerator).toHaveBeenCalledTimes(2);
       expect(verifyUser).toBe(expectedResult);
-    });
-  });
-
-  describe('with not arrive resend time', () => {
-    it('should return duplicateSend error', async () => {
-      // create user and mock token
-      const notToResendTime = subMinutes(new Date(), resendLimitTime - 1);
-      tokenGenerator.mockImplementation(() => {
-        return {
-          token: 'notYetToRefreshToken',
-          date: notToResendTime,
-        };
-      });
-      const email = 'example@example.com';
-      const newUser = await userService.signUp('user1', email, 'password1');
-
-      // make sure get a duplicateSend error
-      try {
-        await userService.refreshToken(newUser.id);
-      } catch (e) {
-        expect(e.code).toBe(resendVerifyEmailErrorMap.duplicateSend.code);
-      }
     });
   });
 });

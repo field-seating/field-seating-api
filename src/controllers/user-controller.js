@@ -1,3 +1,4 @@
+const R = require('ramda');
 const EmailService = require('../services/email-service');
 const UserService = require('../services/user-service');
 const resSuccess = require('./helpers/response');
@@ -19,8 +20,8 @@ const userController = {
       await emailService.sendVerifyEmail(user);
 
       //not show token
-      delete user.verificationToken;
-      res.status(200).json(resSuccess(user));
+      const result = R.omit(['verificationToken'], user);
+      res.status(200).json(resSuccess(result));
     } catch (err) {
       next(err);
     }
@@ -59,7 +60,7 @@ const userController = {
 
       // refresh token
       const userService = new UserService({ req });
-      const newToken = await userService.refreshToken(user.id);
+      const newToken = await userService.flushToken(user.id);
       const userData = {
         email: user.email,
         name: user.name,
