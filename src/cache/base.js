@@ -2,7 +2,6 @@ const { isNil } = require('ramda');
 
 const { getClient, prependPrefix } = require('../config/redis');
 
-// read through
 class CacheBase {
   expiredTime;
 
