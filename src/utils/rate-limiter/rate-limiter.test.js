@@ -51,6 +51,36 @@ describe('rateLimiterHelper', () => {
     }
   });
 
+  it('should decrease the count when the operation exceeds', async () => {
+    const func = jest.fn(async () => {});
+
+    const triggerTime1 = new Date(2010, 1, 1, 0, 1, 0);
+
+    const withRateLimit = rateLimiterHelper({
+      windowSize: 60,
+      limit: 1,
+      key: '1',
+    });
+
+    const withRateLimitFunc = withRateLimit(func, {
+      current: triggerTime1,
+    });
+
+    await withRateLimitFunc();
+
+    try {
+      await withRateLimitFunc();
+    } catch (err) {
+      expect(err.code).toBe(rateLimiterErrorMap.exceedLimit.code);
+    }
+
+    const client = await getClient();
+    const [key] = await client.keys('*');
+    const value = await client.get(key);
+
+    expect(Number(value)).toBe(1);
+  });
+
   it('should pass when execute cross the window', async () => {
     const func = jest.fn(async () => {});
 
