@@ -1,4 +1,5 @@
 const CacheBase = require('./base');
+const { getClient } = require('../config/redis');
 
 const rawData = {
   1: {
@@ -33,11 +34,11 @@ class FieldsCache extends CacheBase {
   }
 }
 
-describe('get', () => {
-  afterEach(async () => {
-    await new FieldsCache().purgeAll();
-  });
+afterEach(async () => {
+  await new FieldsCache().purgeAll();
+});
 
+describe('get', () => {
   it('should set and get properly', async () => {
     const fieldsCache = new FieldsCache();
 
@@ -59,6 +60,19 @@ describe('get', () => {
     expect(data.name).toEqual('桃園國際棒球場');
 
     expect(getFieldsData.mock.calls).toHaveLength(1);
+  });
+
+  it('should have TTL', async () => {
+    const fieldsCache = new FieldsCache();
+
+    const data1 = await fieldsCache.get(1);
+    expect(data1.name).toEqual('桃園國際棒球場');
+
+    const client = await getClient();
+    const [key] = await client.keys('*:fields:*');
+    const ttl = await client.ttl(key);
+
+    expect(ttl).toBeGreaterThanOrEqual(1);
   });
 });
 
