@@ -15,27 +15,27 @@ const getFieldsData = jest.fn((fieldId) => {
   return Promise.resolve(rawData[fieldId]);
 });
 
-describe('get', () => {
-  class FieldsCache extends CacheBase {
-    async fetch(fieldId) {
-      return await getFieldsData(fieldId);
-    }
-
-    getKeyName() {
-      return 'fields';
-    }
-
-    getVersion() {
-      return 1;
-    }
-
-    getExpiredTime() {
-      return 60 * 60 * 24 * 30;
-    }
+class FieldsCache extends CacheBase {
+  async fetch(fieldId) {
+    return await getFieldsData(fieldId);
   }
 
+  getKeyName() {
+    return 'fields';
+  }
+
+  getVersion() {
+    return 1;
+  }
+
+  getExpiredTime() {
+    return 60 * 60 * 24 * 30;
+  }
+}
+
+describe('get', () => {
   afterEach(async () => {
-    await new FieldsCache().purge();
+    await new FieldsCache().purgeAll();
   });
 
   it('should set and get properly', async () => {
@@ -59,5 +59,21 @@ describe('get', () => {
     expect(data.name).toEqual('桃園國際棒球場');
 
     expect(getFieldsData.mock.calls).toHaveLength(1);
+  });
+});
+
+describe('purgeAll', () => {
+  it('should refetch again when cache is purged', async () => {
+    const fieldsCache = new FieldsCache();
+
+    const data1 = await fieldsCache.get(1);
+    expect(data1.name).toEqual('桃園國際棒球場');
+
+    fieldsCache.purgeAll();
+
+    const data2 = await fieldsCache.get(1);
+    expect(data2.name).toEqual('桃園國際棒球場');
+
+    expect(getFieldsData.mock.calls).toHaveLength(2);
   });
 });

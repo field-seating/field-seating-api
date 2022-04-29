@@ -13,8 +13,10 @@ class CacheBase {
   async get(...args) {
     const client = await getClient();
 
-    const key = this.getGlobalKey(...args);
-    let cachedData = await client.get(key);
+    const key = this.getHashKey();
+    const field = this.getFieldName(...args);
+
+    let cachedData = await client.hGet(key, field);
 
     if (isNil(cachedData)) {
       cachedData = await this.#store(...args);
@@ -25,13 +27,11 @@ class CacheBase {
     return result;
   }
 
-  async purge(...args) {
+  async purgeAll() {
     const client = await getClient();
-    await client.del(this.getGlobalKey(...args));
-  }
+    const key = this.getHashKey();
 
-  async reload(...args) {
-    await this.store(...args);
+    await client.del(key);
   }
 
   async #store(...args) {
@@ -40,10 +40,11 @@ class CacheBase {
 
     const client = await getClient();
 
-    await client.set(this.getGlobalKey(...args), value, {
-      EX: this.expiredTime,
-      NX: false,
-    });
+    const key = this.getHashKey();
+    const field = this.getFieldName(...args);
+
+    await client.hSet(key, field, value);
+    await client.expire(key, this.expiredTime);
 
     return value;
   }
@@ -52,13 +53,15 @@ class CacheBase {
     throw new Error('unimplemented');
   }
 
-  getGlobalKey(...args) {
+  getFieldName(...args) {
     if (args.length === 0) {
-      return prependPrefix(`${this.getKeyName()}:v${this.getVersion()}`);
+      return 'global';
     }
-    return prependPrefix(
-      `${this.getKeyName()}:${args.join(':')}:v${this.getVersion()}`
-    );
+    return args.join(':');
+  }
+
+  getHashKey() {
+    return prependPrefix(`${this.getKeyName()}:${this.getVersion()}`);
   }
 
   getKeyName() {
