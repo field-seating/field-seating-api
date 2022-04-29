@@ -105,14 +105,18 @@ describe('user-service.verifyEmail', () => {
 
       // make a fake day which expired token life
       const mockDate = addSeconds(new Date(), verificationTokenLife);
-      const spy = jest.spyOn(global, 'Date').mockImplementation(() => mockDate);
+      jest.useFakeTimers();
+      jest.setSystemTime(mockDate);
       try {
-        await userService.verifyEmail(newUser.verificationToken);
+        const test = await userService.verifyEmail(newUser.verificationToken);
+        console.log(test);
       } catch (e) {
+        console.log(e);
         // make sure get the right err code
         expect(e.code).toBe(verifyErrorMap.invalidToken.code);
       }
-      spy.mockRestore();
+      // clean
+      jest.useRealTimers();
     });
   });
 });
@@ -121,7 +125,7 @@ describe('user-service.gerUserInfo', () => {
   describe('with correct user and no password in return', () => {
     it('should return desired values which same with request user', async () => {
       const data = {
-        name: 'user1',
+        name: 'user',
         email: 'example@example.com',
         password: 'password1',
       };
