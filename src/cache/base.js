@@ -2,21 +2,22 @@ const { isNil } = require('ramda');
 
 const { getClient, prependPrefix } = require('../config/redis');
 
+// read through
 class CacheBase {
-  key;
   expiredTime;
 
   constructor() {
     this.expiredTime = this.getExpiredTime();
-    this.key = prependPrefix(`${this.getKeyName()}:v${this.getVersion()}`);
   }
 
-  async get() {
+  async get(...args) {
     const client = await getClient();
-    let cachedData = await client.get(this.key);
+
+    const key = this.getGlobalKey(...args);
+    let cachedData = await client.get(key);
 
     if (isNil(cachedData)) {
-      cachedData = await this.#store();
+      cachedData = await this.#store(...args);
     }
 
     const result = JSON.parse(cachedData);
@@ -24,22 +25,22 @@ class CacheBase {
     return result;
   }
 
-  async purge() {
+  async purge(...args) {
     const client = await getClient();
-    await client.del(this.key);
+    await client.del(this.getGlobalKey(...args));
   }
 
-  async reload() {
-    this.store();
+  async reload(...args) {
+    await this.store(...args);
   }
 
-  async #store() {
-    const source = await this.fetch();
+  async #store(...args) {
+    const source = await this.fetch(...args);
     const value = JSON.stringify(source);
 
     const client = await getClient();
 
-    await client.set(this.key, value, {
+    await client.set(this.getGlobalKey(...args), value, {
       EX: this.expiredTime,
       NX: false,
     });
@@ -49,6 +50,15 @@ class CacheBase {
 
   async fetch() {
     throw new Error('unimplemented');
+  }
+
+  getGlobalKey(...args) {
+    if (args.length === 0) {
+      return prependPrefix(`${this.getKeyName()}:v${this.getVersion()}`);
+    }
+    return prependPrefix(
+      `${this.getKeyName()}:${args.join(':')}:v${this.getVersion()}`
+    );
   }
 
   getKeyName() {
