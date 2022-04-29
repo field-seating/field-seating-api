@@ -5,7 +5,7 @@ const config = {
     verifyTokenLife: '1d', //24h
     rateLimit: {
       windowSize: 60,
-      limit: 1,
+      limit: 2,
     },
   },
   reqRateLimit: {

@@ -14,10 +14,10 @@ const recordWindowsCount =
     return result.map((str) => Number(str));
   };
 
-//const decrWindowCount = (client) => async (windowIndex, expired) => {
-//const result = await client.decr(windowIndex, expired);
-//return result;
-//};
+const decrWindowCount = (client) => async (windowIndex, expired) => {
+  const result = await client.decr(windowIndex, expired);
+  return result;
+};
 
 const generateIndex = (key) => {
   const localKey = `rate_limiter:${key}`;
@@ -48,8 +48,7 @@ const isPositveInteger = (num) => Number.isInteger(num) && num > 0;
 
 const rateLimiterHelper =
   ({ windowSize, limit, key }) =>
-  (func, { current = new Date() } = { current: new Date() }) =>
-  async (...args) => {
+  (func, { current = new Date() } = { current: new Date() }) => {
     if (!isPositveInteger(windowSize)) {
       throw new PrivateError(rateLimiterErrorMap.windowSizeInvalid);
     }
@@ -77,23 +76,28 @@ const rateLimiterHelper =
     const lastIndex = getLastWindowIndex(currentTimestamp);
     const currentIndex = getCurrentWindowIndex(currentTimestamp);
 
-    const client = await getClient();
+    return async (...args) => {
+      const client = await getClient();
+      const record = recordWindowsCount(client);
+      const decrease = decrWindowCount(client);
 
-    const [lastCount, currentCount] = await recordWindowsCount(client)(
-      lastIndex,
-      currentIndex,
-      2 * windowSize
-    );
+      const [lastCount, currentCount] = await record(
+        lastIndex,
+        currentIndex,
+        2 * windowSize
+      );
 
-    const weighted = multiply(getWeight(windowSize)(currentTimestamp));
+      const weighted = multiply(getWeight(windowSize)(currentTimestamp));
 
-    const exceed = currentCount + weighted(lastCount) > limit;
+      const exceed = currentCount + weighted(lastCount) > limit;
 
-    if (exceed) {
-      throw new PrivateError(rateLimiterErrorMap.exceedLimit);
-    }
+      if (exceed) {
+        await decrease(currentIndex, 2 * windowSize);
+        throw new PrivateError(rateLimiterErrorMap.exceedLimit);
+      }
 
-    return await func(...args);
+      return await func(...args);
+    };
   };
 
 module.exports = rateLimiterHelper;
