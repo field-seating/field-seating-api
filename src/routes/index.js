@@ -10,6 +10,8 @@ const GeneralError = require('../errors/error/general-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const alwaysThrow = require('../utils/func/always-throw');
 const { authenticated } = require('../middleware/auth');
+const { isDevelopmentBuild } = require('../context');
+
 const router = express.Router();
 
 // use by signIn
@@ -36,7 +38,7 @@ router.use('/api/records', authenticated, record);
 router.patch('/api/verify-email', userController.verifyEmail);
 
 // 檢視email格式使用
-if (process.env.NODE_ENV !== 'production') {
+if (isDevelopmentBuild()) {
   router.use('/testemail', (req, res) => res.render('verify-email'));
 }
 

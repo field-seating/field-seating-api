@@ -1,10 +1,13 @@
 const jwt = require('jsonwebtoken');
+
 const { jwtSecret, baseUrl, verifyEmail } = require('../config/config');
 const sendEmail = require('./helpers/send-email');
-const PrivateError = require('../errors/error/private-error');
-const sendEmailErrorMap = require('../errors/send-email-error');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
+const rateLimiterHelper = require('../utils/rate-limiter');
+const rateLimiterErrorMap = require('../errors/rate-limiter-error');
+const sendEmailErrorMap = require('../errors/send-email-error');
+const GeneralError = require('../errors/error/general-error');
 
 class EmailService extends BaseService {
   async sendVerifyEmail(user) {
@@ -12,6 +15,7 @@ class EmailService extends BaseService {
     const token = jwt.sign(user, jwtSecret, {
       expiresIn: verifyEmail.verifyTokenLife,
     });
+
     const meta = {
       receiverList: [
         {
@@ -21,12 +25,15 @@ class EmailService extends BaseService {
       ],
       subject: '球場坐座帳號驗證信',
     };
+
     const data = {
       name: user.name,
       email: user.email,
       url: `${baseUrl}/verify-email/${token}`,
     };
+
     const template = 'verify-email';
+
     // send email
     async function send() {
       const sendInfo = await sendEmail(template, meta, data);
@@ -36,18 +43,23 @@ class EmailService extends BaseService {
       };
       return result;
     }
+
+    const withRateLimit = rateLimiterHelper({
+      windowSize: verifyEmail.rateLimit.windowSize,
+      limit: verifyEmail.rateLimit.limit,
+      key: `sendVerifyEmail:${user.email}`,
+    });
+
+    const sendMailFunc = () => withRetry(send, { maxTries: 3 });
+
     try {
-      const emailInfo = await withRetry(send, { maxTries: 3 });
+      const emailInfo = await withRateLimit(sendMailFunc)();
       this.logger.info('sent email', { emailInfo });
       return emailInfo;
     } catch (err) {
-      //developers.sendinblue.com/docs/how-it-works#endpoints
-      if (err.status === 401)
-        throw new PrivateError(sendEmailErrorMap['apiKeyError']);
-      if (err.status === 400)
-        throw new PrivateError(sendEmailErrorMap['badRequestError']);
-      if (err.status === 429)
-        throw new PrivateError(sendEmailErrorMap['toManyRequestError']);
+      if (err.code === rateLimiterErrorMap.exceedLimit.code) {
+        throw new GeneralError(sendEmailErrorMap.exceedLimitError);
+      }
       throw err;
     }
   }

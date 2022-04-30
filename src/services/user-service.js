@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const GeneralError = require('../errors/error/general-error');
+const PrivateError = require('../errors/error/private-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
 const UserModel = require('../models/user');
@@ -24,8 +25,14 @@ class UserService extends BaseService {
       const postUser = await userModel.createUser(data);
       return postUser;
     } catch (err) {
-      if (err.code === 'P2002') {
+      if (err.code === 'P2000' && err.meta.target === 'Users_name_key') {
+        throw new PrivateError(signUpErrorMap['maximumExceededNameForDev']);
+      }
+      if (err.code === 'P2002' && err.meta.target === 'Users_email_key') {
         throw new GeneralError(signUpErrorMap['duplicateEmail']);
+      }
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
       }
       throw err;
     }
@@ -33,7 +40,7 @@ class UserService extends BaseService {
 
   async signIn(id) {
     const userModel = new UserModel();
-    const getUser = await userModel.getUser(id);
+    const getUser = await userModel.getUserById(id);
 
     // demo for local logger
     this.logger.debug('got a user', { user: getUser });
@@ -69,7 +76,7 @@ class UserService extends BaseService {
   }
   async getUserInfo(id) {
     const userModel = new UserModel();
-    const userInfo = await userModel.getUserInfo(id);
+    const userInfo = await userModel.getUserById(id);
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }

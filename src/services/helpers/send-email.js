@@ -31,21 +31,31 @@ async function sendEmail(templateName, meta, data) {
 
   const result = template(data);
   const sib = new SibApiV3Sdk.TransactionalEmailsApi();
-  const sendInfo = await sib.sendTransacEmail({
-    sender: { email: 'field-seating@gmail.com', name: '球場坐座Team' },
-    subject: meta.subject,
-    htmlContent: result,
-    messageVersions: [
-      {
-        to: receiver,
-      },
-    ],
-  });
-  const returnData = {
-    ...data,
-    sibMessage: sendInfo.messageIds,
-  };
-  return returnData;
+  try {
+    const sendInfo = await sib.sendTransacEmail({
+      sender: { email: 'field-seating@gmail.com', name: '球場坐座Team' },
+      subject: meta.subject,
+      htmlContent: result,
+      messageVersions: [
+        {
+          to: receiver,
+        },
+      ],
+    });
+    const returnData = {
+      ...data,
+      sibMessage: sendInfo.messageIds,
+    };
+    return returnData;
+  } catch (err) {
+    if (err.status === 401)
+      throw new PrivateError(sendEmailErrorMap['apiKeyError']);
+    if (err.status === 400)
+      throw new PrivateError(sendEmailErrorMap['badRequestError']);
+    if (err.status === 429)
+      throw new PrivateError(sendEmailErrorMap['toManyRequestError']);
+    throw err;
+  }
 }
 
 module.exports = sendEmail;

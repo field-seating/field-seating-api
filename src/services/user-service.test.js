@@ -35,7 +35,7 @@ describe('user-service.signUp', () => {
   });
 
   describe('when create users with duplicate email', () => {
-    it('should throw a duplicate error', async () => {
+    it('should throw a duplicateEmail error', async () => {
       const email = 'example@example.com';
 
       await userService.signUp('user1', email, 'password1');
@@ -44,6 +44,20 @@ describe('user-service.signUp', () => {
         await userService.signUp('user2', email, 'password2');
       } catch (e) {
         expect(e.code).toBe(signUpErrorMap.duplicateEmail.code);
+      }
+    });
+  });
+
+  describe('when create users with duplicate name', () => {
+    it('should throw a duplicateName error', async () => {
+      const user = 'user1';
+
+      await userService.signUp(user, 'example@example.com', 'password1');
+
+      try {
+        await userService.signUp(user, 'example2@example.com', 'password2');
+      } catch (e) {
+        expect(e.code).toBe(signUpErrorMap.duplicateName.code);
       }
     });
   });
