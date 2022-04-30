@@ -32,7 +32,7 @@ const signUpErrorMap = {
     code: 's008',
   },
   maximumExceededNameForDev: {
-    message: '名稱不可超過20字',
+    message: '名稱不可超過40字',
     code: 's009',
   },
 };

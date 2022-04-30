@@ -25,20 +25,14 @@ class UserService extends BaseService {
       const postUser = await userModel.createUser(data);
       return postUser;
     } catch (err) {
-      if (err.code === 'P2000') {
-        if (err.meta.target === 'Users_name_key') {
-          throw new PrivateError(signUpErrorMap['maximumExceededNameForDev']);
-        }
-        throw err;
+      if (err.code === 'P2000' && err.meta.target === 'Users_name_key') {
+        throw new PrivateError(signUpErrorMap['maximumExceededNameForDev']);
       }
-      if (err.code === 'P2002') {
-        if (err.meta.target === 'Users_email_key') {
-          throw new GeneralError(signUpErrorMap['duplicateEmail']);
-        }
-        if (err.meta.target === 'Users_name_key') {
-          throw new GeneralError(signUpErrorMap['duplicateName']);
-        }
-        throw err;
+      if (err.code === 'P2002' && err.meta.target === 'Users_email_key') {
+        throw new GeneralError(signUpErrorMap['duplicateEmail']);
+      }
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
       }
       throw err;
     }
