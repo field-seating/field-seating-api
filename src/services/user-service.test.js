@@ -1,4 +1,5 @@
 const { addSeconds } = require('date-fns');
+const assert = require('assert/strict');
 const UserModel = require('../models/user');
 const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
@@ -88,13 +89,14 @@ describe('user-service.verifyEmail', () => {
       const newUser = await userService.signUp('user1', email, 'password1');
       // create wrong token
       const wrongToken = `${newUser.verificationToken}xx`;
-
-      try {
-        await userService.verifyEmail(wrongToken);
-      } catch (e) {
-        // make sure get the right err code
-        expect(e.code).toBe(verifyErrorMap.invalidToken.code);
-      }
+      assert.rejects(
+        async () => {
+          await userService.verifyEmail(wrongToken);
+        },
+        {
+          code: verifyErrorMap.invalidToken.code,
+        }
+      );
     });
   });
 
@@ -107,14 +109,14 @@ describe('user-service.verifyEmail', () => {
       const mockDate = addSeconds(new Date(), verificationTokenLife);
       jest.useFakeTimers();
       jest.setSystemTime(mockDate);
-      try {
-        const test = await userService.verifyEmail(newUser.verificationToken);
-        console.log(test);
-      } catch (e) {
-        console.log(e);
-        // make sure get the right err code
-        expect(e.code).toBe(verifyErrorMap.invalidToken.code);
-      }
+      assert.rejects(
+        async () => {
+          await userService.verifyEmail(newUser.verificationToken);
+        },
+        {
+          code: verifyErrorMap.invalidToken.code,
+        }
+      );
       // clean
       jest.useRealTimers();
     });
@@ -158,11 +160,11 @@ describe('user-service.flushToken', () => {
       tokenGenerator.mockImplementation(() => {
         return 'flushToken';
       });
-      const verifyUser = await userService.flushToken(newUser.id);
+      const token = await userService.flushToken(newUser.id);
       // make sure get a new token
       const expectedResult = 'flushToken';
       expect(tokenGenerator).toHaveBeenCalledTimes(2);
-      expect(verifyUser).toBe(expectedResult);
+      expect(token).toBe(expectedResult);
     });
   });
 });
