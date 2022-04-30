@@ -33,6 +33,6 @@ const signUpSchema = yup.object({
 
 router.get('/me', authenticated, userController.getUserMe);
 router.post('/', validate(signUpSchema), userController.signUp);
-router.post('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
+router.post('/verify-email', authenticated, userController.resendVerifyEmail); // 寄發認證信件
 
 module.exports = router;
