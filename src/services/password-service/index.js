@@ -27,7 +27,10 @@ class PasswordService extends BaseService {
       tokenSignedAt
     );
 
-    return entity;
+    return {
+      user,
+      passwordResetToken: entity,
+    };
   }
 }
 

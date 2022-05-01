@@ -1,6 +1,6 @@
 const passwordErrorMap = {
   emailInvalid: {
-    message: '無合法電子信箱',
+    message: '提供的電子信箱出錯',
     code: 'P001',
   },
   tokenInvalid: {

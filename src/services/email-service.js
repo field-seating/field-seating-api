@@ -17,7 +17,7 @@ class EmailService extends BaseService {
           name: user.name,
         },
       ],
-      subject: '球場坐座帳號驗證信',
+      subject: '帳號驗證信',
     };
 
     const data = {
@@ -57,6 +57,7 @@ class EmailService extends BaseService {
       throw err;
     }
   }
+
   async sendPasswordResetMail(user, passwordResetTokenEntity, requestTime) {
     const { token } = passwordResetTokenEntity;
     const meta = {
@@ -66,7 +67,7 @@ class EmailService extends BaseService {
           name: user.name,
         },
       ],
-      subject: '球場坐座 - 密碼重置',
+      subject: '密碼重置',
     };
 
     const data = {

@@ -11,11 +11,11 @@ const passwordController = {
     const emailService = new EmailService({ logger: req.logger });
 
     try {
-      const passwordResetTokenEntity = await passwordService.recoveryPassword(
-        email
-      );
+      const { user, passwordResetToken: passwordResetTokenEntity } =
+        await passwordService.recoveryPassword(email);
 
       await emailService.sendPasswordResetMail(
+        user,
         passwordResetTokenEntity,
         req.requestTime
       );
