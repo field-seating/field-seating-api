@@ -1,9 +1,21 @@
-//const PasswordService = require('./password-service');
+const assert = require('assert/strict');
 
-//const passwordService = new PasswordService();
+const PasswordService = require('./');
+const passwordErrorMap = require('../../errors/password-error');
+
+const passwordService = new PasswordService({ logger: console });
 
 describe('password-service', () => {
-  it('should remain one password token only', () => {
-    expect(true).toBe(true);
+  it('should throw error when no email matched', () => {
+    const email = 'email';
+
+    assert.rejects(
+      async () => {
+        await passwordService.recoveryPassword(email);
+      },
+      {
+        code: passwordErrorMap.emailInvalid.code,
+      }
+    );
   });
 });

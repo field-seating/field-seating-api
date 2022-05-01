@@ -92,10 +92,12 @@ describe('user-service.verifyEmail', () => {
     it('should return user with status: verified', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+
       // verifyUser
       const verifyUser = await userService.verifyEmail(
         newUser.verificationToken
       );
+
       // make sure the user to be verified
       expect(verifyUser).toBe(true);
     });
@@ -105,6 +107,7 @@ describe('user-service.verifyEmail', () => {
     it('should return error: invalidToken', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+
       // create wrong token
       const wrongToken = `${newUser.verificationToken}xx`;
       assert.rejects(

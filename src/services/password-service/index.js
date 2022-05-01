@@ -12,7 +12,7 @@ class PasswordService extends BaseService {
   async recoveryPassword(email) {
     const passwordResetTokenModel = new PasswordResetTokenModel();
     const userModel = new UserModel();
-    const user = userModel.getUserByEmail(email);
+    const user = await userModel.getUserByEmail(email);
 
     if (isNil(user)) {
       throw new GeneralError(passwordErrorMap.emailInvalid);
