@@ -6,7 +6,6 @@ const {
 const sendEmail = require('./helpers/send-email');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
-const { EFFECTIVE_PERIOD_IN_HOURS } = require('./password-service/constants');
 const rateLimiterHelper = require('../utils/rate-limiter');
 const rateLimiterErrorMap = require('../errors/rate-limiter-error');
 const sendEmailErrorMap = require('../errors/send-email-error');
@@ -78,7 +77,7 @@ class EmailService extends BaseService {
       name: user.name,
       url: `${baseUrl}/password-reset/${token}`,
       time: requestTime,
-      effectiveHours: EFFECTIVE_PERIOD_IN_HOURS,
+      effectiveHours: passwordResetEmail.tokenLife / (60 * 60),
     };
 
     const template = 'password-reset';

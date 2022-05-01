@@ -7,7 +7,7 @@ const config = {
     },
   },
   passwordResetEmail: {
-    tokenLife: 60 * 5, //5min
+    tokenLife: 60 * 60 * 1,
     rateLimit: {
       windowSize: 60,
       limit: 5,
