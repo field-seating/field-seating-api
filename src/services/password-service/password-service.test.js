@@ -1,5 +1,5 @@
 const assert = require('assert/strict');
-const { subDays } = require('date-fns');
+const { subSeconds } = require('date-fns');
 
 const PasswordService = require('./');
 const UserService = require('../user-service');
@@ -95,7 +95,10 @@ describe('updatePassword', () => {
     const user = await userService.signUp('name', 'email', 'pwd');
 
     const token = 'token';
-    const tokenSignedAt = subDays(new Date(), passwordResetEmail.tokenLife + 1);
+    const tokenSignedAt = subSeconds(
+      new Date(),
+      passwordResetEmail.tokenLife + 1
+    );
 
     const newPasswordResetToken = await prisma.passwordResetTokens.create({
       data: {
@@ -118,6 +121,37 @@ describe('updatePassword', () => {
           newPasswordResetToken.token,
           newPassword
         );
+      },
+      {
+        code: passwordErrorMap.tokenInvalid.code,
+      }
+    );
+  });
+
+  it('should get invalid token error when token is not matched', async () => {
+    const user = await userService.signUp('name', 'email', 'pwd');
+
+    const token = 'token';
+    const tokenSignedAt = new Date();
+
+    await prisma.passwordResetTokens.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        token,
+        tokenSignedAt,
+        state: stateMap.valid,
+      },
+    });
+
+    const newPassword = 'new-password';
+
+    assert.rejects(
+      async () => {
+        await passwordService.updatePassword('not-matched-token', newPassword);
       },
       {
         code: passwordErrorMap.tokenInvalid.code,
