@@ -33,7 +33,9 @@ class PasswordService extends BaseService {
     };
   }
 
-  async updatePassword() {}
+  async updatePassword(token, newPassword) {
+    this.logger.info('hits', { token, newPassword });
+  }
 }
 
 module.exports = PasswordService;

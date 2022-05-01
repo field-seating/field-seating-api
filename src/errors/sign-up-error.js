@@ -16,7 +16,7 @@ const signUpErrorMap = {
     code: 's004',
   },
   passwordLength: {
-    message: '密碼長度為8 至20',
+    message: '密碼長度為8 至30',
     code: 's005',
   },
   emailFormat: {

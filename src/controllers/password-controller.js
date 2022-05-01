@@ -28,8 +28,9 @@ const passwordController = {
   updatePassword: async (req, res, next) => {
     const { token, newPassword } = req.body;
 
-    console.log({ token, newPassword });
+    const passwordService = new PasswordService({ logger: req.logger });
     try {
+      await passwordService.updatePassword(token, newPassword);
       res.status(200).json(resSuccess());
     } catch (err) {
       next(err);

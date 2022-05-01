@@ -6,23 +6,19 @@ const passport = require('../config/passport');
 const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
 const password = require('./modules/password');
-const GeneralError = require('../errors/error/general-error');
-const signUpErrorMap = require('../errors/sign-up-error');
-const alwaysThrow = require('../utils/func/always-throw');
 const { isDevelopmentBuild } = require('../context');
+const {
+  passwordValidate,
+  emailValidate,
+} = require('../services/schema/validate');
 
 const router = express.Router();
 
 // use by signIn
 const signInSchema = yup.object({
   body: yup.object({
-    email: yup
-      .string()
-      .required(alwaysThrow(new GeneralError(signUpErrorMap.emailRequired)))
-      .email(alwaysThrow(new GeneralError(signUpErrorMap.emailFormat))),
-    password: yup
-      .string()
-      .required(alwaysThrow(new GeneralError(signUpErrorMap.passwordRequired))),
+    email: emailValidate,
+    password: passwordValidate,
   }),
 });
 
