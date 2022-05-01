@@ -202,7 +202,7 @@ describe('user-service.flushToken', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
       const UserService = require('./user-service');
-      const userService = new UserService({ req: { requestId: '' } });
+      const userService = new UserService({ logger: console });
 
       // create user and mock token
       jest.mock('../services/helpers/token-generator');

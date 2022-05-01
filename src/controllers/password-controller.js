@@ -12,9 +12,9 @@ const passwordController = {
   recoveryPassword: async (req, res, next) => {
     const { email } = req.body;
 
-    const userService = new UserService({ req });
-    const passwordService = new PasswordService({ req });
-    const emailService = new EmailService({ req });
+    const userService = new UserService({ logger: req.logger });
+    const passwordService = new PasswordService({ logger: req.logger });
+    const emailService = new EmailService({ logger: req.logger });
 
     try {
       const user = await userService.getUserByEmail(email);
