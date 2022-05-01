@@ -4,6 +4,7 @@
 generator client {
   provider = "prisma-client-js"
   binaryTargets = ["native"]
+  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -11,7 +12,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// user model
 model Users {
   id        Int      @id @default(autoincrement())
   email     String   @unique @db.VarChar(255)
@@ -20,15 +20,16 @@ model Users {
   role      String   @db.VarChar(255) @default("user")
   status    String   @db.VarChar(255) @default("unverified")
   verificationToken String? @unique @db.VarChar(255)
-  tokenCreatedAt DateTime? 
+  tokenCreatedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   records   Records[]
   photos    Photos[]
   collections Collections[]
   reviews Reviews[]
+  passwordResetTokens PasswordResetTokens[]
 }
-// field model
+
 model Fields {
   id        Int      @id @default(autoincrement())
   orientations FieldOnOrientations[]
@@ -39,7 +40,7 @@ model Fields {
   updatedAt DateTime @updatedAt
   zones     Zones[]
 }
-//orientation model
+
 model Orientations {
   id        Int      @id @default(autoincrement())
   fields    FieldOnOrientations[]
@@ -48,6 +49,7 @@ model Orientations {
   updatedAt DateTime @updatedAt
   zones     Zones[]
 }
+
 model FieldOnOrientations {
   orientation  Orientations @relation(fields: [orientationId], references: [id])
   orientationId     Int
@@ -59,7 +61,7 @@ model FieldOnOrientations {
   @@unique([orientationId, fieldId])
   @@id([orientationId, fieldId])
 }
-//level model
+
 model Levels {
   id        Int      @id @default(autoincrement())
   fields    FieldOnLevels[]
@@ -68,6 +70,7 @@ model Levels {
   updatedAt DateTime @updatedAt
   zones     Zones[]
 }
+
 model FieldOnLevels {
   level  Levels @relation(fields: [levelId], references: [id])
   levelId     Int
@@ -79,7 +82,7 @@ model FieldOnLevels {
   @@unique([levelId, fieldId])
   @@id([levelId, fieldId])
 }
-//zone model
+
 model Zones {
   id        Int      @id @default(autoincrement())
   field     Fields    @relation(fields: [fieldId], references: [id])
@@ -93,7 +96,7 @@ model Zones {
   updatedAt DateTime @updatedAt
   spaces    Spaces[]
 }
-//space model
+
 model Spaces {
   id        Int      @id @default(autoincrement())
   zone     Zones    @relation(fields: [zoneId], references: [id])
@@ -111,7 +114,7 @@ model Spaces {
   collections Collections[]
   @@unique([id, spaceType])
 }
-//seat model
+
 model Seats {
   space    Spaces    @relation(fields: [spaceId, spaceType], references: [id, spaceType])
   spaceId   Int  @id
@@ -119,7 +122,7 @@ model Seats {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-//pillar model
+
 model Pillars {
   space    Spaces   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
   spaceId   Int    @id
@@ -127,7 +130,7 @@ model Pillars {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-// record model
+
 model Records {
   id        Int      @id @default(autoincrement())
   user     Users    @relation(fields: [userId], references: [id])
@@ -141,7 +144,7 @@ model Records {
   updatedAt DateTime @updatedAt
   photos    Photos[]
 }
-// photo model
+
 model Photos {
   id        Int      @id @default(autoincrement())
   user     Users    @relation(fields: [userId], references: [id])
@@ -157,7 +160,7 @@ model Photos {
   updatedAt DateTime @updatedAt
   reviews Reviews[]
 }
-// collection model
+
 model Collections {
   id        Int      @id @default(autoincrement())
   user     Users    @relation(fields: [userId], references: [id])
@@ -167,7 +170,7 @@ model Collections {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
-// review model
+
 model Reviews {
   id        Int      @id @default(autoincrement())
   user     Users    @relation(fields: [userId], references: [id])
@@ -179,3 +182,22 @@ model Reviews {
   updatedAt DateTime @updatedAt
   @@index([photoId, useful])
 }
+
+model PasswordResetTokens {
+  id            Int       @id @default(autoincrement())
+  user          Users?     @relation(fields: [userId], references: [id])
+  userId        Int
+  token         String?   @unique @db.VarChar(255)
+  state         PasswordResetTokenState @default(INVALID)
+  tokenSignedAt DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([state])
+}
+
+enum PasswordResetTokenState {
+  INVALID
+  VALID
+}
+

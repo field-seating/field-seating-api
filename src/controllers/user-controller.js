@@ -57,7 +57,7 @@ const userController = {
         throw new GeneralError(resendVerifyEmailErrorMap['inactive']);
 
       // refresh token
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const newToken = await userService.flushToken(user.id);
       const userData = {
         email: user.email,
@@ -73,6 +73,7 @@ const userController = {
       next(err);
     }
   },
+
   getUserMe: async (req, res, next) => {
     try {
       const { id } = req.user;
@@ -83,6 +84,7 @@ const userController = {
       next(err);
     }
   },
+
   updateMe: async (req, res, next) => {
     try {
       const { id } = req.user;

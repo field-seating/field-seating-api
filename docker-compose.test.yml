@@ -9,6 +9,8 @@ services:
     working_dir: /var/app
     volumes:
       - ./src:/var/app/src
+      - ./prisma:/var/app/prisma
+      - ./scripts:/var/app/scripts
     networks:
       - application
     depends_on:

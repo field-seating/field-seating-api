@@ -10,6 +10,7 @@ const { verificationTokenLife } = require('../constants/token-life-constant');
 beforeEach(async () => {
   jest.resetModules();
 });
+
 afterEach(async () => {
   const userModel = new UserModel();
   await userModel._truncate();
@@ -91,10 +92,12 @@ describe('user-service.verifyEmail', () => {
     it('should return user with status: verified', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+
       // verifyUser
       const verifyUser = await userService.verifyEmail(
         newUser.verificationToken
       );
+
       // make sure the user to be verified
       expect(verifyUser).toBe(true);
     });
@@ -104,6 +107,7 @@ describe('user-service.verifyEmail', () => {
     it('should return error: invalidToken', async () => {
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+
       // create wrong token
       const wrongToken = `${newUser.verificationToken}xx`;
       assert.rejects(
@@ -185,7 +189,7 @@ describe('user-service.flushToken', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
       const UserService = require('./user-service');
-      const userService = new UserService({ req: { requestId: '' } });
+      const userService = new UserService({ logger: console });
 
       // create user and mock token
       jest.mock('../services/helpers/token-generator');
