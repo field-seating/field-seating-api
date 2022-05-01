@@ -9,7 +9,8 @@ class UserModel {
         email: data.email,
         name: data.name,
         password: data.password,
-        // token: data.token,
+        verificationToken: data.token,
+        tokenCreatedAt: new Date(),
       },
       select: {
         id: true,
@@ -17,7 +18,7 @@ class UserModel {
         name: true,
         role: true,
         status: true,
-        // token: true,
+        verificationToken: true,
       },
     });
     return createUser;
@@ -39,12 +40,30 @@ class UserModel {
     return getUser;
   }
 
-  async verifyUser(id) {
-    const verifyUser = await prisma.users.update({
+  async verifyUser(token, { tokenShouldLater: dateTime }) {
+    const verifyUser = await prisma.users.updateMany({
+      where: {
+        verificationToken: token,
+        status: statusMap.unverified,
+        tokenCreatedAt: {
+          gte: dateTime,
+        },
+      },
+      data: {
+        status: statusMap.active,
+        verificationToken: null,
+        tokenCreatedAt: null,
+      },
+    });
+    if (verifyUser.count === 0) return false;
+    return true;
+  }
+
+  async getUserInfo(id) {
+    const userInfo = await prisma.users.findUnique({
       where: {
         id: id,
       },
-      data: { status: statusMap.active },
       select: {
         id: true,
         email: true,
@@ -53,7 +72,38 @@ class UserModel {
         status: true,
       },
     });
-    return verifyUser;
+    return userInfo;
+  }
+  async flushVerificationToken(data) {
+    const newToken = await prisma.users.updateMany({
+      where: {
+        id: data.id,
+        status: statusMap.unverified,
+      },
+      data: { verificationToken: data.token, tokenCreatedAt: new Date() },
+    });
+    if (newToken.count === 0) return false;
+    return true;
+  }
+
+  async updateUser(id, payload) {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        name: payload.name,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
   }
 
   async getUserByEmail(email) {

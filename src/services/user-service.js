@@ -1,31 +1,42 @@
 const jwt = require('jsonwebtoken');
-
+const { subSeconds } = require('date-fns');
 const GeneralError = require('../errors/error/general-error');
+const PrivateError = require('../errors/error/private-error');
 const signUpErrorMap = require('../errors/sign-up-error');
-const verifyErrorMap = require('../errors/verify-error');
 const UserModel = require('../models/user');
-const { jwtLife } = require('../constants/jwt-constant');
+const { jwtLife } = require('../constants/token-life-constant');
 const { hashPassword } = require('../utils/crypto/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
+const tokenGenerator = require('./helpers/token-generator');
+const verifyErrorMap = require('../errors/verify-error');
+const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
+const { verificationTokenLife } = require('../constants/token-life-constant');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {
     // hash password
     const hash = await hashPassword(password);
-
+    const token = await tokenGenerator();
     const userModel = new UserModel();
-    const data = {
+    const userData = {
       name: name,
       email: email,
       password: hash,
+      token: token,
     };
     try {
-      const postUser = await userModel.createUser(data);
+      const postUser = await userModel.createUser(userData);
       return postUser;
     } catch (err) {
-      if (err.code === 'P2002') {
+      if (err.code === 'P2000' && err.meta.target === 'Users_name_key') {
+        throw new PrivateError(signUpErrorMap['maximumExceededNameForDev']);
+      }
+      if (err.code === 'P2002' && err.meta.target === 'Users_email_key') {
         throw new GeneralError(signUpErrorMap['duplicateEmail']);
+      }
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
       }
       throw err;
     }
@@ -46,38 +57,61 @@ class UserService extends BaseService {
     };
     return user;
   }
+
   async verifyEmail(token) {
-    try {
-      // jwt驗證
-      const SECRET = jwtSecret;
-      const user = jwt.verify(token, SECRET);
-      // update user
-      const userModel = new UserModel();
-      const verifyUser = await userModel.verifyUser(user.id);
-      return verifyUser;
-    } catch (err) {
-      // token到期
-      if (err.name === 'TokenExpiredError') {
-        throw new GeneralError(verifyErrorMap['expiredToken']);
-        // token錯誤
-      } else if (err.name === 'JsonWebTokenError') {
-        throw new GeneralError(verifyErrorMap['invalidToken']);
-      } else {
-        throw err;
-      }
-    }
+    // update user
+    const userModel = new UserModel();
+    const verifyLimitTime = subSeconds(new Date(), verificationTokenLife);
+    const verifyUser = await userModel.verifyUser(token, {
+      tokenShouldLater: verifyLimitTime,
+    });
+    if (!verifyUser) throw new GeneralError(verifyErrorMap['invalidToken']);
+    return verifyUser;
   }
+
   async getUserInfo(id) {
     const userModel = new UserModel();
     const userInfo = await userModel.getUserById(id);
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
   }
+
   async getUserByEmail(email) {
     const userModel = new UserModel();
     const user = userModel.getUserByEmail(email);
 
     return user;
+  }
+
+  async updateUser(id, payload) {
+    const userModel = new UserModel();
+
+    try {
+      const user = await userModel.updateUser(id, payload);
+
+      this.logger.debug('update the user', { user });
+
+      return user;
+    } catch (err) {
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
+      }
+
+      throw err;
+    }
+  }
+
+  async flushToken(id) {
+    const userModel = new UserModel();
+    const token = await tokenGenerator();
+    const data = {
+      id: id,
+      token: token,
+    };
+    const flushResult = await userModel.flushVerificationToken(data);
+    if (!flushResult)
+      throw new PrivateError(resendVerifyEmailErrorMap['flushFailed']);
+    return token;
   }
 }
 
