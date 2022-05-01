@@ -34,7 +34,18 @@ class PasswordService extends BaseService {
   }
 
   async updatePassword(token, newPassword) {
-    this.logger.info('hits', { token, newPassword });
+    const passwordResetTokenModel = new PasswordResetTokenModel();
+    const userModel = new UserModel();
+
+    const validEntity =
+      await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
+        token,
+        new Date()
+      );
+
+    const encryptedPassword = newPassword;
+
+    await userModel.udpatePassword(validEntity.userId, encryptedPassword);
   }
 }
 

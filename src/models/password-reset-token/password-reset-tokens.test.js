@@ -68,9 +68,9 @@ describe('createAndInvalidateOthers', () => {
   });
 });
 
-describe('updateStateByTokenAndSignedAfter', () => {
+describe('deactivateByTokenAndSignedAfter', () => {
   describe('with matched valid token', () => {
-    it('should return matched count', async () => {
+    it('should return first valid token', async () => {
       const userModel = new UserModel();
 
       const user = await userModel.createUser({
@@ -87,15 +87,15 @@ describe('updateStateByTokenAndSignedAfter', () => {
       const userId = user.id;
       const userId2 = user2.id;
 
-      const lastToken = 'xxoo';
+      const token = 'xxoo';
       const tokenSignedAt = new Date(2022, 1, 1);
 
       const passwordResetTokenModel = new PasswordResetTokenModel();
 
-      await prisma.passwordResetTokens.create({
+      const entity = await prisma.passwordResetTokens.create({
         data: {
           user: { connect: { id: userId } },
-          token: lastToken,
+          token,
           tokenSignedAt,
           state: stateMap.valid,
         },
@@ -110,18 +110,18 @@ describe('updateStateByTokenAndSignedAfter', () => {
         },
       });
 
-      const count =
-        await passwordResetTokenModel.updateStateByTokenAndSignedAfter(
-          lastToken,
+      const newEntity =
+        await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
+          token,
           new Date(2021, 12, 1)
         );
 
-      expect(count).toBe(1);
+      expect(newEntity.id).toBe(entity.id);
     });
   });
 
   describe('with matched invalid token', () => {
-    it('should return 0', async () => {
+    it('should return null', async () => {
       const userModel = new UserModel();
 
       const user = await userModel.createUser({
@@ -155,18 +155,18 @@ describe('updateStateByTokenAndSignedAfter', () => {
         },
       });
 
-      const count =
-        await passwordResetTokenModel.updateStateByTokenAndSignedAfter(
+      const entity =
+        await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
           lastToken,
           new Date(2021, 12, 1)
         );
 
-      expect(count).toBe(0);
+      expect(entity).toBe(null);
     });
   });
 
   describe('without matched valid token', () => {
-    it('should return 0', async () => {
+    it('should return null', async () => {
       const userModel = new UserModel();
 
       const user = await userModel.createUser({
@@ -199,13 +199,13 @@ describe('updateStateByTokenAndSignedAfter', () => {
         },
       });
 
-      const count =
-        await passwordResetTokenModel.updateStateByTokenAndSignedAfter(
+      const entity =
+        await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
           'two token',
           new Date(2021, 12, 1)
         );
 
-      expect(count).toBe(0);
+      expect(entity).toBe(null);
     });
   });
 });

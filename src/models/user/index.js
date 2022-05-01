@@ -123,6 +123,26 @@ class UserModel {
     return user;
   }
 
+  async udpatePassword(id, password) {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        password,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
   async _truncate() {
     await prisma.users.deleteMany({});
   }

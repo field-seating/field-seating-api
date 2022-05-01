@@ -1,4 +1,4 @@
-const { omit } = require('ramda');
+const { omit, isNil } = require('ramda');
 
 const { stateMap } = require('./constants');
 const prisma = require('../../config/prisma');
@@ -27,19 +27,35 @@ class PasswordResetToken {
     return omit(['createdAt', 'updatedAt'])(newEntity);
   }
 
-  async updateStateByTokenAndSignedAfter(token, signedBefore) {
-    const { count } = await prisma.passwordResetTokens.updateMany({
-      data: { state: stateMap.invalid },
-      where: {
-        state: stateMap.valid,
-        token,
-        tokenSignedAt: {
-          gte: signedBefore,
+  async deactivateByTokenAndSignedAfter(token, signedBefore) {
+    return await prisma.$transaction(async (prisma) => {
+      const entity = await prisma.passwordResetTokens.findUnique({
+        where: {
+          token,
         },
-      },
-    });
+      });
 
-    return count;
+      if (isNil(entity)) {
+        return null;
+      }
+
+      const { count } = await prisma.passwordResetTokens.updateMany({
+        data: { state: stateMap.invalid },
+        where: {
+          state: stateMap.valid,
+          token,
+          tokenSignedAt: {
+            gte: signedBefore,
+          },
+        },
+      });
+
+      if (count === 0) {
+        return null;
+      }
+
+      return entity;
+    });
   }
 
   async _truncate() {
