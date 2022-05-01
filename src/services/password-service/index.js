@@ -1,4 +1,5 @@
 const { isNil } = require('ramda');
+const { subSeconds } = require('date-fns');
 
 const BaseService = require('../base');
 const PasswordResetTokenModel = require('../../models/password-reset-token');
@@ -8,6 +9,7 @@ const { RESET_TOKEN_LENGTH } = require('./constants');
 const GeneralError = require('../../errors/error/general-error');
 const passwordErrorMap = require('../../errors/password-error');
 const { hashPassword } = require('../../utils/crypto/password');
+const { passwordResetEmail } = require('../../config/config');
 
 class PasswordService extends BaseService {
   async recoveryPassword(email) {
@@ -38,11 +40,17 @@ class PasswordService extends BaseService {
     const passwordResetTokenModel = new PasswordResetTokenModel();
     const userModel = new UserModel();
 
+    const boundaryDate = subSeconds(new Date(), passwordResetEmail.tokenLife);
+
     const validEntity =
       await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
         token,
-        new Date(2020)
+        boundaryDate
       );
+
+    if (isNil(validEntity)) {
+      throw new GeneralError(passwordErrorMap.tokenInvalid);
+    }
 
     const encryptedPassword = await hashPassword(newPassword);
 

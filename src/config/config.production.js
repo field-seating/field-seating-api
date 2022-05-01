@@ -8,7 +8,7 @@ const config = {
     },
   },
   passwordResetEmail: {
-    tokenLife: '1d',
+    tokenLife: 60 * 60 * 24,
     rateLimit: {
       windowSize: 60 * 60 * 3,
       limit: 2,

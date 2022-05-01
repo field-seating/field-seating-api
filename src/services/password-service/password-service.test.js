@@ -1,4 +1,5 @@
 const assert = require('assert/strict');
+const { subDays } = require('date-fns');
 
 const PasswordService = require('./');
 const UserService = require('../user-service');
@@ -8,6 +9,7 @@ const PasswordRestTokenModel = require('../../models/password-reset-token');
 const prisma = require('../../config/prisma');
 const { stateMap } = require('../../models/password-reset-token/constants');
 const { comparePassword } = require('../../utils/crypto/password');
+const { passwordResetEmail } = require('../../config/config');
 
 const passwordService = new PasswordService({ logger: console });
 const userService = new UserService({ logger: console });
@@ -87,5 +89,39 @@ describe('updatePassword', () => {
     });
 
     expect(await comparePassword(newPassword, newUser.password)).toBe(true);
+  });
+
+  it('should get invalid token error when token expired', async () => {
+    const user = await userService.signUp('name', 'email', 'pwd');
+
+    const token = 'token';
+    const tokenSignedAt = subDays(new Date(), passwordResetEmail.tokenLife + 1);
+
+    const newPasswordResetToken = await prisma.passwordResetTokens.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        token,
+        tokenSignedAt,
+        state: stateMap.valid,
+      },
+    });
+
+    const newPassword = 'new-password';
+
+    assert.rejects(
+      async () => {
+        await passwordService.updatePassword(
+          newPasswordResetToken.token,
+          newPassword
+        );
+      },
+      {
+        code: passwordErrorMap.tokenInvalid.code,
+      }
+    );
   });
 });
