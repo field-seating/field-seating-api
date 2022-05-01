@@ -27,8 +27,23 @@ class PasswordResetToken {
     return omit(['createdAt', 'updatedAt'])(newEntity);
   }
 
-  async deactivateByTokenAndSignedAfter(token, signedBefore) {
+  async deactivateByTokenAndSignedAfter(token, boundaryDate) {
     return await prisma.$transaction(async (prisma) => {
+      const { count } = await prisma.passwordResetTokens.updateMany({
+        data: { state: stateMap.invalid },
+        where: {
+          state: stateMap.valid,
+          token,
+          tokenSignedAt: {
+            gte: boundaryDate,
+          },
+        },
+      });
+
+      if (count === 0) {
+        return null;
+      }
+
       const entity = await prisma.passwordResetTokens.findUnique({
         where: {
           token,
@@ -36,21 +51,6 @@ class PasswordResetToken {
       });
 
       if (isNil(entity)) {
-        return null;
-      }
-
-      const { count } = await prisma.passwordResetTokens.updateMany({
-        data: { state: stateMap.invalid },
-        where: {
-          state: stateMap.valid,
-          token,
-          tokenSignedAt: {
-            gte: signedBefore,
-          },
-        },
-      });
-
-      if (count === 0) {
         return null;
       }
 

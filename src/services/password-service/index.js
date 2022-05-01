@@ -7,6 +7,7 @@ const { randomString } = require('../../utils/crypto/random');
 const { RESET_TOKEN_LENGTH } = require('./constants');
 const GeneralError = require('../../errors/error/general-error');
 const passwordErrorMap = require('../../errors/password-error');
+const { hashPassword } = require('../../utils/crypto/password');
 
 class PasswordService extends BaseService {
   async recoveryPassword(email) {
@@ -40,10 +41,10 @@ class PasswordService extends BaseService {
     const validEntity =
       await passwordResetTokenModel.deactivateByTokenAndSignedAfter(
         token,
-        new Date()
+        new Date(2020)
       );
 
-    const encryptedPassword = newPassword;
+    const encryptedPassword = await hashPassword(newPassword);
 
     await userModel.udpatePassword(validEntity.userId, encryptedPassword);
   }
