@@ -35,7 +35,7 @@ describe('email-service.sendVerifyEmail', () => {
             name: newUser.name,
           },
         ],
-        subject: '球場坐座帳號驗證信',
+        subject: '帳號驗證信',
       };
       const expectedData = {
         name: newUser.name,

@@ -1,12 +1,16 @@
 const assert = require('assert/strict');
 
 const PasswordService = require('./');
+const UserService = require('../user-service');
 const passwordErrorMap = require('../../errors/password-error');
 const UserModel = require('../../models/user');
 const PasswordRestTokenModel = require('../../models/password-reset-token');
 const prisma = require('../../config/prisma');
+const { stateMap } = require('../../models/password-reset-token/constants');
+const { comparePassword } = require('../../utils/crypto/password');
 
 const passwordService = new PasswordService({ logger: console });
+const userService = new UserService({ logger: console });
 const userModel = new UserModel();
 const passwordResetTokenModel = new PasswordRestTokenModel();
 
@@ -46,5 +50,42 @@ describe('recoveryPassword', () => {
 
     expect(entities).toHaveLength(1);
     expect(entities[0].userId).toBe(user.id);
+  });
+});
+
+describe('updatePassword', () => {
+  it('should reset password', async () => {
+    const user = await userService.signUp('name', 'email', 'pwd');
+
+    const token = 'token';
+    const tokenSignedAt = new Date();
+
+    const newPasswordResetToken = await prisma.passwordResetTokens.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        token,
+        tokenSignedAt,
+        state: stateMap.valid,
+      },
+    });
+
+    const newPassword = 'new-password';
+
+    await passwordService.updatePassword(
+      newPasswordResetToken.token,
+      newPassword
+    );
+
+    const newUser = await prisma.users.findUnique({
+      where: {
+        id: user.id,
+      },
+    });
+
+    expect(await comparePassword(newPassword, newUser.password)).toBe(true);
   });
 });
