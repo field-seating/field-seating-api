@@ -20,7 +20,11 @@ const signUpSchema = yup.object({
     name: yup
       .string()
       .trim()
-      .required(alwaysThrow(new GeneralError(signUpErrorMap.nameRequired))),
+      .required(alwaysThrow(new GeneralError(signUpErrorMap.nameRequired)))
+      .max(
+        20,
+        alwaysThrow(new GeneralError(signUpErrorMap.maximumExceededName))
+      ),
     password: yup
       .string()
       .required(alwaysThrow(new GeneralError(signUpErrorMap.passwordRequired)))
@@ -40,12 +44,12 @@ const updateMeSchema = yup.object({
 
 router.get('/me', authenticated, userController.getUserMe);
 router.post('/', validate(signUpSchema), userController.signUp);
-router.post('/verify-email', authenticated, userController.sendVerifyEmail); // 寄發認證信件
 router.put(
   '/me',
   validate(updateMeSchema),
   authenticated,
   userController.updateMe
 );
+router.post('/verify-email', authenticated, userController.resendVerifyEmail); // 寄發認證信件
 
 module.exports = router;
