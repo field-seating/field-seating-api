@@ -3,7 +3,6 @@ const PasswordService = require('../services/password-service');
 const EmailService = require('../services/email-service');
 
 const passwordController = {
-  // TODO: limit mail sending rate
   recoveryPassword: async (req, res, next) => {
     const { email } = req.body;
 

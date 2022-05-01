@@ -7,6 +7,13 @@ const config = {
       limit: 2,
     },
   },
+  passwordResetEmail: {
+    tokenLife: '1d',
+    rateLimit: {
+      windowSize: 60 * 60 * 3,
+      limit: 2,
+    },
+  },
   reqRateLimit: {
     windowSize: 60,
     limit: 300,

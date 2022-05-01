@@ -1,4 +1,8 @@
-const { baseUrl, verifyEmail } = require('../config/config');
+const {
+  baseUrl,
+  verifyEmail,
+  passwordResetEmail,
+} = require('../config/config');
 const sendEmail = require('./helpers/send-email');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
@@ -88,9 +92,23 @@ class EmailService extends BaseService {
       return result;
     }
 
-    const emailInfo = await withRetry(send, { maxTries: 3 });
+    const withRateLimit = rateLimiterHelper({
+      windowSize: passwordResetEmail.rateLimit.windowSize,
+      limit: passwordResetEmail.rateLimit.limit,
+      key: `sendPasswordResetMail:${user.email}`,
+    });
+    const sendMailFunc = () => withRetry(send, { maxTries: 3 });
 
-    this.logger.info('sent email', { emailInfo });
+    try {
+      const emailInfo = await withRateLimit(sendMailFunc)();
+      this.logger.info('sent email', { emailInfo });
+      return emailInfo;
+    } catch (err) {
+      if (err.code === rateLimiterErrorMap.exceedLimit.code) {
+        throw new GeneralError(sendEmailErrorMap.exceedLimitError);
+      }
+      throw err;
+    }
   }
 }
 

@@ -32,6 +32,8 @@ class PasswordService extends BaseService {
       passwordResetToken: entity,
     };
   }
+
+  async updatePassword() {}
 }
 
 module.exports = PasswordService;
