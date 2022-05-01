@@ -40,7 +40,7 @@ afterEach(async () => {
 
 describe('get', () => {
   it('should set and get properly', async () => {
-    const fieldsCache = new FieldsCache();
+    const fieldsCache = new FieldsCache({ logger: console });
 
     const data1 = await fieldsCache.get(1);
     expect(data1.name).toEqual('桃園國際棒球場');
@@ -51,7 +51,7 @@ describe('get', () => {
   });
 
   it('should call the heavy fetch once only', async () => {
-    const fieldsCache = new FieldsCache();
+    const fieldsCache = new FieldsCache({ logger: console });
 
     let data = await fieldsCache.get(1);
     expect(data.name).toEqual('桃園國際棒球場');

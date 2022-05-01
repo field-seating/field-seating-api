@@ -5,6 +5,7 @@ const validate = require('../../middleware/validate');
 const userController = require('../../controllers/user-controller');
 const GeneralError = require('../../errors/error/general-error');
 const signUpErrorMap = require('../../errors/sign-up-error');
+const updateUserErrorMap = require('../../errors//update-user');
 const alwaysThrow = require('../../utils/func/always-throw');
 const { authenticated } = require('../../middleware/auth');
 
@@ -18,6 +19,7 @@ const signUpSchema = yup.object({
       .email(alwaysThrow(new GeneralError(signUpErrorMap.emailFormat))),
     name: yup
       .string()
+      .trim()
       .required(alwaysThrow(new GeneralError(signUpErrorMap.nameRequired)))
       .max(
         20,
@@ -31,8 +33,23 @@ const signUpSchema = yup.object({
   }),
 });
 
+const updateMeSchema = yup.object({
+  body: yup.object({
+    name: yup
+      .string()
+      .trim()
+      .required(alwaysThrow(new GeneralError(updateUserErrorMap.nameRequired))),
+  }),
+});
+
 router.get('/me', authenticated, userController.getUserMe);
 router.post('/', validate(signUpSchema), userController.signUp);
+router.put(
+  '/me',
+  validate(updateMeSchema),
+  authenticated,
+  userController.updateMe
+);
 router.post('/verify-email', authenticated, userController.resendVerifyEmail); // 寄發認證信件
 
 module.exports = router;

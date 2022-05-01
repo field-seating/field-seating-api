@@ -9,6 +9,7 @@ const responseLogger = require('./middleware/response-logger');
 const requestLogger = require('./middleware/request-logger');
 const requestIdMiddleware = require('./middleware/request-id');
 const requestTimeMiddleware = require('./middleware/request-time');
+const dependenciesMiddleware = require('./middleware/dependencies-middleware');
 const reqRateLimitMiddleware = require('./middleware/req-rate-limit-middleware');
 const routes = require('./routes');
 const { port } = require('./config/config');
@@ -20,6 +21,8 @@ const usedPort = port || 3000;
 app.use(reqRateLimitMiddleware);
 app.use(requestIdMiddleware);
 app.use(requestTimeMiddleware);
+app.use(dependenciesMiddleware);
+
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json()); // POST json格式

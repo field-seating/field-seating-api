@@ -83,6 +83,27 @@ class UserModel {
     if (newToken.count === 0) return false;
     return true;
   }
+
+  async updateUser(id, payload) {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        name: payload.name,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
   async _truncate() {
     await prisma.users.deleteMany({});
   }

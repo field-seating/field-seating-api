@@ -5,7 +5,6 @@ const signUpErrorMap = require('../errors/sign-up-error');
 const verifyErrorMap = require('../errors/verify-error');
 const { statusMap } = require('../models/user/constants');
 const UserService = require('./user-service');
-const userService = new UserService({ req: { requestId: '' } });
 const { verificationTokenLife } = require('../constants/token-life-constant');
 
 beforeEach(async () => {
@@ -14,6 +13,10 @@ beforeEach(async () => {
 afterEach(async () => {
   const userModel = new UserModel();
   await userModel._truncate();
+});
+
+const userService = new UserService({
+  logger: console,
 });
 
 describe('user-service.signUp', () => {
@@ -157,11 +160,33 @@ describe('user-service.gerUserInfo', () => {
   });
 });
 
+describe('user-service.updateUser', () => {
+  it('should update properly', async () => {
+    const data = {
+      name: 'user1',
+      email: 'example@example.com',
+      password: 'password1',
+    };
+    const userModel = new UserModel();
+    const user = await userModel.createUser(data);
+
+    const newName = 'new user';
+    const newUser = await userService.updateUser(user.id, { name: newName });
+
+    expect(newUser.name).toBe(newName);
+
+    const userFromDB = await userModel.getUserById(user.id);
+
+    expect(userFromDB.name).toBe(newName);
+  });
+});
+
 describe('user-service.flushToken', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
       const UserService = require('./user-service');
       const userService = new UserService({ req: { requestId: '' } });
+
       // create user and mock token
       jest.mock('../services/helpers/token-generator');
       const tokenGenerator = require('../services/helpers/token-generator');
@@ -170,11 +195,13 @@ describe('user-service.flushToken', () => {
       });
       const email = 'example@example.com';
       const newUser = await userService.signUp('user1', email, 'password1');
+
       // verifyUser
       tokenGenerator.mockImplementation(() => {
         return 'flushToken';
       });
       const token = await userService.flushToken(newUser.id);
+
       // make sure get a new token
       const expectedResult = 'flushToken';
       expect(tokenGenerator).toHaveBeenCalledTimes(2);

@@ -76,6 +76,24 @@ class UserService extends BaseService {
     return userInfo;
   }
 
+  async updateUser(id, payload) {
+    const userModel = new UserModel();
+
+    try {
+      const user = await userModel.updateUser(id, payload);
+
+      this.logger.debug('update the user', { user });
+
+      return user;
+    } catch (err) {
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
+      }
+
+      throw err;
+    }
+  }
+
   async flushToken(id) {
     const userModel = new UserModel();
     const token = await tokenGenerator();
