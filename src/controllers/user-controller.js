@@ -73,6 +73,7 @@ const userController = {
       next(err);
     }
   },
+
   getUserMe: async (req, res, next) => {
     try {
       const { id } = req.user;
@@ -83,6 +84,7 @@ const userController = {
       next(err);
     }
   },
+
   updateMe: async (req, res, next) => {
     try {
       const { id } = req.user;
