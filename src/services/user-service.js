@@ -76,13 +76,6 @@ class UserService extends BaseService {
     return userInfo;
   }
 
-  async getUserByEmail(email) {
-    const userModel = new UserModel();
-    const user = userModel.getUserByEmail(email);
-
-    return user;
-  }
-
   async updateUser(id, payload) {
     const userModel = new UserModel();
 

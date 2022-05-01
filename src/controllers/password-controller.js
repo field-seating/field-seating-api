@@ -1,33 +1,21 @@
-const { isNil } = require('ramda');
-
 const resSuccess = require('./helpers/response');
 const PasswordService = require('../services/password-service');
 const EmailService = require('../services/email-service');
-const UserService = require('../services/user-service');
-const GeneralError = require('../errors/error/general-error');
-const passwordErrorMap = require('../errors/password-error');
 
 const passwordController = {
   // TODO: limit mail sending rate
   recoveryPassword: async (req, res, next) => {
     const { email } = req.body;
 
-    const userService = new UserService({ logger: req.logger });
     const passwordService = new PasswordService({ logger: req.logger });
     const emailService = new EmailService({ logger: req.logger });
 
     try {
-      const user = await userService.getUserByEmail(email);
-
-      if (isNil(user)) {
-        throw new GeneralError(passwordErrorMap.emailInvalid);
-      }
-
-      const passwordResetTokenEntity =
-        await passwordService.createPasswordResetToken(user.id);
+      const passwordResetTokenEntity = await passwordService.recoveryPassword(
+        email
+      );
 
       await emailService.sendPasswordResetMail(
-        user,
         passwordResetTokenEntity,
         req.requestTime
       );

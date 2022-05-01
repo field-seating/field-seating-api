@@ -1,7 +1,7 @@
-const { randomUUID } = require('crypto');
+const { randomString } = require('../../utils/crypto/random');
 
 async function tokenGenerator() {
-  const token = await randomUUID();
+  const token = await randomString(16);
   const result = token;
   return result;
 }
