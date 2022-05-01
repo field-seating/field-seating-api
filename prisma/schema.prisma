@@ -20,7 +20,7 @@ model Users {
   role      String   @db.VarChar(255) @default("user")
   status    String   @db.VarChar(255) @default("unverified")
   verificationToken String? @unique @db.VarChar(255)
-  tokenCreatedAt DateTime? 
+  tokenCreatedAt DateTime?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   records   Records[]
@@ -185,7 +185,7 @@ model Reviews {
 
 model PasswordResetTokens {
   id            Int       @id @default(autoincrement())
-  user          Users     @relation(fields: [userId], references: [id])
+  user          Users?     @relation(fields: [userId], references: [id])
   userId        Int
   token         String?   @unique @db.VarChar(255)
   state         PasswordResetTokenState @default(INVALID)
