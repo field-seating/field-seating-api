@@ -5,7 +5,6 @@ const randomFilename = require('../middleware/random-filename');
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
-  console.log(file);
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -58,6 +57,10 @@ const resizeImages = async (req, res, next) => {
         .toFile(`upload/large-${newFilename}`);
 
       req.body.images.push(newFilename);
+      req.body = {
+        ...req.body,
+        filename: filename,
+      };
     })
   );
 

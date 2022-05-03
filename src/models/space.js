@@ -19,6 +19,7 @@ class SpaceModel {
         },
       },
     });
+    console.log(getSpace);
     return getSpace;
   }
 }
