@@ -12,11 +12,9 @@ const userController = {
       const { name, email, password } = req.body;
 
       // sign up
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const user = await userService.signUp(name, email, password);
-
-      //send verify email (need token)
-      const emailService = new EmailService({ req });
+      const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(user);
 
       //not show token
@@ -29,7 +27,7 @@ const userController = {
   signIn: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const user = await userService.signIn(id);
       res.status(200).json(resSuccess(user));
     } catch (err) {
@@ -41,7 +39,7 @@ const userController = {
       const token = req.body.token;
 
       // verify user
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       await userService.verifyEmail(token);
       res.status(200).json(resSuccess());
     } catch (err) {
@@ -59,7 +57,7 @@ const userController = {
         throw new GeneralError(resendVerifyEmailErrorMap['inactive']);
 
       // refresh token
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const newToken = await userService.flushToken(user.id);
       const userData = {
         email: user.email,
@@ -68,19 +66,34 @@ const userController = {
       };
 
       // send verify email
-      const emailService = new EmailService({ req });
+      const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(userData);
       res.status(200).json(resSuccess());
     } catch (err) {
       next(err);
     }
   },
+
   getUserMe: async (req, res, next) => {
     try {
       const { id } = req.user;
-      const userService = new UserService({ req });
+      const userService = new UserService({ logger: req.logger });
       const userInfo = await userService.getUserInfo(id);
       res.status(200).json(resSuccess(userInfo));
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  updateMe: async (req, res, next) => {
+    try {
+      const { id } = req.user;
+      const { name } = req.body;
+
+      const userService = new UserService({ logger: req.logger });
+      const user = await userService.updateUser(id, { name });
+
+      res.status(200).json(resSuccess(user));
     } catch (err) {
       next(err);
     }

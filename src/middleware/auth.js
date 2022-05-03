@@ -6,6 +6,9 @@ const authenticated = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err || !user) next(new GeneralError(authErrorMap['unauthorized']));
     req.user = user;
+
+    req.logger = req.logger.child({ userId: user.id });
+
     next();
   })(req, res, next);
 };

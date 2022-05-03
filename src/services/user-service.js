@@ -5,7 +5,7 @@ const PrivateError = require('../errors/error/private-error');
 const signUpErrorMap = require('../errors/sign-up-error');
 const UserModel = require('../models/user');
 const { jwtLife } = require('../constants/token-life-constant');
-const { hashPassword } = require('../utils/func/password');
+const { hashPassword } = require('../utils/crypto/password');
 const { jwtSecret } = require('../config/config');
 const BaseService = require('./base');
 const tokenGenerator = require('./helpers/token-generator');
@@ -74,6 +74,24 @@ class UserService extends BaseService {
     const userInfo = await userModel.getUserById(id);
     this.logger.debug('got a userInfo', { userInfo });
     return userInfo;
+  }
+
+  async updateUser(id, payload) {
+    const userModel = new UserModel();
+
+    try {
+      const user = await userModel.updateUser(id, payload);
+
+      this.logger.debug('update the user', { user });
+
+      return user;
+    } catch (err) {
+      if (err.code === 'P2002' && err.meta.target === 'Users_name_key') {
+        throw new GeneralError(signUpErrorMap['duplicateName']);
+      }
+
+      throw err;
+    }
   }
 
   async flushToken(id) {

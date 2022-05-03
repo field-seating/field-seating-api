@@ -39,6 +39,7 @@ class UserModel {
     });
     return getUser;
   }
+
   async verifyUser(token, { tokenShouldLater: dateTime }) {
     const verifyUser = await prisma.users.updateMany({
       where: {
@@ -57,6 +58,7 @@ class UserModel {
     if (verifyUser.count === 0) return false;
     return true;
   }
+
   async getUserInfo(id) {
     const userInfo = await prisma.users.findUnique({
       where: {
@@ -84,6 +86,64 @@ class UserModel {
     if (newToken.count === 0) return false;
     return true;
   }
+
+  async updateUser(id, payload) {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        name: payload.name,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
+  async getUserByEmail(email) {
+    const user = await prisma.users.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
+  async udpatePassword(id, password) {
+    const user = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        password,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+
+    return user;
+  }
+
   async _truncate() {
     await prisma.users.deleteMany({});
   }

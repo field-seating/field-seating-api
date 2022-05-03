@@ -1,4 +1,8 @@
-const { baseUrl, verifyEmail } = require('../config/config');
+const {
+  baseUrl,
+  verifyEmail,
+  passwordResetEmail,
+} = require('../config/config');
 const sendEmail = require('./helpers/send-email');
 const withRetry = require('../utils/func/retry');
 const BaseService = require('./base');
@@ -16,7 +20,7 @@ class EmailService extends BaseService {
           name: user.name,
         },
       ],
-      subject: '球場坐座帳號驗證信',
+      subject: '帳號驗證信',
     };
 
     const data = {
@@ -43,6 +47,55 @@ class EmailService extends BaseService {
       key: `sendVerifyEmail:${user.email}`,
     });
 
+    const sendMailFunc = () => withRetry(send, { maxTries: 3 });
+
+    try {
+      const emailInfo = await withRateLimit(sendMailFunc)();
+      this.logger.info('sent email', { emailInfo });
+      return emailInfo;
+    } catch (err) {
+      if (err.code === rateLimiterErrorMap.exceedLimit.code) {
+        throw new GeneralError(sendEmailErrorMap.exceedLimitError);
+      }
+      throw err;
+    }
+  }
+
+  async sendPasswordResetMail(user, passwordResetTokenEntity, requestTime) {
+    const { token } = passwordResetTokenEntity;
+    const meta = {
+      receiverList: [
+        {
+          email: user.email,
+          name: user.name,
+        },
+      ],
+      subject: '密碼重置',
+    };
+
+    const data = {
+      name: user.name,
+      url: `${baseUrl}/password-reset/${token}`,
+      time: requestTime,
+      effectiveHours: passwordResetEmail.tokenLife / (60 * 60),
+    };
+
+    const template = 'password-reset';
+
+    async function send() {
+      const sendInfo = await sendEmail(template, meta, data);
+      const result = {
+        ...sendInfo,
+        token: token,
+      };
+      return result;
+    }
+
+    const withRateLimit = rateLimiterHelper({
+      windowSize: passwordResetEmail.rateLimit.windowSize,
+      limit: passwordResetEmail.rateLimit.limit,
+      key: `sendPasswordResetMail:${user.email}`,
+    });
     const sendMailFunc = () => withRetry(send, { maxTries: 3 });
 
     try {

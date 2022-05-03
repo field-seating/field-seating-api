@@ -4,8 +4,10 @@ const { getClient, prependPrefix } = require('../config/redis');
 
 class CacheBase {
   expiredTime;
+  logger;
 
-  constructor() {
+  constructor({ logger } = { logger: console }) {
+    this.logger = logger;
     this.expiredTime = this.getExpiredTime();
   }
 

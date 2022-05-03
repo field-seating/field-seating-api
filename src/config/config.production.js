@@ -1,7 +1,13 @@
 const config = {
   baseUrl: 'https://fieldseating.wendellatman.com',
   verifyEmail: {
-    verifyTokenLife: '1d', //24h
+    rateLimit: {
+      windowSize: 60 * 60 * 3,
+      limit: 2,
+    },
+  },
+  passwordResetEmail: {
+    tokenLife: 60 * 60 * 24,
     rateLimit: {
       windowSize: 60 * 60 * 3,
       limit: 2,
