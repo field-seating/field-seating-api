@@ -11,6 +11,7 @@ const configFromEnv = {
   sibKey: process.env.SIB_KEY,
   doKey: process.env.AWS_ACCESS_KEY,
   doSecret: process.env.AWS_SECRET_ACCESS_KEY,
+  doEndpoint: process.env.DIGITALOCEAN_ENDPOINT,
   redisUrl: process.env.REDIS_URL,
 };
 

@@ -4,12 +4,6 @@ const { uploadImages } = require('../../middleware/multer');
 // const uploadDo = require('../../services/helpers/upload-image');
 const router = express.Router();
 
-router.post(
-  '/',
-  uploadImages,
-  // resizeImages,
-  // uploadDo,
-  recordController.postRecord
-);
+router.post('/', uploadImages, recordController.postRecord);
 
 module.exports = router;
