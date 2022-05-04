@@ -5,13 +5,12 @@ const getUser = require('../controllers/helpers/get-user');
 const recordController = {
   postRecord: async (req, res, next) => {
     try {
+      console.log('gocontroll');
+      console.log(req.body);
       const { filename, spaceId, date } = req.body;
-      console.log(filename);
+      console.log(spaceId);
       const userId = getUser(req).id;
       const dateTime = new Date(date);
-      console.log(userId);
-      console.log(spaceId);
-      console.log(dateTime);
       const record = await recordServices.postRecord(
         filename,
         userId,

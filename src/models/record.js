@@ -47,7 +47,6 @@ class RecordModel {
         ...createRecord,
         photo: createPhoto,
       };
-      console.log(result);
       return result;
     });
   }
