@@ -6,7 +6,6 @@ generator client {
   // 要使用transaction 新增的，根據git issue需執行 npx prisma generate
   previewFeatures = ["interactiveTransactions"] 
   binaryTargets = ["native"]
-  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -153,8 +152,8 @@ model Photos {
   userId   Int
   space     Spaces    @relation(fields: [spaceId], references: [id])
   spaceId   Int
-  record     Records    @relation(fields: [recordId], references: [id])
-  recordId   Int
+  record     Records?    @relation(fields: [recordId], references: [id])
+  recordId   Int?
   date      DateTime @db.Date
   path   String   @db.VarChar(255)
   thumbnail_path String   @db.VarChar(255)

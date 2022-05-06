@@ -16,7 +16,7 @@ const { verificationTokenLife } = require('../constants/token-life-constant');
 class UserService extends BaseService {
   async signUp(name, email, password) {
     // hash password
-    const hash = await hashPassword(password);
+    const hash = await hashPassword(password, 10);
     const token = await tokenGenerator();
     const userModel = new UserModel();
     const userData = {

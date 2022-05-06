@@ -12,6 +12,7 @@ const configFromEnv = {
   doKey: process.env.AWS_ACCESS_KEY,
   doSecret: process.env.AWS_SECRET_ACCESS_KEY,
   doEndpoint: process.env.DIGITALOCEAN_ENDPOINT,
+  doBucket: process.env.DIGITALOCEAN_BUCKET,
   redisUrl: process.env.REDIS_URL,
 };
 

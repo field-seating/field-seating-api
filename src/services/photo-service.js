@@ -1,23 +1,22 @@
 const SpaceModel = require('../models/space');
-const RecordModel = require('../models/record');
+const PhotoModel = require('../models/photo');
 
-const recordService = {
-  postRecord: async (filename, userId, spaceId, date) => {
-    console.log('goservice');
+const photoService = {
+  postPhotos: async (filename, userId, spaceId, dateTime) => {
     spaceId = parseInt(spaceId);
     const spaceModel = new SpaceModel();
-    const recordModel = new RecordModel();
+    const photoModel = new PhotoModel();
     // check spaceId exist
     const spaceCheck = await spaceModel.getSpace(spaceId);
     // creat record and photo
-    const data = await recordModel.createRecord(
+    const data = await photoModel.createPhoto(
       filename,
       userId,
       spaceCheck.id,
-      date
+      dateTime
     );
     return data;
   },
 };
 
-module.exports = recordService;
+module.exports = photoService;

@@ -3,23 +3,22 @@ const prisma = require('../config/prisma');
 class PhotoModel {
   constructor() {}
   // get latest photo_pathname
-  async getLatestPhoto(spaceId) {
-    const getLatestPhoto = await prisma.photos.findMany({
-      where: {
+  async createPhoto(filename, userId, spaceId, dateTime) {
+    const createPhoto = await prisma.photos.create({
+      data: {
+        userId: userId,
         spaceId: spaceId,
+        date: dateTime,
+        path: filename,
+        thumbnail_path: `thumb_${filename}`,
       },
-      orderBy: {
-        createdAt: 'desc',
-      },
-      take: 1,
       select: {
         id: true,
-        path: true,
-        thumbnail_path: true,
         spaceId: true,
+        path: true,
       },
     });
-    return getLatestPhoto[0];
+    return createPhoto;
   }
 }
 

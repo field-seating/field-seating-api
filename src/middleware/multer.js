@@ -1,59 +1,43 @@
 const multer = require('multer');
-const aws = require('aws-sdk');
-const multerS3 = require('multer-s3-transform');
-const sharp = require('sharp');
-const randomFilename = require('../middleware/random-filename');
-const { doKey, doSecret, doEndpoint } = require('../config/config');
+const GeneralError = require('../errors/error/general-error');
+const PrivateError = require('../errors/error/private-error');
+const postPhotoErrorMap = require('../errors/post-photo-error');
 
-const s3 = new aws.S3({
-  endpoint: doEndpoint,
-  accessKeyId: doKey,
-  secretAccessKey: doSecret,
-});
+// judge right file type
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new GeneralError(postPhotoErrorMap['weNeedPhoto']));
+  }
+};
+
+// set upload to where
 const upload = multer({
-  storage: multerS3({
-    s3,
-    bucket: 'field-seating/photos',
-    contentType: multerS3.AUTO_CONTENT_TYPE,
-    acl: 'public-read',
-    shouldTransform: async function (req, file, cb) {
-      (file.originalname = await randomFilename()),
-        cb(null, /^image/i.test(file.mimetype));
-    },
-    transforms: [
-      {
-        id: 'large',
-        key: function (req, file, cb) {
-          cb(null, file.originalname);
-        },
-        transform: function (req, file, cb) {
-          cb(null, sharp().resize(6400));
-        },
-      },
-      {
-        id: 'thumbnail',
-        key: function (req, file, cb) {
-          cb(null, `thumb_${file.originalname}`);
-        },
-        transform: function (req, file, cb) {
-          cb(null, sharp().resize(640));
-        },
-      },
-    ],
-  }),
+  dest: 'temp/',
+  fileFilter: multerFilter,
 });
 
-const uploadFiles = upload.array('images', 3);
+// upload way(single or many)
+const uploadFiles = upload.array('images', 3); // limit 3 images
 
+// upload
 const uploadImages = (req, res, next) => {
   uploadFiles(req, res, (err) => {
-    console.log(err);
-    if (err instanceof multer.MulterError) {
-      if (err.code === 'LIMIT_UNEXPECTED_FILE') {
-        return res.send('Too many files to upload !');
-      }
+    //  exceed limit
+    if (
+      err instanceof multer.MulterError &&
+      err.code === 'LIMIT_UNEXPECTED_FILE'
+    ) {
+      next(new GeneralError(postPhotoErrorMap['toManyPhotos']));
     } else if (err) {
-      return res.send(err);
+      // file type error
+      if (err.code === 'p002') {
+        next(new GeneralError(err));
+      } else {
+        // other we don't know
+        next(new PrivateError(err));
+      }
     }
     next();
   });
