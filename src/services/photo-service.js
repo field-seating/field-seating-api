@@ -1,22 +1,19 @@
-const SpaceModel = require('../models/space');
+const BaseService = require('./base');
 const PhotoModel = require('../models/photo');
 
-const photoService = {
-  postPhotos: async (filename, userId, spaceId, dateTime) => {
+class PhotoService extends BaseService {
+  async postPhotos(filename, userId, spaceId, dateTime) {
     spaceId = parseInt(spaceId);
-    const spaceModel = new SpaceModel();
     const photoModel = new PhotoModel();
-    // check spaceId exist
-    const spaceCheck = await spaceModel.getSpace(spaceId);
     // creat record and photo
     const data = await photoModel.createPhoto(
       filename,
       userId,
-      spaceCheck.id,
+      spaceId,
       dateTime
     );
     return data;
-  },
-};
+  }
+}
 
-module.exports = photoService;
+module.exports = PhotoService;
