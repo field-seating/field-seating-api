@@ -154,14 +154,11 @@ model Photos {
   spaceId   Int
   record     Records?    @relation(fields: [recordId], references: [id])
   recordId   Int?
+  path String   @unique @db.VarChar(255)
   date      DateTime @db.Date
-  path   String   @db.VarChar(255)
-  thumbnail_path String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   reviews Reviews[]
-  @@unique([spaceId, path])
-  @@unique([spaceId, thumbnail_path])
 }
 
 model Collections {
@@ -195,7 +192,6 @@ model PasswordResetTokens {
   tokenSignedAt DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
   @@index([state])
 }
 

@@ -1,5 +1,4 @@
 const aws = require('aws-sdk');
-const fs = require('fs');
 const {
   doKey,
   doSecret,
@@ -13,14 +12,13 @@ const s3 = new aws.S3({
   secretAccessKey: doSecret,
 });
 
-async function uploadS3(file, bucket, resizeFile) {
-  const fileStream = fs.createReadStream(file.path);
+async function uploadS3(file, bucket) {
   const params = {
     Bucket: `${doBucket}/${bucket}`,
-    Key: resizeFile.name ? resizeFile.name : file.newFilename,
-    Body: resizeFile.buffer ? resizeFile.buffer : fileStream,
+    Key: file.filename,
+    Body: file.data,
     ACL: 'public-read',
-    ContentType: file.mimetype,
+    ContentType: `image/${file.info.format}`,
   };
   return s3.upload(params).promise();
 }

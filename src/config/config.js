@@ -14,6 +14,7 @@ const configFromEnv = {
   doEndpoint: process.env.DIGITALOCEAN_ENDPOINT,
   doBucket: process.env.DIGITALOCEAN_BUCKET,
   redisUrl: process.env.REDIS_URL,
+  domain: process.env.DOMAIN,
 };
 
 const envMap = {

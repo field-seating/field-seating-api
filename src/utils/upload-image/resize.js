@@ -1,38 +1,27 @@
 const sharp = require('sharp');
+const PrivateError = require('../../errors/error/private-error');
 
-async function resizeImages(file) {
+async function resizeImages(file, options, format) {
   // to return info for upload
-  const buffers = [];
+  const resizeFiles = [];
 
-  // resize thumbnail
-  await sharp(file.path)
-    .resize(640)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toBuffer()
-    .then((buffer) => {
-      // return info for upload
-      buffers.push({
-        name: `thumb_${file.newFilename}`,
-        buffer,
-      });
-    });
-
-  // resize large
-  await sharp(file.path)
-    .resize(3200)
-    .toFormat('jpeg')
-    .jpeg({ quality: 90 })
-    .toBuffer()
-    .then((buffer) => {
-      // return info for upload
-      buffers.push({
-        name: file.newFilename,
-        buffer,
-      });
-    });
-  // return info for upload
-  return buffers;
+  await Promise.all(
+    options.map(async (option) => {
+      await sharp(file.buffer)
+        .resize(option.size)
+        .toFormat(format)
+        .jpeg({ quality: 90 })
+        .toBuffer({ resolveWithObject: true })
+        .then((data) => {
+          data.filename = `${option.name}${file.newFilename}`;
+          resizeFiles.push(data);
+        })
+        .catch((err) => {
+          throw new PrivateError(err);
+        });
+    })
+  );
+  return resizeFiles;
 }
 
 module.exports = {

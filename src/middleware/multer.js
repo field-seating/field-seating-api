@@ -3,6 +3,8 @@ const GeneralError = require('../errors/error/general-error');
 const PrivateError = require('../errors/error/private-error');
 const postPhotoErrorMap = require('../errors/post-photo-error');
 
+const multerStorage = multer.memoryStorage();
+
 // judge right file type
 const multerFilter = (req, file, cb) => {
   if (file.mimetype.startsWith('image')) {
@@ -14,8 +16,9 @@ const multerFilter = (req, file, cb) => {
 
 // set upload to where
 const upload = multer({
-  dest: 'temp/',
+  storage: multerStorage,
   fileFilter: multerFilter,
+  limits: { fileSize: 8 * 1024 * 1024 },
 });
 
 // upload way(single or many)
@@ -30,6 +33,11 @@ const uploadImages = (req, res, next) => {
       err.code === 'LIMIT_UNEXPECTED_FILE'
     ) {
       next(new GeneralError(postPhotoErrorMap['toManyPhotos']));
+    } else if (
+      err instanceof multer.MulterError &&
+      err.code === 'LIMIT_FILE_SIZE'
+    ) {
+      next(new GeneralError(postPhotoErrorMap['toLargeFile']));
     } else if (err) {
       // file type error
       if (err.code === 'p002') {

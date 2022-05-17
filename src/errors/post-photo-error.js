@@ -11,6 +11,14 @@ const postPhotoErrorMap = {
     message: '此座位不存在',
     code: 'p003',
   },
+  toLargeFile: {
+    message: '檔案大小超過限制',
+    code: 'p004',
+  },
+  duplicatePath: {
+    message: 'Path已經存在',
+    code: 'p005',
+  },
 };
 
 module.exports = postPhotoErrorMap;
