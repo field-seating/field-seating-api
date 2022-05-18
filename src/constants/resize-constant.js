@@ -1,7 +1,7 @@
 const sizeMap = {
   seatPhoto: [
-    { size: 640, name: 'thumb_' },
-    { size: 3200, name: '' },
+    { size: 640, namePrefix: 'thumb_' },
+    { size: 3200, namePrefix: '' },
   ],
 };
 

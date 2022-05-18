@@ -6,7 +6,6 @@ const passport = require('../config/passport');
 const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
 const photo = require('./modules/photo');
-const { authenticated } = require('../middleware/auth');
 const password = require('./modules/password');
 const { isDevelopmentBuild } = require('../context');
 const {
@@ -31,7 +30,7 @@ router.post(
   userController.signIn
 );
 router.use('/api/users', user);
-router.use('/api/photos', authenticated, photo);
+router.use('/api/photos', photo);
 router.use('/api/password', password);
 router.patch('/api/verify-email', userController.verifyEmail);
 

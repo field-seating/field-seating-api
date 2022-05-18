@@ -1,5 +1,5 @@
 const { randomString } = require('../../utils/crypto/random');
-const { hashPassword } = require('../../utils/crypto/password');
+const { hashString } = require('../../utils/crypto/hash');
 
 async function randomHashName(reqId, randomLength) {
   // random word
@@ -7,7 +7,7 @@ async function randomHashName(reqId, randomLength) {
   // combine with name
   const randomFilename = `${reqId}${randomWord}`;
   // hash it
-  const hashFilename = await hashPassword(randomFilename, 2);
+  const hashFilename = await hashString(randomFilename);
   // avoid slash
   const result = hashFilename.replace(/\//g, 'slash');
   return result;

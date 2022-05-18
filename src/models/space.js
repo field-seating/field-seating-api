@@ -11,12 +11,6 @@ class SpaceModel {
         id: true,
         colNumber: true,
         rowNumber: true,
-        zone: {
-          select: {
-            id: true,
-            name: true,
-          },
-        },
       },
     });
     return getSpace;

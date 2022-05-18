@@ -32,12 +32,12 @@ const uploadImages = (req, res, next) => {
       err instanceof multer.MulterError &&
       err.code === 'LIMIT_UNEXPECTED_FILE'
     ) {
-      next(new GeneralError(postPhotoErrorMap['toManyPhotos']));
+      next(new GeneralError(postPhotoErrorMap['tooManyPhotos']));
     } else if (
       err instanceof multer.MulterError &&
       err.code === 'LIMIT_FILE_SIZE'
     ) {
-      next(new GeneralError(postPhotoErrorMap['toLargeFile']));
+      next(new GeneralError(postPhotoErrorMap['tooLargeFile']));
     } else if (err) {
       // file type error
       if (err.code === 'p002') {

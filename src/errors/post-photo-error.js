@@ -1,5 +1,5 @@
 const postPhotoErrorMap = {
-  toManyPhotos: {
+  tooManyPhotos: {
     message: '超過單一上傳數量限制',
     code: 'p001',
   },
@@ -11,7 +11,7 @@ const postPhotoErrorMap = {
     message: '此座位不存在',
     code: 'p003',
   },
-  toLargeFile: {
+  tooLargeFile: {
     message: '檔案大小超過限制',
     code: 'p004',
   },
