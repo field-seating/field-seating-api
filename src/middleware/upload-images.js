@@ -27,27 +27,26 @@ const uploadFiles = upload.array('images', 3); // limit 3 images
 // upload
 const uploadImages = (req, res, next) => {
   uploadFiles(req, res, (err) => {
-    //  exceed limit
+    if (!err) {
+      next();
+      return;
+    }
     if (
       err instanceof multer.MulterError &&
       err.code === 'LIMIT_UNEXPECTED_FILE'
     ) {
       next(new GeneralError(postPhotoErrorMap['tooManyPhotos']));
-    } else if (
-      err instanceof multer.MulterError &&
-      err.code === 'LIMIT_FILE_SIZE'
-    ) {
-      next(new GeneralError(postPhotoErrorMap['tooLargeFile']));
-    } else if (err) {
-      // file type error
-      if (err.code === 'p002') {
-        next(new GeneralError(err));
-      } else {
-        // other we don't know
-        next(new PrivateError(err));
-      }
+      return;
     }
-    next();
+    if (err instanceof multer.MulterError && err.code === 'LIMIT_FILE_SIZE') {
+      next(new GeneralError(postPhotoErrorMap['tooLargeFile']));
+      return;
+    }
+    if (err.code === 'p002') {
+      next(new GeneralError(err));
+    }
+    // others err we don't know
+    next(new PrivateError(err));
   });
 };
 

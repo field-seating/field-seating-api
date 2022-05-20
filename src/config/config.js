@@ -9,12 +9,9 @@ const configFromEnv = {
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
-  doKey: process.env.AWS_ACCESS_KEY,
-  doSecret: process.env.AWS_SECRET_ACCESS_KEY,
-  doEndpoint: process.env.DIGITALOCEAN_ENDPOINT,
-  doBucket: process.env.DIGITALOCEAN_BUCKET,
+  doKey: process.env.DO_ACCESS_KEY,
+  doSecret: process.env.DO_SECRET,
   redisUrl: process.env.REDIS_URL,
-  domain: process.env.DOMAIN,
 };
 
 const envMap = {

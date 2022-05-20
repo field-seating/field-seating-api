@@ -7,7 +7,7 @@ module.exports = {
     '**/src/**/__tests__/**/*.[jt]s?(x)',
     '**/src/**/?(*.)+(spec|test).[tj]s?(x)',
   ],
-
+  testTimeout: 10000,
   //An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
   testPathIgnorePatterns: ['/node_modules/'],
   setupFiles: ['dotenv/config'],

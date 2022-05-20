@@ -1,4 +1,7 @@
 const config = {
+  assetDomain: 'field-seating.sgp1.digitaloceanspaces',
+  doEndpoint: 'sgp1.digitaloceanspaces.com',
+  doBucket: 'field-seating',
   baseUrl: 'https://fieldseating.wendellatman.com',
   verifyEmail: {
     rateLimit: {
