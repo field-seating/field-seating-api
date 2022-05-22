@@ -9,6 +9,8 @@ const configFromEnv = {
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   sibKey: process.env.SIB_KEY,
+  doKey: process.env.DO_ACCESS_KEY,
+  doSecret: process.env.DO_SECRET,
   redisUrl: process.env.REDIS_URL,
 };
 

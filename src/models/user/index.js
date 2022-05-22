@@ -70,6 +70,7 @@ class UserModel {
         name: true,
         role: true,
         status: true,
+        // **** wait to add photoCount and recordCount
       },
     });
     return userInfo;

@@ -52,7 +52,7 @@ class PasswordService extends BaseService {
       throw new GeneralError(passwordErrorMap.tokenInvalid);
     }
 
-    const encryptedPassword = await hashPassword(newPassword);
+    const encryptedPassword = await hashPassword(newPassword, 10);
 
     await userModel.udpatePassword(validEntity.userId, encryptedPassword);
   }

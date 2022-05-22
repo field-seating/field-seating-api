@@ -3,8 +3,9 @@
 
 generator client {
   provider = "prisma-client-js"
+  // 要使用transaction 新增的，根據git issue需執行 npx prisma generate
+  previewFeatures = ["interactiveTransactions"] 
   binaryTargets = ["native"]
-  previewFeatures = ["interactiveTransactions"]
 }
 
 datasource db {
@@ -35,7 +36,7 @@ model Fields {
   orientations FieldOnOrientations[]
   levels    FieldOnLevels[]
   name      String   @db.VarChar(255)
-  img       String   @db.VarChar(255)
+  img       String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   zones     Zones[]
@@ -138,8 +139,8 @@ model Records {
   space     Spaces    @relation(fields: [spaceId], references: [id])
   spaceId   Int
   date      DateTime @db.Date
-  score   String   @db.VarChar(10)
-  comment String   @db.VarChar(255)
+  score   String?   @db.VarChar(10)
+  comment String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   photos    Photos[]
@@ -151,11 +152,10 @@ model Photos {
   userId   Int
   space     Spaces    @relation(fields: [spaceId], references: [id])
   spaceId   Int
-  record     Records    @relation(fields: [recordId], references: [id])
-  recordId   Int
+  record     Records?    @relation(fields: [recordId], references: [id])
+  recordId   Int?
+  path String   @unique @db.VarChar(255)
   date      DateTime @db.Date
-  path   String   @db.VarChar(255)
-  thumbnail_path String   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   reviews Reviews[]
@@ -192,7 +192,6 @@ model PasswordResetTokens {
   tokenSignedAt DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
   @@index([state])
 }
 
