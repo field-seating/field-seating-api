@@ -30,7 +30,6 @@ class ZoneModel {
         id: true,
       },
     });
-    console.log(searchZone);
     return searchZone;
   }
   async _truncate() {

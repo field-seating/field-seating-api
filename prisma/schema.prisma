@@ -96,6 +96,7 @@ model Zones {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   spaces    Spaces[]
+  @@unique([fieldId, name])
 }
 
 model Spaces {

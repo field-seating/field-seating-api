@@ -5,7 +5,7 @@ const FieldModel = require('../src/models/field');
 const LevelModel = require('../src/models/level');
 const OrientationModel = require('../src/models/orientation');
 const ZoneModel = require('../src/models/zone');
-const SpaceModel = require('../src/models/space/space');
+const SpaceModel = require('../src/models/space/index');
 
 async function seeding() {
   const fieldModel = new FieldModel();

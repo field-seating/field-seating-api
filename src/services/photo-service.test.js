@@ -5,7 +5,8 @@ const FieldModel = require('../models/field');
 const LevelModel = require('../models/level');
 const OrientationModel = require('../models/orientation');
 const ZoneModel = require('../models/zone');
-const SpaceModel = require('../models/space');
+const SpaceModel = require('../models/space/index');
+const SeatModel = require('../models/seat');
 const UserModel = require('../models/user');
 const UserService = require('./user-service');
 const postPhotoErrorMap = require('../errors/post-photo-error');
@@ -24,7 +25,9 @@ afterEach(async () => {
   const orientationModel = new OrientationModel();
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
+  const seatModel = new SeatModel();
   await photoModel._truncate();
+  await seatModel._truncate();
   await spaceModel._truncate();
   await zoneModel._truncate();
   await orientationModel._truncate();
@@ -69,7 +72,7 @@ describe('photo-service.postPhoto', () => {
       );
       const newSpace = await spaceModel.createSpace(
         newZone.id,
-        'testType',
+        'seat',
         'testVersion',
         '1',
         '1'
@@ -160,7 +163,7 @@ describe('photo-service.postPhoto', () => {
       );
       const newSpace = await spaceModel.createSpace(
         newZone.id,
-        'testType',
+        'seat',
         'testVersion',
         '1',
         '1'
@@ -252,7 +255,7 @@ describe('photo-service.postPhoto', () => {
       );
       const newSpace = await spaceModel.createSpace(
         newZone.id,
-        'testType',
+        'seat',
         'testVersion',
         '1',
         '1'
