@@ -35,7 +35,7 @@ model Fields {
   id        Int      @id @default(autoincrement())
   orientations FieldOnOrientations[]
   levels    FieldOnLevels[]
-  name      String   @db.VarChar(255)
+  name      String   @unique @db.VarChar(255)
   img       String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -45,7 +45,7 @@ model Fields {
 model Orientations {
   id        Int      @id @default(autoincrement())
   fields    FieldOnOrientations[]
-  name      String   @db.VarChar(255)
+  name      String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   zones     Zones[]
@@ -66,7 +66,7 @@ model FieldOnOrientations {
 model Levels {
   id        Int      @id @default(autoincrement())
   fields    FieldOnLevels[]
-  name      String   @db.VarChar(255)
+  name      String   @unique @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   zones     Zones[]

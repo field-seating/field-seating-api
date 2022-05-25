@@ -1,0 +1,26 @@
+{
+  "field": "樂天桃園棒球場",
+  "spaces": [
+    {
+      "zone": "西下A",
+      "spaceType": "pillar",
+      "version": "1.0.0",
+      "colNumber": "1",
+      "rowNumber": "1"
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "pillar",
+      "version": "1.0.0",
+      "colNumber": "1",
+      "rowNumber": "2"
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "pillar",
+      "version": "1.0.0",
+      "colNumber": "1",
+      "rowNumber": "3"
+    }
+  ]
+}

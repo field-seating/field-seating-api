@@ -1,0 +1,301 @@
+{
+  "field": "樂天桃園棒球場",
+  "orientations": ["一壘側", "三壘側"],
+  "levels": ["下層", "上層"],
+  "zones": [
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下A"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下B"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下C"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下D"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下E"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下F"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下C"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下G"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下H"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下I"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下J"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下K"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下L"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下M"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下A"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下B"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下C"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下D"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下E"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下F"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下G"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下H"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下I"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下J"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下K"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上B"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上C"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上D"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上E"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上F"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上G"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上H"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上I"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上J"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上K"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上L"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "上層",
+      "name": "東上M"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上B"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上C"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上D"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上E"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上F"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上G"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上H"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上I"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上J"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上K"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上L"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "西上M"
+    }
+  ]
+}

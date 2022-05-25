@@ -14,6 +14,17 @@ class OrientationModel {
     });
     return createOrientation;
   }
+  async searchOrientation(name) {
+    const searchOrientation = await prisma.orientations.findUnique({
+      where: {
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return searchOrientation;
+  }
   async _truncate() {
     await prisma.orientations.deleteMany({});
   }

@@ -1,0 +1,7200 @@
+{
+  "spaces": [
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 22,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 23,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 24,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 25,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 26,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 27,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 28,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 29,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 30,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 31,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下A",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 32,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 1,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 2,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 3,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 4,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 5,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 6,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 7,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 8,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 9,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 10,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 11,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 12,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 13,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 14,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 15,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 16,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 17,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 18,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 19,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 20,
+      "rowNumber": 20
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 1
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 2
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 3
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 4
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 5
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 6
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 7
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 8
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 9
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 10
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 11
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 12
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 13
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 14
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 15
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 16
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 17
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 18
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 19
+    },
+    {
+      "zone": "西下B",
+      "spaceType": "seat",
+      "version": "1.0.0",
+      "colNumber": 21,
+      "rowNumber": 20
+    }
+  ]
+}

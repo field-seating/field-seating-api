@@ -14,6 +14,17 @@ class LevelModel {
     });
     return createLevel;
   }
+  async searchLevel(name) {
+    const searchLevel = await prisma.levels.findUnique({
+      where: {
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return searchLevel;
+  }
   async _truncate() {
     await prisma.levels.deleteMany({});
   }

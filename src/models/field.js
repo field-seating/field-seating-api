@@ -16,6 +16,17 @@ class FieldModel {
     });
     return createField;
   }
+  async searchField(name) {
+    const searchField = await prisma.fields.findUnique({
+      where: {
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return searchField;
+  }
   async _truncate() {
     await prisma.fields.deleteMany({});
   }

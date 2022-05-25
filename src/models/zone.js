@@ -20,6 +20,19 @@ class ZoneModel {
     });
     return createZone;
   }
+  async searchZone(fieldId, name) {
+    const searchZone = await prisma.zones.findMany({
+      where: {
+        fieldId: fieldId,
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    console.log(searchZone);
+    return searchZone;
+  }
   async _truncate() {
     await prisma.zones.deleteMany({});
   }
