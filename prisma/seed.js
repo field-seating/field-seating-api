@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
-const data = require('../seeders/data.json');
+const data = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
 const FieldModel = require('../src/models/field');
 const LevelModel = require('../src/models/level');
 const OrientationModel = require('../src/models/orientation');
@@ -9,7 +9,7 @@ const SpaceModel = require('../src/models/space/index');
 
 // csv read
 async function readCsv() {
-  const fileContent = await fs.promises.readFile('./seeders/spaces/westAB.csv');
+  const fileContent = await fs.promises.readFile('./seeders/spaces/westAB.csv'); // data of space
   const data = parse(fileContent, { columns: true });
   return data;
 }
@@ -20,34 +20,79 @@ async function seeding() {
   const orientationModel = new OrientationModel();
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
+
+  // create field
   await fieldModel.createField(data.field);
+
+  // create orientation
   await Promise.all(
     data.orientations.map(async (orientation) => {
       await orientationModel.createOrientation(orientation);
     })
   );
+
+  // create level
   await Promise.all(
     data.levels.map(async (level) => {
       await levelModel.createLevel(level);
     })
   );
+
+  // create zone
+  let fieldMap = new Map();
+  let orientationMap = new Map();
+  let levelMap = new Map();
   await Promise.all(
     data.zones.map(async (zone) => {
-      const field = await fieldModel.searchField(zone.field);
-      const orientation = await orientationModel.searchOrientation(
-        zone.orientation
-      );
-      const level = await levelModel.searchLevel(zone.level);
-      await zoneModel.createZone(field.id, orientation.id, level.id, zone.name);
+      // if fieldId never got searched
+      if (!fieldMap.has(zone.field)) {
+        const field = await fieldModel.searchField(zone.field);
+        fieldMap.set(zone.field, field.id);
+      }
+      const fieldId = await fieldMap.get(zone.field);
+
+      // if orientationId never got searched
+      if (!orientationMap.has(zone.orientation)) {
+        const orientation = await orientationModel.searchOrientation(
+          zone.orientation
+        );
+        orientationMap.set(zone.orientation, orientation.id);
+      }
+      const orientationId = await orientationMap.get(zone.orientation);
+
+      // if levelId never got searched
+      if (!levelMap.has(zone.level)) {
+        const level = await levelModel.searchLevel(zone.level);
+        levelMap.set(zone.level, level.id);
+      }
+      const levelId = await levelMap.get(zone.level);
+      await zoneModel.createZone(fieldId, orientationId, levelId, zone.name); // create
     })
   );
+
+  // create space
   const spacesData = await readCsv();
-  const spacesOfField = await fieldModel.searchField(spacesData[0].field);
+  let zoneMap = new Map();
   await Promise.all(
     spacesData.map(async (space) => {
-      const zone = await zoneModel.searchZone(spacesOfField.id, space.zone);
+      // if fieldId never got searched
+      if (!fieldMap.has(space.field)) {
+        const field = await fieldModel.searchField(space.field);
+        fieldMap.set(space.field, field.id);
+      }
+      const fieldId = await fieldMap.get(space.field);
+
+      // if zoneId never got searched
+      if (!zoneMap.has(space.zone)) {
+        const zone = await zoneModel.searchZone(fieldId, space.zone);
+        console.log(zone);
+        zoneMap.set(space.zone, zone[0].id);
+      }
+      const zoneId = await zoneMap.get(space.zone);
+
+      // create
       await spaceModel.createSpace(
-        zone[0].id,
+        zoneId,
         space.spaceType,
         space.version,
         space.colNumber,
