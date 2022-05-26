@@ -1,25 +1,27 @@
 const fs = require('fs');
-const { zoneMap } = require('./zone-constant');
+const { stringify } = require('csv-stringify/sync');
+const { zoneMap, zoneKey } = require('./zone-constant');
 
-const data = {};
-data.spaces = [];
+const spaces = [zoneKey];
 
 for (let z = 0; z < zoneMap.length; z++) {
   for (let c = zoneMap[z].col[0]; c < zoneMap[z].col[1] + 1; c++) {
     for (let r = zoneMap[z].row[0]; r < zoneMap[z].row[1] + 1; r++) {
-      var obj = {
-        zone: zoneMap[z].zone,
-        spaceType: zoneMap[z].spaceType,
-        version: zoneMap[z].version,
-        colNumber: c,
-        rowNumber: r,
-      };
-      data.spaces.push(obj);
+      var data = [
+        zoneMap[z].field,
+        zoneMap[z].zone,
+        zoneMap[z].spaceType,
+        zoneMap[z].version,
+        c,
+        r,
+      ];
+      spaces.push(data);
     }
   }
 }
+const csv = stringify(spaces);
 
-fs.writeFile('input.json', JSON.stringify(data), function (err) {
+fs.writeFile('input.csv', csv, function (err) {
   if (err) throw err;
   console.log('complete');
 });

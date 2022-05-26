@@ -16,7 +16,8 @@
     "container:down": "docker-compose -f ./docker-compose.test.yml down",
     "lint": "npx eslint .",
     "db:deploy": "npx prisma generate && npx prisma migrate deploy",
-    "db:migration:generate": "npx prisma migrate dev"
+    "db:migration:generate": "npx prisma migrate dev",
+    "spacesCsv-gene": "node seeders/spaces/space-generator.js"
   },
   "engines": {
     "npm": ">=7.0.0",
@@ -31,6 +32,7 @@
     "app-root-path": "^3.0.0",
     "aws-sdk": "^2.1126.0",
     "bcryptjs": "^2.4.3",
+    "csv": "^6.1.0",
     "date-fns": "^2.28.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",

@@ -1,11 +1,18 @@
-// const prisma = require('../config/prisma');
+const fs = require('fs');
+const { parse } = require('csv-parse/sync');
 const data = require('../seeders/data.json');
-const spacesData = require('../seeders/spaces/spacesData.json');
 const FieldModel = require('../src/models/field');
 const LevelModel = require('../src/models/level');
 const OrientationModel = require('../src/models/orientation');
 const ZoneModel = require('../src/models/zone');
 const SpaceModel = require('../src/models/space/index');
+
+// csv read
+async function readCsv() {
+  const fileContent = await fs.promises.readFile('./seeders/spaces/westAB.csv');
+  const data = parse(fileContent, { columns: true });
+  return data;
+}
 
 async function seeding() {
   const fieldModel = new FieldModel();
@@ -34,9 +41,10 @@ async function seeding() {
       await zoneModel.createZone(field.id, orientation.id, level.id, zone.name);
     })
   );
+  const spacesData = await readCsv();
+  const spacesOfField = await fieldModel.searchField(spacesData[0].field);
   await Promise.all(
-    spacesData.spaces.map(async (space) => {
-      const spacesOfField = await fieldModel.searchField(spacesData.field);
+    spacesData.map(async (space) => {
       const zone = await zoneModel.searchZone(spacesOfField.id, space.zone);
       await spaceModel.createSpace(
         zone[0].id,
