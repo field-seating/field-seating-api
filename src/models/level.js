@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 class LevelModel {
   constructor() {}
   async createLevel(name) {
-    const createLevel = await prisma.levels.create({
+    const newLevel = await prisma.levels.create({
       data: {
         name,
       },
@@ -12,10 +12,10 @@ class LevelModel {
         name: true,
       },
     });
-    return createLevel;
+    return newLevel;
   }
-  async searchLevel(name) {
-    const searchLevel = await prisma.levels.findUnique({
+  async getLevelByName(name) {
+    const level = await prisma.levels.findUnique({
       where: {
         name: name,
       },
@@ -23,7 +23,7 @@ class LevelModel {
         id: true,
       },
     });
-    return searchLevel;
+    return level;
   }
   async _truncate() {
     await prisma.levels.deleteMany({});

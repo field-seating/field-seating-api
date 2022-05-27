@@ -17,7 +17,7 @@
     "lint": "npx eslint .",
     "db:deploy": "npx prisma generate && npx prisma migrate deploy",
     "db:migration:generate": "npx prisma migrate dev",
-    "spacesCsv-gene": "node seeders/spaces/space-generator.js"
+    "spacesCsv-generate": "node seeders/spaces/space-generator.js"
   },
   "engines": {
     "npm": ">=7.0.0",

@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 class FieldModel {
   constructor() {}
   async createField(name, img) {
-    const createField = await prisma.fields.create({
+    const newField = await prisma.fields.create({
       data: {
         name,
         img,
@@ -14,10 +14,10 @@ class FieldModel {
         img: true,
       },
     });
-    return createField;
+    return newField;
   }
-  async searchField(name) {
-    const searchField = await prisma.fields.findUnique({
+  async getFieldByName(name) {
+    const field = await prisma.fields.findUnique({
       where: {
         name: name,
       },
@@ -25,7 +25,7 @@ class FieldModel {
         id: true,
       },
     });
-    return searchField;
+    return field;
   }
   async _truncate() {
     await prisma.fields.deleteMany({});

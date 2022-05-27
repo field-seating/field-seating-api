@@ -1,5 +1,5 @@
 {
-  "field": "樂天桃園棒球場",
+  "fields": ["樂天桃園棒球場", "新莊棒球場"],
   "orientations": ["一壘側", "三壘側"],
   "levels": ["下層", "上層"],
   "zones": [
@@ -290,6 +290,48 @@
       "orientation": "三壘側",
       "level": "上層",
       "name": "西上M"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A1"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A2"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A3"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A4"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A5"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A6"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "A7"
     }
   ]
 }

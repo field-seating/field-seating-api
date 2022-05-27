@@ -4,16 +4,17 @@ const { zoneMap, zoneKey } = require('./zone-constant');
 
 const spaces = [zoneKey];
 
-for (let z = 0; z < zoneMap.length; z++) {
-  for (let c = zoneMap[z].col[0]; c < zoneMap[z].col[1] + 1; c++) {
-    for (let r = zoneMap[z].row[0]; r < zoneMap[z].row[1] + 1; r++) {
-      var data = [
-        zoneMap[z].field,
-        zoneMap[z].zone,
-        zoneMap[z].spaceType,
-        zoneMap[z].version,
-        c,
-        r,
+for (let zoneIndex = 0; zoneIndex < zoneMap.length; zoneIndex++) {
+  const zone = zoneMap[zoneIndex];
+  for (let col = zone.col[0]; col < zone.col[1] + 1; col++) {
+    for (let row = zone.row[0]; row < zone.row[1] + 1; row++) {
+      const data = [
+        zone.field,
+        zone.zone,
+        zone.spaceType,
+        zone.version,
+        col,
+        row,
       ];
       spaces.push(data);
     }

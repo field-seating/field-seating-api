@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
-const data = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
+const fieldData = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
 const FieldModel = require('../src/models/field');
 const LevelModel = require('../src/models/level');
 const OrientationModel = require('../src/models/orientation');
@@ -8,10 +8,21 @@ const ZoneModel = require('../src/models/zone');
 const SpaceModel = require('../src/models/space/index');
 
 // csv read
-async function readCsv() {
-  const fileContent = await fs.promises.readFile('./seeders/spaces/westAB.csv'); // data of space
-  const data = parse(fileContent, { columns: true });
-  return data;
+async function getSpacesData() {
+  try {
+    const files = await fs.promises.readdir('./seeders/space-data');
+    let data = [];
+    for (let file of files) {
+      const fileContent = await fs.promises.readFile(
+        `./seeders/space-data/${file}`
+      ); // data of space
+      const content = parse(fileContent, { columns: true });
+      data = data.concat(content);
+    }
+    return data;
+  } catch (err) {
+    throw new err();
+  }
 }
 
 async function seeding() {
@@ -22,19 +33,23 @@ async function seeding() {
   const spaceModel = new SpaceModel();
 
   // create field
-  await fieldModel.createField(data.field);
+  await Promise.all(
+    fieldData.fields.map(async (fieldName) => {
+      await fieldModel.createField(fieldName);
+    })
+  );
 
   // create orientation
   await Promise.all(
-    data.orientations.map(async (orientation) => {
-      await orientationModel.createOrientation(orientation);
+    fieldData.orientations.map(async (orientationName) => {
+      await orientationModel.createOrientation(orientationName);
     })
   );
 
   // create level
   await Promise.all(
-    data.levels.map(async (level) => {
-      await levelModel.createLevel(level);
+    fieldData.levels.map(async (levelName) => {
+      await levelModel.createLevel(levelName);
     })
   );
 
@@ -43,52 +58,51 @@ async function seeding() {
   let orientationMap = new Map();
   let levelMap = new Map();
   await Promise.all(
-    data.zones.map(async (zone) => {
-      // if fieldId never got searched
+    fieldData.zones.map(async (zone) => {
+      // if fieldId never get
       if (!fieldMap.has(zone.field)) {
-        const field = await fieldModel.searchField(zone.field);
+        const field = await fieldModel.getFieldByName(zone.field);
         fieldMap.set(zone.field, field.id);
       }
-      const fieldId = await fieldMap.get(zone.field);
+      const fieldId = fieldMap.get(zone.field);
 
-      // if orientationId never got searched
+      // if orientationId never get
       if (!orientationMap.has(zone.orientation)) {
-        const orientation = await orientationModel.searchOrientation(
+        const orientation = await orientationModel.getOrientationByName(
           zone.orientation
         );
         orientationMap.set(zone.orientation, orientation.id);
       }
-      const orientationId = await orientationMap.get(zone.orientation);
+      const orientationId = orientationMap.get(zone.orientation);
 
-      // if levelId never got searched
+      // if levelId never get
       if (!levelMap.has(zone.level)) {
-        const level = await levelModel.searchLevel(zone.level);
+        const level = await levelModel.getLevelByName(zone.level);
         levelMap.set(zone.level, level.id);
       }
-      const levelId = await levelMap.get(zone.level);
+      const levelId = levelMap.get(zone.level);
       await zoneModel.createZone(fieldId, orientationId, levelId, zone.name); // create
     })
   );
 
   // create space
-  const spacesData = await readCsv();
+  const spacesData = await getSpacesData();
   let zoneMap = new Map();
   await Promise.all(
     spacesData.map(async (space) => {
-      // if fieldId never got searched
+      // if fieldId never get
       if (!fieldMap.has(space.field)) {
-        const field = await fieldModel.searchField(space.field);
+        const field = await fieldModel.getFieldByName(space.field);
         fieldMap.set(space.field, field.id);
       }
-      const fieldId = await fieldMap.get(space.field);
+      const fieldId = fieldMap.get(space.field);
 
-      // if zoneId never got searched
+      // if zoneId never get
       if (!zoneMap.has(space.zone)) {
-        const zone = await zoneModel.searchZone(fieldId, space.zone);
-        console.log(zone);
+        const zone = await zoneModel.getZoneByName(fieldId, space.zone);
         zoneMap.set(space.zone, zone[0].id);
       }
-      const zoneId = await zoneMap.get(space.zone);
+      const zoneId = zoneMap.get(space.zone);
 
       // create
       await spaceModel.createSpace(

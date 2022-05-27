@@ -18,7 +18,7 @@ class SpaceModel {
   }
   async createSpace(zoneId, spaceType, version, colNumber, rowNumber) {
     if (spaceType === spaceTypeMap.seat) {
-      const createSpace = await prisma.spaces.create({
+      const newSpace = await prisma.spaces.create({
         data: {
           zoneId,
           spaceType,
@@ -35,18 +35,12 @@ class SpaceModel {
           rowNumber: true,
           spaceType: true,
           version: true,
-          zone: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
         },
       });
-      return createSpace;
+      return newSpace;
     }
     if (spaceType === spaceTypeMap.pillar) {
-      const createSpace = await prisma.spaces.create({
+      const newSpace = await prisma.spaces.create({
         data: {
           zoneId,
           spaceType,
@@ -63,15 +57,9 @@ class SpaceModel {
           rowNumber: true,
           spaceType: true,
           version: true,
-          zone: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
         },
       });
-      return createSpace;
+      return newSpace;
     }
   }
   async _truncate() {
