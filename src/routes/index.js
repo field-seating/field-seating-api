@@ -7,6 +7,7 @@ const userController = require('../controllers/user-controller');
 const user = require('./modules/user');
 const photo = require('./modules/photo');
 const password = require('./modules/password');
+const field = require('./modules/field');
 const { isDevelopmentBuild } = require('../context');
 const {
   passwordValidate,
@@ -32,6 +33,7 @@ router.post(
 router.use('/api/users', user);
 router.use('/api/photos', photo);
 router.use('/api/password', password);
+router.use('/api/fields', field);
 router.patch('/api/verify-email', userController.verifyEmail);
 
 // 檢視email格式使用
