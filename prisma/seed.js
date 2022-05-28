@@ -9,20 +9,16 @@ const SpaceModel = require('../src/models/space/index');
 
 // csv read
 async function getSpacesData() {
-  try {
-    const files = await fs.promises.readdir('./seeders/space-data');
-    let data = [];
-    for (let file of files) {
-      const fileContent = await fs.promises.readFile(
-        `./seeders/space-data/${file}`
-      ); // data of space
-      const content = parse(fileContent, { columns: true });
-      data = data.concat(content);
-    }
-    return data;
-  } catch (err) {
-    throw new err();
+  const files = await fs.promises.readdir('./seeders/space-data');
+  let data = [];
+  for (let file of files) {
+    const fileContent = await fs.promises.readFile(
+      `./seeders/space-data/${file}`
+    ); // data of space
+    const content = parse(fileContent, { columns: true });
+    data = data.concat(content);
   }
+  return data;
 }
 
 async function seeding() {
