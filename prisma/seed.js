@@ -28,13 +28,6 @@ async function seeding() {
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
 
-  // create field
-  await Promise.all(
-    fieldData.fields.map(async (fieldName) => {
-      await fieldModel.createField(fieldName);
-    })
-  );
-
   // create orientation
   await Promise.all(
     fieldData.orientations.map(async (orientationName) => {
@@ -49,10 +42,48 @@ async function seeding() {
     })
   );
 
-  // create zone
-  let fieldMap = new Map();
+  // create field
   let orientationMap = new Map();
   let levelMap = new Map();
+  await Promise.all(
+    fieldData.fields.map(async (fieldName) => {
+      // get orientations id which this field have
+      const orientationIds = await Promise.all(
+        fieldName.orientations.map(async (orientationName) => {
+          if (!orientationMap.has(orientationName)) {
+            const orientation = await orientationModel.getOrientationByName(
+              orientationName
+            );
+            orientationMap.set(orientationName, orientation.id);
+          }
+          return orientationMap.get(orientationName);
+        })
+      );
+
+      // get levels id id which this field have
+      const levelIds = await Promise.all(
+        fieldName.levels.map(async (levelName) => {
+          // if levelId never get
+          if (!levelMap.has(levelName)) {
+            const level = await levelModel.getLevelByName(levelName);
+            levelMap.set(levelName, level.id);
+          }
+          return levelMap.get(levelName);
+        })
+      );
+
+      // create field and the mm relationship with level and orientation
+      await fieldModel.createField(
+        fieldName.name,
+        fieldName.img,
+        orientationIds,
+        levelIds
+      );
+    })
+  );
+
+  // create zone
+  let fieldMap = new Map();
   await Promise.all(
     fieldData.zones.map(async (zone) => {
       // if fieldId never get
