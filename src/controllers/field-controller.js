@@ -15,9 +15,7 @@ const fieldController = {
     try {
       const fieldId = req.body.id;
       const fieldService = new FieldService({ logger: req.logger });
-      const orientationList = await fieldService.getFieldsOrientationsFields(
-        fieldId
-      );
+      const orientationList = await fieldService.getFieldsOrientations(fieldId);
       res.status(200).json(resSuccess(orientationList));
     } catch (err) {
       next(err);
