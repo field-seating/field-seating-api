@@ -8,6 +8,12 @@ class FieldService extends BaseService {
     this.logger.debug('got a fieldList', { fieldList });
     return fieldList;
   }
+  async getFieldsOrientations() {
+    const fieldModel = new FieldModel();
+    const fieldList = await fieldModel.getFields();
+    this.logger.debug('got a fieldList', { fieldList });
+    return fieldList;
+  }
 }
 
 module.exports = FieldService;

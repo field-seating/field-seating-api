@@ -14,6 +14,17 @@ class OrientationModel {
     });
     return createOrientation;
   }
+  async getOrientationsByField() {
+    const fieldList = await prisma.orientations.findMany({
+      where: {},
+      select: {
+        id: true,
+        name: true,
+        img: true,
+      },
+    });
+    return fieldList;
+  }
   async _truncate() {
     await prisma.orientations.deleteMany({});
   }
