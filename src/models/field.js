@@ -7,32 +7,28 @@ class FieldModel {
     let levelConnect = [];
     // create prisma code array
     if (orientationIds) {
-      orientationConnect = await Promise.all(
-        orientationIds.map(async (id) => {
-          return {
-            orientation: {
-              connect: {
-                id: id,
-              },
+      orientationConnect = orientationIds.map((id) => {
+        return {
+          orientation: {
+            connect: {
+              id: id,
             },
-          };
-        })
-      );
+          },
+        };
+      });
     }
 
     // create prisma code array
     if (levelIds) {
-      levelConnect = await Promise.all(
-        levelIds.map(async (id) => {
-          return {
-            level: {
-              connect: {
-                id: id,
-              },
+      levelConnect = levelIds.map((id) => {
+        return {
+          level: {
+            connect: {
+              id: id,
             },
-          };
-        })
-      );
+          },
+        };
+      });
     }
 
     // create
