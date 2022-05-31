@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 class PhotoModel {
   constructor() {}
   async createPhoto(path, userId, spaceId, dateTime) {
-    const createPhoto = await prisma.photos.create({
+    const newPhoto = await prisma.photos.create({
       data: {
         userId: userId,
         spaceId: spaceId,
@@ -16,7 +16,7 @@ class PhotoModel {
         path: true,
       },
     });
-    return createPhoto;
+    return newPhoto;
   }
   async _truncate() {
     await prisma.photos.deleteMany({});

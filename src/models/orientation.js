@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 class OrientationModel {
   constructor() {}
   async createOrientation(name) {
-    const createOrientation = await prisma.orientations.create({
+    const newOrientation = await prisma.orientations.create({
       data: {
         name,
       },
@@ -12,7 +12,18 @@ class OrientationModel {
         name: true,
       },
     });
-    return createOrientation;
+    return newOrientation;
+  }
+  async getOrientationByName(name) {
+    const orientation = await prisma.orientations.findUnique({
+      where: {
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return orientation;
   }
   async getOrientationsByField() {
     const fieldList = await prisma.orientations.findMany({

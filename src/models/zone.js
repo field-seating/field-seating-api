@@ -3,7 +3,7 @@ const prisma = require('../config/prisma');
 class ZoneModel {
   constructor() {}
   async createZone(fieldId, orientationId, levelId, name) {
-    const createZone = await prisma.zones.create({
+    const newZone = await prisma.zones.create({
       data: {
         fieldId,
         orientationId,
@@ -18,7 +18,19 @@ class ZoneModel {
         name: true,
       },
     });
-    return createZone;
+    return newZone;
+  }
+  async getZoneByName(fieldId, name) {
+    const zone = await prisma.zones.findMany({
+      where: {
+        fieldId: fieldId,
+        name: name,
+      },
+      select: {
+        id: true,
+      },
+    });
+    return zone;
   }
   async _truncate() {
     await prisma.zones.deleteMany({});
