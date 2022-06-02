@@ -32,8 +32,10 @@ class FieldModel {
     }
 
     // create
-    const newField = await prisma.fields.create({
-      data: {
+    const newField = await prisma.fields.upsert({
+      where: { name },
+      update: {},
+      create: {
         name,
         img,
         levels: {

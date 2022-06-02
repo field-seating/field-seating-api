@@ -3,8 +3,10 @@ const prisma = require('../config/prisma');
 class ZoneModel {
   constructor() {}
   async createZone(fieldId, orientationId, levelId, name) {
-    const newZone = await prisma.zones.create({
-      data: {
+    const newZone = await prisma.zones.upsert({
+      where: { fieldId_name: { fieldId, name } },
+      update: {},
+      create: {
         fieldId,
         orientationId,
         levelId,

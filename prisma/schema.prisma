@@ -115,12 +115,13 @@ model Spaces {
   photos    Photos[]
   collections Collections[]
   @@unique([id, spaceType])
+  @@unique([zoneId, version, colNumber, rowNumber])
 }
 
 model Seats {
   space    Spaces    @relation(fields: [spaceId, spaceType], references: [id, spaceType])
   spaceId   Int  @id
-  spaceType String   @default("seat")
+  spaceType String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -128,7 +129,7 @@ model Seats {
 model Pillars {
   space    Spaces   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
   spaceId   Int    @id
-  spaceType String   @default("pillar")
+  spaceType String   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
