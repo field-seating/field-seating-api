@@ -1,5 +1,5 @@
 {
-  "orientations": ["一壘側", "三壘側"],
+  "orientations": ["一壘側", "三壘側", "外野"],
   "levels": ["下層", "上層"],
   "fields": [
     {
@@ -13,6 +13,12 @@
       "img": "",
       "levels": ["下層", "上層"],
       "orientations": ["一壘側", "三壘側"]
+    },
+    {
+      "name": "台中洲際棒球場",
+      "img": "",
+      "levels": ["下層", "上層"],
+      "orientations": ["一壘側", "三壘側", "外野"]
     }
   ],
   "zones": [

@@ -36,11 +36,15 @@ async function seeding() {
   );
 
   // create level
-  await Promise.all(
-    fieldData.levels.map(async (levelName) => {
-      await levelModel.createLevel(levelName);
-    })
-  );
+  try {
+    await Promise.all(
+      fieldData.levels.map(async (levelName) => {
+        await levelModel.createLevel(levelName);
+      })
+    );
+  } catch (err) {
+    console.log(err);
+  }
 
   // create field
   let orientationMap = new Map();

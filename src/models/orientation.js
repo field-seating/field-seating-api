@@ -3,10 +3,10 @@ const prisma = require('../config/prisma');
 class OrientationModel {
   constructor() {}
   async createOrientation(name) {
-    const newOrientation = await prisma.orientations.create({
-      data: {
-        name,
-      },
+    const newOrientation = await prisma.orientations.upsert({
+      where: { name },
+      update: {},
+      create: { name },
       select: {
         id: true,
         name: true,
@@ -30,9 +30,7 @@ class OrientationModel {
       where: {
         fields: {
           some: {
-            field: {
-              id: fieldId,
-            },
+            fieldId: Number(fieldId),
           },
         },
       },

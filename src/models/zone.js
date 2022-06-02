@@ -32,6 +32,23 @@ class ZoneModel {
     });
     return zone;
   }
+  async getFieldZones(fieldId, orientationId, levelId) {
+    const zone = await prisma.zones.findMany({
+      where: {
+        fieldId: Number(fieldId),
+        orientationId: Number(orientationId),
+        levelId: Number(levelId),
+      },
+      select: {
+        id: true,
+        fieldId: true,
+        orientationId: true,
+        levelId: true,
+        name: true,
+      },
+    });
+    return zone;
+  }
   async _truncate() {
     await prisma.zones.deleteMany({});
   }
