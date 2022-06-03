@@ -31,20 +31,16 @@ async function seeding() {
   // create orientation
   await Promise.all(
     fieldData.orientations.map(async (orientationName) => {
-      await orientationModel.createOrientation(orientationName);
+      await orientationModel.findOrCreateOrientation(orientationName);
     })
   );
 
   // create level
-  try {
-    await Promise.all(
-      fieldData.levels.map(async (levelName) => {
-        await levelModel.createLevel(levelName);
-      })
-    );
-  } catch (err) {
-    console.log(err);
-  }
+  await Promise.all(
+    fieldData.levels.map(async (levelName) => {
+      await levelModel.findOrCreateLevel(levelName);
+    })
+  );
 
   // create field
   let orientationMap = new Map();
@@ -77,7 +73,7 @@ async function seeding() {
       );
 
       // create field and the mm relationship with level and orientation
-      await fieldModel.createField(
+      await fieldModel.findOrCreateField(
         fieldName.name,
         fieldName.img,
         orientationIds,
@@ -112,7 +108,12 @@ async function seeding() {
         levelMap.set(zone.level, level.id);
       }
       const levelId = levelMap.get(zone.level);
-      await zoneModel.createZone(fieldId, orientationId, levelId, zone.name); // create
+      await zoneModel.findOrCreateZone(
+        fieldId,
+        orientationId,
+        levelId,
+        zone.name
+      ); // create
     })
   );
 
@@ -136,7 +137,7 @@ async function seeding() {
       const zoneId = zoneMap.get(space.zone);
 
       // create
-      await spaceModel.createSpace(
+      await spaceModel.findOrCreateSpace(
         zoneId,
         space.spaceType,
         space.version,

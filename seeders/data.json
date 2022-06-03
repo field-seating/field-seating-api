@@ -1,6 +1,6 @@
 {
   "orientations": ["一壘側", "三壘側", "外野"],
-  "levels": ["下層", "上層"],
+  "levels": ["下層", "上層", "第三層"],
   "fields": [
     {
       "name": "樂天桃園棒球場",
@@ -99,6 +99,12 @@
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下M"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下R"
     },
     {
       "field": "樂天桃園棒球場",
