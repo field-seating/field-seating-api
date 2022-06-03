@@ -32,7 +32,56 @@ class FieldModel {
     }
 
     // create
-    const newField = await prisma.fields.upsert({
+    const newField = await prisma.fields.create({
+      data: {
+        name,
+        img,
+        levels: {
+          create: levelConnect,
+        },
+        orientations: {
+          create: orientationConnect,
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+        img: true,
+      },
+    });
+    return newField;
+  }
+  async findOrCreateField(name, img, orientationIds, levelIds) {
+    let orientationConnect = [];
+    let levelConnect = [];
+    // create prisma code array
+    if (orientationIds) {
+      orientationConnect = orientationIds.map((id) => {
+        return {
+          orientation: {
+            connect: {
+              id: id,
+            },
+          },
+        };
+      });
+    }
+
+    // create prisma code array
+    if (levelIds) {
+      levelConnect = levelIds.map((id) => {
+        return {
+          level: {
+            connect: {
+              id: id,
+            },
+          },
+        };
+      });
+    }
+
+    // create
+    const field = await prisma.fields.upsert({
       where: { name },
       update: {},
       create: {
@@ -51,7 +100,7 @@ class FieldModel {
         img: true,
       },
     });
-    return newField;
+    return field;
   }
   async getFieldByName(name) {
     const field = await prisma.fields.findUnique({

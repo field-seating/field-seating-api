@@ -18,17 +18,8 @@ class SpaceModel {
   }
   async createSpace(zoneId, spaceType, version, colNumber, rowNumber) {
     if (spaceType === spaceTypeMap.seat) {
-      const newSpace = await prisma.spaces.upsert({
-        where: {
-          zoneId_version_colNumber_rowNumber: {
-            zoneId,
-            version,
-            colNumber,
-            rowNumber,
-          },
-        },
-        update: {},
-        create: {
+      const newSpace = await prisma.spaces.create({
+        data: {
           zoneId,
           spaceType,
           version,
@@ -49,7 +40,31 @@ class SpaceModel {
       return newSpace;
     }
     if (spaceType === spaceTypeMap.pillar) {
-      const newSpace = await prisma.spaces.upsert({
+      const newSpace = await prisma.spaces.create({
+        data: {
+          zoneId,
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          pillars: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          colNumber: true,
+          rowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return newSpace;
+    }
+  }
+  async findOrCreateSpace(zoneId, spaceType, version, colNumber, rowNumber) {
+    if (spaceType === spaceTypeMap.seat) {
+      const space = await prisma.spaces.upsert({
         where: {
           zoneId_version_colNumber_rowNumber: {
             zoneId,
@@ -77,7 +92,38 @@ class SpaceModel {
           version: true,
         },
       });
-      return newSpace;
+      return space;
+    }
+    if (spaceType === spaceTypeMap.pillar) {
+      const space = await prisma.spaces.upsert({
+        where: {
+          zoneId_version_colNumber_rowNumber: {
+            zoneId,
+            version,
+            colNumber,
+            rowNumber,
+          },
+        },
+        update: {},
+        create: {
+          zoneId,
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          pillars: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          colNumber: true,
+          rowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return space;
     }
   }
   async _truncate() {

@@ -3,7 +3,19 @@ const prisma = require('../config/prisma');
 class LevelModel {
   constructor() {}
   async createLevel(name) {
-    const newLevel = await prisma.levels.upsert({
+    const newLevel = await prisma.levels.create({
+      data: {
+        name,
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return newLevel;
+  }
+  async findOrCreateLevel(name) {
+    const level = await prisma.levels.upsert({
       where: { name },
       update: {},
       create: { name },
@@ -12,7 +24,7 @@ class LevelModel {
         name: true,
       },
     });
-    return newLevel;
+    return level;
   }
   async getLevelByName(name) {
     const level = await prisma.levels.findUnique({
