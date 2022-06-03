@@ -14,6 +14,18 @@ class LevelModel {
     });
     return newLevel;
   }
+  async findOrCreateLevel(name) {
+    const level = await prisma.levels.upsert({
+      where: { name },
+      update: {},
+      create: { name },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return level;
+  }
   async getLevelByName(name) {
     const level = await prisma.levels.findUnique({
       where: {

@@ -62,6 +62,70 @@ class SpaceModel {
       return newSpace;
     }
   }
+  async findOrCreateSpace(zoneId, spaceType, version, colNumber, rowNumber) {
+    if (spaceType === spaceTypeMap.seat) {
+      const space = await prisma.spaces.upsert({
+        where: {
+          zoneId_version_colNumber_rowNumber: {
+            zoneId,
+            version,
+            colNumber,
+            rowNumber,
+          },
+        },
+        update: {},
+        create: {
+          zoneId,
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          seats: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          colNumber: true,
+          rowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return space;
+    }
+    if (spaceType === spaceTypeMap.pillar) {
+      const space = await prisma.spaces.upsert({
+        where: {
+          zoneId_version_colNumber_rowNumber: {
+            zoneId,
+            version,
+            colNumber,
+            rowNumber,
+          },
+        },
+        update: {},
+        create: {
+          zoneId,
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          pillars: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          colNumber: true,
+          rowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return space;
+    }
+  }
   async _truncate() {
     await prisma.spaces.deleteMany({});
   }
