@@ -55,9 +55,12 @@ class ZoneModel {
   async getFieldZones(fieldId, orientationId, levelId) {
     const zone = await prisma.zones.findMany({
       where: {
-        fieldId: Number(fieldId),
-        orientationId: Number(orientationId),
-        levelId: Number(levelId),
+        fieldId: fieldId ? Number(fieldId) : {},
+        orientationId: orientationId ? Number(orientationId) : {},
+        levelId: levelId ? Number(levelId) : {},
+      },
+      orderBy: {
+        name: 'asc',
       },
       select: {
         id: true,

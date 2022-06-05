@@ -126,6 +126,24 @@ class SpaceModel {
       return space;
     }
   }
+  async getZoneSpaces(zoneId, spaceType) {
+    console.log(spaceType);
+    const zone = await prisma.spaces.findMany({
+      where: {
+        zoneId: Number(zoneId),
+        spaceType: spaceType ? spaceType : {},
+      },
+      select: {
+        id: true,
+        zoneId: true,
+        spaceType: true,
+        version: true,
+        colNumber: true,
+        rowNumber: true,
+      },
+    });
+    return zone;
+  }
   async _truncate() {
     await prisma.spaces.deleteMany({});
   }
