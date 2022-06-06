@@ -74,8 +74,8 @@ describe('photo-service.postPhoto', () => {
         newZone.id,
         'seat',
         'testVersion',
-        '1',
-        '1'
+        1,
+        1
       );
 
       // creat file
@@ -165,8 +165,8 @@ describe('photo-service.postPhoto', () => {
         newZone.id,
         'seat',
         'testVersion',
-        '1',
-        '1'
+        1,
+        1
       );
 
       // creat file
@@ -257,8 +257,8 @@ describe('photo-service.postPhoto', () => {
         newZone.id,
         'seat',
         'testVersion',
-        '1',
-        '1'
+        1,
+        1
       );
 
       // creat file
