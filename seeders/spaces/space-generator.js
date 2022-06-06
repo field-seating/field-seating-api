@@ -11,8 +11,11 @@ for (let zoneIndex = 0; zoneIndex < zoneMap.length; zoneIndex++) {
       const data = [
         zone.field,
         zone.zone,
+        zone.name,
         zone.spaceType,
         zone.version,
+        col,
+        row,
         col,
         row,
       ];

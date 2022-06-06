@@ -141,8 +141,11 @@ async function seeding() {
         zoneId,
         space.spaceType,
         space.version,
-        space.colNumber,
-        space.rowNumber
+        Number(space.colNumber),
+        Number(space.rowNumber),
+        space.name,
+        Number(space.positionColNumber),
+        Number(space.positionRowNumber)
       );
     })
   );
