@@ -240,7 +240,7 @@ class SpaceModel {
     // if no filter of spaceType
     if (!spaceType) {
       // find
-      const zone = await prisma.spaces.findMany({
+      const spaces = await prisma.spaces.findMany({
         where: {
           zoneId: Number(zoneId),
         },
@@ -256,7 +256,7 @@ class SpaceModel {
           positionRowNumber: true,
         },
       });
-      return zone;
+      return spaces;
     }
 
     // filter of spaceType
@@ -278,7 +278,7 @@ class SpaceModel {
     }
 
     // find
-    const zone = await prisma.spaces.findMany({
+    const spaces = await prisma.spaces.findMany({
       where: {
         zoneId: Number(zoneId),
         OR: spaceTypeFilter,
@@ -295,7 +295,7 @@ class SpaceModel {
         positionRowNumber: true,
       },
     });
-    return zone;
+    return spaces;
   }
   async _truncate() {
     await prisma.spaces.deleteMany({});
