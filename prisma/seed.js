@@ -1,5 +1,7 @@
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
+const logger = require('../src/config/logger');
+
 const fieldData = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
 const FieldModel = require('../src/models/field');
 const LevelModel = require('../src/models/level');
@@ -22,6 +24,8 @@ async function getSpacesData() {
 }
 
 async function seeding() {
+  logger.info('start to seed the data');
+
   const fieldModel = new FieldModel();
   const levelModel = new LevelModel();
   const orientationModel = new OrientationModel();
@@ -149,6 +153,8 @@ async function seeding() {
       );
     })
   );
+
+  logger.info('the seeding job is successful');
 }
 
 seeding();
