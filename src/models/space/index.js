@@ -35,8 +35,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           seats: {
             create: [{}],
           },
@@ -63,8 +63,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           pillars: {
             create: [{}],
           },
@@ -91,8 +91,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           groups: {
             create: [{}],
           },
@@ -237,19 +237,62 @@ class SpaceModel {
     }
   }
   async getZoneSpaces(zoneId, spaceType) {
-    console.log(spaceType);
+    // if no filter of spaceType
+    if (!spaceType) {
+      // find
+      const zone = await prisma.spaces.findMany({
+        where: {
+          zoneId: Number(zoneId),
+        },
+        select: {
+          id: true,
+          name: true,
+          zoneId: true,
+          spaceType: true,
+          version: true,
+          colNumber: true,
+          rowNumber: true,
+          positionColNumber: true,
+          positionRowNumber: true,
+        },
+      });
+      return zone;
+    }
+
+    // filter of spaceType
+    let spaceTypeFilter = undefined;
+
+    // if only one parameter
+    if (typeof spaceType === 'string') {
+      spaceTypeFilter = {
+        spaceType: spaceType,
+      };
+    }
+    // if multiple parameters
+    if (Array.isArray(spaceType)) {
+      spaceTypeFilter = spaceType.map((type) => {
+        return {
+          spaceType: type,
+        };
+      });
+    }
+
+    // find
     const zone = await prisma.spaces.findMany({
       where: {
         zoneId: Number(zoneId),
-        spaceType: spaceType ? spaceType : {},
+        OR: spaceTypeFilter,
       },
       select: {
         id: true,
+        name: true,
         zoneId: true,
         spaceType: true,
         version: true,
         colNumber: true,
         rowNumber: true,
+        positionColNumber: true,
+        positionRowNumber: true,
       },
     });
     return zone;

@@ -32,10 +32,8 @@ class FieldModel {
     }
 
     // create
-    const newField = await prisma.fields.upsert({
-      where: { name },
-      update: {},
-      create: {
+    const newField = await prisma.fields.create({
+      data: {
         name,
         img,
         levels: {
@@ -51,23 +49,6 @@ class FieldModel {
         img: true,
       },
     });
-    // create({
-    //   data: {
-    //     name,
-    //     img,
-    //     levels: {
-    //       create: levelConnect,
-    //     },
-    //     orientations: {
-    //       create: orientationConnect,
-    //     },
-    //   },
-    //   select: {
-    //     id: true,
-    //     name: true,
-    //     img: true,
-    //   },
-    // });
     return newField;
   }
   async findOrCreateField(name, img, orientationIds, levelIds) {
