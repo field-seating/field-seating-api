@@ -236,46 +236,31 @@ class SpaceModel {
       return space;
     }
   }
-  async getZoneSpaces(zoneId, spaceType) {
-    // if no filter of spaceType
-    if (!spaceType) {
-      // find
-      const spaces = await prisma.spaces.findMany({
-        where: {
-          zoneId: Number(zoneId),
-        },
-        select: {
-          id: true,
-          name: true,
-          zoneId: true,
-          spaceType: true,
-          version: true,
-          colNumber: true,
-          rowNumber: true,
-          positionColNumber: true,
-          positionRowNumber: true,
-        },
-      });
-      return spaces;
-    }
-
-    // filter of spaceType
-    let spaceTypeFilter = undefined;
-
-    // if only one parameter
-    if (typeof spaceType === 'string') {
-      spaceTypeFilter = {
-        spaceType: spaceType,
+  async getSpacesByZone(zoneId) {
+    const spaces = await prisma.spaces.findMany({
+      where: {
+        zoneId: Number(zoneId),
+      },
+      select: {
+        id: true,
+        name: true,
+        zoneId: true,
+        spaceType: true,
+        version: true,
+        colNumber: true,
+        rowNumber: true,
+        positionColNumber: true,
+        positionRowNumber: true,
+      },
+    });
+    return spaces;
+  }
+  async getSpacesByZoneAndSpaceTypes(zoneId, spaceType) {
+    const spaceTypeFilter = spaceType.map((type) => {
+      return {
+        spaceType: type,
       };
-    }
-    // if multiple parameters
-    if (Array.isArray(spaceType)) {
-      spaceTypeFilter = spaceType.map((type) => {
-        return {
-          spaceType: type,
-        };
-      });
-    }
+    });
 
     // find
     const spaces = await prisma.spaces.findMany({

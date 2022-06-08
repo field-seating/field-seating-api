@@ -1,10 +1,10 @@
 const getListErrorMap = {
   fieldNotFound: {
-    message: '該球場不存在',
+    message: '該球場無任何資訊',
     code: 'L001',
   },
   zoneNotFound: {
-    message: '該區域不存在',
+    message: '該區域無任何資訊',
     code: 'L002',
   },
 };

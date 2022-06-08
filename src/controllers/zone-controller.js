@@ -2,12 +2,18 @@ const ZoneService = require('../services/zone-service');
 const resSuccess = require('./helpers/response');
 
 const zoneController = {
-  getZoneSpaces: async (req, res, next) => {
+  getSpacesByZone: async (req, res, next) => {
     try {
       const zoneId = req.params.id;
-      const spaceType = req.query.spaceType;
+      const queryData = req.query.spaceType;
+      let spaceType = undefined;
+      if (!queryData) {
+        spaceType = null;
+      } else {
+        spaceType = [].concat(queryData);
+      }
       const zoneService = new ZoneService({ logger: req.logger });
-      const spaces = await zoneService.getZoneSpaces(zoneId, spaceType);
+      const spaces = await zoneService.getSpacesByZone(zoneId, spaceType);
       res.status(200).json(resSuccess(spaces));
     } catch (err) {
       next(err);

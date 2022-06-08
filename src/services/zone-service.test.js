@@ -2,6 +2,7 @@ const FieldModel = require('../models/field');
 const LevelModel = require('../models/level');
 const OrientationModel = require('../models/orientation');
 const ZoneModel = require('../models/zone');
+const { spaceTypeMap } = require('../models/space/constants');
 const SpaceModel = require('../models/space');
 const SeatModel = require('../models/seat');
 const PillarModel = require('../models/pillar');
@@ -31,7 +32,7 @@ const zoneService = new ZoneService({
   logger: console,
 });
 
-describe('zone-service.getZoneSpaces', () => {
+describe('zone-service.getSpacesByZone', () => {
   describe('with regular input', () => {
     it('should return desired values which spaceType is seat', async () => {
       // create space
@@ -83,7 +84,9 @@ describe('zone-service.getZoneSpaces', () => {
         3
       );
 
-      const spaceList = await zoneService.getZoneSpaces(newZone.id, 'seat');
+      const spaceList = await zoneService.getSpacesByZone(newZone.id, [
+        spaceTypeMap.seat,
+      ]);
       const expectedResult = [
         {
           name: 'rightSeat',
