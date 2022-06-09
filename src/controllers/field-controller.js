@@ -11,7 +11,7 @@ const fieldController = {
       next(err);
     }
   },
-  getOrientationsByField: async (req, res, next) => {
+  getFieldOrientations: async (req, res, next) => {
     try {
       const fieldId = req.params.id;
       const fieldService = new FieldService({ logger: req.logger });
@@ -23,7 +23,7 @@ const fieldController = {
       next(err);
     }
   },
-  getLevelsByField: async (req, res, next) => {
+  getFieldLevels: async (req, res, next) => {
     try {
       const fieldId = req.params.id;
       const fieldService = new FieldService({ logger: req.logger });
@@ -33,7 +33,7 @@ const fieldController = {
       next(err);
     }
   },
-  getZonesByField: async (req, res, next) => {
+  getFieldZones: async (req, res, next) => {
     try {
       const fieldId = req.params.id;
       const orientationId = req.query.orientation;

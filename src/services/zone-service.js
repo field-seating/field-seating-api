@@ -6,16 +6,18 @@ const getListErrorMap = require('../errors/getList-error');
 class ZoneService extends BaseService {
   async getSpacesByZone(zoneId, spaceType) {
     const spaceModel = new SpaceModel();
-    let spaces = [];
-    if (!spaceType) {
-      spaces = await spaceModel.getSpacesByZone(zoneId);
-    }
-    if (spaceType) {
-      spaces = await spaceModel.getSpacesByZoneAndSpaceTypes(zoneId, spaceType);
-    }
-    if (!spaces[0]) throw new GeneralError(getListErrorMap['zoneNotFound']);
 
-    // demo for local logger
+    async function getSpacesModelSelector(spaceType) {
+      if (!spaceType) {
+        const spaces = await spaceModel.getSpacesByZone(zoneId);
+        return spaces;
+      }
+      return await spaceModel.getSpacesByZoneAndSpaceTypes(zoneId, spaceType);
+    }
+
+    const spaces = await getSpacesModelSelector(spaceType);
+    if (!spaces[0]) throw new GeneralError(getListErrorMap['spaceNotFound']);
+
     this.logger.debug('got a SpaceList', { spaces });
     return spaces;
   }

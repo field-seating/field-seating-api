@@ -11,7 +11,6 @@ class FieldService extends BaseService {
     const fieldModel = new FieldModel();
     const fieldList = await fieldModel.getFields();
 
-    // demo for local logger
     this.logger.debug('got a fieldList', { fieldList });
     return fieldList;
   }
@@ -21,19 +20,17 @@ class FieldService extends BaseService {
       fieldId
     );
     if (!orientationList[0])
-      throw new GeneralError(getListErrorMap['fieldNotFound']);
+      throw new GeneralError(getListErrorMap['orientationNotFound']);
 
-    // demo for local logger
     this.logger.debug('got a orientationList', { orientationList });
     return orientationList;
   }
   async getLevelsByField(fieldId) {
     const levelModel = new LevelModel();
     const levelList = await levelModel.getLevelsByField(fieldId);
-    if (!levelList[0]) throw new GeneralError(getListErrorMap['fieldNotFound']);
+    if (!levelList[0]) throw new GeneralError(getListErrorMap['levelNotFound']);
 
-    // demo for local logger
-    this.logger.debug('got a orientationList', { levelList });
+    this.logger.debug('got a levelList', { levelList });
     return levelList;
   }
   async getZonesByField(fieldId, orientationId, levelId) {
@@ -43,9 +40,8 @@ class FieldService extends BaseService {
       orientationId,
       levelId
     );
-    if (!zoneList[0]) throw new GeneralError(getListErrorMap['fieldNotFound']);
+    if (!zoneList[0]) throw new GeneralError(getListErrorMap['zoneNotFound']);
 
-    // demo for local logger
     this.logger.debug('got a zoneList', { zoneList });
     return zoneList;
   }
