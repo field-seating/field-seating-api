@@ -12,7 +12,7 @@ const getListErrorMap = {
     code: 'L003',
   },
   spaceNotFound: {
-    message: '該區域無任何space資訊',
+    message: '該區域無任何空間資訊',
     code: 'L004',
   },
 };

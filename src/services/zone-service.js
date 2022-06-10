@@ -7,7 +7,7 @@ class ZoneService extends BaseService {
   async getSpacesByZone(zoneId, spaceType) {
     const spaceModel = new SpaceModel();
 
-    async function getSpacesModelSelector(spaceType) {
+    async function getSpaces(spaceType) {
       if (!spaceType) {
         const spaces = await spaceModel.getSpacesByZone(zoneId);
         return spaces;
@@ -15,8 +15,9 @@ class ZoneService extends BaseService {
       return await spaceModel.getSpacesByZoneAndSpaceTypes(zoneId, spaceType);
     }
 
-    const spaces = await getSpacesModelSelector(spaceType);
-    if (!spaces[0]) throw new GeneralError(getListErrorMap['spaceNotFound']);
+    const spaces = await getSpaces(spaceType);
+    if (spaces.length === 0)
+      throw new GeneralError(getListErrorMap['spaceNotFound']);
 
     this.logger.debug('got a SpaceList', { spaces });
     return spaces;
