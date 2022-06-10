@@ -75,6 +75,9 @@ describe('photo-service.postPhoto', () => {
         'seat',
         'testVersion',
         1,
+        1,
+        '',
+        1,
         1
       );
 
@@ -165,6 +168,9 @@ describe('photo-service.postPhoto', () => {
         newZone.id,
         'seat',
         'testVersion',
+        1,
+        1,
+        '',
         1,
         1
       );
@@ -257,6 +263,9 @@ describe('photo-service.postPhoto', () => {
         newZone.id,
         'seat',
         'testVersion',
+        1,
+        1,
+        '',
         1,
         1
       );

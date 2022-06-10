@@ -37,6 +37,22 @@ class LevelModel {
     });
     return level;
   }
+  async getLevelsByField(fieldId) {
+    const levelList = await prisma.levels.findMany({
+      where: {
+        fields: {
+          some: {
+            fieldId: Number(fieldId),
+          },
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return levelList;
+  }
   async _truncate() {
     await prisma.levels.deleteMany({});
   }

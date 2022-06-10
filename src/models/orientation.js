@@ -37,6 +37,22 @@ class OrientationModel {
     });
     return orientation;
   }
+  async getOrientationsByField(fieldId) {
+    const orientationList = await prisma.orientations.findMany({
+      where: {
+        fields: {
+          some: {
+            fieldId: Number(fieldId),
+          },
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+    return orientationList;
+  }
   async _truncate() {
     await prisma.orientations.deleteMany({});
   }

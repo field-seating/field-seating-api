@@ -35,8 +35,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           seats: {
             create: [{}],
           },
@@ -63,8 +63,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           pillars: {
             create: [{}],
           },
@@ -91,8 +91,8 @@ class SpaceModel {
           version,
           colNumber,
           rowNumber,
-          positionColNumber: positionColNumber ? positionColNumber : 0,
-          positionRowNumber: positionRowNumber ? positionRowNumber : 0,
+          positionColNumber,
+          positionRowNumber,
           groups: {
             create: [{}],
           },
@@ -235,6 +235,52 @@ class SpaceModel {
       });
       return space;
     }
+  }
+  async getSpacesByZone(zoneId) {
+    const spaces = await prisma.spaces.findMany({
+      where: {
+        zoneId: Number(zoneId),
+      },
+      select: {
+        id: true,
+        name: true,
+        zoneId: true,
+        spaceType: true,
+        version: true,
+        colNumber: true,
+        rowNumber: true,
+        positionColNumber: true,
+        positionRowNumber: true,
+      },
+    });
+    return spaces;
+  }
+  async getSpacesByZoneAndSpaceTypes(zoneId, spaceType) {
+    const spaceTypeFilter = spaceType.map((type) => {
+      return {
+        spaceType: type,
+      };
+    });
+
+    // find
+    const spaces = await prisma.spaces.findMany({
+      where: {
+        zoneId: Number(zoneId),
+        OR: spaceTypeFilter,
+      },
+      select: {
+        id: true,
+        name: true,
+        zoneId: true,
+        spaceType: true,
+        version: true,
+        colNumber: true,
+        rowNumber: true,
+        positionColNumber: true,
+        positionRowNumber: true,
+      },
+    });
+    return spaces;
   }
   async _truncate() {
     await prisma.spaces.deleteMany({});

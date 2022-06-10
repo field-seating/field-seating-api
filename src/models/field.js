@@ -113,6 +113,17 @@ class FieldModel {
     });
     return field;
   }
+  async getFields() {
+    const fieldList = await prisma.fields.findMany({
+      where: {},
+      select: {
+        id: true,
+        name: true,
+        img: true,
+      },
+    });
+    return fieldList;
+  }
   async _truncate() {
     await prisma.fields.deleteMany({});
   }
