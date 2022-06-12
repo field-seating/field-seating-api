@@ -35,7 +35,7 @@ class FieldService extends BaseService {
   }
   async getZonesByField(fieldId, orientationId, levelId) {
     const zoneModel = new ZoneModel();
-    const zoneList = await zoneModel.getZonesByField(
+    const zoneList = await zoneModel.getFieldZones(
       fieldId,
       orientationId,
       levelId
