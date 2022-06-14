@@ -8,7 +8,7 @@ class ZonesByFieldCache extends CacheBase {
   }
 
   getKeyName() {
-    return 'zones';
+    return 'zonesByField';
   }
 
   getVersion() {

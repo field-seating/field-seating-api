@@ -8,7 +8,7 @@ class SpacesByZoneCache extends CacheBase {
   }
 
   getKeyName() {
-    return 'spaces';
+    return 'spacesByZone';
   }
 
   getVersion() {

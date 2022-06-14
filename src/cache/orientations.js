@@ -8,7 +8,7 @@ class OrientationsByFieldCache extends CacheBase {
   }
 
   getKeyName() {
-    return 'orientations';
+    return 'orientationsByField';
   }
 
   getVersion() {

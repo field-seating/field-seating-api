@@ -8,7 +8,7 @@ class LevelsByFieldCache extends CacheBase {
   }
 
   getKeyName() {
-    return 'levels';
+    return 'levelsByField';
   }
 
   getVersion() {
