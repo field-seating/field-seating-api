@@ -2,14 +2,14 @@ const CacheBase = require('./base');
 const FieldService = require('../services/field-service');
 const { expiredTime, version, keyMap } = require('./constants');
 
-class FieldsCache extends CacheBase {
-  async fetch() {
-    const fieldService = new FieldService({ logger: this.logger });
-    return await fieldService.getFields();
+class levelsCache extends CacheBase {
+  async fetch(fieldId) {
+    const fieldService = new FieldService();
+    return await fieldService.getLevelsByField(fieldId);
   }
 
   getKeyName() {
-    return keyMap.fields;
+    return keyMap.levels;
   }
 
   getVersion() {
@@ -21,4 +21,4 @@ class FieldsCache extends CacheBase {
   }
 }
 
-module.exports = FieldsCache;
+module.exports = levelsCache;

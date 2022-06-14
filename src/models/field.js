@@ -114,7 +114,6 @@ class FieldModel {
     return field;
   }
   async getFields() {
-    console.log('go database');
     const fieldList = await prisma.fields.findMany({
       where: {},
       select: {
