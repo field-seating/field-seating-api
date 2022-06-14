@@ -4,7 +4,7 @@ const { expiredTime, version, keyMap } = require('./constants');
 
 class levelsCache extends CacheBase {
   async fetch(fieldId) {
-    const fieldService = new FieldService();
+    const fieldService = new FieldService({ logger: this.logger });
     return await fieldService.getLevelsByField(fieldId);
   }
 
