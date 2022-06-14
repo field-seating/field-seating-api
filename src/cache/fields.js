@@ -1,6 +1,5 @@
 const CacheBase = require('./base');
 const FieldService = require('../services/field-service');
-const { expiredTime, version, keyMap } = require('./constants');
 
 class FieldsCache extends CacheBase {
   async fetch() {
@@ -9,15 +8,15 @@ class FieldsCache extends CacheBase {
   }
 
   getKeyName() {
-    return keyMap.fields;
+    return 'fields';
   }
 
   getVersion() {
-    return version;
+    return 1;
   }
 
   getExpiredTime() {
-    return expiredTime;
+    return 60 * 60 * 24 * 30;
   }
 }
 

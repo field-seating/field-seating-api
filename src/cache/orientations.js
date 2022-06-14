@@ -1,24 +1,23 @@
 const CacheBase = require('./base');
 const FieldService = require('../services/field-service');
-const { expiredTime, version, keyMap } = require('./constants');
 
-class orientationsCache extends CacheBase {
+class OrientationsByFieldCache extends CacheBase {
   async fetch(fieldId) {
     const fieldService = new FieldService({ logger: this.logger });
     return await fieldService.getOrientationsByField(fieldId);
   }
 
   getKeyName() {
-    return keyMap.orientations;
+    return 'orientations';
   }
 
   getVersion() {
-    return version;
+    return 1;
   }
 
   getExpiredTime() {
-    return expiredTime;
+    return 60 * 60 * 24 * 30;
   }
 }
 
-module.exports = orientationsCache;
+module.exports = OrientationsByFieldCache;

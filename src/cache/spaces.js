@@ -1,24 +1,23 @@
 const CacheBase = require('./base');
 const ZoneService = require('../services/zone-service');
-const { expiredTime, version, keyMap } = require('./constants');
 
-class zonesCache extends CacheBase {
+class SpacesByZoneCache extends CacheBase {
   async fetch(zoneId, spaceType) {
     const zoneService = new ZoneService({ logger: this.logger });
     return await zoneService.getSpacesByZone(zoneId, spaceType);
   }
 
   getKeyName() {
-    return keyMap.spaces;
+    return 'spaces';
   }
 
   getVersion() {
-    return version;
+    return 1;
   }
 
   getExpiredTime() {
-    return expiredTime;
+    return 60 * 60 * 24 * 30;
   }
 }
 
-module.exports = zonesCache;
+module.exports = SpacesByZoneCache;
