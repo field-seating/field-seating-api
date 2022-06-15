@@ -72,6 +72,21 @@ class ZoneModel {
     });
     return zone;
   }
+  async getZone(id) {
+    const zone = await prisma.zones.findUnique({
+      where: {
+        id: Number(id),
+      },
+      select: {
+        id: true,
+        fieldId: true,
+        orientationId: true,
+        levelId: true,
+        name: true,
+      },
+    });
+    return zone;
+  }
   async _truncate() {
     await prisma.zones.deleteMany({});
   }

@@ -1,5 +1,6 @@
 const resSuccess = require('./helpers/response');
 const FieldsCache = require('../cache/fields');
+const FieldService = require('../services/field-service');
 const LevelsByFieldCache = require('../cache/levels-by-field');
 const OrientationsByFieldCache = require('../cache/orientations-by-field');
 const ZonesByFieldCache = require('../cache/zones-by-field');
@@ -48,6 +49,16 @@ const fieldController = {
         levelId
       );
       res.status(200).json(resSuccess(zoneList));
+    } catch (err) {
+      next(err);
+    }
+  },
+  getField: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const fieldService = new FieldService({ logger: req.logger });
+      const field = await fieldService.getField(id);
+      res.status(200).json(resSuccess(field));
     } catch (err) {
       next(err);
     }

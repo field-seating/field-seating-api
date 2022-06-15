@@ -4,17 +4,23 @@ const { spaceTypeMap } = require('./constants');
 class SpaceModel {
   constructor() {}
   async getSpace(id) {
-    const getSpace = await prisma.spaces.findUnique({
+    const space = await prisma.spaces.findUnique({
       where: {
-        id: id,
+        id: Number(id),
       },
       select: {
         id: true,
+        zoneId: true,
+        spaceType: true,
+        version: true,
         colNumber: true,
         rowNumber: true,
+        name: true,
+        positionColNumber: true,
+        positionRowNumber: true,
       },
     });
-    return getSpace;
+    return space;
   }
   async createSpace(
     zoneId,
