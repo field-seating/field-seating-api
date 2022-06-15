@@ -1,5 +1,5 @@
 const resSuccess = require('./helpers/response');
-const SpacesByZoneCache = require('../cache/spaces');
+const SpacesByZoneCache = require('../cache/spaces-by-zone');
 
 const zoneController = {
   getZoneSpaces: async (req, res, next) => {
