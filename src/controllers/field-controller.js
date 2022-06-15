@@ -1,11 +1,14 @@
-const FieldService = require('../services/field-service');
 const resSuccess = require('./helpers/response');
+const FieldsCache = require('../cache/fields');
+const LevelsByFieldCache = require('../cache/levels-by-field');
+const OrientationsByFieldCache = require('../cache/orientations-by-field');
+const ZonesByFieldCache = require('../cache/zones-by-field');
 
 const fieldController = {
   getFields: async (req, res, next) => {
     try {
-      const fieldService = new FieldService({ logger: req.logger });
-      const fieldList = await fieldService.getFields();
+      const fieldsCache = new FieldsCache({ logger: req.logger });
+      const fieldList = await fieldsCache.get();
       res.status(200).json(resSuccess(fieldList));
     } catch (err) {
       next(err);
@@ -14,10 +17,10 @@ const fieldController = {
   getFieldOrientations: async (req, res, next) => {
     try {
       const fieldId = req.params.id;
-      const fieldService = new FieldService({ logger: req.logger });
-      const orientationList = await fieldService.getOrientationsByField(
-        fieldId
-      );
+      const orientationsByFieldCache = new OrientationsByFieldCache({
+        logger: req.logger,
+      });
+      const orientationList = await orientationsByFieldCache.get(fieldId);
       res.status(200).json(resSuccess(orientationList));
     } catch (err) {
       next(err);
@@ -26,8 +29,8 @@ const fieldController = {
   getFieldLevels: async (req, res, next) => {
     try {
       const fieldId = req.params.id;
-      const fieldService = new FieldService({ logger: req.logger });
-      const levelList = await fieldService.getLevelsByField(fieldId);
+      const levelsByFieldCache = new LevelsByFieldCache({ logger: req.logger });
+      const levelList = await levelsByFieldCache.get(fieldId);
       res.status(200).json(resSuccess(levelList));
     } catch (err) {
       next(err);
@@ -38,8 +41,8 @@ const fieldController = {
       const fieldId = req.params.id;
       const orientationId = req.query.orientation;
       const levelId = req.query.level;
-      const fieldService = new FieldService({ logger: req.logger });
-      const zoneList = await fieldService.getZonesByField(
+      const zonesByFieldCache = new ZonesByFieldCache({ logger: req.logger });
+      const zoneList = await zonesByFieldCache.get(
         fieldId,
         orientationId,
         levelId
