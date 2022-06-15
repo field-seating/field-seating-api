@@ -1,5 +1,6 @@
 const resSuccess = require('./helpers/response');
 const FieldsCache = require('../cache/fields');
+const FieldService = require('../services/field-service');
 const LevelsByFieldCache = require('../cache/levels-by-field');
 const OrientationsByFieldCache = require('../cache/orientations-by-field');
 const ZonesByFieldCache = require('../cache/zones-by-field');
