@@ -1,7 +1,10 @@
+const { isNil } = require('ramda');
 const BaseService = require('./base');
 const SpaceModel = require('../models/space');
+const ZoneModel = require('../models/zone');
 const GeneralError = require('../errors/error/general-error');
-const getListErrorMap = require('../errors/getList-error');
+const getListErrorMap = require('../errors/get-list-error');
+const getDataErrorMap = require('../errors/get-data-error');
 
 class ZoneService extends BaseService {
   async getSpacesByZone(zoneId, spaceType) {
@@ -17,10 +20,18 @@ class ZoneService extends BaseService {
 
     const spaces = await getSpaces(spaceType);
     if (spaces.length === 0)
-      throw new GeneralError(getListErrorMap['spaceNotFound']);
+      throw new GeneralError(getListErrorMap['spacesNotFound']);
 
     this.logger.debug('got a SpaceList', { spaces });
     return spaces;
+  }
+  async getZone(id) {
+    const zoneModel = new ZoneModel();
+
+    const zone = await zoneModel.getZone(id);
+    if (isNil(zone)) throw new GeneralError(getDataErrorMap['zoneNotFound']);
+    this.logger.debug('got a zone', { zone });
+    return zone;
   }
 }
 

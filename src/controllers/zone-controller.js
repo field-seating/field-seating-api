@@ -14,6 +14,16 @@ const zoneController = {
       next(err);
     }
   },
+  getZone: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const zoneService = new ZoneService({ logger: req.logger });
+      const zone = await zoneService.getZone(id);
+      res.status(200).json(resSuccess(zone));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = zoneController;

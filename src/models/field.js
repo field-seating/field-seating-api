@@ -124,6 +124,19 @@ class FieldModel {
     });
     return fieldList;
   }
+  async getField(id) {
+    const field = await prisma.fields.findUnique({
+      where: {
+        id: Number(id),
+      },
+      select: {
+        id: true,
+        name: true,
+        img: true,
+      },
+    });
+    return field;
+  }
   async _truncate() {
     await prisma.fields.deleteMany({});
   }

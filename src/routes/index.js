@@ -9,6 +9,7 @@ const photo = require('./modules/photo');
 const password = require('./modules/password');
 const field = require('./modules/field');
 const zone = require('./modules/zone');
+const space = require('./modules/space');
 const { isDevelopmentBuild } = require('../context');
 const {
   passwordValidate,
@@ -36,6 +37,7 @@ router.use('/api/photos', photo);
 router.use('/api/password', password);
 router.use('/api/fields', field);
 router.use('/api/zones', zone);
+router.use('/api/spaces', space);
 router.patch('/api/verify-email', userController.verifyEmail);
 
 // 檢視email格式使用

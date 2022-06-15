@@ -49,6 +49,16 @@ const fieldController = {
       next(err);
     }
   },
+  getField: async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const fieldService = new FieldService({ logger: req.logger });
+      const field = await fieldService.getField(id);
+      res.status(200).json(resSuccess(field));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = fieldController;
