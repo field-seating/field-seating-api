@@ -52,7 +52,7 @@ class ZoneModel {
     });
     return zone;
   }
-  async getFieldZones(fieldId, orientationId, levelId) {
+  async getZonesByField(fieldId, orientationId, levelId) {
     const zone = await prisma.zones.findMany({
       where: {
         fieldId: fieldId ? Number(fieldId) : {},
