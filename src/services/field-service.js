@@ -14,6 +14,7 @@ class FieldService extends BaseService {
     const fieldList = await fieldModel.getFields();
 
     this.logger.debug('got a fieldList', { fieldList });
+
     return fieldList;
   }
   async getOrientationsByField(fieldId) {
@@ -21,19 +22,23 @@ class FieldService extends BaseService {
     const orientationList = await orientationModel.getOrientationsByField(
       fieldId
     );
+
     if (!orientationList[0])
       throw new GeneralError(getListErrorMap['orientationsNotFound']);
 
     this.logger.debug('got a orientationList', { orientationList });
+
     return orientationList;
   }
   async getLevelsByField(fieldId) {
     const levelModel = new LevelModel();
     const levelList = await levelModel.getLevelsByField(fieldId);
+
     if (!levelList[0])
       throw new GeneralError(getListErrorMap['levelsNotFound']);
 
     this.logger.debug('got a levelList', { levelList });
+
     return levelList;
   }
   async getZonesByField(fieldId, orientationId, levelId) {
@@ -43,16 +48,21 @@ class FieldService extends BaseService {
       orientationId,
       levelId
     );
+
     if (!zoneList[0]) throw new GeneralError(getListErrorMap['zonesNotFound']);
 
     this.logger.debug('got a zoneList', { zoneList });
+
     return zoneList;
   }
   async getField(id) {
     const fieldModel = new FieldModel();
     const field = await fieldModel.getField(id);
+
     if (isNil(field)) throw new GeneralError(getDataErrorMap['fieldNotFound']);
+
     this.logger.debug('got a field', { field });
+
     return field;
   }
 }

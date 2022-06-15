@@ -19,18 +19,23 @@ class ZoneService extends BaseService {
     }
 
     const spaces = await getSpaces(spaceType);
+
     if (spaces.length === 0)
       throw new GeneralError(getListErrorMap['spacesNotFound']);
 
     this.logger.debug('got a SpaceList', { spaces });
+
     return spaces;
   }
   async getZone(id) {
     const zoneModel = new ZoneModel();
 
     const zone = await zoneModel.getZone(id);
+
     if (isNil(zone)) throw new GeneralError(getDataErrorMap['zoneNotFound']);
+
     this.logger.debug('got a zone', { zone });
+
     return zone;
   }
 }

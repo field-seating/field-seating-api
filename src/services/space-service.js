@@ -9,9 +9,11 @@ class SpaceService extends BaseService {
     const zoneModel = new SpaceModel();
 
     const space = await zoneModel.getSpace(id);
+
     if (isNil(space)) throw new GeneralError(getDataErrorMap['spaceNotFound']);
 
     this.logger.debug('got a space', { space });
+
     return space;
   }
 }
