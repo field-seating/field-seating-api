@@ -1,5 +1,5 @@
 const config = {
-  assetDomain: 'field-seating.sgp1.digitaloceanspaces',
+  assetDomain: 'field-seating.sgp1.cdn.digitaloceanspaces.com',
   doEndpoint: 'sgp1.digitaloceanspaces.com',
   doBucket: 'field-seating',
   foo: 'bar_staging',
