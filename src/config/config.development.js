@@ -24,6 +24,9 @@ const config = {
     maxLevel: 'debug',
     handleExceptions: false,
   },
+  uselessLimit: {
+    limit: -1,
+  },
 };
 
 module.exports = config;

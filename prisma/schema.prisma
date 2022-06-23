@@ -195,6 +195,7 @@ model Reviews {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([photoId, useful])
+  @@unique([userId, photoId])
 }
 
 model PasswordResetTokens {

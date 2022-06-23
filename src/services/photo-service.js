@@ -2,9 +2,11 @@ const R = require('ramda');
 const BaseService = require('./base');
 const PhotoModel = require('../models/photo');
 const SpaceModel = require('../models/space');
+const ReviewModel = require('../models/review/review');
 const PrivateError = require('../errors/error/private-error');
 const GeneralError = require('../errors/error/general-error');
 const postPhotoErrorMap = require('../errors/post-photo-error');
+const getPhotoErrorMap = require('../errors/get-photo-error');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
 const { resizeImages } = require('../utils/upload-image/resize');
@@ -36,7 +38,7 @@ class PhotoService extends BaseService {
             await uploadS3(resizeFile, bucket);
           });
 
-          // creat photo
+          // create photo
           const dateTime = new Date(date);
           const path = `/${bucketMap.photos}/${file.newFilename}`;
           const photoModel = new PhotoModel();
@@ -61,6 +63,26 @@ class PhotoService extends BaseService {
       }
       throw err;
     }
+  }
+  async getPhoto(id) {
+    const photoModel = new PhotoModel();
+    const photo = await photoModel.getPhoto(id);
+
+    if (!photo) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
+
+    const reviewModel = new ReviewModel();
+    const reviewCount = await reviewModel.getReviewCountByPhoto(id);
+    console.log(reviewCount);
+    this.logger.debug('got a field', { photo });
+
+    const result = {
+      ...photo,
+      url: `https://${assetDomain}.com${photo.path}`,
+      usefulCount: reviewCount.usefulCount,
+      uselessCount: reviewCount.uselessCount,
+      netUsefulCount: reviewCount.netUsefulCount,
+    };
+    return result;
   }
 }
 

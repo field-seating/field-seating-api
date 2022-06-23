@@ -1,15 +1,14 @@
-const PhotoService = require('../services/photo-service');
+const ReviewService = require('../services/review-service');
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
-const SpaceService = require('../services/space-service');
 
-const photoController = {
+const reviewController = {
   postPhotos: async (req, res, next) => {
     try {
       const { spaceId, date } = req.body;
       const userId = getUser(req).id;
 
-      const photoService = new PhotoService({ logger: req.logger });
+      const photoService = new ReviewService({ logger: req.logger });
       const uploadInfo = await photoService.postPhotos(
         spaceId,
         req.files,
@@ -24,12 +23,11 @@ const photoController = {
   },
   getPhotosPhotos: async (req, res, next) => {
     try {
-      const photoId = req.query.start_photo;
-      console.log(photoId);
-      const photoService = new PhotoService({ logger: req.logger });
-      const startPhoto = await photoService.getPhoto(photoId);
-      const spaceService = new SpaceService({ logger: req.logger });
-      const photos = await spaceService.getPhotosBySpace(startPhoto.spaceId);
+      const id = req.params.id;
+      const sort = req.query.sort;
+      const order = req.query.order;
+      const spaceService = new ReviewService({ logger: req.logger });
+      const photos = await spaceService.getPhotosBySpace(id, sort, order);
       res.status(200).json(resSuccess(photos));
     } catch (err) {
       next(err);
@@ -37,4 +35,4 @@ const photoController = {
   },
 };
 
-module.exports = photoController;
+module.exports = reviewController;

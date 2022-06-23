@@ -1,4 +1,4 @@
-const SpaceService = require('../services/space-service');
+const SpaceService = require('../services/space-service/index');
 const resSuccess = require('./helpers/response');
 
 const spaceController = {
