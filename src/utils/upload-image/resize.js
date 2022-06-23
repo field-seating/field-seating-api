@@ -1,17 +1,17 @@
 const sharp = require('sharp');
 
-async function resizeImages(file, options, format) {
-  // to return info for upload
+async function resizeImages(file, resizeInfoList) {
   const resizeFiles = await Promise.all(
-    options.map(async (option) => {
+    resizeInfoList.map(async ({ config, filename }) => {
       const result = await sharp(file.buffer)
-        .resize(option.size)
-        .toFormat(format.format, { quality: format.quality })
+        .resize(config.resizeOption)
+        .toFormat(config.format, config.formatOption)
         .toBuffer({ resolveWithObject: true })
         .then((data) => {
-          data.filename = `${option.namePrefix}${file.newFilename}`;
+          data.filename = filename;
           return data;
         });
+
       return result;
     })
   );
