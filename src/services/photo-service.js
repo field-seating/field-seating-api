@@ -50,7 +50,7 @@ class PhotoService extends BaseService {
           );
           const data = {
             ...photo,
-            url: `https://${assetDomain}.com${photo.path}`,
+            url: `https://${assetDomain}${photo.path}`,
           };
           const result = R.omit(['path'], data);
           return result;
