@@ -35,7 +35,4 @@ const sizeMap = {
   },
 };
 
-const formatMap = {
-  jpeg90: { format: 'jpeg', quality: 90 },
-};
-module.exports = { sizeMap, formatMap };
+module.exports = { sizeMap };
