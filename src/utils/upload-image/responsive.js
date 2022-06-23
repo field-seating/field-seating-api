@@ -1,25 +1,31 @@
-const { toPairs, mergeRight, reduce, map } = require('ramda');
+const { toPairs, mergeRight, reduce, map, compose } = require('ramda');
 
-const resizeInfoShaper = ({ filename }) =>
-  map(([flag, config]) => {
-    return {
-      config,
-      filename: `${flag}/${filename}`,
-    };
-  });
+const renderResizeInfo =
+  (sizeMap) =>
+  ({ filename }) =>
+    compose(
+      map(([flag, config]) => {
+        return {
+          config,
+          filename: `${flag}/${filename}`,
+        };
+      }),
+      toPairs
+    )(sizeMap);
 
-const datasetShaper = ({ assetDomain, bucketName, filename }) =>
-  reduce((acc, [flag]) => {
-    return mergeRight(acc, {
-      [flag]: `${assetDomain}/${bucketName}/${flag}/${filename}`,
-    });
-  }, {});
-
-const renderHelper = (shaper) => (sizeMap) => {
-  return (localParams) => shaper(localParams)(toPairs(sizeMap));
-};
+const renderDataset =
+  (sizeMap) =>
+  ({ assetDomain, bucketName, filename }) =>
+    compose(
+      reduce((acc, [flag]) => {
+        return mergeRight(acc, {
+          [flag]: `${assetDomain}/${bucketName}/${flag}/${filename}`,
+        });
+      }, {}),
+      toPairs
+    )(sizeMap);
 
 module.exports = {
-  renderResizeInfo: renderHelper(resizeInfoShaper),
-  renderDataset: renderHelper(datasetShaper),
+  renderResizeInfo,
+  renderDataset,
 };
