@@ -3,7 +3,7 @@ const { map } = require('ramda');
 const context = require('../context');
 
 const bucketMap = {
-  photos: `photos`,
+  photos: 'photos',
 };
 
 const processedBucketMap = map(

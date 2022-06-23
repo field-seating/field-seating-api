@@ -15,11 +15,11 @@ const renderResizeInfo =
 
 const renderDataset =
   (sizeMap) =>
-  ({ assetDomain, bucketName, filename }) =>
+  ({ assetDomain, bucketName, path }) =>
     compose(
       reduce((acc, [flag]) => {
         return mergeRight(acc, {
-          [flag]: `${assetDomain}/${bucketName}/${flag}/${filename}`,
+          [flag]: `${assetDomain}/${bucketName}/${flag}/${path}`,
         });
       }, {}),
       toPairs

@@ -26,7 +26,7 @@ describe('renderResizeInfo', () => {
 
 describe('renderDataset', () => {
   const dataset = renderDataset(sizeMap)({
-    filename: 'foo.jpeg',
+    path: 'foo.jpeg',
     bucketName: 'staging/photos',
     assetDomain: 'https://example.cdn.com',
   });

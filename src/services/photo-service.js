@@ -55,7 +55,7 @@ class PhotoService extends BaseService {
           );
 
           const dataset = renderDataset(sizeMap.seatPhoto)({
-            filename: path,
+            path,
             bucketName: bucketMap.photos,
             assetDomain,
           });
