@@ -18,4 +18,4 @@ async function resizeImages(file, resizeInfoList) {
   return resizeFiles;
 }
 
-module.exports = resizeImages;
+module.exports = { resizeImages };

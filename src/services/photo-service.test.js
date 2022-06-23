@@ -10,7 +10,7 @@ const SeatModel = require('../models/seat');
 const UserModel = require('../models/user');
 const UserService = require('./user-service');
 const postPhotoErrorMap = require('../errors/post-photo-error');
-const resizeImages = require('../utils/upload-image/resize');
+const { resizeImages } = require('../utils/upload-image/resize');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
 jest.mock('../utils/upload-image/resize');
