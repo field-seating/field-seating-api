@@ -1,4 +1,5 @@
 const R = require('ramda');
+const { isEmpty } = require('ramda');
 const BaseService = require('./base');
 const PhotoModel = require('../models/photo');
 const SpaceModel = require('../models/space');
@@ -70,17 +71,26 @@ class PhotoService extends BaseService {
 
     if (!photo) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
 
-    const reviewModel = new ReviewModel();
-    const reviewCount = await reviewModel.getReviewCountByPhoto(id);
-    console.log(reviewCount);
     this.logger.debug('got a field', { photo });
 
+    const reviewModel = new ReviewModel();
+    const reviewCount = await reviewModel.getReviewCountByPhoto(id);
+    if (isEmpty(reviewCount)) {
+      const result = {
+        ...photo,
+        url: `https://${assetDomain}${photo.path}`,
+        usefulCount: 0,
+        uselessCount: 0,
+        netUsefulCount: 0,
+      };
+      return result;
+    }
     const result = {
       ...photo,
-      url: `https://${assetDomain}.com${photo.path}`,
-      usefulCount: reviewCount.usefulCount,
-      uselessCount: reviewCount.uselessCount,
-      netUsefulCount: reviewCount.netUsefulCount,
+      url: `https://${assetDomain}${photo.path}`,
+      usefulCount: reviewCount[0].usefulCount,
+      uselessCount: reviewCount[0].uselessCount,
+      netUsefulCount: reviewCount[0].netUsefulCount,
     };
     return result;
   }

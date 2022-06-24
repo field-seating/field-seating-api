@@ -20,7 +20,6 @@ class ReviewModel {
     return newReview;
   }
   async getReviewCountByPhoto(photoId) {
-    console.log('go');
     const photoWithReviewCount = await prisma.$queryRaw`SELECT
     Reviews.photoId,
     COUNT(if(Reviews.useful=${usefulMap.up},true,null)) AS usefulCount, 

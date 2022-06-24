@@ -55,6 +55,30 @@ class PhotoModel {
     });
     return photos;
   }
+  async getOtherPhotosBySpace(spaceId, photoId) {
+    const photos = await prisma.photos.findMany({
+      where: {
+        id: { not: photoId },
+        spaceId: Number(spaceId),
+      },
+      select: {
+        id: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        spaceId: true,
+        date: true,
+        path: true,
+      },
+      orderBy: {
+        date: 'desc',
+      },
+    });
+    return photos;
+  }
   async getPhoto(id) {
     const photo = await prisma.photos.findUnique({
       where: {

@@ -25,11 +25,14 @@ const photoController = {
   getPhotosPhotos: async (req, res, next) => {
     try {
       const photoId = req.query.start_photo;
-      console.log(photoId);
       const photoService = new PhotoService({ logger: req.logger });
       const startPhoto = await photoService.getPhoto(photoId);
       const spaceService = new SpaceService({ logger: req.logger });
-      const photos = await spaceService.getPhotosBySpace(startPhoto.spaceId);
+      const photos = await spaceService.getOtherPhotosBySpace(
+        startPhoto.spaceId,
+        startPhoto.id
+      );
+      photos.unshift(startPhoto);
       res.status(200).json(resSuccess(photos));
     } catch (err) {
       next(err);

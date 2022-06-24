@@ -34,19 +34,95 @@ class SpaceService extends BaseService {
     // combine above two data
     let photosData = await Promise.all(
       photos.map(async (photo) => {
+        let mappingResult = false;
         for (let i = 0; i < photosWithReviewCount.length; i++) {
           if (photosWithReviewCount[i].photoId === photo.id) {
-            console.log('catch');
             photo = {
               ...photo,
-              url: `https://${assetDomain}.com${photo.path}`,
+              url: `https://${assetDomain}${photo.path}`,
               usefulCount: photosWithReviewCount[i].usefulCount,
               uselessCount: photosWithReviewCount[i].uselessCount,
               netUsefulCount: photosWithReviewCount[i].netUsefulCount,
             };
-            photo = R.omit(['path'], photo);
+            mappingResult = true;
           }
         }
+        if (!mappingResult) {
+          photo = {
+            ...photo,
+            url: `https://${assetDomain}${photo.path}`,
+            usefulCount: 0,
+            uselessCount: 0,
+            netUsefulCount: 0,
+          };
+        }
+        photo = R.omit(['path'], photo);
+        return photo;
+      })
+    );
+
+    // sort and order condition
+    if (sort === sortMap.useful && order === orderMap.desc) {
+      photosData = photosData.sort(
+        (a, b) => b.netUsefulCount - a.netUsefulCount
+      );
+
+      // delete useless data
+      for (let i = photosData.length - 1; i >= 0; i--) {
+        if (photosData[i].netUsefulCount < uselessLimit.limit)
+          photosData.splice(i, 1);
+      }
+    }
+    if (sort === sortMap.useful && order === orderMap.asc) {
+      photosData = photosData.sort(
+        (a, b) => a.netUsefulCount - b.netUsefulCount
+      );
+
+      // delete useless data
+      for (let i = photosData.length - 1; i >= 0; i--) {
+        if (photosData[i].netUsefulCount < uselessLimit.limit)
+          photosData.splice(i, 1);
+      }
+    }
+    return photosData;
+  }
+  async getOtherPhotosBySpace(spaceId, photoId, sort, order) {
+    const photoModel = new PhotoModel();
+
+    // get photos by space which has review
+    const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
+      spaceId
+    );
+
+    // get photos by space
+    const photos = await photoModel.getOtherPhotosBySpace(spaceId, photoId);
+
+    // combine above two data
+    let photosData = await Promise.all(
+      photos.map(async (photo) => {
+        let mappingResult = false;
+        for (let i = 0; i < photosWithReviewCount.length; i++) {
+          if (photosWithReviewCount[i].photoId === photo.id) {
+            photo = {
+              ...photo,
+              url: `https://${assetDomain}${photo.path}`,
+              usefulCount: photosWithReviewCount[i].usefulCount,
+              uselessCount: photosWithReviewCount[i].uselessCount,
+              netUsefulCount: photosWithReviewCount[i].netUsefulCount,
+            };
+            mappingResult = true;
+          }
+        }
+        if (!mappingResult) {
+          photo = {
+            ...photo,
+            url: `https://${assetDomain}${photo.path}`,
+            usefulCount: 0,
+            uselessCount: 0,
+            netUsefulCount: 0,
+          };
+        }
+        photo = R.omit(['path'], photo);
         return photo;
       })
     );
