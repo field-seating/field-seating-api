@@ -128,13 +128,15 @@ describe('photo-service.postPhoto', () => {
         userId,
         dateTime
       );
+
       const expectedResult = [
         {
           spaceId,
         },
       ];
+
       expect(newPhoto).toMatchObject(expectedResult);
-      expect(newPhoto[0]).toHaveProperty('url');
+      expect(newPhoto[0]).toHaveProperty('dataset');
     });
   });
 

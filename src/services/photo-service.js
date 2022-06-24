@@ -11,9 +11,13 @@ const getPhotoErrorMap = require('../errors/get-photo-error');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
 const { resizeImages } = require('../utils/upload-image/resize');
-const { sizeMap, formatMap } = require('../constants/resize-constant');
 const { bucketMap } = require('../constants/upload-constant');
 const { assetDomain } = require('../config/config');
+const { sizeMap } = require('../constants/resize-constant');
+const {
+  renderDataset,
+  renderResizeInfo,
+} = require('../utils/upload-image/responsive');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -27,12 +31,14 @@ class PhotoService extends BaseService {
           // random filename
           const newFilename = await randomHashName(uniqueKey, 4);
           file.newFilename = newFilename;
+
+          const resizeInfoList = renderResizeInfo(sizeMap.seatPhoto)({
+            filename: file.newFilename,
+          });
+
           // resize to large and thumbnail
-          const resizeFiles = await resizeImages(
-            file,
-            sizeMap.seatPhoto,
-            formatMap.jpeg90
-          );
+          const resizeFiles = await resizeImages(file, resizeInfoList);
+
           // upload to s3
           const bucket = bucketMap.photos;
           resizeFiles.forEach(async (resizeFile) => {
@@ -41,19 +47,29 @@ class PhotoService extends BaseService {
 
           // create photo
           const dateTime = new Date(date);
-          const path = `/${bucketMap.photos}/${file.newFilename}`;
+          const path = file.newFilename;
           const photoModel = new PhotoModel();
+
           const photo = await photoModel.createPhoto(
             path,
             userId,
             parseInt(spaceId),
             dateTime
           );
+
+          const dataset = renderDataset(sizeMap.seatPhoto)({
+            path,
+            bucketName: bucketMap.photos,
+            assetDomain,
+          });
+
           const data = {
             ...photo,
-            url: `https://${assetDomain}${photo.path}`,
+            dataset,
           };
+
           const result = R.omit(['path'], data);
+
           return result;
         })
       );

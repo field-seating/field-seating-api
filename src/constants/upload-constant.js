@@ -1,5 +1,13 @@
+const { map } = require('ramda');
+
+const context = require('../context');
+
 const bucketMap = {
   photos: 'photos',
 };
 
-module.exports = { bucketMap };
+const processedBucketMap = map(
+  (bucketName) => `${context.getEnv()}/${bucketName}`
+)(bucketMap);
+
+module.exports = { bucketMap: processedBucketMap };
