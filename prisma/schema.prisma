@@ -191,7 +191,7 @@ model Reviews {
   userId   Int
   photo     Photos    @relation(fields: [photoId], references: [id])
   photoId   Int
-  useful    String   @db.VarChar(255)
+  useful    String?   @db.VarChar(255)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   @@index([photoId, useful])

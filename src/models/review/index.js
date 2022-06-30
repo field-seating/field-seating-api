@@ -1,5 +1,5 @@
 const prisma = require('../../config/prisma');
-const { usefulMap } = require('../../models/review/constant');
+const { usefulMap } = require('./constant');
 
 class ReviewModel {
   constructor() {}
@@ -30,6 +30,20 @@ class ReviewModel {
     group by Reviews.photoId`;
 
     return photoWithReviewCount;
+  }
+  async updateOrCreateReview(userId, photoId, useful) {
+    const review = await prisma.reviews.upsert({
+      where: { userId, photoId, useful: null },
+      update: { useful },
+      create: { userId, photoId, useful },
+      select: {
+        id: true,
+        userId: true,
+        photoId: true,
+        useful: true,
+      },
+    });
+    return review;
   }
   async _truncate() {
     await prisma.reviews.deleteMany({});
