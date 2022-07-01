@@ -31,20 +31,6 @@ class ReviewModel {
 
     return photoWithReviewCount;
   }
-  async updateOrCreateReview(userId, photoId, useful) {
-    const review = await prisma.reviews.upsert({
-      where: { userId, photoId, useful: null },
-      update: { useful },
-      create: { userId, photoId, useful },
-      select: {
-        id: true,
-        userId: true,
-        photoId: true,
-        useful: true,
-      },
-    });
-    return review;
-  }
   async _truncate() {
     await prisma.reviews.deleteMany({});
   }

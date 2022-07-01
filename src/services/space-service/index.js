@@ -86,7 +86,7 @@ class SpaceService extends BaseService {
     }
     return photosData;
   }
-  async getOtherPhotosBySpace(spaceId, photoId, sort, order) {
+  async getOtherPhotosBySpace(spaceId, photoId) {
     const photoModel = new PhotoModel();
 
     // get photos by space which has review
@@ -127,29 +127,6 @@ class SpaceService extends BaseService {
       })
     );
 
-    // sort and order condition
-    if (sort === sortMap.useful && order === orderMap.desc) {
-      photosData = photosData.sort(
-        (a, b) => b.netUsefulCount - a.netUsefulCount
-      );
-
-      // delete useless data
-      for (let i = photosData.length - 1; i >= 0; i--) {
-        if (photosData[i].netUsefulCount < uselessLimit.limit)
-          photosData.splice(i, 1);
-      }
-    }
-    if (sort === sortMap.useful && order === orderMap.asc) {
-      photosData = photosData.sort(
-        (a, b) => a.netUsefulCount - b.netUsefulCount
-      );
-
-      // delete useless data
-      for (let i = photosData.length - 1; i >= 0; i--) {
-        if (photosData[i].netUsefulCount < uselessLimit.limit)
-          photosData.splice(i, 1);
-      }
-    }
     return photosData;
   }
 }

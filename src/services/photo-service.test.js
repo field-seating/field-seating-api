@@ -24,8 +24,8 @@ afterEach(async () => {
   const levelModel = new LevelModel();
   const orientationModel = new OrientationModel();
   const zoneModel = new ZoneModel();
-  const spaceModel = new SpaceModel();
   const seatModel = new SeatModel();
+  const spaceModel = new SpaceModel();
   await photoModel._truncate();
   await seatModel._truncate();
   await spaceModel._truncate();
