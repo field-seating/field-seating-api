@@ -100,7 +100,7 @@ class PhotoModel {
     return photo;
   }
   async _truncate() {
-    await prisma.spaces.deleteMany({});
+    await prisma.photos.deleteMany({});
   }
 }
 

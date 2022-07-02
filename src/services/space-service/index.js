@@ -5,8 +5,12 @@ const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
 const GeneralError = require('../../errors/error/general-error');
 const getDataErrorMap = require('../../errors/get-data-error');
+const getPhotoErrorMap = require('../../errors/get-photo-error');
 const { sortMap, orderMap } = require('./constant');
+const { bucketMap } = require('../../constants/upload-constant');
+const { sizeMap } = require('../../constants/resize-constant');
 const { uselessLimit, assetDomain } = require('../../config/config');
+const { renderDataset } = require('../../utils/upload-image/responsive');
 
 class SpaceService extends BaseService {
   async getSpace(id) {
@@ -21,9 +25,13 @@ class SpaceService extends BaseService {
     return space;
   }
   async getPhotosBySpace(id, sort, order) {
-    const photoModel = new PhotoModel();
+    // check space exist
+    const spaceModel = new SpaceModel();
+    const space = await spaceModel.getSpace(id);
+    if (isNil(space)) throw new GeneralError(getPhotoErrorMap['spaceNotFound']);
 
     // get photos by space which has review
+    const photoModel = new PhotoModel();
     const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
       id
     );
@@ -34,12 +42,24 @@ class SpaceService extends BaseService {
     // combine above two data
     let photosData = await Promise.all(
       photos.map(async (photo) => {
+        const dataset = renderDataset(sizeMap.seatPhoto)({
+          path: photo.path,
+          bucketName: bucketMap.photos,
+          assetDomain,
+        });
+
+        const data = {
+          ...photo,
+          dataset,
+        };
+
+        const result = R.omit(['path'], data);
+
         let mappingResult = false;
         for (let i = 0; i < photosWithReviewCount.length; i++) {
           if (photosWithReviewCount[i].photoId === photo.id) {
             photo = {
-              ...photo,
-              url: `https://${assetDomain}${photo.path}`,
+              ...result,
               usefulCount: photosWithReviewCount[i].usefulCount,
               uselessCount: photosWithReviewCount[i].uselessCount,
               netUsefulCount: photosWithReviewCount[i].netUsefulCount,
@@ -49,14 +69,12 @@ class SpaceService extends BaseService {
         }
         if (!mappingResult) {
           photo = {
-            ...photo,
-            url: `https://${assetDomain}${photo.path}`,
+            ...result,
             usefulCount: 0,
             uselessCount: 0,
             netUsefulCount: 0,
           };
         }
-        photo = R.omit(['path'], photo);
         return photo;
       })
     );
@@ -87,9 +105,13 @@ class SpaceService extends BaseService {
     return photosData;
   }
   async getOtherPhotosBySpace(spaceId, photoId) {
-    const photoModel = new PhotoModel();
+    // check space exist
+    const spaceModel = new SpaceModel();
+    const space = await spaceModel.getSpace(spaceId);
+    if (isNil(space)) throw new GeneralError(getPhotoErrorMap['spaceNotFound']);
 
     // get photos by space which has review
+    const photoModel = new PhotoModel();
     const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
       spaceId
     );
@@ -100,12 +122,24 @@ class SpaceService extends BaseService {
     // combine above two data
     let photosData = await Promise.all(
       photos.map(async (photo) => {
+        const dataset = renderDataset(sizeMap.seatPhoto)({
+          path: photo.path,
+          bucketName: bucketMap.photos,
+          assetDomain,
+        });
+
+        const data = {
+          ...photo,
+          dataset,
+        };
+
+        const result = R.omit(['path'], data);
+
         let mappingResult = false;
         for (let i = 0; i < photosWithReviewCount.length; i++) {
           if (photosWithReviewCount[i].photoId === photo.id) {
             photo = {
-              ...photo,
-              url: `https://${assetDomain}${photo.path}`,
+              ...result,
               usefulCount: photosWithReviewCount[i].usefulCount,
               uselessCount: photosWithReviewCount[i].uselessCount,
               netUsefulCount: photosWithReviewCount[i].netUsefulCount,
@@ -115,14 +149,12 @@ class SpaceService extends BaseService {
         }
         if (!mappingResult) {
           photo = {
-            ...photo,
-            url: `https://${assetDomain}${photo.path}`,
+            ...result,
             usefulCount: 0,
             uselessCount: 0,
             netUsefulCount: 0,
           };
         }
-        photo = R.omit(['path'], photo);
         return photo;
       })
     );

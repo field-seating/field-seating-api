@@ -87,28 +87,39 @@ class PhotoService extends BaseService {
 
     if (!photo) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
 
-    this.logger.debug('got a field', { photo });
+    this.logger.debug('got a photo', { photo });
+
+    const dataset = renderDataset(sizeMap.seatPhoto)({
+      path: photo.path,
+      bucketName: bucketMap.photos,
+      assetDomain,
+    });
+
+    const data = {
+      ...photo,
+      dataset,
+    };
+
+    const result = R.omit(['path'], data);
 
     const reviewModel = new ReviewModel();
     const reviewCount = await reviewModel.getReviewCountByPhoto(id);
     if (isEmpty(reviewCount)) {
-      const result = {
-        ...photo,
-        url: `https://${assetDomain}${photo.path}`,
+      const photoInfo = {
+        ...result,
         usefulCount: 0,
         uselessCount: 0,
         netUsefulCount: 0,
       };
-      return result;
+      return photoInfo;
     }
-    const result = {
-      ...photo,
-      url: `https://${assetDomain}${photo.path}`,
+    const photoInfo = {
+      ...result,
       usefulCount: reviewCount[0].usefulCount,
       uselessCount: reviewCount[0].uselessCount,
       netUsefulCount: reviewCount[0].netUsefulCount,
     };
-    return result;
+    return photoInfo;
   }
 }
 
