@@ -121,6 +121,60 @@ class PhotoService extends BaseService {
     };
     return photoInfo;
   }
+  async getPhotos() {
+    // get photos
+    const photoModel = new PhotoModel();
+    const photos = await photoModel.getPhotos();
+
+    if (isEmpty(photos))
+      throw new GeneralError(getPhotoErrorMap['photosNotFound']);
+
+    this.logger.debug('got photos', { photos });
+
+    // get photos which has review
+    const photosWithReviewCount = await photoModel.getPhotosReviewCount();
+
+    // combine above two data
+    let photosData = await Promise.all(
+      photos.map(async (photo) => {
+        const dataset = renderDataset(sizeMap.seatPhoto)({
+          path: photo.path,
+          bucketName: bucketMap.photos,
+          assetDomain,
+        });
+
+        const data = {
+          ...photo,
+          dataset,
+        };
+
+        const result = R.omit(['path'], data);
+
+        let mappingResult = false;
+        for (let i = 0; i < photosWithReviewCount.length; i++) {
+          if (photosWithReviewCount[i].photoId === photo.id) {
+            photo = {
+              ...result,
+              usefulCount: photosWithReviewCount[i].usefulCount,
+              uselessCount: photosWithReviewCount[i].uselessCount,
+              netUsefulCount: photosWithReviewCount[i].netUsefulCount,
+            };
+            mappingResult = true;
+          }
+        }
+        if (!mappingResult) {
+          photo = {
+            ...result,
+            usefulCount: 0,
+            uselessCount: 0,
+            netUsefulCount: 0,
+          };
+        }
+        return photo;
+      })
+    );
+    return photosData;
+  }
 }
 
 module.exports = PhotoService;

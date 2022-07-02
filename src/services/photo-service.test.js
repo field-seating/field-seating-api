@@ -359,7 +359,7 @@ describe('photo-service.getPhoto', () => {
         newLevel.id,
         'testZone'
       );
-      const correctSpace = await spaceModel.createSpace(
+      const newSpace = await spaceModel.createSpace(
         newZone.id,
         'seat',
         'testVersion',
@@ -381,7 +381,7 @@ describe('photo-service.getPhoto', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = newUser.id;
-      const spaceId = correctSpace.id;
+      const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
       const newPhoto = await photoModel.createPhoto(
@@ -399,7 +399,6 @@ describe('photo-service.getPhoto', () => {
 
       // getPhoto
       const photo = await photoService.getPhoto(newPhoto.id);
-      console.log(photo);
       expect(photo).toMatchObject(expectedResult);
       expect(photo).toHaveProperty('netUsefulCount');
       expect(photo).toHaveProperty('dataset');
@@ -425,7 +424,7 @@ describe('photo-service.getPhoto', () => {
         newLevel.id,
         'testZone'
       );
-      const correctSpace = await spaceModel.createSpace(
+      const newSpace = await spaceModel.createSpace(
         newZone.id,
         'seat',
         'testVersion',
@@ -447,7 +446,7 @@ describe('photo-service.getPhoto', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = newUser.id;
-      const spaceId = correctSpace.id;
+      const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
       const newPhoto = await photoModel.createPhoto(
@@ -465,6 +464,119 @@ describe('photo-service.getPhoto', () => {
         },
         {
           code: getPhotoErrorMap.photoNotFound.code,
+        }
+      );
+    });
+  });
+});
+
+describe('photo-service.getPhotos', () => {
+  describe('with regular input', () => {
+    it('should return all photos data', async () => {
+      // create two space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const spaceOne = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        'rightSeat',
+        1,
+        1
+      );
+
+      const spaceTwo = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        2,
+        2,
+        'rightSeat',
+        2,
+        2
+      );
+
+      // create and verify user
+      const userService = new UserService({
+        logger: console,
+      });
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
+      await userService.verifyEmail(newUser.verificationToken);
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const userId = newUser.id;
+      const spaceOneId = spaceOne.id;
+      const spaceTwoId = spaceTwo.id;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      await photoModel.createPhoto(path, userId, spaceOneId, dateTime);
+
+      await photoModel.createPhoto(`${path}1`, userId, spaceTwoId, dateTime);
+
+      // getPhotos
+      const photos = await photoService.getPhotos();
+      expect(photos).toHaveLength(2);
+      expect(photos[0]).toHaveProperty('netUsefulCount');
+      expect(photos[0]).toHaveProperty('dataset');
+    });
+  });
+  describe('with no photos exist', () => {
+    it('should return photosNotFound error', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        'rightSeat',
+        1,
+        1
+      );
+
+      // get Photos
+      assert.rejects(
+        async () => {
+          await photoService.getPhotos();
+        },
+        {
+          code: getPhotoErrorMap.photosNotFound.code,
         }
       );
     });

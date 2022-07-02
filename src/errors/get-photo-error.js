@@ -9,6 +9,11 @@ const getPhotoErrorMap = {
     code: 'gp002',
     httpCode: 404,
   },
+  photosNotFound: {
+    message: '沒有任何照片',
+    code: 'gp003',
+    httpCode: 404,
+  },
 };
 
 module.exports = getPhotoErrorMap;

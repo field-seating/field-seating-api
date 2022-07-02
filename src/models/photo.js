@@ -99,6 +99,40 @@ class PhotoModel {
     });
     return photo;
   }
+  async getPhotos() {
+    const photos = await prisma.photos.findMany({
+      where: {},
+      select: {
+        id: true,
+        user: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        spaceId: true,
+        date: true,
+        path: true,
+      },
+      orderBy: {
+        date: 'desc',
+      },
+    });
+    return photos;
+  }
+  async getPhotosReviewCount() {
+    const photosWithReviewCount = await prisma.$queryRaw`SELECT
+    Reviews.photoId,
+    COUNT(if(Reviews.useful=${usefulMap.up},true,null)) AS usefulCount, 
+    COUNT(if(Reviews.useful=${usefulMap.down},true,null)) AS uselessCount,
+    COUNT(if(Reviews.useful=${usefulMap.up},true,null)) - COUNT(if(Reviews.useful=${usefulMap.down},true,null))  AS netUsefulCount
+    FROM Reviews
+    WHERE Reviews.photoId IN (select Photos.id FROM Photos)
+    group by photoId
+    ORDER BY netUsefulCount desc `;
+
+    return photosWithReviewCount;
+  }
   async _truncate() {
     await prisma.photos.deleteMany({});
   }
