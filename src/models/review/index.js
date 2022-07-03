@@ -31,6 +31,40 @@ class ReviewModel {
 
     return photoWithReviewCount;
   }
+  async updateReview(userId, photoId, useful) {
+    const review = await prisma.reviews.update({
+      where: {
+        userId_photoId: {
+          userId: Number(userId),
+          photoId: Number(photoId),
+        },
+      },
+      data: { useful },
+      select: {
+        id: true,
+        userId: true,
+        photoId: true,
+        useful: true,
+      },
+    });
+    return review;
+  }
+  async getReview(userId, photoId) {
+    const review = await prisma.reviews.findUnique({
+      where: {
+        userId_photoId: {
+          userId: Number(userId),
+          photoId: Number(photoId),
+        },
+      },
+      select: {
+        userId: true,
+        photoId: true,
+        useful: true,
+      },
+    });
+    return review;
+  }
   async _truncate() {
     await prisma.reviews.deleteMany({});
   }

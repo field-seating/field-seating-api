@@ -1,4 +1,6 @@
 const PhotoService = require('../services/photo-service');
+const ReviewService = require('../services/review-service');
+
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
 const SpaceService = require('../services/space-service');
@@ -47,6 +49,32 @@ const photoController = {
 
       photos.unshift(startPhoto);
       res.status(200).json(resSuccess(photos));
+    } catch (err) {
+      next(err);
+    }
+  },
+  postReview: async (req, res, next) => {
+    try {
+      const { useful } = req.body;
+      const userId = getUser(req).id;
+      const photoId = req.params.id;
+
+      const reviewService = new ReviewService({ logger: req.logger });
+      const review = await reviewService.postReview(userId, photoId, useful);
+      res.status(200).json(resSuccess(review));
+    } catch (err) {
+      next(err);
+    }
+  },
+  postUnreview: async (req, res, next) => {
+    try {
+      const { useful } = req.body;
+      const userId = getUser(req).id;
+      const photoId = req.params.id;
+
+      const reviewService = new ReviewService({ logger: req.logger });
+      const review = await reviewService.postUnreview(userId, photoId, useful);
+      res.status(200).json(resSuccess(review));
     } catch (err) {
       next(err);
     }
