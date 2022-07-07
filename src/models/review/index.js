@@ -2,7 +2,6 @@ const prisma = require('../../config/prisma');
 const { usefulMap } = require('./constant');
 
 class ReviewModel {
-  constructor() {}
   async createReview(userId, photoId, useful) {
     const newReview = await prisma.reviews.create({
       data: {

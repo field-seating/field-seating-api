@@ -1,19 +1,18 @@
 const R = require('ramda');
-const { isEmpty } = require('ramda');
+const { isNil, isEmpty } = require('ramda');
 const BaseService = require('./base');
 const PhotoModel = require('../models/photo');
 const SpaceModel = require('../models/space');
-const ReviewModel = require('../models/review/index');
 const PrivateError = require('../errors/error/private-error');
 const GeneralError = require('../errors/error/general-error');
 const postPhotoErrorMap = require('../errors/post-photo-error');
-const getPhotoErrorMap = require('../errors/get-photo-error');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
 const { resizeImages } = require('../utils/upload-image/resize');
 const { bucketMap } = require('../constants/upload-constant');
 const { assetDomain } = require('../config/config');
 const { sizeMap } = require('../constants/resize-constant');
+const { paginationLimit } = require('../constants/photo-constant');
 const {
   renderDataset,
   renderResizeInfo,
@@ -81,98 +80,80 @@ class PhotoService extends BaseService {
       throw err;
     }
   }
-  async getPhoto(id) {
-    const photoModel = new PhotoModel();
-    const photo = await photoModel.getPhoto(id);
-
-    if (!photo) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
-
-    this.logger.debug('got a photo', { photo });
-
-    const dataset = renderDataset(sizeMap.seatPhoto)({
-      path: photo.path,
-      bucketName: bucketMap.photos,
-      assetDomain,
-    });
-
-    const data = {
-      ...photo,
-      dataset,
-    };
-
-    const result = R.omit(['path'], data);
-
-    const reviewModel = new ReviewModel();
-    const reviewCount = await reviewModel.getReviewCountByPhoto(id);
-    if (isEmpty(reviewCount)) {
-      const photoInfo = {
-        ...result,
-        usefulCount: 0,
-        uselessCount: 0,
-        netUsefulCount: 0,
-      };
-      return photoInfo;
-    }
-    const photoInfo = {
-      ...result,
-      usefulCount: reviewCount[0].usefulCount,
-      uselessCount: reviewCount[0].uselessCount,
-      netUsefulCount: reviewCount[0].netUsefulCount,
-    };
-    return photoInfo;
-  }
-  async getPhotos() {
+  async getPhotos(startPhotoId, limit = paginationLimit, cursorId) {
+    let photos = [];
     // get photos
     const photoModel = new PhotoModel();
-    const photos = await photoModel.getPhotos();
+    // if no startPhoto query
+    if (isNil(startPhotoId)) {
+      photos = await photoModel.getPhotos(limit, cursorId);
+    } else {
+      // has startPhoto query
+      const photoModel = new PhotoModel();
 
-    if (isEmpty(photos))
-      throw new GeneralError(getPhotoErrorMap['photosNotFound']);
+      //get start photo
+      const startPhoto = await photoModel.getPhoto(startPhotoId);
 
-    this.logger.debug('got photos', { photos });
+      if (isNil(startPhoto)) return [];
+      //get other photos
+      const otherPhotos = await photoModel.getOtherPhotosBySpace(
+        startPhoto.spaceId,
+        startPhoto.id,
+        limit,
+        cursorId
+      );
+      // if no cursorId we need startPhoto
+      if (!cursorId) {
+        otherPhotos.data.unshift(startPhoto);
+        otherPhotos.data = otherPhotos.data.slice(0, 5);
+      }
+      photos = otherPhotos;
+    }
+
+    // if no photos data
+    if (isEmpty(photos.data)) return [];
 
     // get photos which has review
-    const photosWithReviewCount = await photoModel.getPhotosReviewCount();
+    const photosId = photos.data.map((photo) => {
+      return `${photo.id}`;
+    });
+    const photosWithReviewCount = await photoModel.getPhotosReviewCount(
+      photosId
+    );
 
     // combine above two data
-    let photosData = await Promise.all(
-      photos.map(async (photo) => {
-        const dataset = renderDataset(sizeMap.seatPhoto)({
-          path: photo.path,
-          bucketName: bucketMap.photos,
-          assetDomain,
-        });
-
-        const data = {
-          ...photo,
-          dataset,
-        };
-
-        const result = R.omit(['path'], data);
-
-        let mappingResult = false;
-        for (let i = 0; i < photosWithReviewCount.length; i++) {
-          if (photosWithReviewCount[i].photoId === photo.id) {
-            photo = {
-              ...result,
-              usefulCount: photosWithReviewCount[i].usefulCount,
-              uselessCount: photosWithReviewCount[i].uselessCount,
-              netUsefulCount: photosWithReviewCount[i].netUsefulCount,
-            };
-            mappingResult = true;
-          }
-        }
-        if (!mappingResult) {
-          photo = {
-            ...result,
-            usefulCount: 0,
-            uselessCount: 0,
-            netUsefulCount: 0,
-          };
-        }
-        return photo;
-      })
+    const photosWithReviewCountMap = R.indexBy(
+      R.prop('photoId'),
+      photosWithReviewCount
     );
+
+    let photosData = photos.data.map((photo) => {
+      const id = photo.id.toString();
+
+      // size dataset
+      const dataset = renderDataset(sizeMap.seatPhoto)({
+        path: photo.path,
+        bucketName: bucketMap.photos,
+        assetDomain,
+      });
+
+      const data = {
+        ...photo,
+        dataset,
+        usefulCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].usefulCount
+          : 0,
+        uselessCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].uselessCount
+          : 0,
+        netUsefulCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].netUsefulCount
+          : 0,
+      };
+
+      const result = R.omit(['path'], data);
+      return result;
+    });
     return photosData;
   }
 }

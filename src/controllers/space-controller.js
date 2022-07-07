@@ -1,4 +1,4 @@
-const SpaceService = require('../services/space-service/index');
+const SpaceService = require('../services/space-service');
 const resSuccess = require('./helpers/response');
 
 const spaceController = {
@@ -17,9 +17,17 @@ const spaceController = {
       const id = req.params.id;
       const sort = req.query.sort;
       const order = req.query.order;
+      const limit = req.query.limit;
+      const cursorId = req.query.cursor_id;
 
       const spaceService = new SpaceService({ logger: req.logger });
-      const photos = await spaceService.getPhotosBySpace(id, sort, order);
+      const photos = await spaceService.getPhotosBySpace(
+        id,
+        sort,
+        order,
+        limit,
+        cursorId
+      );
 
       res.status(200).json(resSuccess(photos));
     } catch (err) {

@@ -1,14 +1,14 @@
-const { isNil } = require('ramda');
+const { isNil, isEmpty } = require('ramda');
 const R = require('ramda');
 const BaseService = require('../base');
 const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
 const GeneralError = require('../../errors/error/general-error');
 const getDataErrorMap = require('../../errors/get-data-error');
-const getPhotoErrorMap = require('../../errors/get-photo-error');
 const { sortMap, orderMap } = require('./constant');
 const { bucketMap } = require('../../constants/upload-constant');
 const { sizeMap } = require('../../constants/resize-constant');
+const { paginationLimit } = require('../../constants/photo-constant');
 const { uselessLimit, assetDomain } = require('../../config/config');
 const { renderDataset } = require('../../utils/upload-image/responsive');
 
@@ -24,24 +24,50 @@ class SpaceService extends BaseService {
 
     return space;
   }
-  async getPhotosBySpace(id, sort, order) {
+  async getPhotosBySpace(
+    id,
+    sort = sortMap.date,
+    order = orderMap.desc,
+    limit = paginationLimit,
+    cursorId
+  ) {
     // check space exist
     const spaceModel = new SpaceModel();
     const space = await spaceModel.getSpace(id);
-    if (isNil(space)) throw new GeneralError(getPhotoErrorMap['spaceNotFound']);
+    if (isNil(space)) return [];
 
-    // get photos by space which has review
     const photoModel = new PhotoModel();
-    const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
-      id
-    );
 
-    // get photos by space
-    const photos = await photoModel.getPhotosBySpace(id, order);
+    // if sort by date, we limit in SQL
+    if (sort === sortMap.date) {
+      const photos = await photoModel.getPhotosBySpace(
+        id,
+        order,
+        limit,
+        cursorId
+      );
 
-    // combine above two data
-    let photosData = await Promise.all(
-      photos.map(async (photo) => {
+      // if no photos data
+      if (isEmpty(photos.data)) return [];
+
+      // get photos which has review
+      const photosId = photos.data.map((photo) => {
+        return `${photo.id}`;
+      });
+      const photosWithReviewCount = await photoModel.getPhotosReviewCount(
+        photosId
+      );
+
+      // combine above two data
+      const photosWithReviewCountMap = R.indexBy(
+        R.prop('photoId'),
+        photosWithReviewCount
+      );
+
+      let photosData = photos.data.map((photo) => {
+        const id = photo.id.toString();
+
+        // size dataset
         const dataset = renderDataset(sizeMap.seatPhoto)({
           path: photo.path,
           bucketName: bucketMap.photos,
@@ -51,32 +77,69 @@ class SpaceService extends BaseService {
         const data = {
           ...photo,
           dataset,
+          usefulCount: photosWithReviewCountMap[id]
+            ? photosWithReviewCountMap[id].usefulCount
+            : 0,
+          uselessCount: photosWithReviewCountMap[id]
+            ? photosWithReviewCountMap[id].uselessCount
+            : 0,
+          netUsefulCount: photosWithReviewCountMap[id]
+            ? photosWithReviewCountMap[id].netUsefulCount
+            : 0,
         };
 
         const result = R.omit(['path'], data);
+        return result;
+      });
+      return photosData;
+    }
 
-        let mappingResult = false;
-        for (let i = 0; i < photosWithReviewCount.length; i++) {
-          if (photosWithReviewCount[i].photoId === photo.id) {
-            photo = {
-              ...result,
-              usefulCount: photosWithReviewCount[i].usefulCount,
-              uselessCount: photosWithReviewCount[i].uselessCount,
-              netUsefulCount: photosWithReviewCount[i].netUsefulCount,
-            };
-            mappingResult = true;
-          }
-        }
-        if (!mappingResult) {
-          photo = {
-            ...result,
-            usefulCount: 0,
-            uselessCount: 0,
-            netUsefulCount: 0,
-          };
-        }
-        return photo;
-      })
+    // if sort by useful, we get all data and sort here
+    // get photos by space which has review
+    const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
+      id
+    );
+
+    const photosWithReviewCountMap = R.indexBy(
+      R.prop('photoId'),
+      photosWithReviewCount
+    );
+
+    // get photos by space
+    const photos = await photoModel.getPhotosBySpace(id, order);
+
+    // combine above two data
+    let photosData = photos.data.map((photo) => {
+      const id = photo.id.toString();
+
+      // size dataset
+      const dataset = renderDataset(sizeMap.seatPhoto)({
+        path: photo.path,
+        bucketName: bucketMap.photos,
+        assetDomain,
+      });
+
+      const data = {
+        ...photo,
+        dataset,
+        usefulCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].usefulCount
+          : 0,
+        uselessCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].uselessCount
+          : 0,
+        netUsefulCount: photosWithReviewCountMap[id]
+          ? photosWithReviewCountMap[id].netUsefulCount
+          : 0,
+      };
+
+      const result = R.omit(['path'], data);
+      return result;
+    });
+
+    // delete useless data
+    photosData = photosData.filter(
+      (photo) => photo.netUsefulCount >= uselessLimit.limit
     );
 
     // sort and order condition
@@ -84,80 +147,23 @@ class SpaceService extends BaseService {
       photosData = photosData.sort(
         (a, b) => b.netUsefulCount - a.netUsefulCount
       );
-
-      // delete useless data
-      for (let i = photosData.length - 1; i >= 0; i--) {
-        if (photosData[i].netUsefulCount < uselessLimit.limit)
-          photosData.splice(i, 1);
-      }
     }
     if (sort === sortMap.useful && order === orderMap.asc) {
       photosData = photosData.sort(
         (a, b) => a.netUsefulCount - b.netUsefulCount
       );
-
-      // delete useless data
-      for (let i = photosData.length - 1; i >= 0; i--) {
-        if (photosData[i].netUsefulCount < uselessLimit.limit)
-          photosData.splice(i, 1);
-      }
     }
-    return photosData;
-  }
-  async getOtherPhotosBySpace(spaceId, photoId) {
-    // check space exist
-    const spaceModel = new SpaceModel();
-    const space = await spaceModel.getSpace(spaceId);
-    if (isNil(space)) throw new GeneralError(getPhotoErrorMap['spaceNotFound']);
 
-    // get photos by space which has review
-    const photoModel = new PhotoModel();
-    const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
-      spaceId
-    );
+    // cursor and limit
+    // find index which the cursorId in
+    const cursorIndex = R.findIndex(R.propEq('id', cursorId))(photosData);
 
-    // get photos by space
-    const photos = await photoModel.getOtherPhotosBySpace(spaceId, photoId);
-
-    // combine above two data
-    let photosData = await Promise.all(
-      photos.map(async (photo) => {
-        const dataset = renderDataset(sizeMap.seatPhoto)({
-          path: photo.path,
-          bucketName: bucketMap.photos,
-          assetDomain,
-        });
-
-        const data = {
-          ...photo,
-          dataset,
-        };
-
-        const result = R.omit(['path'], data);
-
-        let mappingResult = false;
-        for (let i = 0; i < photosWithReviewCount.length; i++) {
-          if (photosWithReviewCount[i].photoId === photo.id) {
-            photo = {
-              ...result,
-              usefulCount: photosWithReviewCount[i].usefulCount,
-              uselessCount: photosWithReviewCount[i].uselessCount,
-              netUsefulCount: photosWithReviewCount[i].netUsefulCount,
-            };
-            mappingResult = true;
-          }
-        }
-        if (!mappingResult) {
-          photo = {
-            ...result,
-            usefulCount: 0,
-            uselessCount: 0,
-            netUsefulCount: 0,
-          };
-        }
-        return photo;
-      })
-    );
+    // if  cursorId not found
+    if (cursorIndex === -1) {
+      photosData = photosData.slice(0, limit);
+    } else {
+      photosData = photosData.slice(cursorIndex, cursorIndex + limit);
+    }
 
     return photosData;
   }
