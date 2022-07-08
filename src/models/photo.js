@@ -108,10 +108,10 @@ class PhotoModel {
     if (cursorId) {
       const photos = await prisma.photos.findMany({
         where: {
-          id: { not: photoId },
+          id: { not: Number(photoId) },
           spaceId: Number(spaceId),
         },
-        skip: 1,
+        skip: 1, // prisma set
         take: limit,
         cursor: {
           id: Number(cursorId),
@@ -139,11 +139,11 @@ class PhotoModel {
       return result;
     } else {
       const photos = await prisma.photos.findMany({
+        take: limit, // 4 will be big bug
         where: {
-          id: { not: photoId },
+          id: { not: Number(photoId) },
           spaceId: Number(spaceId),
         },
-        take: limit,
         select: {
           id: true,
           user: {
@@ -163,7 +163,8 @@ class PhotoModel {
 
       const result = {
         data: photos,
-        cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
+        // to combine start photo we need catch (length -2) index
+        cursorId: isEmpty(photos) ? null : photos[photos.length - 2].id,
       };
       return result;
     }

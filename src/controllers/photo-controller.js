@@ -26,6 +26,7 @@ const photoController = {
       const startPhotoId = req.query.start_photo;
       const cursorId = req.query.cursor_id;
       const limit = req.query.limit;
+
       // get target photo
       const photoService = new PhotoService({ logger: req.logger });
       const photos = await photoService.getPhotos(

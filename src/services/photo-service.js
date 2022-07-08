@@ -84,17 +84,18 @@ class PhotoService extends BaseService {
     let photos = [];
     // get photos
     const photoModel = new PhotoModel();
+
     // if no startPhoto query
     if (isNil(startPhotoId)) {
       photos = await photoModel.getPhotos(limit, cursorId);
     } else {
       // has startPhoto query
       const photoModel = new PhotoModel();
-
       //get start photo
       const startPhoto = await photoModel.getPhoto(startPhotoId);
 
       if (isNil(startPhoto)) return [];
+
       //get other photos
       const otherPhotos = await photoModel.getOtherPhotosBySpace(
         startPhoto.spaceId,
@@ -102,12 +103,16 @@ class PhotoService extends BaseService {
         limit,
         cursorId
       );
+
+      photos = otherPhotos;
+
       // if no cursorId we need startPhoto
       if (!cursorId) {
-        otherPhotos.data.unshift(startPhoto);
-        otherPhotos.data = otherPhotos.data.slice(0, 5);
+        let combinedPhotos = otherPhotos;
+        combinedPhotos.data.pop();
+        combinedPhotos.data.unshift(startPhoto);
+        photos = combinedPhotos;
       }
-      photos = otherPhotos;
     }
 
     // if no photos data
@@ -154,7 +159,15 @@ class PhotoService extends BaseService {
       const result = R.omit(['path'], data);
       return result;
     });
-    return photosData;
+
+    const result = {
+      data: photosData,
+      pagination: {
+        cursorId: photos.cursorId,
+      },
+    };
+
+    return result;
   }
 }
 

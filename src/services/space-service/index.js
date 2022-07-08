@@ -34,11 +34,12 @@ class SpaceService extends BaseService {
     // check space exist
     const spaceModel = new SpaceModel();
     const space = await spaceModel.getSpace(id);
+
     if (isNil(space)) return [];
 
     const photoModel = new PhotoModel();
 
-    // if sort by date, we limit in SQL
+    // **if sort by date, we limit in SQL
     if (sort === sortMap.date) {
       const photos = await photoModel.getPhotosBySpace(
         id,
@@ -91,15 +92,21 @@ class SpaceService extends BaseService {
         const result = R.omit(['path'], data);
         return result;
       });
-      return photosData;
+
+      const result = {
+        data: photosData,
+        pagination: {
+          cursorId: photos.cursorId,
+        },
+      };
+      return result;
     }
 
-    // if sort by useful, we get all data and sort here
+    // **if sort by useful, we get all data and sort here
     // get photos by space which has review
     const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
       id
     );
-
     const photosWithReviewCountMap = R.indexBy(
       R.prop('photoId'),
       photosWithReviewCount
@@ -156,16 +163,24 @@ class SpaceService extends BaseService {
 
     // cursor and limit
     // find index which the cursorId in
-    const cursorIndex = R.findIndex(R.propEq('id', cursorId))(photosData);
+    const cursorIndex = R.findIndex(R.propEq('id', Number(cursorId)))(
+      photosData
+    );
 
-    // if  cursorId not found
-    if (cursorIndex === -1) {
-      photosData = photosData.slice(0, limit);
-    } else {
-      photosData = photosData.slice(cursorIndex, cursorIndex + limit);
-    }
+    const nextCursorId = photosData[cursorIndex + limit]
+      ? photosData[cursorIndex + limit].id
+      : null;
 
-    return photosData;
+    // select data
+    photosData = photosData.slice(cursorIndex + 1, cursorIndex + limit + 1);
+
+    const result = {
+      data: photosData,
+      pagination: {
+        cursorId: nextCursorId,
+      },
+    };
+    return result;
   }
 }
 
