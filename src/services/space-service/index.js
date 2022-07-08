@@ -3,8 +3,6 @@ const R = require('ramda');
 const BaseService = require('../base');
 const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
-const GeneralError = require('../../errors/error/general-error');
-const getDataErrorMap = require('../../errors/get-data-error');
 const { sortMap, orderMap } = require('./constant');
 const { bucketMap } = require('../../constants/upload-constant');
 const { sizeMap } = require('../../constants/resize-constant');
@@ -18,7 +16,7 @@ class SpaceService extends BaseService {
 
     const space = await spaceModel.getSpace(id);
 
-    if (isNil(space)) throw new GeneralError(getDataErrorMap['spaceNotFound']);
+    if (isNil(space)) return null;
 
     this.logger.debug('got a space', { space });
 
