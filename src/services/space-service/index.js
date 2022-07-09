@@ -37,7 +37,13 @@ class SpaceService extends BaseService {
       );
 
       // if no photos data
-      if (isEmpty(photos.data)) return null;
+      if (isEmpty(photos.data))
+        return {
+          photos: [],
+          pagination: {
+            cursorId: null,
+          },
+        };
 
       // get photos which has review
       const photosIds = photos.data.map((photo) => {
@@ -57,7 +63,7 @@ class SpaceService extends BaseService {
       const photosData = combine(photos.data, photosWithReviewCountMap);
 
       const result = {
-        data: photosData,
+        photos: photosData,
         pagination: {
           cursorId: photos.cursorId,
         },
@@ -97,10 +103,20 @@ class SpaceService extends BaseService {
       R.propEq('id', Number(paginationOption.cursorId))
     )(photosData);
 
+    // if cursorId not found return null
+    if (cursorIndex === -1 && !isNil(paginationOption.cursorId)) {
+      const result = {
+        photos: [],
+        pagination: {
+          cursorId: null,
+        },
+      };
+      return result;
+    }
+
     const nextCursorId = photosData[cursorIndex + paginationOption.limit]
       ? photosData[cursorIndex + paginationOption.limit].id
       : null;
-
     // select data
     photosData = photosData.slice(
       cursorIndex + 1,
@@ -108,7 +124,7 @@ class SpaceService extends BaseService {
     );
 
     const result = {
-      data: photosData,
+      photos: photosData,
       pagination: {
         cursorId: nextCursorId,
       },

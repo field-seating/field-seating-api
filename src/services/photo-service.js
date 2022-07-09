@@ -93,7 +93,13 @@ class PhotoService extends BaseService {
       //get start photo
       const startPhoto = await photoModel.getPhoto(startPhotoId);
 
-      if (isNil(startPhoto)) return null;
+      if (isNil(startPhoto))
+        return {
+          photos: [],
+          pagination: {
+            cursorId: null,
+          },
+        };
 
       //get other photos
       const otherPhotos = await photoModel.getOtherPhotosBySpace(
@@ -113,7 +119,13 @@ class PhotoService extends BaseService {
     }
 
     // if no photos data
-    if (isEmpty(photos.data)) return null;
+    if (isEmpty(photos.data))
+      return {
+        photos: [],
+        pagination: {
+          cursorId: null,
+        },
+      };
 
     // get photos which has review
     const photosIds = photos.data.map((photo) => {
@@ -133,7 +145,7 @@ class PhotoService extends BaseService {
     const photosData = combine(photos.data, photosWithReviewCountMap);
 
     const result = {
-      data: photosData,
+      photos: photosData,
       pagination: {
         cursorId: photos.cursorId,
       },
