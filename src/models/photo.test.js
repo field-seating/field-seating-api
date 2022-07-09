@@ -144,26 +144,32 @@ describe('photo-model.getPhotos', () => {
       );
 
       // getPhotos
-      const limit = 5; // change 5 will be ok
+      const limit = 4; // change 5 will be ok
       const allLimit = 100;
 
       // get expected photos data
-      const allPhotos = await photoModel.getPhotos(allLimit);
+      const allPhotos = await photoModel.getPhotos({ limit: allLimit });
       console.log(allPhotos);
 
       // limit query photos data
-      const photos = await photoModel.getPhotos(limit);
+      const photos = await photoModel.getPhotos({ limit: limit });
       console.log(photos);
 
-      const photosSecond = await photoModel.getPhotos(limit, photos.cursorId);
+      // limit query photos data page 2
+      const photosSecond = await photoModel.getPhotos({
+        limit: limit,
+        cursorId: photos.cursorId,
+      });
       console.log(photosSecond);
 
-      const photosThird = await photoModel.getPhotos(
-        limit,
-        photosSecond.cursorId
-      );
+      // limit query photos data page 3
+      const photosThird = await photoModel.getPhotos({
+        limit: limit,
+        cursorId: photosSecond.cursorId,
+      });
       console.log(photosThird);
 
+      // check the data is disappear or not
       if (
         isEmpty(
           photos.data.filter((photo) => photo.id === allPhotos.data[2].id)

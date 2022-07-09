@@ -13,6 +13,7 @@ const postPhotoErrorMap = require('../errors/post-photo-error');
 const { resizeImages } = require('../utils/upload-image/resize');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
+const { paginationLimitMap } = require('../constants/pagination-constant');
 jest.mock('../utils/upload-image/resize');
 jest.mock('../utils/upload-image/uploadS3');
 jest.mock('../utils/upload-image/random-hash-name');
@@ -400,10 +401,21 @@ describe('photo-service.getPhotos', () => {
       await photoModel.createPhoto(`${path}1`, userId, spaceTwoId, dateTime);
 
       // getPhotos
-      const photos = await photoService.getPhotos();
-      expect(photos.data).toHaveLength(2);
-      expect(photos.data[0]).toHaveProperty('netUsefulCount');
-      expect(photos.data[0]).toHaveProperty('dataset');
+      const startPhotoId = null;
+      const limit = paginationLimitMap.photos;
+      const cursorId = null;
+      const paginationOption = {
+        limit,
+        cursorId,
+      };
+      const photos = await photoService.getPhotos(
+        startPhotoId,
+        paginationOption
+      );
+
+      expect(photos.photos).toHaveLength(2);
+      expect(photos.photos[0]).toHaveProperty('netUsefulCount');
+      expect(photos.photos[0]).toHaveProperty('dataset');
       expect(photos).toHaveProperty('pagination');
       expect(photos.pagination).toHaveProperty('cursorId');
     });
@@ -478,8 +490,15 @@ describe('photo-service.getPhotos', () => {
       // getPhotos
       const startPhotoId = photoStart.id;
       const limit = 3;
-      const cursorId = photoThree.id;
-      const photos = await photoService.getPhotos(startPhotoId, limit);
+      const cursorId = null;
+      const paginationOption = {
+        limit,
+        cursorId,
+      };
+      const photos = await photoService.getPhotos(
+        startPhotoId,
+        paginationOption
+      );
 
       const expectedResult = {
         id: startPhotoId,
@@ -487,11 +506,12 @@ describe('photo-service.getPhotos', () => {
         spaceId,
       };
       const expectedPaginationData = {
-        cursorId: cursorId,
+        cursorId: photoThree.id,
       };
-      expect(photos.data).toHaveLength(3);
-      expect(photos.data[0]).toMatchObject(expectedResult);
-      expect(photos.data[0]).toHaveProperty('dataset');
+
+      expect(photos.photos).toHaveLength(3);
+      expect(photos.photos[0]).toMatchObject(expectedResult);
+      expect(photos.photos[0]).toHaveProperty('dataset');
       expect(photos).toHaveProperty('pagination');
       expect(photos.pagination).toMatchObject(expectedPaginationData);
     });

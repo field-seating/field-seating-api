@@ -7,7 +7,8 @@ const SeatModel = require('../../models/seat');
 const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
 
-const { orderMap } = require('./constant');
+const { sortMap, orderMap } = require('./constant');
+const { paginationLimitMap } = require('../../constants/pagination-constant');
 const SpaceService = require('./index');
 const UserService = require('../user-service');
 
@@ -99,13 +100,23 @@ describe('space-service.getPhotosBySpace', () => {
       };
 
       // getSpacePhotos
+      const sort = sortMap.date;
+      const order = orderMap.desc;
+      const limit = paginationLimitMap.photos;
+      const cursorId = null;
+      const paginationOption = {
+        limit,
+        cursorId,
+      };
       const photos = await spaceService.getPhotosBySpace(
         spaceId,
-        orderMap.desc
+        sort,
+        order,
+        paginationOption
       );
-      expect(photos.data[0]).toMatchObject(expectedResult);
-      expect(photos.data[0]).toHaveProperty('netUsefulCount');
-      expect(photos.data[0]).toHaveProperty('dataset');
+      expect(photos.photos[0]).toMatchObject(expectedResult);
+      expect(photos.photos[0]).toHaveProperty('netUsefulCount');
+      expect(photos.photos[0]).toHaveProperty('dataset');
       expect(photos).toHaveProperty('pagination');
       expect(photos.pagination).toHaveProperty('cursorId');
     });
