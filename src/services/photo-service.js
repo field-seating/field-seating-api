@@ -12,11 +12,11 @@ const { resizeImages } = require('../utils/upload-image/resize');
 const { bucketMap } = require('../constants/upload-constant');
 const { assetDomain } = require('../config/config');
 const { sizeMap } = require('../constants/resize-constant');
-const { paginationLimit } = require('../constants/photo-constant');
 const {
   renderDataset,
   renderResizeInfo,
 } = require('../utils/upload-image/responsive');
+const { combine } = require('./helpers/combine-helper');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -80,34 +80,31 @@ class PhotoService extends BaseService {
       throw err;
     }
   }
-  async getPhotos(startPhotoId, limit = paginationLimit, cursorId) {
-    let photos = [];
+  async getPhotos(startPhotoId, paginationOption) {
+    let photos = null;
     // get photos
     const photoModel = new PhotoModel();
 
-    // if no startPhoto query
+    // if no startPhotoId query
     if (isNil(startPhotoId)) {
-      photos = await photoModel.getPhotos(limit, cursorId);
+      photos = await photoModel.getPhotos(paginationOption);
     } else {
       // has startPhoto query
-      const photoModel = new PhotoModel();
       //get start photo
       const startPhoto = await photoModel.getPhoto(startPhotoId);
 
-      if (isNil(startPhoto)) return [];
+      if (isNil(startPhoto)) return null;
 
       //get other photos
       const otherPhotos = await photoModel.getOtherPhotosBySpace(
         startPhoto.spaceId,
         startPhoto.id,
-        limit,
-        cursorId
+        paginationOption
       );
 
       photos = otherPhotos;
-
       // if no cursorId we need startPhoto
-      if (!cursorId) {
+      if (!paginationOption.cursorId) {
         let combinedPhotos = otherPhotos;
         combinedPhotos.data.pop();
         combinedPhotos.data.unshift(startPhoto);
@@ -116,49 +113,24 @@ class PhotoService extends BaseService {
     }
 
     // if no photos data
-    if (isEmpty(photos.data)) return [];
+    if (isEmpty(photos.data)) return null;
 
     // get photos which has review
-    const photosId = photos.data.map((photo) => {
+    const photosIds = photos.data.map((photo) => {
       return `${photo.id}`;
     });
     const photosWithReviewCount = await photoModel.getPhotosReviewCount(
-      photosId
+      photosIds
     );
 
-    // combine above two data
+    // build reviewCount map
     const photosWithReviewCountMap = R.indexBy(
       R.prop('photoId'),
       photosWithReviewCount
     );
 
-    let photosData = photos.data.map((photo) => {
-      const id = photo.id.toString();
-
-      // size dataset
-      const dataset = renderDataset(sizeMap.seatPhoto)({
-        path: photo.path,
-        bucketName: bucketMap.photos,
-        assetDomain,
-      });
-
-      const data = {
-        ...photo,
-        dataset,
-        usefulCount: photosWithReviewCountMap[id]
-          ? photosWithReviewCountMap[id].usefulCount
-          : 0,
-        uselessCount: photosWithReviewCountMap[id]
-          ? photosWithReviewCountMap[id].uselessCount
-          : 0,
-        netUsefulCount: photosWithReviewCountMap[id]
-          ? photosWithReviewCountMap[id].netUsefulCount
-          : 0,
-      };
-
-      const result = R.omit(['path'], data);
-      return result;
-    });
+    // combine above two data
+    const photosData = combine(photos.data, photosWithReviewCountMap);
 
     const result = {
       data: photosData,
@@ -166,7 +138,6 @@ class PhotoService extends BaseService {
         cursorId: photos.cursorId,
       },
     };
-
     return result;
   }
 }

@@ -1,6 +1,7 @@
 const PhotoService = require('../services/photo-service');
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
+const { paginationLimitMap } = require('../constants/pagination-constant');
 
 const photoController = {
   postPhotos: async (req, res, next) => {
@@ -26,16 +27,19 @@ const photoController = {
       const startPhotoId = req.query.start_photo;
       const cursorId = req.query.cursor_id;
       const limit = req.query.limit;
+      const paginationOption = {
+        limit: limit ? Number(limit) : paginationLimitMap.photos,
+        cursorId: cursorId ? Number(cursorId) : null,
+      };
 
       // get target photo
       const photoService = new PhotoService({ logger: req.logger });
-      const photos = await photoService.getPhotos(
+      const result = await photoService.getPhotos(
         startPhotoId,
-        limit,
-        cursorId
+        paginationOption
       );
 
-      res.status(200).json(resSuccess(photos));
+      res.status(200).json(resSuccess(result));
     } catch (err) {
       next(err);
     }
