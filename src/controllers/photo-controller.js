@@ -25,11 +25,11 @@ const photoController = {
   getPhotos: async (req, res, next) => {
     try {
       const startPhotoId = req.query.start_photo;
-      const cursorId = req.query.cursor_id;
+      // const cursorId = req.query.cursor_id;
       const limit = req.query.limit;
       const paginationOption = {
         limit: limit ? Number(limit) : paginationLimitMap.photos,
-        cursorId: cursorId ? Number(cursorId) : null,
+        cursorId: null, // cursorId ? cursorId :
       };
 
       // get target photo

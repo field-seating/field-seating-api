@@ -117,7 +117,7 @@ class PhotoModel {
         skip: 1, // prisma set
         take: limit,
         cursor: {
-          id: Number(cursorId),
+          path: cursorId,
         },
         select: {
           id: true,
@@ -137,13 +137,13 @@ class PhotoModel {
       });
       const result = {
         data: photos,
-        cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
+        // cursorId: null, isEmpty(photos) ? null : photos[photos.length - 1].id,
       };
       return result;
     }
 
     const photos = await prisma.photos.findMany({
-      take: limit,
+      take: 5,
       where: {
         id: { not: Number(photoId) },
         spaceId: Number(spaceId),
@@ -168,7 +168,7 @@ class PhotoModel {
     const result = {
       data: photos,
       // to combine start photo we need catch (length -2) index
-      cursorId: isEmpty(photos) ? null : photos[photos.length - 2].id,
+      cursorId: null, // isEmpty(photos) ? null : photos[photos.length - 2].id,
     };
     return result;
   }
@@ -215,13 +215,13 @@ class PhotoModel {
           path: true,
         },
         orderBy: {
-          date: order,
+          id: order,
         },
       });
 
       const result = {
         data: photos,
-        cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
+        cursorId: null, // isEmpty(photos) ? null : photos[photos.length - 1].id,
       };
       return result;
     }
@@ -242,14 +242,12 @@ class PhotoModel {
         date: true,
         path: true,
       },
-      orderBy: {
-        date: 'desc',
-      },
+      orderBy: [{ date: 'desc' }, { id: 'desc' }],
     });
 
     const result = {
       data: photos,
-      cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
+      cursorId: null, //isEmpty(photos) ? null : photos[photos.length - 1].id,
     };
     return result;
   }

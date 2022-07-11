@@ -20,10 +20,10 @@ const spaceController = {
       const sort = req.query.sort;
       const order = req.query.order;
       const limit = req.query.limit;
-      const cursorId = req.query.cursor_id;
+      // const cursorId = req.query.cursor_id;
       const paginationOption = {
         limit: limit ? Number(limit) : paginationLimitMap.photos,
-        cursorId: cursorId ? Number(cursorId) : null,
+        cursorId: null, // cursorId ? Number(cursorId) :
       };
 
       const spaceService = new SpaceService({ logger: req.logger });

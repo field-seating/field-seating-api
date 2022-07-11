@@ -144,7 +144,7 @@ describe('photo-model.getPhotos', () => {
       );
 
       // getPhotos
-      const limit = 4; // change 5 will be ok
+      const limit = 5; // change 5 will be ok
       const allLimit = 100;
 
       // get expected photos data
