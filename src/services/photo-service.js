@@ -16,7 +16,9 @@ const {
   renderDataset,
   renderResizeInfo,
 } = require('../utils/upload-image/responsive');
-const { combine } = require('./helpers/combine-helper');
+const {
+  renderPhotoResponse,
+} = require('./helpers/render-photo-response-helper');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -108,10 +110,19 @@ class PhotoService extends BaseService {
         paginationOption
       );
 
-      let combinedPhotos = otherPhotos;
-      combinedPhotos.data.pop();
-      combinedPhotos.data.unshift(startPhoto);
-      photos = combinedPhotos;
+      // combine photos
+      const exceedMount =
+        otherPhotos.data.length - paginationOption.limit < 0
+          ? otherPhotos.data.length
+          : -(otherPhotos.data.length - paginationOption.limit + 1);
+
+      const limitData = otherPhotos.data.slice(0, exceedMount);
+
+      const combineData = [startPhoto].concat(limitData);
+      photos = {
+        data: combineData,
+        cursorId: null,
+      };
     }
 
     // if no photos data
@@ -137,8 +148,13 @@ class PhotoService extends BaseService {
       photosWithReviewCount
     );
 
-    // combine above two data
-    const photosData = combine(photos.data, photosWithReviewCountMap);
+    // render photos response
+    const photosData = renderPhotoResponse(
+      photos.data,
+      photosWithReviewCountMap,
+      sizeMap.seatPhoto,
+      bucketMap.photos
+    );
 
     const result = {
       photos: photosData,

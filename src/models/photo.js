@@ -33,7 +33,7 @@ class PhotoModel {
 
     return photosWithReviewCount;
   }
-  async getPhotosBySpace(spaceId, order = 'desc', { limit } = {}) {
+  async getPhotosBySpace(spaceId, { order = 'desc', limit } = {}) {
     const photos = await prisma.photos.findMany({
       where: {
         spaceId: Number(spaceId),

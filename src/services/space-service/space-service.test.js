@@ -105,13 +105,13 @@ describe('space-service.getPhotosBySpace', () => {
       const limit = paginationLimitMap.photos;
       const cursorId = null;
       const paginationOption = {
+        sort,
+        order,
         limit,
         cursorId,
       };
       const photos = await spaceService.getPhotosBySpace(
         spaceId,
-        sort,
-        order,
         paginationOption
       );
       expect(photos.photos[0]).toMatchObject(expectedResult);

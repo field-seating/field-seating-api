@@ -1,7 +1,11 @@
 const { isNil } = require('ramda');
 const SpaceService = require('../services/space-service');
 const resSuccess = require('./helpers/response');
-const { paginationLimitMap } = require('../constants/pagination-constant');
+const {
+  paginationLimitMap,
+  orderMap,
+  sortMap,
+} = require('../constants/pagination-constant');
 
 const spaceController = {
   getSpace: async (req, res, next) => {
@@ -21,6 +25,8 @@ const spaceController = {
       const order = req.query.order;
       const limit = req.query.limit;
       const paginationOption = {
+        sort: sort ? sort : sortMap.date,
+        order: order ? order : orderMap.desc,
         limit: limit ? Number(limit) : paginationLimitMap.photos,
         cursorId: null,
       };
@@ -29,19 +35,19 @@ const spaceController = {
 
       // check space exist
       const space = await spaceService.getSpace(id);
-      const spaceNotExist = isNil(space);
-      let result = null;
 
-      // exist then get photos by space
-      if (!spaceNotExist) {
-        result = await spaceService.getPhotosBySpace(
+      if (isNil(space)) {
+        // if space not existed
+        res.status(200).json(resSuccess(space));
+        next();
+      } else {
+        // exist then get photos by space
+        const result = await spaceService.getPhotosBySpace(
           id,
-          sort,
-          order,
           paginationOption
         );
+        res.status(200).json(resSuccess(result));
       }
-      res.status(200).json(resSuccess(spaceNotExist ? space : result));
     } catch (err) {
       next(err);
     }

@@ -3,10 +3,15 @@ const R = require('ramda');
 const BaseService = require('../base');
 const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
-const { sortMap, orderMap } = require('./constant');
+const { sortMap } = require('./constant');
+const { countMap } = require('../review-service/constant');
 const { uselessLimit } = require('../../config/config');
-const { combine } = require('../helpers/combine-helper');
+const {
+  renderPhotoResponse,
+} = require('../helpers/render-photo-response-helper');
 const { sortHelper } = require('../helpers/sort-helper');
+const { sizeMap } = require('../../constants/resize-constant');
+const { bucketMap } = require('../../constants/upload-constant');
 
 class SpaceService extends BaseService {
   async getSpace(id) {
@@ -20,21 +25,12 @@ class SpaceService extends BaseService {
 
     return space;
   }
-  async getPhotosBySpace(
-    id,
-    sort = sortMap.date,
-    order = orderMap.desc,
-    paginationOption
-  ) {
+  async getPhotosBySpace(id, paginationOption) {
     const photoModel = new PhotoModel();
 
     // **if sort by date, we limit in SQL
-    if (sort === sortMap.date) {
-      const photos = await photoModel.getPhotosBySpace(
-        id,
-        order,
-        paginationOption
-      );
+    if (paginationOption.sort === sortMap.date) {
+      const photos = await photoModel.getPhotosBySpace(id, paginationOption);
 
       // if no photos data
       if (isEmpty(photos.data))
@@ -59,8 +55,13 @@ class SpaceService extends BaseService {
         photosWithReviewCount
       );
 
-      // combine above two data
-      const photosData = combine(photos.data, photosWithReviewCountMap);
+      // render photos response
+      const photosData = renderPhotoResponse(
+        photos.data,
+        photosWithReviewCountMap,
+        sizeMap.seatPhoto,
+        bucketMap.photos
+      );
 
       const result = {
         photos: photosData,
@@ -73,7 +74,10 @@ class SpaceService extends BaseService {
 
     // **if sort by useful, we get all data and sort here
     // get photos by space with no limit and cursor
-    const photos = await photoModel.getPhotosBySpace(id, order);
+    const photos = await photoModel.getPhotosBySpace(
+      id,
+      paginationOption.order
+    );
 
     // get photos by space which has review
     const photosWithReviewCount = await photoModel.getPhotosReviewCountBySpace(
@@ -86,8 +90,13 @@ class SpaceService extends BaseService {
       photosWithReviewCount
     );
 
-    // combine above two data
-    let photosData = combine(photos.data, photosWithReviewCountMap);
+    // render photos response
+    let photosData = renderPhotoResponse(
+      photos.data,
+      photosWithReviewCountMap,
+      sizeMap.seatPhoto,
+      bucketMap.photos
+    );
 
     // delete useless data
     photosData = photosData.filter(
@@ -95,7 +104,7 @@ class SpaceService extends BaseService {
     );
 
     // sort and order condition
-    photosData = sortHelper(photosData, order);
+    photosData = sortHelper(photosData, paginationOption.order, countMap.net);
 
     // limit
     // select data
