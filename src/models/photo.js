@@ -1,4 +1,3 @@
-const { isEmpty } = require('ramda');
 const prisma = require('../config/prisma');
 const { Prisma } = require('prisma/prisma-client');
 const { usefulMap } = require('../models/review/constant');
@@ -34,46 +33,7 @@ class PhotoModel {
 
     return photosWithReviewCount;
   }
-  async getPhotosBySpace(
-    spaceId,
-    order = 'desc',
-    { limit, cursorId = null } = {}
-  ) {
-    // have cursorId
-    if (cursorId) {
-      const photos = await prisma.photos.findMany({
-        where: {
-          spaceId: Number(spaceId),
-        },
-        skip: 1,
-        take: limit,
-        cursor: {
-          id: Number(cursorId),
-        },
-        select: {
-          id: true,
-          user: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-          spaceId: true,
-          date: true,
-          path: true,
-        },
-        orderBy: {
-          date: order,
-        },
-      });
-      const result = {
-        data: photos,
-        cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
-      };
-      return result;
-    }
-
-    // no cursorId
+  async getPhotosBySpace(spaceId, order = 'desc', { limit } = {}) {
     const photos = await prisma.photos.findMany({
       where: {
         spaceId: Number(spaceId),
@@ -98,52 +58,13 @@ class PhotoModel {
 
     const result = {
       data: photos,
-      cursorId: isEmpty(photos) ? null : photos[photos.length - 1].id,
+      cursorId: null,
     };
     return result;
   }
-  async getOtherPhotosBySpace(
-    spaceId,
-    photoId,
-    { limit, cursorId = null } = {}
-  ) {
-    // if has cursor
-    if (cursorId) {
-      const photos = await prisma.photos.findMany({
-        where: {
-          id: { not: Number(photoId) },
-          spaceId: Number(spaceId),
-        },
-        skip: 1, // prisma set
-        take: limit,
-        cursor: {
-          path: cursorId,
-        },
-        select: {
-          id: true,
-          user: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-          spaceId: true,
-          date: true,
-          path: true,
-        },
-        orderBy: {
-          date: 'desc',
-        },
-      });
-      const result = {
-        data: photos,
-        // cursorId: null, isEmpty(photos) ? null : photos[photos.length - 1].id,
-      };
-      return result;
-    }
-
+  async getOtherPhotosBySpace(spaceId, photoId, { limit } = {}) {
     const photos = await prisma.photos.findMany({
-      take: 5,
+      take: limit,
       where: {
         id: { not: Number(photoId) },
         spaceId: Number(spaceId),
@@ -167,8 +88,7 @@ class PhotoModel {
 
     const result = {
       data: photos,
-      // to combine start photo we need catch (length -2) index
-      cursorId: null, // isEmpty(photos) ? null : photos[photos.length - 2].id,
+      cursorId: null,
     };
     return result;
   }
@@ -192,41 +112,7 @@ class PhotoModel {
     });
     return photo;
   }
-  async getPhotos({ limit, cursorId = null } = {}, order = orderMap.desc) {
-    // have cursorId
-    if (cursorId) {
-      const photos = await prisma.photos.findMany({
-        where: {},
-        skip: 1,
-        take: limit,
-        cursor: {
-          id: Number(cursorId),
-        },
-        select: {
-          id: true,
-          user: {
-            select: {
-              id: true,
-              name: true,
-            },
-          },
-          spaceId: true,
-          date: true,
-          path: true,
-        },
-        orderBy: {
-          id: order,
-        },
-      });
-
-      const result = {
-        data: photos,
-        cursorId: null, // isEmpty(photos) ? null : photos[photos.length - 1].id,
-      };
-      return result;
-    }
-
-    // no cursorId
+  async getPhotos({ limit } = {}, order = orderMap.desc) {
     const photos = await prisma.photos.findMany({
       where: {},
       take: limit,
@@ -242,12 +128,12 @@ class PhotoModel {
         date: true,
         path: true,
       },
-      orderBy: [{ date: 'desc' }, { id: 'desc' }],
+      orderBy: { date: order },
     });
 
     const result = {
       data: photos,
-      cursorId: null, //isEmpty(photos) ? null : photos[photos.length - 1].id,
+      cursorId: null,
     };
     return result;
   }

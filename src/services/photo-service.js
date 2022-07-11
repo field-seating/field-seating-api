@@ -108,14 +108,10 @@ class PhotoService extends BaseService {
         paginationOption
       );
 
-      photos = otherPhotos;
-      // if no cursorId we need startPhoto
-      if (!paginationOption.cursorId) {
-        let combinedPhotos = otherPhotos;
-        combinedPhotos.data.pop();
-        combinedPhotos.data.unshift(startPhoto);
-        photos = combinedPhotos;
-      }
+      let combinedPhotos = otherPhotos;
+      combinedPhotos.data.pop();
+      combinedPhotos.data.unshift(startPhoto);
+      photos = combinedPhotos;
     }
 
     // if no photos data

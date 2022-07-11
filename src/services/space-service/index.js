@@ -97,36 +97,14 @@ class SpaceService extends BaseService {
     // sort and order condition
     photosData = sortHelper(photosData, order);
 
-    // cursor and limit
-    // find index which the cursorId in
-    const cursorIndex = R.findIndex(
-      R.propEq('id', Number(paginationOption.cursorId))
-    )(photosData);
-
-    // if cursorId not found return null
-    if (cursorIndex === -1 && !isNil(paginationOption.cursorId)) {
-      const result = {
-        photos: [],
-        pagination: {
-          cursorId: null,
-        },
-      };
-      return result;
-    }
-
-    const nextCursorId = photosData[cursorIndex + paginationOption.limit]
-      ? photosData[cursorIndex + paginationOption.limit].id
-      : null;
+    // limit
     // select data
-    photosData = photosData.slice(
-      cursorIndex + 1,
-      cursorIndex + paginationOption.limit + 1
-    );
+    photosData = photosData.slice(0, paginationOption.limit);
 
     const result = {
       photos: photosData,
       pagination: {
-        cursorId: nextCursorId,
+        cursorId: null,
       },
     };
     return result;

@@ -1,5 +1,5 @@
 const paginationLimitMap = {
-  photos: 5,
+  photos: 50,
 };
 
 module.exports = { paginationLimitMap };

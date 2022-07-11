@@ -340,7 +340,7 @@ describe('photo-service.postPhoto', () => {
 
 describe('photo-service.getPhotos', () => {
   describe('with regular input', () => {
-    it('should return all photos data and pagination', async () => {
+    it('should return all photos data', async () => {
       // create two space
       const fieldModel = new FieldModel();
       const levelModel = new LevelModel();
@@ -420,7 +420,7 @@ describe('photo-service.getPhotos', () => {
       expect(photos.pagination).toHaveProperty('cursorId');
     });
   });
-  describe('with limit and cursorId', () => {
+  describe('with limit', () => {
     it('should return right photo', async () => {
       // create space
       const fieldModel = new FieldModel();
@@ -481,7 +481,7 @@ describe('photo-service.getPhotos', () => {
         new Date('2022-04-30')
       );
 
-      const photoThree = await photoModel.createPhoto(
+      await photoModel.createPhoto(
         'photoThree',
         userId,
         spaceId,
@@ -506,7 +506,7 @@ describe('photo-service.getPhotos', () => {
         spaceId,
       };
       const expectedPaginationData = {
-        cursorId: photoThree.id,
+        cursorId: null,
       };
 
       expect(photos.photos).toHaveLength(3);
