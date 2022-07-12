@@ -4,12 +4,9 @@ const BaseService = require('../base');
 const SpaceModel = require('../../models/space');
 const PhotoModel = require('../../models/photo');
 const { sortMap } = require('./constant');
-const { countMap } = require('../review-service/constant');
 const { uselessLimit } = require('../../config/config');
-const {
-  renderPhotoResponse,
-} = require('../helpers/render-photo-response-helper');
-const { sortHelper } = require('../helpers/sort-helper');
+const renderPhotoResponse = require('../helpers/render-photo-response-helper');
+const sortHelper = require('../helpers/sort-helper');
 const { sizeMap } = require('../../constants/resize-constant');
 const { bucketMap } = require('../../constants/upload-constant');
 
@@ -104,7 +101,11 @@ class SpaceService extends BaseService {
     );
 
     // sort and order condition
-    photosData = sortHelper(photosData, paginationOption.order, countMap.net);
+    photosData = sortHelper(
+      photosData,
+      paginationOption.order,
+      'netUsefulCount'
+    );
 
     // limit
     // select data

@@ -16,9 +16,7 @@ const {
   renderDataset,
   renderResizeInfo,
 } = require('../utils/upload-image/responsive');
-const {
-  renderPhotoResponse,
-} = require('./helpers/render-photo-response-helper');
+const renderPhotoResponse = require('./helpers/render-photo-response-helper');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {

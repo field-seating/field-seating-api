@@ -2,8 +2,8 @@ const R = require('ramda');
 const { assetDomain } = require('../../config/config');
 const { renderDataset } = require('../../utils/upload-image/responsive');
 
-function renderPhotoResponse(dataList, mapData, size, bucket) {
-  const dataSetFunc = renderDataset(size);
+function renderPhotoResponse(dataList, mapData, sizeMap, bucketMap) {
+  const dataSetFunc = renderDataset(sizeMap);
 
   const combineDataList = dataList.map((data) => {
     const id = data.id.toString();
@@ -11,7 +11,7 @@ function renderPhotoResponse(dataList, mapData, size, bucket) {
     // size dataset
     const dataset = dataSetFunc({
       path: data.path,
-      bucketName: bucket,
+      bucketName: bucketMap,
       assetDomain,
     });
 
@@ -29,4 +29,4 @@ function renderPhotoResponse(dataList, mapData, size, bucket) {
   return combineDataList;
 }
 
-module.exports = { renderPhotoResponse };
+module.exports = renderPhotoResponse;

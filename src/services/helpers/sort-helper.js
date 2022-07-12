@@ -4,6 +4,4 @@ function sortHelper(data, order, prop) {
   if (order === orderMap.asc) return data.sort((a, b) => a[prop] - b[prop]);
 }
 
-module.exports = {
-  sortHelper,
-};
+module.exports = sortHelper;
