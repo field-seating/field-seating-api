@@ -24,6 +24,9 @@ const config = {
     maxLevel: 'info',
     handleExceptions: true,
   },
+  uselessLimit: {
+    limit: -100,
+  },
 };
 
 module.exports = config;

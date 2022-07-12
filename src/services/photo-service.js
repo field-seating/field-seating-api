@@ -1,4 +1,5 @@
 const R = require('ramda');
+const { isNil, isEmpty } = require('ramda');
 const BaseService = require('./base');
 const PhotoModel = require('../models/photo');
 const SpaceModel = require('../models/space');
@@ -15,6 +16,7 @@ const {
   renderDataset,
   renderResizeInfo,
 } = require('../utils/upload-image/responsive');
+const renderPhotoResponse = require('./helpers/render-photo-response-helper');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -42,7 +44,7 @@ class PhotoService extends BaseService {
             await uploadS3(resizeFile, bucket);
           });
 
-          // creat photo
+          // create photo
           const dateTime = new Date(date);
           const path = file.newFilename;
           const photoModel = new PhotoModel();
@@ -77,6 +79,88 @@ class PhotoService extends BaseService {
       }
       throw err;
     }
+  }
+  async getPhotos(startPhotoId, paginationOption) {
+    let photos = null;
+    // get photos
+    const photoModel = new PhotoModel();
+
+    // if no startPhotoId query
+    if (isNil(startPhotoId)) {
+      photos = await photoModel.getPhotos(paginationOption);
+    } else {
+      // has startPhoto query
+      //get start photo
+      const startPhoto = await photoModel.getPhoto(startPhotoId);
+
+      if (isNil(startPhoto))
+        return {
+          photos: [],
+          pagination: {
+            cursorId: null,
+          },
+        };
+
+      //get other photos
+      const otherPhotos = await photoModel.getOtherPhotosBySpace(
+        startPhoto.spaceId,
+        startPhoto.id,
+        paginationOption
+      );
+
+      // combine photos
+      const exceedMount =
+        otherPhotos.data.length - paginationOption.limit < 0
+          ? otherPhotos.data.length
+          : -(otherPhotos.data.length - paginationOption.limit + 1);
+
+      const limitData = otherPhotos.data.slice(0, exceedMount);
+
+      const combineData = [startPhoto].concat(limitData);
+      photos = {
+        data: combineData,
+        cursorId: null,
+      };
+    }
+
+    // if no photos data
+    if (isEmpty(photos.data))
+      return {
+        photos: [],
+        pagination: {
+          cursorId: null,
+        },
+      };
+
+    // get photos which has review
+    const photosIds = photos.data.map((photo) => {
+      return `${photo.id}`;
+    });
+    const photosWithReviewCount = await photoModel.getPhotosReviewCount(
+      photosIds
+    );
+
+    // build reviewCount map
+    const photosWithReviewCountMap = R.indexBy(
+      R.prop('photoId'),
+      photosWithReviewCount
+    );
+
+    // render photos response
+    const photosData = renderPhotoResponse(
+      photos.data,
+      photosWithReviewCountMap,
+      sizeMap.seatPhoto,
+      bucketMap.photos
+    );
+
+    const result = {
+      photos: photosData,
+      pagination: {
+        cursorId: photos.cursorId,
+      },
+    };
+    return result;
   }
 }
 

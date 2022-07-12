@@ -13,6 +13,7 @@ const postPhotoErrorMap = require('../errors/post-photo-error');
 const { resizeImages } = require('../utils/upload-image/resize');
 const { uploadS3 } = require('../utils/upload-image/uploadS3');
 const { randomHashName } = require('../utils/upload-image/random-hash-name');
+const { paginationLimitMap } = require('../constants/pagination-constant');
 jest.mock('../utils/upload-image/resize');
 jest.mock('../utils/upload-image/uploadS3');
 jest.mock('../utils/upload-image/random-hash-name');
@@ -24,8 +25,8 @@ afterEach(async () => {
   const levelModel = new LevelModel();
   const orientationModel = new OrientationModel();
   const zoneModel = new ZoneModel();
-  const spaceModel = new SpaceModel();
   const seatModel = new SeatModel();
+  const spaceModel = new SpaceModel();
   await photoModel._truncate();
   await seatModel._truncate();
   await spaceModel._truncate();
@@ -333,6 +334,186 @@ describe('photo-service.postPhoto', () => {
           code: postPhotoErrorMap.duplicatePath.code,
         }
       );
+    });
+  });
+});
+
+describe('photo-service.getPhotos', () => {
+  describe('with regular input', () => {
+    it('should return all photos data', async () => {
+      // create two space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const spaceOne = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        'rightSeat',
+        1,
+        1
+      );
+
+      const spaceTwo = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        2,
+        2,
+        'rightSeat',
+        2,
+        2
+      );
+
+      // create and verify user
+      const userService = new UserService({
+        logger: console,
+      });
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
+      await userService.verifyEmail(newUser.verificationToken);
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const userId = newUser.id;
+      const spaceOneId = spaceOne.id;
+      const spaceTwoId = spaceTwo.id;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      await photoModel.createPhoto(path, userId, spaceOneId, dateTime);
+
+      await photoModel.createPhoto(`${path}1`, userId, spaceTwoId, dateTime);
+
+      // getPhotos
+      const startPhotoId = null;
+      const limit = paginationLimitMap.photos;
+      const cursorId = null;
+      const paginationOption = {
+        limit,
+        cursorId,
+      };
+      const photos = await photoService.getPhotos(
+        startPhotoId,
+        paginationOption
+      );
+
+      expect(photos.photos).toHaveLength(2);
+      expect(photos.photos[0]).toHaveProperty('netUsefulCount');
+      expect(photos.photos[0]).toHaveProperty('dataset');
+      expect(photos).toHaveProperty('pagination');
+      expect(photos.pagination).toHaveProperty('cursorId');
+    });
+  });
+  describe('with limit', () => {
+    it('should return right photo', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        'rightSeat',
+        1,
+        1
+      );
+
+      // create and verify user
+      const userService = new UserService({
+        logger: console,
+      });
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
+      await userService.verifyEmail(newUser.verificationToken);
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const userId = newUser.id;
+      const spaceId = newSpace.id;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      await photoModel.createPhoto(path, userId, spaceId, dateTime);
+
+      const photoStart = await photoModel.createPhoto(
+        'starPhoto',
+        userId,
+        spaceId,
+        new Date('2022-06-30')
+      );
+
+      await photoModel.createPhoto(
+        'photoTwo',
+        userId,
+        spaceId,
+        new Date('2022-04-30')
+      );
+
+      await photoModel.createPhoto(
+        'photoThree',
+        userId,
+        spaceId,
+        new Date('2022-05-30')
+      );
+      // getPhotos
+      const startPhotoId = photoStart.id;
+      const limit = 3;
+      const cursorId = null;
+      const paginationOption = {
+        limit,
+        cursorId,
+      };
+      const photos = await photoService.getPhotos(
+        startPhotoId,
+        paginationOption
+      );
+
+      const expectedResult = {
+        id: startPhotoId,
+        user: { id: newUser.id, name: newUser.name },
+        spaceId,
+      };
+      const expectedPaginationData = {
+        cursorId: null,
+      };
+
+      expect(photos.photos).toHaveLength(3);
+      expect(photos.photos[0]).toMatchObject(expectedResult);
+      expect(photos.photos[0]).toHaveProperty('dataset');
+      expect(photos).toHaveProperty('pagination');
+      expect(photos.pagination).toMatchObject(expectedPaginationData);
     });
   });
 });
