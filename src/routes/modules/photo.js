@@ -5,6 +5,8 @@ const { authenticated } = require('../../middleware/auth');
 
 const router = express.Router();
 
+router.post('/:id/reviews', authenticated, photoController.postReview);
+router.post('/:id/unreviews', authenticated, photoController.postUnreview);
 router.get('/', photoController.getPhotos);
 router.post('/', authenticated, uploadImages, photoController.postPhotos);
 
