@@ -24,7 +24,13 @@ class SpaceModel {
             name: true,
             levelId: true,
             orientationId: true,
-            field: true,
+            field: {
+              select: {
+                id: true,
+                name: true,
+                img: true,
+              },
+            },
           },
         },
       },
