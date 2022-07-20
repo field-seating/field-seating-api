@@ -18,6 +18,21 @@ class SpaceModel {
         name: true,
         positionColNumber: true,
         positionRowNumber: true,
+        zone: {
+          select: {
+            id: true,
+            name: true,
+            levelId: true,
+            orientationId: true,
+            field: {
+              select: {
+                id: true,
+                name: true,
+                img: true,
+              },
+            },
+          },
+        },
       },
     });
     return space;
