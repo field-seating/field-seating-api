@@ -19,6 +19,10 @@ const postPhotoErrorMap = {
     message: 'Path已經存在',
     code: 'p005',
   },
+  exceedLimitError: {
+    message: '您已超出單日上傳限額',
+    code: 'p006',
+  },
 };
 
 module.exports = postPhotoErrorMap;

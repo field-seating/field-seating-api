@@ -17,6 +17,9 @@ const {
   renderResizeInfo,
 } = require('../utils/upload-image/responsive');
 const renderPhotoResponse = require('./helpers/render-photo-response-helper');
+const rateLimiterHelper = require('../utils/rate-limiter');
+const { postPhotoRateLimit } = require('../config/config');
+const rateLimiterErrorMap = require('../errors/rate-limiter-error');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -24,7 +27,9 @@ class PhotoService extends BaseService {
     const spaceModel = new SpaceModel();
     const spaceCheck = await spaceModel.getSpace(parseInt(spaceId));
     if (!spaceCheck) throw new GeneralError(postPhotoErrorMap['wrongSpaceId']);
-    try {
+
+    // upload function
+    async function upload() {
       const uploadInfo = await Promise.all(
         files.map(async (file) => {
           // random filename
@@ -73,9 +78,26 @@ class PhotoService extends BaseService {
         })
       );
       return uploadInfo;
+    }
+
+    // rate limiter helper
+    const withRateLimit = rateLimiterHelper({
+      windowSize: postPhotoRateLimit.windowSize,
+      limit: postPhotoRateLimit.limit,
+      key: `postPhotosService:${userId}`,
+    });
+
+    try {
+      //upload with rate limit
+      const info = await withRateLimit(upload)();
+      this.logger.info('post photo', { info });
+      return info;
     } catch (err) {
       if (err.code === 'P2002' && err.meta.target === 'Photos_path_key') {
         throw new PrivateError(postPhotoErrorMap['duplicatePath']);
+      }
+      if (err.code === rateLimiterErrorMap.exceedLimit.code) {
+        throw new GeneralError(postPhotoErrorMap.exceedLimitError);
       }
       throw err;
     }
