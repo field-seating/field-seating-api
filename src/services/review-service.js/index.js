@@ -1,18 +1,18 @@
 const { isEmpty, isNil } = require('ramda');
-const BaseService = require('./base');
-const ReviewModel = require('../models/review/index');
-const PhotoModel = require('../models/photo');
+const BaseService = require('../base');
+const ReviewModel = require('../../models/review/index');
+const PhotoModel = require('../../models/photo');
 
-const GeneralError = require('../errors/error/general-error');
-const getPhotoErrorMap = require('../errors/get-photo-error');
-const reviewErrorMap = require('../errors//review-error');
+const GeneralError = require('../../errors/error/general-error');
+const getDataErrorMap = require('../../errors/get-data-error');
+const reviewErrorMap = require('../../errors/review-error');
 
 class ReviewService extends BaseService {
   async postReview(userId, photoId, useful) {
     // check space exist
     const photoModel = new PhotoModel();
     const photoCheck = await photoModel.getPhoto(photoId);
-    if (!photoCheck) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
+    if (!photoCheck) throw new GeneralError(getDataErrorMap['photoNotFound']);
 
     // check existed review
     const reviewModel = new ReviewModel();
@@ -46,7 +46,7 @@ class ReviewService extends BaseService {
     // check space exist
     const photoModel = new PhotoModel();
     const photoCheck = await photoModel.getPhoto(photoId);
-    if (!photoCheck) throw new GeneralError(getPhotoErrorMap['photoNotFound']);
+    if (!photoCheck) throw new GeneralError(getDataErrorMap['photoNotFound']);
 
     // check existed review
     const reviewModel = new ReviewModel();

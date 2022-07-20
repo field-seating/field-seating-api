@@ -1,5 +1,5 @@
 const PhotoService = require('../services/photo-service');
-const ReviewService = require('../services/review-service');
+const ReviewService = require('../services/review-service.js/index.js');
 
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
@@ -47,12 +47,13 @@ const photoController = {
   },
   postReview: async (req, res, next) => {
     try {
-      const { useful } = req.body;
+      const useful = req.body.useful;
       const userId = getUser(req).id;
       const photoId = req.params.id;
 
       const reviewService = new ReviewService({ logger: req.logger });
       const review = await reviewService.postReview(userId, photoId, useful);
+
       res.status(200).json(resSuccess(review));
     } catch (err) {
       next(err);
@@ -60,12 +61,13 @@ const photoController = {
   },
   postUnreview: async (req, res, next) => {
     try {
-      const { useful } = req.body;
+      const useful = req.body.useful;
       const userId = getUser(req).id;
       const photoId = req.params.id;
 
       const reviewService = new ReviewService({ logger: req.logger });
       const review = await reviewService.postUnreview(userId, photoId, useful);
+
       res.status(200).json(resSuccess(review));
     } catch (err) {
       next(err);

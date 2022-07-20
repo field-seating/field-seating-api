@@ -14,6 +14,11 @@ const getDataErrorMap = {
     code: 'D003',
     httpCode: 404,
   },
+  photoNotFound: {
+    message: '該照片並不存在',
+    code: 'D004',
+    httpCode: 404,
+  },
 };
 
 module.exports = getDataErrorMap;
