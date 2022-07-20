@@ -27,6 +27,10 @@ const config = {
   uselessLimit: {
     limit: -100,
   },
+  postPhotoRateLimit: {
+    windowSize: 60 * 60 * 24,
+    limit: 50,
+  },
 };
 
 module.exports = config;
