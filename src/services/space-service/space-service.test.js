@@ -122,3 +122,42 @@ describe('space-service.getPhotosBySpace', () => {
     });
   });
 });
+
+describe('space-service.getSpace', () => {
+  it('should return zone and field info', async () => {
+    // create space
+    const fieldModel = new FieldModel();
+    const levelModel = new LevelModel();
+    const orientationModel = new OrientationModel();
+    const zoneModel = new ZoneModel();
+    const spaceModel = new SpaceModel();
+
+    const newField = await fieldModel.createField('testField', '');
+    const newLevel = await levelModel.createLevel('testLevel');
+    const newOrientation = await orientationModel.createOrientation(
+      'testOrientation'
+    );
+    const newZone = await zoneModel.createZone(
+      newField.id,
+      newOrientation.id,
+      newLevel.id,
+      'testZone'
+    );
+    const newSpace = await spaceModel.createSpace(
+      newZone.id,
+      'seat',
+      'testVersion',
+      1,
+      1,
+      'rightSeat',
+      1,
+      1
+    );
+    const space = await spaceService.getSpace(newSpace.id);
+
+    console.log('space', space);
+
+    expect(space.zone.id).toBe(newZone.id);
+    expect(space.zone.field.id).toBe(newField.id);
+  });
+});
