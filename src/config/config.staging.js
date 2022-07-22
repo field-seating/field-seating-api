@@ -1,9 +1,15 @@
 const config = {
+  mailSender: {
+    general: {
+      email: 'op@staging.fieldseating.com',
+      name: '球場坐座團隊',
+    },
+  },
   assetDomain: 'https://field-seating.sgp1.cdn.digitaloceanspaces.com',
   doEndpoint: 'sgp1.digitaloceanspaces.com',
   doBucket: 'field-seating',
   foo: 'bar_staging',
-  baseUrl: 'https://fieldseating.wendellatman.com',
+  baseUrl: 'https://staging.fieldseating.com',
   verifyEmail: {
     rateLimit: {
       windowSize: 60,

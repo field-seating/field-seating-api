@@ -2,7 +2,7 @@ const SibApiV3Sdk = require('sib-api-v3-sdk');
 var fs = require('fs');
 var path = require('path');
 const Handlebars = require('handlebars');
-const { sibKey } = require('../../config/config');
+const { sibKey, mailSender } = require('../../config/config');
 const PrivateError = require('../../errors/error/private-error');
 const sendEmailErrorMap = require('../../errors/send-email-error');
 const R = require('ramda');
@@ -33,7 +33,7 @@ async function sendEmail(templateName, meta, data) {
   const sib = new SibApiV3Sdk.TransactionalEmailsApi();
   try {
     const sendInfo = await sib.sendTransacEmail({
-      sender: { email: 'field-seating@gmail.com', name: '球場坐座Team' },
+      sender: mailSender.general,
       subject: meta.subject,
       htmlContent: result,
       messageVersions: [
