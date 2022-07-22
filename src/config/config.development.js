@@ -2,7 +2,7 @@ const config = {
   assetDomain: 'https://field-seating.sgp1.cdn.digitaloceanspaces.com',
   doEndpoint: 'sgp1.digitaloceanspaces.com',
   doBucket: 'field-seating',
-  baseUrl: 'https://fieldseating.wendellatman.com',
+  baseUrl: 'https://staging.fieldseating.com',
   verifyEmail: {
     rateLimit: {
       windowSize: 60,
