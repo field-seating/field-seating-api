@@ -98,34 +98,6 @@ async function seeding() {
 
   // create zone
   let fieldMap = new Map();
-  await Promise.all(
-    fieldData.zones.map(async (zone) => {
-      // if fieldId never get
-      if (!fieldMap.has(zone.field)) {
-        const field = await fieldModel.getFieldByName(zone.field);
-        fieldMap.set(zone.field, field.id);
-      }
-      const fieldId = fieldMap.get(zone.field);
-
-      // if orientationId never get
-      if (!orientationMap.has(zone.orientation)) {
-        const orientation = await orientationModel.getOrientationByName(
-          zone.orientation
-        );
-        orientationMap.set(zone.orientation, orientation.id);
-      }
-      const orientationId = orientationMap.get(zone.orientation);
-
-      // if levelId never get
-      if (!levelMap.has(zone.level)) {
-        const level = await levelModel.getLevelByName(zone.level);
-        levelMap.set(zone.level, level.id);
-      }
-      const levelId = levelMap.get(zone.level);
-      await zoneModel.createZone(fieldId, orientationId, levelId, zone.name);
-    })
-  );
-
   await PromisePool.withConcurrency(10)
     .for(fieldData.zones)
     .process(async (zone) => {
@@ -167,6 +139,7 @@ async function seeding() {
     .process(async (space) => {
       // if fieldId never get
       if (!fieldMap.has(space.field)) {
+        logger.debug('get field while creating space');
         const field = await fieldModel.getFieldByName(space.field);
         fieldMap.set(space.field, field.id);
       }
@@ -174,6 +147,7 @@ async function seeding() {
 
       // if zoneId never get
       if (!zoneMap.has(space.zone)) {
+        logger.debug('get zone while creating space');
         const zone = await zoneModel.getZoneByName(fieldId, space.zone);
         zoneMap.set(space.zone, zone[0].id);
       }
