@@ -11,6 +11,8 @@ const OrientationModel = require('../src/models/orientation');
 const ZoneModel = require('../src/models/zone');
 const SpaceModel = require('../src/models/space/index');
 
+const POOL_SIZE = 10;
+
 // csv read
 async function getSpacesData() {
   const files = await fs.promises.readdir('./seeders/space-data');
@@ -34,12 +36,13 @@ async function seeding() {
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
 
+  const fieldMap = new Map();
   const orientationMap = new Map();
   const levelMap = new Map();
   const zoneMap = new Map();
 
   // create orientation
-  await PromisePool.withConcurrency(10)
+  await PromisePool.withConcurrency(POOL_SIZE)
     .for(fieldData.orientations)
     .process(async (orientationName) => {
       const newOrientation = await orientationModel.createOrientation(
@@ -50,7 +53,7 @@ async function seeding() {
     });
 
   // create level
-  await PromisePool.withConcurrency(10)
+  await PromisePool.withConcurrency(POOL_SIZE)
     .for(fieldData.levels)
     .process(async (levelName) => {
       const newLevel = await levelModel.createLevel(levelName);
@@ -59,12 +62,12 @@ async function seeding() {
     });
 
   // create field
-  await PromisePool.withConcurrency(10)
+  await PromisePool.withConcurrency(POOL_SIZE)
     .for(fieldData.fields)
-    .process(async (fieldName) => {
+    .process(async (field) => {
       // get orientations id which this field have
       const orientationIds = await Promise.all(
-        fieldName.orientations.map(async (orientationName) => {
+        field.orientations.map(async (orientationName) => {
           if (!orientationMap.has(orientationName)) {
             const orientation = await orientationModel.getOrientationByName(
               orientationName
@@ -77,7 +80,7 @@ async function seeding() {
 
       // get levels id id which this field have
       const levelIds = await Promise.all(
-        fieldName.levels.map(async (levelName) => {
+        field.levels.map(async (levelName) => {
           // if levelId never get
           if (!levelMap.has(levelName)) {
             const level = await levelModel.getLevelByName(levelName);
@@ -88,17 +91,17 @@ async function seeding() {
       );
 
       // create field and the mm relationship with level and orientation
-      await fieldModel.createField(
-        fieldName.name,
-        fieldName.img,
+      const newField = await fieldModel.createField(
+        field.name,
+        field.img,
         orientationIds,
         levelIds
       );
+      fieldMap.set(field.name, newField.id);
     });
 
   // create zone
-  let fieldMap = new Map();
-  await PromisePool.withConcurrency(10)
+  await PromisePool.withConcurrency(POOL_SIZE)
     .for(fieldData.zones)
     .process(async (zone) => {
       // if fieldId never get
@@ -134,7 +137,7 @@ async function seeding() {
 
   // create space
   const spacesData = await getSpacesData();
-  await PromisePool.withConcurrency(10)
+  await PromisePool.withConcurrency(POOL_SIZE)
     .for(spacesData)
     .process(async (space) => {
       // if fieldId never get
