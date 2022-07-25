@@ -1,5 +1,7 @@
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
+const { PromisePool } = require('@supercharge/promise-pool');
+
 const logger = require('../src/config/logger');
 
 const fieldData = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
@@ -32,25 +34,34 @@ async function seeding() {
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
 
+  const orientationMap = new Map();
+  const levelMap = new Map();
+  const zoneMap = new Map();
+
   // create orientation
-  await Promise.all(
-    fieldData.orientations.map(async (orientationName) => {
-      await orientationModel.createOrientation(orientationName);
-    })
-  );
+  await PromisePool.withConcurrency(10)
+    .for(fieldData.orientations)
+    .process(async (orientationName) => {
+      const newOrientation = await orientationModel.createOrientation(
+        orientationName
+      );
+
+      orientationMap.set(orientationName, newOrientation.id);
+    });
 
   // create level
-  await Promise.all(
-    fieldData.levels.map(async (levelName) => {
-      await levelModel.createLevel(levelName);
-    })
-  );
+  await PromisePool.withConcurrency(10)
+    .for(fieldData.levels)
+    .process(async (levelName) => {
+      const newLevel = await levelModel.createLevel(levelName);
+
+      levelMap.set(levelName, newLevel.id);
+    });
 
   // create field
-  let orientationMap = new Map();
-  let levelMap = new Map();
-  await Promise.all(
-    fieldData.fields.map(async (fieldName) => {
+  await PromisePool.withConcurrency(10)
+    .for(fieldData.fields)
+    .process(async (fieldName) => {
       // get orientations id which this field have
       const orientationIds = await Promise.all(
         fieldName.orientations.map(async (orientationName) => {
@@ -83,8 +94,7 @@ async function seeding() {
         orientationIds,
         levelIds
       );
-    })
-  );
+    });
 
   // create zone
   let fieldMap = new Map();
@@ -116,11 +126,45 @@ async function seeding() {
     })
   );
 
+  await PromisePool.withConcurrency(10)
+    .for(fieldData.zones)
+    .process(async (zone) => {
+      // if fieldId never get
+      if (!fieldMap.has(zone.field)) {
+        const field = await fieldModel.getFieldByName(zone.field);
+        fieldMap.set(zone.field, field.id);
+      }
+      const fieldId = fieldMap.get(zone.field);
+
+      // if orientationId never get
+      if (!orientationMap.has(zone.orientation)) {
+        const orientation = await orientationModel.getOrientationByName(
+          zone.orientation
+        );
+        orientationMap.set(zone.orientation, orientation.id);
+      }
+      const orientationId = orientationMap.get(zone.orientation);
+
+      // if levelId never get
+      if (!levelMap.has(zone.level)) {
+        const level = await levelModel.getLevelByName(zone.level);
+        levelMap.set(zone.level, level.id);
+      }
+      const levelId = levelMap.get(zone.level);
+      const newZone = await zoneModel.createZone(
+        fieldId,
+        orientationId,
+        levelId,
+        zone.name
+      );
+      zoneMap.set(zone.name, newZone.id);
+    });
+
   // create space
   const spacesData = await getSpacesData();
-  let zoneMap = new Map();
-  await Promise.all(
-    spacesData.map(async (space) => {
+  await PromisePool.withConcurrency(10)
+    .for(spacesData)
+    .process(async (space) => {
       // if fieldId never get
       if (!fieldMap.has(space.field)) {
         const field = await fieldModel.getFieldByName(space.field);
@@ -146,8 +190,7 @@ async function seeding() {
         Number(space.positionColNumber),
         Number(space.positionRowNumber)
       );
-    })
-  );
+    });
 
   logger.info('the seeding job is successful');
 }
