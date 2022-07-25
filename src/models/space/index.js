@@ -131,6 +131,34 @@ class SpaceModel {
       });
       return newSpace;
     }
+    if (spaceType === spaceTypeMap.aisle) {
+      const newSpace = await prisma.spaces.create({
+        data: {
+          zoneId,
+          name: name ? name : '',
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          positionColNumber,
+          positionRowNumber,
+          aisles: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+          colNumber: true,
+          rowNumber: true,
+          positionColNumber: true,
+          positionRowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return newSpace;
+    }
   }
   async findOrCreateSpace(
     zoneId,
@@ -145,12 +173,11 @@ class SpaceModel {
     if (spaceType === spaceTypeMap.seat) {
       const space = await prisma.spaces.upsert({
         where: {
-          zoneId_version_name_colNumber_rowNumber: {
+          zoneId_version_positionColNumber_positionRowNumber: {
             zoneId,
             version,
-            name,
-            colNumber,
-            rowNumber,
+            positionColNumber,
+            positionRowNumber,
           },
         },
         update: {},
@@ -183,12 +210,11 @@ class SpaceModel {
     if (spaceType === spaceTypeMap.pillar) {
       const space = await prisma.spaces.upsert({
         where: {
-          zoneId_version_name_colNumber_rowNumber: {
+          zoneId_version_positionColNumber_positionRowNumber: {
             zoneId,
             version,
-            name,
-            colNumber,
-            rowNumber,
+            positionColNumber,
+            positionRowNumber,
           },
         },
         update: {},
@@ -221,12 +247,11 @@ class SpaceModel {
     if (spaceType === spaceTypeMap.group) {
       const space = await prisma.spaces.upsert({
         where: {
-          zoneId_version_name_colNumber_rowNumber: {
+          zoneId_version_positionColNumber_positionRowNumber: {
             zoneId,
             version,
-            name,
-            colNumber,
-            rowNumber,
+            positionColNumber,
+            positionRowNumber,
           },
         },
         update: {},
@@ -240,6 +265,43 @@ class SpaceModel {
           positionColNumber,
           positionRowNumber,
           groups: {
+            create: [{}],
+          },
+        },
+        select: {
+          id: true,
+          name: true,
+          colNumber: true,
+          rowNumber: true,
+          positionColNumber: true,
+          positionRowNumber: true,
+          spaceType: true,
+          version: true,
+        },
+      });
+      return space;
+    }
+    if (spaceType === spaceTypeMap.aisle) {
+      const space = await prisma.spaces.upsert({
+        where: {
+          zoneId_version_positionColNumber_positionRowNumber: {
+            zoneId,
+            version,
+            positionColNumber,
+            positionRowNumber,
+          },
+        },
+        update: {},
+        create: {
+          zoneId,
+          name,
+          spaceType,
+          version,
+          colNumber,
+          rowNumber,
+          positionColNumber,
+          positionRowNumber,
+          aisles: {
             create: [{}],
           },
         },

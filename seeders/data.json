@@ -7,18 +7,6 @@
       "img": "",
       "levels": ["下層", "上層"],
       "orientations": ["一壘側", "三壘側"]
-    },
-    {
-      "name": "新莊棒球場",
-      "img": "",
-      "levels": ["下層", "上層"],
-      "orientations": ["一壘側", "三壘側"]
-    },
-    {
-      "name": "台中洲際棒球場",
-      "img": "",
-      "levels": ["下層", "上層"],
-      "orientations": ["一壘側", "三壘側", "外野"]
     }
   ],
   "zones": [
@@ -104,7 +92,13 @@
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下R"
+      "name": "東下R1"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "東下R2"
     },
     {
       "field": "樂天桃園棒球場",
@@ -171,6 +165,30 @@
       "orientation": "三壘側",
       "level": "下層",
       "name": "西下K"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下L"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下M"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下R1"
+    },
+    {
+      "field": "樂天桃園棒球場",
+      "orientation": "三壘側",
+      "level": "下層",
+      "name": "西下R2"
     },
     {
       "field": "樂天桃園棒球場",
@@ -315,48 +333,6 @@
       "orientation": "三壘側",
       "level": "上層",
       "name": "西上M"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A1"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A2"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A3"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A4"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A5"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A6"
-    },
-    {
-      "field": "新莊棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "A7"
     }
   ]
 }
