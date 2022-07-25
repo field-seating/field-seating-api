@@ -115,11 +115,12 @@ model Spaces {
   seats    Seats[]
   pillars    Pillars[]
   groups    Groups[]
+  aisles    Aisles[]
   records   Records[]
   photos    Photos[]
   collections Collections[]
   @@unique([id, spaceType])
-  @@unique([zoneId, version, name, colNumber, rowNumber])
+  @@unique([zoneId, version, positionColNumber, positionRowNumber])
 }
 
 model Seats {
@@ -139,6 +140,14 @@ model Pillars {
 }
 
 model Groups {
+  space    Spaces   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
+  spaceId   Int    @id
+  spaceType String   
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Aisles {
   space    Spaces   @relation(fields: [spaceId, spaceType], references: [id, spaceType])
   spaceId   Int    @id
   spaceType String   
