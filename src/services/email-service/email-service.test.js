@@ -1,8 +1,8 @@
-const EmailService = require('./email-service');
-const sendEmail = require('../services/helpers/send-email');
-const { baseUrl } = require('../config/config');
+const EmailService = require('.');
+const sendEmail = require('../helpers/send-email');
+const { baseUrl } = require('../../config/config');
 
-jest.mock('../services/helpers/send-email');
+jest.mock('../helpers/send-email');
 const emailService = new EmailService({ logger: console });
 //  sendVerifyEmail
 describe('email-service.sendVerifyEmail', () => {

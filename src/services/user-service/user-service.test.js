@@ -1,11 +1,13 @@
 const { addSeconds } = require('date-fns');
 const assert = require('assert/strict');
-const UserModel = require('../models/user');
-const signUpErrorMap = require('../errors/sign-up-error');
-const verifyErrorMap = require('../errors/verify-error');
-const { statusMap } = require('../models/user/constants');
-const UserService = require('./user-service');
-const { verificationTokenLife } = require('../constants/token-life-constant');
+const UserModel = require('../../models/user');
+const signUpErrorMap = require('../../errors/sign-up-error');
+const verifyErrorMap = require('../../errors/verify-error');
+const { statusMap } = require('../../models/user/constants');
+const UserService = require('.');
+const {
+  verificationTokenLife,
+} = require('../../constants/token-life-constant');
 
 beforeEach(async () => {
   jest.resetModules();
@@ -188,12 +190,12 @@ describe('user-service.updateUser', () => {
 describe('user-service.flushToken', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
-      const UserService = require('./user-service');
+      const UserService = require('.');
       const userService = new UserService({ logger: console });
 
       // create user and mock token
-      jest.mock('../services/helpers/token-generator');
-      const tokenGenerator = require('../services/helpers/token-generator');
+      jest.mock('../helpers/token-generator');
+      const tokenGenerator = require('../helpers/token-generator');
       tokenGenerator.mockImplementation(() => {
         return 'expiredTokenToRefresh';
       });

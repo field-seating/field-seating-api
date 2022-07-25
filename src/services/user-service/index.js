@@ -1,17 +1,19 @@
 const jwt = require('jsonwebtoken');
 const { subSeconds } = require('date-fns');
-const GeneralError = require('../errors/error/general-error');
-const PrivateError = require('../errors/error/private-error');
-const signUpErrorMap = require('../errors/sign-up-error');
-const UserModel = require('../models/user');
-const { jwtLife } = require('../constants/token-life-constant');
-const { hashPassword } = require('../utils/crypto/password');
-const { jwtSecret } = require('../config/config');
-const BaseService = require('./base');
-const tokenGenerator = require('./helpers/token-generator');
-const verifyErrorMap = require('../errors/verify-error');
-const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
-const { verificationTokenLife } = require('../constants/token-life-constant');
+const GeneralError = require('../../errors/error/general-error');
+const PrivateError = require('../../errors/error/private-error');
+const signUpErrorMap = require('../../errors/sign-up-error');
+const UserModel = require('../../models/user');
+const { jwtLife } = require('../../constants/token-life-constant');
+const { hashPassword } = require('../../utils/crypto/password');
+const { jwtSecret } = require('../../config/config');
+const BaseService = require('../base');
+const tokenGenerator = require('../helpers/token-generator');
+const verifyErrorMap = require('../../errors/verify-error');
+const resendVerifyEmailErrorMap = require('../../errors/resend-verify-email-error');
+const {
+  verificationTokenLife,
+} = require('../../constants/token-life-constant');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {

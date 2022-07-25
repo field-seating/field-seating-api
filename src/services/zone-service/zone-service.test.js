@@ -1,13 +1,13 @@
-const FieldModel = require('../models/field');
-const LevelModel = require('../models/level');
-const OrientationModel = require('../models/orientation');
-const ZoneModel = require('../models/zone');
-const { spaceTypeMap } = require('../models/space/constants');
-const SpaceModel = require('../models/space');
-const SeatModel = require('../models/seat');
-const PillarModel = require('../models/pillar');
-const GroupModel = require('../models/group');
-const ZoneService = require('./zone-service');
+const FieldModel = require('../../models/field');
+const LevelModel = require('../../models/level');
+const OrientationModel = require('../../models/orientation');
+const ZoneModel = require('../../models/zone');
+const { spaceTypeMap } = require('../../models/space/constants');
+const SpaceModel = require('../../models/space');
+const SeatModel = require('../../models/seat');
+const PillarModel = require('../../models/pillar');
+const GroupModel = require('../../models/group');
+const ZoneService = require('.');
 
 afterEach(async () => {
   const fieldModel = new FieldModel();

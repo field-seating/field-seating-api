@@ -1,12 +1,12 @@
 const { isNil } = require('ramda');
-const BaseService = require('./base');
-const FieldModel = require('../models/field');
-const OrientationModel = require('../models/orientation');
-const LevelModel = require('../models/level');
-const ZoneModel = require('../models/zone');
-const GeneralError = require('../errors/error/general-error');
-const getListErrorMap = require('../errors/get-list-error');
-const getDataErrorMap = require('../errors/get-data-error');
+const BaseService = require('../base');
+const FieldModel = require('../../models/field');
+const OrientationModel = require('../../models/orientation');
+const LevelModel = require('../../models/level');
+const ZoneModel = require('../../models/zone');
+const GeneralError = require('../../errors/error/general-error');
+const getListErrorMap = require('../../errors/get-list-error');
+const getDataErrorMap = require('../../errors/get-data-error');
 
 class FieldService extends BaseService {
   async getFields() {

@@ -1,7 +1,7 @@
-const prisma = require('../config/prisma');
+const prisma = require('../../config/prisma');
 const { Prisma } = require('prisma/prisma-client');
-const { usefulMap } = require('../models/review/constant');
-const { orderMap } = require('../services/space-service/constant');
+const { usefulMap } = require('../review/constant');
+const { orderMap } = require('../../services/space-service/constant');
 
 class PhotoModel {
   async createPhoto(path, userId, spaceId, dateTime) {

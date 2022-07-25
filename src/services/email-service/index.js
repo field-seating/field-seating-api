@@ -2,14 +2,14 @@ const {
   baseUrl,
   verifyEmail,
   passwordResetEmail,
-} = require('../config/config');
-const sendEmail = require('./helpers/send-email');
-const withRetry = require('../utils/func/retry');
-const BaseService = require('./base');
-const rateLimiterHelper = require('../utils/rate-limiter');
-const rateLimiterErrorMap = require('../errors/rate-limiter-error');
-const sendEmailErrorMap = require('../errors/send-email-error');
-const GeneralError = require('../errors/error/general-error');
+} = require('../../config/config');
+const sendEmail = require('../helpers/send-email');
+const withRetry = require('../../utils/func/retry');
+const BaseService = require('../base');
+const rateLimiterHelper = require('../../utils/rate-limiter');
+const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const sendEmailErrorMap = require('../../errors/send-email-error');
+const GeneralError = require('../../errors/error/general-error');
 
 class EmailService extends BaseService {
   async sendVerifyEmail(user) {

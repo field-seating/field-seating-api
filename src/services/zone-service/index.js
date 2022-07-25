@@ -1,10 +1,10 @@
 const { isNil } = require('ramda');
-const BaseService = require('./base');
-const SpaceModel = require('../models/space');
-const ZoneModel = require('../models/zone');
-const GeneralError = require('../errors/error/general-error');
-const getListErrorMap = require('../errors/get-list-error');
-const getDataErrorMap = require('../errors/get-data-error');
+const BaseService = require('../base');
+const SpaceModel = require('../../models/space');
+const ZoneModel = require('../../models/zone');
+const GeneralError = require('../../errors/error/general-error');
+const getListErrorMap = require('../../errors/get-list-error');
+const getDataErrorMap = require('../../errors/get-data-error');
 
 class ZoneService extends BaseService {
   async getSpacesByZone(zoneId, spaceType) {
