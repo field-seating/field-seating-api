@@ -80,6 +80,7 @@ CREATE TABLE `Zones` (
     `orientationId` INTEGER NOT NULL,
     `levelId` INTEGER NOT NULL,
     `name` VARCHAR(255) NOT NULL,
+    `xMirror` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
