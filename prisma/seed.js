@@ -1,5 +1,7 @@
 const fs = require('fs');
 const { parse } = require('csv-parse/sync');
+const { PromisePool } = require('@supercharge/promise-pool');
+
 const logger = require('../src/config/logger');
 
 const fieldData = require('../seeders/data.json'); // data of field (include field, orientation, level, zone)
@@ -8,6 +10,8 @@ const LevelModel = require('../src/models/level');
 const OrientationModel = require('../src/models/orientation');
 const ZoneModel = require('../src/models/zone');
 const SpaceModel = require('../src/models/space/index');
+
+const POOL_SIZE = 10;
 
 // csv read
 async function getSpacesData() {
@@ -32,28 +36,39 @@ async function seeding() {
   const zoneModel = new ZoneModel();
   const spaceModel = new SpaceModel();
 
+  const fieldMap = new Map();
+  const orientationMap = new Map();
+  const levelMap = new Map();
+  const zoneMap = new Map();
+
   // create orientation
-  await Promise.all(
-    fieldData.orientations.map(async (orientationName) => {
-      await orientationModel.findOrCreateOrientation(orientationName);
-    })
-  );
+  await PromisePool.withConcurrency(POOL_SIZE)
+    .for(fieldData.orientations)
+    .process(async (orientationName) => {
+      const newOrientation = await orientationModel.createOrientation(
+        orientationName
+      );
+
+      orientationMap.set(orientationName, newOrientation.id);
+    });
 
   // create level
-  await Promise.all(
-    fieldData.levels.map(async (levelName) => {
-      await levelModel.findOrCreateLevel(levelName);
-    })
-  );
+  await PromisePool.withConcurrency(POOL_SIZE)
+    .for(fieldData.levels)
+    .process(async (levelName) => {
+      const newLevel = await levelModel.createLevel(levelName);
+
+      levelMap.set(levelName, newLevel.id);
+    });
 
   // create field
-  let orientationMap = new Map();
-  let levelMap = new Map();
-  await Promise.all(
-    fieldData.fields.map(async (fieldName) => {
+  await PromisePool.withConcurrency(POOL_SIZE)
+    .for(fieldData.fields)
+    .process(async (field) => {
       // get orientations id which this field have
+      // FIXME: implement a where-in query for orientations
       const orientationIds = await Promise.all(
-        fieldName.orientations.map(async (orientationName) => {
+        field.orientations.map(async (orientationName) => {
           if (!orientationMap.has(orientationName)) {
             const orientation = await orientationModel.getOrientationByName(
               orientationName
@@ -65,8 +80,9 @@ async function seeding() {
       );
 
       // get levels id id which this field have
+      // FIXME: implement a where-in query for levels
       const levelIds = await Promise.all(
-        fieldName.levels.map(async (levelName) => {
+        field.levels.map(async (levelName) => {
           // if levelId never get
           if (!levelMap.has(levelName)) {
             const level = await levelModel.getLevelByName(levelName);
@@ -77,19 +93,19 @@ async function seeding() {
       );
 
       // create field and the mm relationship with level and orientation
-      await fieldModel.findOrCreateField(
-        fieldName.name,
-        fieldName.img,
+      const newField = await fieldModel.createField(
+        field.name,
+        field.img,
         orientationIds,
         levelIds
       );
-    })
-  );
+      fieldMap.set(field.name, newField.id);
+    });
 
   // create zone
-  let fieldMap = new Map();
-  await Promise.all(
-    fieldData.zones.map(async (zone) => {
+  await PromisePool.withConcurrency(POOL_SIZE)
+    .for(fieldData.zones)
+    .process(async (zone) => {
       // if fieldId never get
       if (!fieldMap.has(zone.field)) {
         const field = await fieldModel.getFieldByName(zone.field);
@@ -112,22 +128,23 @@ async function seeding() {
         levelMap.set(zone.level, level.id);
       }
       const levelId = levelMap.get(zone.level);
-      await zoneModel.findOrCreateZone(
+      const newZone = await zoneModel.createZone(
         fieldId,
         orientationId,
         levelId,
         zone.name
-      ); // create
-    })
-  );
+      );
+      zoneMap.set(zone.name, newZone.id);
+    });
 
   // create space
   const spacesData = await getSpacesData();
-  let zoneMap = new Map();
-  await Promise.all(
-    spacesData.map(async (space) => {
+  await PromisePool.withConcurrency(POOL_SIZE)
+    .for(spacesData)
+    .process(async (space) => {
       // if fieldId never get
       if (!fieldMap.has(space.field)) {
+        logger.debug('get field while creating space');
         const field = await fieldModel.getFieldByName(space.field);
         fieldMap.set(space.field, field.id);
       }
@@ -135,13 +152,14 @@ async function seeding() {
 
       // if zoneId never get
       if (!zoneMap.has(space.zone)) {
+        logger.debug('get zone while creating space');
         const zone = await zoneModel.getZoneByName(fieldId, space.zone);
         zoneMap.set(space.zone, zone[0].id);
       }
       const zoneId = zoneMap.get(space.zone);
 
       // create
-      await spaceModel.findOrCreateSpace(
+      await spaceModel.createSpace(
         zoneId,
         space.spaceType,
         space.version,
@@ -151,8 +169,7 @@ async function seeding() {
         Number(space.positionColNumber),
         Number(space.positionRowNumber)
       );
-    })
-  );
+    });
 
   logger.info('the seeding job is successful');
 }
