@@ -66,6 +66,7 @@ async function seeding() {
     .for(fieldData.fields)
     .process(async (field) => {
       // get orientations id which this field have
+      // FIXME: implement a where-in query for orientations
       const orientationIds = await Promise.all(
         field.orientations.map(async (orientationName) => {
           if (!orientationMap.has(orientationName)) {
@@ -79,6 +80,7 @@ async function seeding() {
       );
 
       // get levels id id which this field have
+      // FIXME: implement a where-in query for levels
       const levelIds = await Promise.all(
         field.levels.map(async (levelName) => {
           // if levelId never get
