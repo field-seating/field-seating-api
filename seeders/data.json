@@ -15,90 +15,91 @@
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下A",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下B",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下C",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下D",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下E",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下F",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下G",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下H",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下I",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下J",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下K"
+      "name": "東下K",
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下L",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "下層",
       "name": "東下M",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
@@ -195,98 +196,98 @@
       "orientation": "三壘側",
       "level": "下層",
       "name": "西下R1",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "三壘側",
       "level": "下層",
       "name": "西下R2",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上B",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上C",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上D",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上E",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上F",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上G",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上H",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上I",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上J",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上K",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上L",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",
       "orientation": "一壘側",
       "level": "上層",
       "name": "東上M",
-      "x_mirror": true
+      "xMirror": true
     },
     {
       "field": "樂天桃園棒球場",

@@ -2,14 +2,14 @@ const prisma = require('../../config/prisma');
 
 class ZoneModel {
   constructor() {}
-  async createZone(fieldId, orientationId, levelId, name, x_mirror) {
+  async createZone(fieldId, orientationId, levelId, name, xMirror) {
     const newZone = await prisma.zones.create({
       data: {
         fieldId,
         orientationId,
         levelId,
         name,
-        x_mirror,
+        xMirror,
       },
       select: {
         id: true,
@@ -17,12 +17,12 @@ class ZoneModel {
         orientationId: true,
         levelId: true,
         name: true,
-        x_mirror: true,
+        xMirror: true,
       },
     });
     return newZone;
   }
-  async findOrCreateZone(fieldId, orientationId, levelId, name, x_mirror) {
+  async findOrCreateZone(fieldId, orientationId, levelId, name, xMirror) {
     const zone = await prisma.zones.upsert({
       where: { fieldId_name: { fieldId, name } },
       update: {},
@@ -31,7 +31,7 @@ class ZoneModel {
         orientationId,
         levelId,
         name,
-        x_mirror,
+        xMirror,
       },
       select: {
         id: true,
@@ -39,7 +39,7 @@ class ZoneModel {
         orientationId: true,
         levelId: true,
         name: true,
-        x_mirror: true,
+        xMirror: true,
       },
     });
     return zone;
@@ -72,7 +72,7 @@ class ZoneModel {
         orientationId: true,
         levelId: true,
         name: true,
-        x_mirror: true,
+        xMirror: true,
       },
     });
     return zone;
@@ -88,7 +88,7 @@ class ZoneModel {
         orientationId: true,
         levelId: true,
         name: true,
-        x_mirror: true,
+        xMirror: true,
       },
     });
     return zone;

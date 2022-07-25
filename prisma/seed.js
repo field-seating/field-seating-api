@@ -133,7 +133,7 @@ async function seeding() {
         orientationId,
         levelId,
         zone.name,
-        zone.x_mirror
+        zone.xMirror
       );
       zoneMap.set(zone.name, newZone.id);
     });

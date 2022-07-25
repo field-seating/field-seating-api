@@ -93,7 +93,7 @@ model Zones {
   level    Levels    @relation(fields: [levelId], references: [id])
   levelId   Int
   name      String   @db.VarChar(255)
-  x_mirror Boolean @default(false)
+  xMirror Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   spaces    Spaces[]
