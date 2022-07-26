@@ -23,7 +23,7 @@ describe('email-service.sendVerifyEmail', () => {
             name: 'user1',
             email: 'example@example.com',
             url: `${baseUrl}/verify-email/${result.token}`,
-            sibMessage: ['<202204131533.30577521883.1@smtp-relay.mailin.fr>'],
+            messageIds: ['23f2fwefwev'],
           },
         };
       });

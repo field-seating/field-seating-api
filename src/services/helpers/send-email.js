@@ -1,14 +1,23 @@
-const SibApiV3Sdk = require('sib-api-v3-sdk');
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
+
+const sgMail = require('@sendgrid/mail');
 const Handlebars = require('handlebars');
-const { sibKey, mailSender } = require('../../config/config');
+
+const {
+  sendgridApiKey,
+  mailSender,
+  sendgridSandboxMode,
+} = require('../../config/config');
 const PrivateError = require('../../errors/error/private-error');
 const sendEmailErrorMap = require('../../errors/send-email-error');
 const R = require('ramda');
 
-const defaultClient = SibApiV3Sdk.ApiClient.instance;
-defaultClient.authentications['api-key'].apiKey = sibKey;
+sgMail.setApiKey(sendgridApiKey);
+
+const DEFAULT_TEXT = "It's a mail from field seating";
+
+const mapMessageId = R.map(R.path(['headers', 'x-message-id']));
 
 async function sendEmail(templateName, meta, data) {
   // check
@@ -29,23 +38,31 @@ async function sendEmail(templateName, meta, data) {
 
   const receiver = meta.receiverList;
 
-  const result = template(data);
-  const sib = new SibApiV3Sdk.TransactionalEmailsApi();
+  const htmlContent = template(data);
+
+  const enableSandboxMode = sendgridSandboxMode;
+
   try {
-    const sendInfo = await sib.sendTransacEmail({
-      sender: mailSender.general,
+    const msg = {
+      to: receiver,
+      from: mailSender.general,
       subject: meta.subject,
-      htmlContent: result,
-      messageVersions: [
-        {
-          to: receiver,
+      text: meta.text || DEFAULT_TEXT,
+      html: htmlContent,
+      mailSettings: {
+        sandboxMode: {
+          enable: enableSandboxMode,
         },
-      ],
-    });
+      },
+    };
+
+    const sendInfo = await sgMail.send(msg);
+
     const returnData = {
       ...data,
-      sibMessage: sendInfo.messageIds,
+      messageIds: mapMessageId(sendInfo),
     };
+
     return returnData;
   } catch (err) {
     if (err.status === 401)

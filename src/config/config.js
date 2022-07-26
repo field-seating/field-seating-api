@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const developmentConfig = require('./config.development');
 const stagingConfig = require('./config.staging');
 const testConfig = require('./config._test');
@@ -8,10 +10,12 @@ const configFromEnv = {
   port: process.env.PORT,
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
-  sibKey: process.env.SIB_KEY,
   doKey: process.env.DO_ACCESS_KEY,
   doSecret: process.env.DO_SECRET,
   redisUrl: process.env.REDIS_URL,
+  sendgridApiKey: process.env.SENDGRID_API_KEY,
+  sendgridSandboxMode:
+    process.env.SENDGRID_SANDBOX_MODE === 'true' ? true : false,
 };
 
 const envMap = {

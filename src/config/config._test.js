@@ -1,7 +1,7 @@
 const config = {
   mailSender: {
     general: {
-      email: 'op@staging.fieldseating.com',
+      email: 'op-staging@fieldseating.com',
       name: '球場坐座團隊',
     },
   },
