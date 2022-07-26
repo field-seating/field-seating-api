@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const developmentConfig = require('./config.development');
 const stagingConfig = require('./config.staging');
 const testConfig = require('./config._test');
@@ -12,6 +14,7 @@ const configFromEnv = {
   doKey: process.env.DO_ACCESS_KEY,
   doSecret: process.env.DO_SECRET,
   redisUrl: process.env.REDIS_URL,
+  sendgridApiKey: process.env.SENDGRID_API_KEY,
 };
 
 const envMap = {
