@@ -1,28 +1,24 @@
-const sgMail = require('@sendgrid/mail');
+const sendEmail = require('../src/services/helpers/send-email');
 
-const {
-  sendgridApiKey,
-  mailSender,
-  sendgridSandboxMode,
-} = require('../src/config/config');
+const templateName = 'verify-email';
 
-sgMail.setApiKey(sendgridApiKey);
-
-const msg = {
-  to: 'cuk.bas@gmail.com', // Change to your recipient
-  from: mailSender.general, // Change to your verified sender
-  subject: 'Sending with SendGrid is Fun',
-  text: "It's a mail from field seating",
-  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-  mailSettings: {
-    sandboxMode: {
-      enable: sendgridSandboxMode,
+const meta = {
+  receiverList: [
+    {
+      email: 'cuk.bas@gmail.com',
+      name: 'Wendell',
     },
-  },
+  ],
+  subject: '帳號驗證信',
 };
 
-sgMail
-  .send(msg)
+const data = {
+  name: 'Wendell',
+  email: 'cuk.bas@gmail.com',
+  url: 'https://example.com',
+};
+
+sendEmail(templateName, meta, data)
   .then((resp) => {
     console.log('resp', resp);
     console.log('Email sent');
