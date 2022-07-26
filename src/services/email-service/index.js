@@ -51,7 +51,9 @@ class EmailService extends BaseService {
 
     try {
       const emailInfo = await withRateLimit(sendMailFunc)();
+
       this.logger.info('sent email', { emailInfo });
+
       return emailInfo;
     } catch (err) {
       if (err.code === rateLimiterErrorMap.exceedLimit.code) {

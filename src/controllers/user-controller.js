@@ -14,6 +14,7 @@ const userController = {
       // sign up
       const userService = new UserService({ logger: req.logger });
       const user = await userService.signUp(name, email, password);
+
       const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(user);
 
