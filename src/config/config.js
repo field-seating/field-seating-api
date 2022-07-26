@@ -15,6 +15,8 @@ const configFromEnv = {
   doSecret: process.env.DO_SECRET,
   redisUrl: process.env.REDIS_URL,
   sendgridApiKey: process.env.SENDGRID_API_KEY,
+  sendgridSandboxMode:
+    process.env.SENDGRID_SANDBOX_MODE === 'true' ? true : false,
 };
 
 const envMap = {
