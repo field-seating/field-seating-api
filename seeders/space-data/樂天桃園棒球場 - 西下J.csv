@@ -71,7 +71,7 @@ field,zone,name,spaceType,version,colNumber,rowNumber,positionColNumber,position
 樂天桃園棒球場,西下J,,seat,1.0.0,4,18,4,19
 樂天桃園棒球場,西下J,,seat,1.0.0,4,19,4,20
 樂天桃園棒球場,西下J,,seat,1.0.0,4,20,4,21
-樂天桃園棒球場,西下J,大園區VIP包廂,group,1.0.0,,,4,22
+樂天桃園棒球場,西下J,大園包廂,group,1.0.0,,,4,22
 樂天桃園棒球場,西下J,,seat,1.0.0,5,4,5,4
 樂天桃園棒球場,西下J,,seat,1.0.0,5,5,5,5
 樂天桃園棒球場,西下J,,seat,1.0.0,5,6,5,6
@@ -216,7 +216,7 @@ field,zone,name,spaceType,version,colNumber,rowNumber,positionColNumber,position
 樂天桃園棒球場,西下J,,pillar,1.0.0,12,18,12,19
 樂天桃園棒球場,西下J,,pillar,1.0.0,12,19,12,20
 樂天桃園棒球場,西下J,,pillar,1.0.0,12,20,12,21
-樂天桃園棒球場,西下J,龍潭區VIP包廂,group,1.0.0,,,12,22
+樂天桃園棒球場,西下J,龍潭包廂,group,1.0.0,,,12,22
 樂天桃園棒球場,西下J,,seat,1.0.0,13,4,13,4
 樂天桃園棒球場,西下J,,seat,1.0.0,13,5,13,5
 樂天桃園棒球場,西下J,,seat,1.0.0,13,6,13,6
