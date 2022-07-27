@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY . .
 RUN apk add --no-cache libheif
+RUN apk add --no-cache vips
 RUN npm install --production
 
 EXPOSE 3000
