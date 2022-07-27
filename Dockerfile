@@ -3,6 +3,7 @@ WORKDIR /app
 
 COPY . .
 RUN npm install --production
+RUN apk add --no-cache libheif
 
 EXPOSE 3000
 ENV NODE_ENV production
