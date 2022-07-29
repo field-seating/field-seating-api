@@ -23,9 +23,10 @@ const config = {
       limit: 5,
     },
   },
+  // updated for load test
   reqRateLimit: {
-    windowSize: 60,
-    limit: 300,
+    windowSize: 1,
+    limit: 1000,
   },
   log: {
     maxLevel: 'info',
