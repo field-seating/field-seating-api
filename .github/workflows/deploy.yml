@@ -1,4 +1,4 @@
-name: staging site deploy
+name: Deploy
 
 on:
   workflow_run:
@@ -30,9 +30,15 @@ jobs:
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        uses: docker/metadata-action@v3
+        uses: docker/metadata-action@v4
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=sha
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
