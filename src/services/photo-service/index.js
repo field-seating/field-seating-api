@@ -20,6 +20,7 @@ const renderPhotoResponse = require('../helpers/render-photo-response-helper');
 const rateLimiterHelper = require('../../utils/rate-limiter');
 const { postPhotoRateLimit } = require('../../config/config');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const { getOrientation } = require('get-orientation');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, userId, date) {
@@ -32,6 +33,9 @@ class PhotoService extends BaseService {
     async function upload() {
       const uploadInfo = await Promise.all(
         files.map(async (file) => {
+          console.log(file);
+          const orientation = await getOrientation(file.buffer);
+          console.log(orientation);
           // random filename
           const newFilename = await randomHashName(uniqueKey, 4);
           file.newFilename = newFilename;
