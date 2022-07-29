@@ -1,5 +1,5 @@
 const paginationLimitMap = {
-  photos: 50,
+  photos: 200,
 };
 const sortMap = {
   useful: 'useful',
