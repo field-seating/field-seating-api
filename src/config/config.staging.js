@@ -26,7 +26,7 @@ const config = {
   // updated for load test
   reqRateLimit: {
     windowSize: 1,
-    limit: 1000,
+    limit: 100000,
   },
   log: {
     maxLevel: 'info',
