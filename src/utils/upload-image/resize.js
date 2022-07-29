@@ -14,6 +14,7 @@ async function resizeImages(file, resizeInfoList) {
 
 const resizeImage = async ({ config, filename, buffer }) => {
   const result = await sharp(buffer)
+    .rotate()
     .resize(config.resizeOption)
     .toFormat(config.format, config.formatOption)
     .toBuffer({ resolveWithObject: true })
@@ -21,7 +22,6 @@ const resizeImage = async ({ config, filename, buffer }) => {
       data.filename = filename;
       return data;
     });
-
   return result;
 };
 
