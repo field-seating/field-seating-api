@@ -12,6 +12,7 @@ const reqRateLimitMiddleware = require('./middleware/req-rate-limit-middleware')
 const routes = require('./routes');
 const { port } = require('./config/config');
 const { isDevelopmentBuild, getEnv } = require('./context');
+const resSuccess = require('./controllers//helpers/response');
 
 const app = express();
 const usedPort = port || 3000;
@@ -37,7 +38,9 @@ app.use(responseLogger);
 app.use(routes);
 app.use(errorHandler);
 
-app.get('/', (req, res) => res.send('Hello field-seating!'));
+app.get('/health', (_, res) =>
+  res.status(200).json(resSuccess('server is running'))
+);
 
 app.listen(usedPort, async () => {
   logger.info(`App listening on port ${usedPort}`, { appEnv: getEnv() });
