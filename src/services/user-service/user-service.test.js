@@ -203,14 +203,12 @@ describe('user-service.flushToken', () => {
       const newUser = await userService.signUp('user1', email, 'password1');
 
       // verifyUser
-      tokenGenerator.mockImplementation(() => {
-        return 'flushToken';
-      });
-      const token = await userService.flushToken(newUser.id);
+      const newToken = 'newToken';
+      const token = await userService.flushToken(newUser.id, newToken);
 
       // make sure get a new token
-      const expectedResult = 'flushToken';
-      expect(tokenGenerator).toHaveBeenCalledTimes(2);
+      const expectedResult = 'newToken';
+      expect(tokenGenerator).toHaveBeenCalledTimes(1);
       expect(token).toBe(expectedResult);
     });
   });

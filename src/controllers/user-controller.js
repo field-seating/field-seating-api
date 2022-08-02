@@ -5,6 +5,7 @@ const resSuccess = require('./helpers/response');
 const GeneralError = require('../errors/error/general-error');
 const resendVerifyEmailErrorMap = require('../errors/resend-verify-email-error');
 const { statusMap } = require('../models/user/constants');
+const tokenGenerator = require('../services/helpers/token-generator');
 
 const userController = {
   signUp: async (req, res, next) => {
@@ -57,9 +58,8 @@ const userController = {
       if (user.status === statusMap.inactive)
         throw new GeneralError(resendVerifyEmailErrorMap['inactive']);
 
-      // refresh token
-      const userService = new UserService({ logger: req.logger });
-      const newToken = await userService.flushToken(user.id);
+      // generate new token
+      const newToken = await tokenGenerator();
       const userData = {
         email: user.email,
         name: user.name,
@@ -69,6 +69,10 @@ const userController = {
       // send verify email
       const emailService = new EmailService({ logger: req.logger });
       await emailService.sendVerifyEmail(userData);
+
+      // flush token
+      const userService = new UserService({ logger: req.logger });
+      await userService.flushToken(user.id, newToken);
       res.status(200).json(resSuccess());
     } catch (err) {
       next(err);

@@ -96,9 +96,8 @@ class UserService extends BaseService {
     }
   }
 
-  async flushToken(id) {
+  async flushToken(id, token) {
     const userModel = new UserModel();
-    const token = await tokenGenerator();
     const data = {
       id: id,
       token: token,
