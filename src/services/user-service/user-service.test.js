@@ -229,7 +229,7 @@ describe('user-service.resendVerifyEmail', () => {
       expect(token).toBe(expectedResult);
     });
   });
-  describe('with limit', () => {
+  describe('with exceed send rate limit', () => {
     it('should not flush token', async () => {
       const UserService = require('.');
       const userService = new UserService({ logger: console });
