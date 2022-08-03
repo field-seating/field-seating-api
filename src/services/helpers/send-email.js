@@ -65,11 +65,11 @@ async function sendEmail(templateName, meta, data) {
 
     return returnData;
   } catch (err) {
-    if (err.status === 401)
+    if (err.code === 401)
       throw new PrivateError(sendEmailErrorMap['apiKeyError']);
-    if (err.status === 400)
+    if (err.code === 400)
       throw new PrivateError(sendEmailErrorMap['badRequestError']);
-    if (err.status === 429)
+    if (err.code === 429)
       throw new PrivateError(sendEmailErrorMap['toManyRequestError']);
     throw err;
   }
