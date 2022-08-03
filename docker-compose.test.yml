@@ -23,7 +23,7 @@ services:
       SIB_KEY: "sibKey"
       EMAIL: YOUR_EMAIL
       REDIS_URL: redis://field-seating-test-redis:6379
-      SENDGRID_SANDBOX_MODE: true
+      SENDGRID_SANDBOX_MODE: "true"
 
   database:
     image: mysql:8
