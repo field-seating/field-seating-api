@@ -12,7 +12,7 @@ const config = {
   verifyEmail: {
     rateLimit: {
       windowSize: 60,
-      limit: 5,
+      limit: 5, // for dev
     },
   },
   passwordResetEmail: {
