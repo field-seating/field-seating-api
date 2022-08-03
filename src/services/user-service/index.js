@@ -8,12 +8,14 @@ const { jwtLife } = require('../../constants/token-life-constant');
 const { hashPassword } = require('../../utils/crypto/password');
 const { jwtSecret } = require('../../config/config');
 const BaseService = require('../base');
+const EmailService = require('../email-service');
 const tokenGenerator = require('../helpers/token-generator');
 const verifyErrorMap = require('../../errors/verify-error');
 const resendVerifyEmailErrorMap = require('../../errors/resend-verify-email-error');
 const {
   verificationTokenLife,
 } = require('../../constants/token-life-constant');
+const { statusMap } = require('../../models/user/constants');
 
 class UserService extends BaseService {
   async signUp(name, email, password) {
@@ -96,16 +98,35 @@ class UserService extends BaseService {
     }
   }
 
-  async flushToken(id, token) {
-    const userModel = new UserModel();
-    const data = {
-      id: id,
-      token: token,
+  async resendVerifyEmail(user) {
+    // judge status
+    if (user.status === statusMap.active)
+      throw new GeneralError(resendVerifyEmailErrorMap['alreadyVerified']);
+    if (user.status === statusMap.inactive)
+      throw new GeneralError(resendVerifyEmailErrorMap['inactive']);
+
+    // generate new token
+    const newToken = await tokenGenerator();
+    const userData = {
+      email: user.email,
+      name: user.name,
+      verificationToken: newToken,
     };
+
+    // send verify email
+    const emailService = new EmailService({ logger: this.logger });
+    await emailService.sendVerifyEmail(userData);
+
+    // flush token
+    const data = {
+      id: user.id,
+      token: newToken,
+    };
+    const userModel = new UserModel();
     const flushResult = await userModel.flushVerificationToken(data);
     if (!flushResult)
       throw new PrivateError(resendVerifyEmailErrorMap['flushFailed']);
-    return token;
+    return newToken;
   }
 }
 
