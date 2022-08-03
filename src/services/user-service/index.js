@@ -126,6 +126,7 @@ class UserService extends BaseService {
     const flushResult = await userModel.flushVerificationToken(data);
     if (!flushResult)
       throw new PrivateError(resendVerifyEmailErrorMap['flushFailed']);
+
     return newToken;
   }
 }

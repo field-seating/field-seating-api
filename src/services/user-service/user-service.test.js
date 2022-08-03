@@ -11,6 +11,10 @@ const UserService = require('.');
 const {
   verificationTokenLife,
 } = require('../../constants/token-life-constant');
+const tokenGenerator = require('../helpers/token-generator');
+const sendEmail = require('../helpers/send-email');
+jest.mock('../helpers/token-generator');
+jest.mock('../helpers/send-email');
 
 beforeEach(async () => {
   jest.resetModules();
@@ -193,12 +197,7 @@ describe('user-service.updateUser', () => {
 describe('user-service.resendVerifyEmail', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
-      const UserService = require('.');
-      const userService = new UserService({ logger: console });
-
       // create user and mock token
-      jest.mock('../helpers/token-generator');
-      const tokenGenerator = require('../helpers/token-generator');
       tokenGenerator.mockImplementation(() => {
         return 'expiredTokenToRefresh';
       });
@@ -209,8 +208,6 @@ describe('user-service.resendVerifyEmail', () => {
       tokenGenerator.mockImplementation(() => {
         return 'newToken';
       });
-      jest.mock('../helpers/send-email');
-      const sendEmail = require('../helpers/send-email');
       sendEmail.mockImplementation(() => {
         return {
           sendEmail: {
@@ -231,12 +228,7 @@ describe('user-service.resendVerifyEmail', () => {
   });
   describe('with exceed send rate limit', () => {
     it('should not flush token', async () => {
-      const UserService = require('.');
-      const userService = new UserService({ logger: console });
-
       // create user and mock token
-      jest.mock('../helpers/token-generator');
-      const tokenGenerator = require('../helpers/token-generator');
       tokenGenerator.mockImplementation(() => {
         return 'expiredTokenToRefresh';
       });
@@ -250,9 +242,6 @@ describe('user-service.resendVerifyEmail', () => {
       });
 
       // send email
-
-      jest.mock('../helpers/send-email');
-      const sendEmail = require('../helpers/send-email');
       sendEmail.mockImplementation(() => {
         throw new PrivateError(rateLimiterErrorMap.exceedLimit);
       });
@@ -260,12 +249,13 @@ describe('user-service.resendVerifyEmail', () => {
       try {
         await userService.resendVerifyEmail(newUser);
       } catch (e) {
+        expect(e.code).toBe(sendEmailErrorMap.exceedLimitError.code);
+      } finally {
         await userService.verifyEmail(token);
         const userInfo = await userService.getUserInfo(newUser.id);
         expect(userInfo.status).toBe(statusMap.active);
         expect(sendEmail).toHaveBeenCalled();
         expect(tokenGenerator).toHaveBeenCalledTimes(2);
-        expect(e.code).toBe(sendEmailErrorMap.exceedLimitError.code);
       }
     });
   });
