@@ -8,6 +8,7 @@ const context = require('../context');
 
 const configFromEnv = {
   port: process.env.PORT,
+  buildVersion: process.env.BUILD_VERSION || '',
   jwtSecret: process.env.JWT_SECRET,
   databaseUrl: process.env.DATABASE_URL,
   doKey: process.env.DO_ACCESS_KEY,

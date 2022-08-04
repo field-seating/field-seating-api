@@ -6,6 +6,7 @@ const errorHandler = require('./middleware/error-handler');
 const responseLogger = require('./middleware/response-logger');
 const requestLogger = require('./middleware/request-logger');
 const requestIdMiddleware = require('./middleware/request-id');
+const buildVersionMiddleware = require('./middleware/build-version');
 const requestTimeMiddleware = require('./middleware/request-time');
 const dependenciesMiddleware = require('./middleware/dependencies-middleware');
 const reqRateLimitMiddleware = require('./middleware/req-rate-limit-middleware');
@@ -18,6 +19,7 @@ const app = express();
 const usedPort = port || 3000;
 
 app.use(reqRateLimitMiddleware);
+app.use(buildVersionMiddleware);
 app.use(requestIdMiddleware);
 app.use(requestTimeMiddleware);
 app.use(dependenciesMiddleware);
