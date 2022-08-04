@@ -3,11 +3,18 @@ const assert = require('assert/strict');
 const UserModel = require('../../models/user');
 const signUpErrorMap = require('../../errors/sign-up-error');
 const verifyErrorMap = require('../../errors/verify-error');
+const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const sendEmailErrorMap = require('../../errors/send-email-error');
+const PrivateError = require('../../errors/error/private-error');
 const { statusMap } = require('../../models/user/constants');
 const UserService = require('.');
 const {
   verificationTokenLife,
 } = require('../../constants/token-life-constant');
+const tokenGenerator = require('../helpers/token-generator');
+const sendEmail = require('../helpers/send-email');
+jest.mock('../helpers/token-generator');
+jest.mock('../helpers/send-email');
 
 beforeEach(async () => {
   jest.resetModules();
@@ -187,15 +194,10 @@ describe('user-service.updateUser', () => {
   });
 });
 
-describe('user-service.flushToken', () => {
+describe('user-service.resendVerifyEmail', () => {
   describe('with regular input', () => {
     it('should return new token', async () => {
-      const UserService = require('.');
-      const userService = new UserService({ logger: console });
-
       // create user and mock token
-      jest.mock('../helpers/token-generator');
-      const tokenGenerator = require('../helpers/token-generator');
       tokenGenerator.mockImplementation(() => {
         return 'expiredTokenToRefresh';
       });
@@ -204,14 +206,57 @@ describe('user-service.flushToken', () => {
 
       // verifyUser
       tokenGenerator.mockImplementation(() => {
-        return 'flushToken';
+        return 'newToken';
       });
-      const token = await userService.flushToken(newUser.id);
+      sendEmail.mockImplementation(() => {
+        return {
+          sendEmail: {
+            name: 'user1',
+            email: 'example@example.com',
+            url: `test/verify-email/newToken`,
+            messageIds: ['newTokenId'],
+          },
+        };
+      });
+      const token = await userService.resendVerifyEmail(newUser);
 
-      // make sure get a new token
-      const expectedResult = 'flushToken';
+      const expectedResult = 'newToken';
+      expect(sendEmail).toHaveBeenCalled();
       expect(tokenGenerator).toHaveBeenCalledTimes(2);
       expect(token).toBe(expectedResult);
+    });
+  });
+  describe('with exceed send rate limit', () => {
+    it('should not flush token', async () => {
+      // create user and mock token
+      tokenGenerator.mockImplementation(() => {
+        return 'expiredTokenToRefresh';
+      });
+      const token = 'expiredTokenToRefresh';
+      const email = 'example@example.com';
+      const newUser = await userService.signUp('user1', email, 'password1');
+
+      // verifyUser
+      tokenGenerator.mockImplementation(() => {
+        return 'newToken';
+      });
+
+      // send email
+      sendEmail.mockImplementation(() => {
+        throw new PrivateError(rateLimiterErrorMap.exceedLimit);
+      });
+
+      try {
+        await userService.resendVerifyEmail(newUser);
+      } catch (e) {
+        expect(e.code).toBe(sendEmailErrorMap.exceedLimitError.code);
+      } finally {
+        await userService.verifyEmail(token);
+        const userInfo = await userService.getUserInfo(newUser.id);
+        expect(userInfo.status).toBe(statusMap.active);
+        expect(sendEmail).toHaveBeenCalled();
+        expect(tokenGenerator).toHaveBeenCalledTimes(2);
+      }
     });
   });
 });
