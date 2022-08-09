@@ -13,7 +13,6 @@ const authenticated = (req, res, next) => {
   })(req, res, next);
 };
 const uploadAuthenticate = (req, res, next) => {
-  console.log(req);
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err || !user) return next(); // if no auth
     req.user = user;
