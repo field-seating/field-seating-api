@@ -22,7 +22,7 @@ const { postPhotoRateLimit } = require('../../config/config');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
 
 class PhotoService extends BaseService {
-  async postPhotos(spaceId, files, uniqueKey, userId, date) {
+  async postPhotos(spaceId, files, uniqueKey, date, userId = null) {
     // check space exist
     const spaceModel = new SpaceModel();
     const spaceCheck = await spaceModel.getSpace(parseInt(spaceId));
@@ -80,7 +80,7 @@ class PhotoService extends BaseService {
       return uploadInfo;
     }
 
-    // rate limiter helper
+    // rate limiter helper (for auth user)
     const withRateLimit = rateLimiterHelper({
       windowSize: postPhotoRateLimit.windowSize,
       limit: postPhotoRateLimit.limit,
@@ -88,8 +88,8 @@ class PhotoService extends BaseService {
     });
 
     try {
-      //upload with rate limit
-      const info = await withRateLimit(upload)();
+      //upload with rate limit or not(noAuth)
+      const info = userId ? await withRateLimit(upload)() : await upload();
       this.logger.info('post photo', { info });
       return info;
     } catch (err) {

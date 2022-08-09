@@ -12,4 +12,15 @@ const authenticated = (req, res, next) => {
     next();
   })(req, res, next);
 };
-module.exports = { authenticated };
+const uploadAuthenticate = (req, res, next) => {
+  console.log(req);
+  passport.authenticate('jwt', { session: false }, (err, user) => {
+    if (err || !user) return next(); // if no auth
+    req.user = user;
+
+    req.logger = req.logger.child({ userId: user.id });
+
+    next();
+  })(req, res, next);
+};
+module.exports = { authenticated, uploadAuthenticate };
