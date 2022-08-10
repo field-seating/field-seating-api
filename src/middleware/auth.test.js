@@ -11,19 +11,28 @@ const userService = new UserService({
   logger: console,
 });
 
-describe('uploadAuthenticate', () => {
+describe('bindUser', () => {
   describe('with no auth', () => {
     it('should return req with no user', async () => {
       const req = {
         headers: {},
       };
       const res = {};
-      const next = jest.fn();
+      const spy = jest.fn();
 
-      bindUser(req, res, next);
-      console.log('test1', req);
+      const job = (_req, _res) =>
+        new Promise((resolve) => {
+          const next = () => {
+            spy();
+            resolve();
+          };
+          bindUser(_req, _res, next);
+        });
+
+      await job(req, res);
+
       expect(req).not.toHaveProperty('user');
-      expect(next).toBeCalledTimes(1);
+      expect(spy).toBeCalledTimes(1);
     });
   });
   describe('with a user', () => {
@@ -38,15 +47,24 @@ describe('uploadAuthenticate', () => {
 
       const req = {
         headers: { authorization: `Bearer ${signInUser.token}` },
-        // logger: { child: {} },
+        logger: { child: () => {} },
       };
       const res = {};
-      const next = jest.fn();
+      const spy = jest.fn();
 
-      await bindUser(req, res, next);
-      console.log(req);
+      const job = (_req, _res) =>
+        new Promise((resolve) => {
+          const next = () => {
+            spy();
+            resolve();
+          };
+          bindUser(_req, _res, next);
+        });
+
+      await job(req, res);
+
       expect(req).toHaveProperty('user');
-      expect(next).toBeCalledTimes(1);
+      expect(spy).toBeCalledTimes(1);
     });
   });
 });
