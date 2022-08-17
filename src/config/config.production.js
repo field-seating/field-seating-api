@@ -37,6 +37,10 @@ const config = {
     windowSize: 60 * 60 * 24,
     limit: 50,
   },
+  postReportRateLimit: {
+    windowSize: 60 * 60 * 24,
+    limit: 50,
+  },
 };
 
 module.exports = config;

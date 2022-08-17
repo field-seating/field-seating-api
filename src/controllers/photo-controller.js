@@ -1,4 +1,5 @@
 const PhotoService = require('../services/photo-service');
+const ReportService = require('../services/report-service');
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
 const { paginationLimitMap } = require('../constants/pagination-constant');
@@ -40,6 +41,26 @@ const photoController = {
       );
 
       res.status(200).json(resSuccess(result));
+    } catch (err) {
+      next(err);
+    }
+  },
+  postPhotosReport: async (req, res, next) => {
+    try {
+      const reportIp = req.ip;
+      const userId = getUser(req) ? getUser(req).id : null;
+      const reporter = {
+        ip: reportIp,
+        userId: userId,
+      };
+
+      const content = req.body.content;
+      const photoId = Number(req.params.id);
+
+      const reportService = new ReportService({ logger: req.logger });
+      const report = await reportService.postReport(photoId, content, reporter);
+
+      res.status(200).json(resSuccess(report));
     } catch (err) {
       next(err);
     }
