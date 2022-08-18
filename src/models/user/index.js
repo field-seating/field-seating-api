@@ -1,5 +1,5 @@
 const prisma = require('../../config/prisma');
-const { statusMap } = require('../user/constants');
+const { statusMap, roleMap } = require('../user/constants');
 
 class UserModel {
   constructor() {}
@@ -142,6 +142,27 @@ class UserModel {
     });
 
     return user;
+  }
+  async createAdmin(data) {
+    const createAdmin = await prisma.users.create({
+      data: {
+        email: data.email,
+        name: data.name,
+        password: data.password,
+        verificationToken: data.token,
+        tokenCreatedAt: new Date(),
+        role: roleMap.admin,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+        verificationToken: true,
+      },
+    });
+    return createAdmin;
   }
 
   async _truncate() {
