@@ -38,6 +38,9 @@ class ReportModel {
     });
     return report;
   }
+  async _truncate() {
+    await prisma.reports.deleteMany({});
+  }
 }
 
 module.exports = ReportModel;
