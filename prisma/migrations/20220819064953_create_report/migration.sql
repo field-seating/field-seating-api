@@ -5,7 +5,7 @@ CREATE TABLE `Reports` (
     `photoId` INTEGER NOT NULL,
     `status` VARCHAR(20) NOT NULL,
     `content` VARCHAR(255) NOT NULL,
-    `resolvedTime` DATETIME NOT NULL,
+    `resolvedTime` DATETIME NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
