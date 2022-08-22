@@ -41,7 +41,7 @@ const config = {
   },
   postReportRateLimit: {
     windowSize: 60 * 60 * 24,
-    limit: 50,
+    limit: 5,
   },
 };
 

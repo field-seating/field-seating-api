@@ -12,16 +12,18 @@ class ReportService extends BaseService {
   async postReport(photoId, content, { ip, userId = null } = {}) {
     // check photo exist
     const photoModel = new PhotoModel();
-    const photoCheck = await photoModel.getPhoto(parseInt(photoId));
-    if (!photoCheck) throw new GeneralError(reportErrorMap['wrongPhotoId']);
+    const hasPhoto = await photoModel.getPhoto(parseInt(photoId));
+    if (!hasPhoto) throw new GeneralError(reportErrorMap['wrongPhotoId']);
 
     // if is a user, check report exist
     const reportModel = new ReportModel();
 
     if (userId) {
-      const report = await reportModel.getReport(photoId, userId);
-      if (!isEmpty(report))
-        throw new GeneralError(reportErrorMap['duplicateError']);
+      const report = await reportModel.getReportsByPhotoIdAndUserId(
+        photoId,
+        userId
+      );
+      if (!isEmpty(report)) return report;
     }
 
     // post report
@@ -39,12 +41,12 @@ class ReportService extends BaseService {
       ? rateLimiterHelper({
           windowSize: postReportRateLimit.windowSize,
           limit: postReportRateLimit.limit,
-          key: `postReportService:${userId}`,
+          key: `postReportService:${userId}-${photoId}`,
         })
       : rateLimiterHelper({
           windowSize: postReportRateLimit.windowSize,
           limit: postReportRateLimit.limit,
-          key: `postReportService:${ip}`,
+          key: `postReportService:${ip}-${photoId}`,
         });
 
     try {

@@ -113,7 +113,7 @@ describe('report-service.postReport', () => {
   });
 
   describe('with duplicate report by a user', () => {
-    it('should return duplicate error', async () => {
+    it('should return the exist report info', async () => {
       // create user
       const name = 'testPhoto';
       const email = 'testphoto@example.com';
@@ -170,16 +170,20 @@ describe('report-service.postReport', () => {
       };
       // create first time
       await reportService.postReport(newPhoto.id, content, reporter);
-
-      await assert.rejects(
-        async () => {
-          // create report again
-          await reportService.postReport(newPhoto.id, content, reporter);
-        },
-        {
-          code: reportErrorMap.duplicateError.code,
-        }
+      // create again
+      await reportService.postReport(newPhoto.id, content, reporter);
+      //create again and again (to check only one data in DB)
+      const newReport = await reportService.postReport(
+        newPhoto.id,
+        content,
+        reporter
       );
+
+      expect(newReport).toHaveLength(1); //to check only one data in DB
+      expect(newReport[0].photoId).toBe(newPhoto.id);
+      expect(newReport[0].userId).toBe(userId);
+      expect(newReport[0].content).toBe(content);
+      expect(newReport[0].status).toBe(statusMap.pending);
     });
   });
 

@@ -21,7 +21,7 @@ class ReportModel {
     });
     return newReport;
   }
-  async getReport(photoId, userId) {
+  async getReportsByPhotoIdAndUserId(photoId, userId) {
     const report = await prisma.reports.findMany({
       where: {
         photoId: photoId,
