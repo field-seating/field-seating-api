@@ -25,7 +25,7 @@ const bindUser = (req, res, next) => {
 const authenticatedAdmin = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user) => {
     if (err || !user || user.role !== roleMap.admin)
-      next(new GeneralError(authErrorMap['unauthorized']));
+      return next(new GeneralError(authErrorMap['unauthorizedAdmin']));
 
     req.user = user;
 

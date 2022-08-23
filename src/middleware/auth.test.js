@@ -1,4 +1,4 @@
-const { bindUser } = require('./auth');
+const { bindUser, authenticatedAdmin } = require('./auth');
 const UserModel = require('../models/user');
 const UserService = require('../services/user-service');
 
@@ -69,8 +69,8 @@ describe('bindUser', () => {
   });
 });
 describe('authenticatedAdmin', () => {
-  describe('with role admin', () => {
-    it('should return req with no user', async () => {
+  describe('with role noAuth', () => {
+    it('should return error unauthorized', async () => {
       const req = {
         headers: {},
       };
@@ -83,7 +83,7 @@ describe('authenticatedAdmin', () => {
             spy();
             resolve();
           };
-          bindUser(_req, _res, next);
+          authenticatedAdmin(_req, _res, next);
         });
 
       await job(req, res);
@@ -93,7 +93,7 @@ describe('authenticatedAdmin', () => {
     });
   });
   describe('with role user', () => {
-    it('should return req user', async () => {
+    it('should return error unauthorized', async () => {
       // create user
       const name = 'testUser';
       const email = 'testuser@example.com';
@@ -115,12 +115,48 @@ describe('authenticatedAdmin', () => {
             spy();
             resolve();
           };
-          bindUser(_req, _res, next);
+          authenticatedAdmin(_req, _res, next);
         });
 
       await job(req, res);
 
+      expect(req).not.toHaveProperty('user');
+      expect(spy).toBeCalledTimes(1);
+    });
+  });
+  describe('with role admin', () => {
+    it('should return req user', async () => {
+      // create user
+      const userModel = new UserModel();
+      const data = {
+        email: 'testAdmin@example.com',
+        name: 'testAdmin',
+        password: '12345678',
+        token: 'adminTest',
+      };
+      const newAdmin = await userModel.createAdmin(data);
+
+      const signInAdmin = await userService.signIn(newAdmin.id);
+
+      const req = {
+        headers: { authorization: `Bearer ${signInAdmin.token}` },
+        logger: { child: () => {} },
+      };
+      const res = {};
+      const spy = jest.fn();
+
+      const job = (_req, _res) =>
+        new Promise((resolve) => {
+          const next = () => {
+            spy();
+            resolve();
+          };
+          authenticatedAdmin(_req, _res, next);
+        });
+
+      await job(req, res);
       expect(req).toHaveProperty('user');
+      expect(req.user.role).toBe('admin');
       expect(spy).toBeCalledTimes(1);
     });
   });
