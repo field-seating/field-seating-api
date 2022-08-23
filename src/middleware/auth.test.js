@@ -69,7 +69,7 @@ describe('bindUser', () => {
   });
 });
 describe('authenticatedAdmin', () => {
-  describe('with role noAuth', () => {
+  describe('without token', () => {
     it('should return error unauthorized', async () => {
       const req = {
         headers: {},
