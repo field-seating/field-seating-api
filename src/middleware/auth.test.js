@@ -127,16 +127,16 @@ describe('authenticatedAdmin', () => {
   describe('with role admin', () => {
     it('should return req user', async () => {
       // create user
-      const userModel = new UserModel();
-      const data = {
-        email: 'testAdmin@example.com',
-        name: 'testAdmin',
-        password: '12345678',
-        token: 'adminTest',
-      };
-      const newAdmin = await userModel.createAdmin(data);
+      // create user
+      const name = 'testUser';
+      const email = 'testuser@example.com';
+      const password = '12345678';
+      const newUser = await userService.signUp(name, email, password);
 
-      const signInAdmin = await userService.signIn(newAdmin.id);
+      const userModel = new UserModel();
+      await userModel.updateToAdmin(newUser.id);
+
+      const signInAdmin = await userService.signIn(newUser.id);
 
       const req = {
         headers: { authorization: `Bearer ${signInAdmin.token}` },

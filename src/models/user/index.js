@@ -143,14 +143,12 @@ class UserModel {
 
     return user;
   }
-  async createAdmin(data) {
-    const createAdmin = await prisma.users.create({
+  async updateToAdmin(id) {
+    const adminUser = await prisma.users.update({
+      where: {
+        id,
+      },
       data: {
-        email: data.email,
-        name: data.name,
-        password: data.password,
-        verificationToken: data.token,
-        tokenCreatedAt: new Date(),
         role: roleMap.admin,
       },
       select: {
@@ -159,10 +157,9 @@ class UserModel {
         name: true,
         role: true,
         status: true,
-        verificationToken: true,
       },
     });
-    return createAdmin;
+    return adminUser;
   }
 
   async _truncate() {
