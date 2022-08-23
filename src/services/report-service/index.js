@@ -18,13 +18,11 @@ class ReportService extends BaseService {
     // if is a user, check report exist
     const reportModel = new ReportModel();
 
-    if (userId) {
-      const report = await reportModel.getReportsByPhotoIdAndUserId(
-        photoId,
-        userId
-      );
-      if (!isEmpty(report)) return report;
-    }
+    const report = userId
+      ? await reportModel.getReportsByPhotoIdAndUserId(photoId, userId)
+      : [];
+
+    if (!isEmpty(report)) return report;
 
     // post report
     async function createReport() {
