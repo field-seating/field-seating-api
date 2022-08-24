@@ -6,6 +6,7 @@ const { bindUser } = require('../../middleware/auth');
 const router = express.Router();
 
 router.get('/', photoController.getPhotos);
+router.post('/:id/report', bindUser, photoController.postPhotosReport);
 router.post('/', bindUser, uploadImages, photoController.postPhotos);
 
 module.exports = router;

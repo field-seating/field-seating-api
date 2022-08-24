@@ -28,6 +28,7 @@ model Users {
   photos    Photos[]
   collections Collections[]
   reviews Reviews[]
+  reports    Reports[]
   passwordResetTokens PasswordResetTokens[]
 }
 
@@ -183,6 +184,7 @@ model Photos {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   reviews Reviews[]
+  reports Reports[]
 }
 
 model Collections {
@@ -218,6 +220,19 @@ model PasswordResetTokens {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   @@index([state])
+}
+
+model Reports {
+  id        Int      @id @default(autoincrement())
+  user     Users?    @relation(fields: [userId], references: [id])
+  userId   Int?
+  photo     Photos    @relation(fields: [photoId], references: [id])
+  photoId   Int
+  status    String   @db.VarChar(20)
+  content   String   @db.VarChar(255)
+  resolvedTime DateTime? @db.DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum PasswordResetTokenState {
