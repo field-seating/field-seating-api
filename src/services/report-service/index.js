@@ -7,6 +7,9 @@ const ReportModel = require('../../models/report');
 const rateLimiterHelper = require('../../utils/rate-limiter');
 const { postReportRateLimit } = require('../../config/config');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const renderReportPhotosResponse = require('../helpers/render-report-photos-response-helper');
+const { sizeMap } = require('../../constants/resize-constant');
+const { bucketMap } = require('../../constants/upload-constant');
 
 class ReportService extends BaseService {
   async postReport(photoId, content, { ip, userId = null } = {}) {
@@ -58,6 +61,35 @@ class ReportService extends BaseService {
       }
       throw err;
     }
+  }
+  async getReportPhotos(limit) {
+    // get reportPhotos
+    const reportModel = new ReportModel();
+    const reportPhotos = await reportModel.getReportsPhotos(limit);
+
+    // if no photos data
+    if (isEmpty(reportPhotos.data))
+      return {
+        reportPhotos: [],
+        pagination: {
+          cursorId: null,
+        },
+      };
+
+    // render photos response
+    const photosData = renderReportPhotosResponse(
+      reportPhotos.data,
+      sizeMap.seatPhoto,
+      bucketMap.photos
+    );
+
+    const result = {
+      reportPhotos: photosData,
+      pagination: {
+        cursorId: reportPhotos.cursorId,
+      },
+    };
+    return result;
   }
 }
 

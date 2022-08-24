@@ -38,6 +38,35 @@ class ReportModel {
     });
     return report;
   }
+  async getReportsPhotos(limit) {
+    const reportPhotos = await prisma.reports.findMany({
+      take: limit,
+      where: {},
+      select: {
+        id: true,
+        userId: true,
+        status: true,
+        content: true,
+        createdAt: true,
+        photoId: true,
+        photo: {
+          select: {
+            id: true,
+            path: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    const result = {
+      data: reportPhotos,
+      cursorId: null,
+    };
+    return result;
+  }
   async _truncate() {
     await prisma.reports.deleteMany({});
   }
