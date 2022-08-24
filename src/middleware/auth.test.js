@@ -127,7 +127,6 @@ describe('authenticatedAdmin', () => {
   describe('with role admin', () => {
     it('should return req user', async () => {
       // create user
-      // create user
       const name = 'testUser';
       const email = 'testuser@example.com';
       const password = '12345678';
