@@ -67,7 +67,7 @@ class ReportService extends BaseService {
     const reportModel = new ReportModel();
     const reportPhotos = await reportModel.getReportsPhotos(limit);
 
-    // if no photos data
+    // if no report's photos data
     if (isEmpty(reportPhotos.data))
       return {
         reportPhotos: [],
@@ -76,15 +76,15 @@ class ReportService extends BaseService {
         },
       };
 
-    // render photos response
-    const photosData = renderReportPhotosResponse(
+    // render report's photos response
+    const reportPhotosData = renderReportPhotosResponse(
       reportPhotos.data,
       sizeMap.seatPhoto,
       bucketMap.photos
     );
 
     const result = {
-      reportPhotos: photosData,
+      reportPhotos: reportPhotosData,
       pagination: {
         cursorId: reportPhotos.cursorId,
       },
