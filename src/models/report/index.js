@@ -38,7 +38,7 @@ class ReportModel {
     });
     return report;
   }
-  async getReportsPhotos(limit) {
+  async getReportsPhotos({ limit }) {
     const reportPhotos = await prisma.reports.findMany({
       take: limit,
       where: {},

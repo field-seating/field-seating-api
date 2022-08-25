@@ -10,6 +10,7 @@ const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
 const renderReportPhotosResponse = require('../helpers/render-report-photos-response-helper');
 const { sizeMap } = require('../../constants/resize-constant');
 const { bucketMap } = require('../../constants/upload-constant');
+const resWithPagination = require('../helpers/response');
 
 class ReportService extends BaseService {
   async postReport(photoId, content, { ip, userId = null } = {}) {
@@ -62,10 +63,10 @@ class ReportService extends BaseService {
       throw err;
     }
   }
-  async getReportPhotos(limit) {
+  async getReportPhotos(paginationOption) {
     // get reportPhotos
     const reportModel = new ReportModel();
-    const reportPhotos = await reportModel.getReportsPhotos(limit);
+    const reportPhotos = await reportModel.getReportsPhotos(paginationOption);
 
     // if no report's photos data
     if (isEmpty(reportPhotos.data))
@@ -83,13 +84,11 @@ class ReportService extends BaseService {
       bucketMap.photos
     );
 
-    const result = {
-      reportPhotos: reportPhotosData,
-      pagination: {
-        cursorId: reportPhotos.cursorId,
-      },
-    };
-    return result;
+    return resWithPagination(
+      reportPhotosData,
+      'reportPhoto',
+      reportPhotos.cursorId
+    );
   }
 }
 

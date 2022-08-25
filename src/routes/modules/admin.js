@@ -3,6 +3,6 @@ const adminController = require('../../controllers/admin-controller');
 
 const router = express.Router();
 
-router.get('/report/photos', adminController.getReportPhotos);
+router.get('/reports/photos', adminController.getReportPhotos);
 
 module.exports = router;

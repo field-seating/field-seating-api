@@ -5,13 +5,13 @@ const { paginationLimitMap } = require('../constants/pagination-constant');
 const adminController = {
   getReportPhotos: async (req, res, next) => {
     try {
-      const limit = req.query.limit
-        ? Number(req.query.limit)
-        : paginationLimitMap.reports;
-
+      const limit = req.query.limit;
+      const paginationOption = {
+        limit: limit ? Number(limit) : paginationLimitMap.reports,
+      };
       // get reportPhotos
       const reportService = new ReportService({ logger: req.logger });
-      const result = await reportService.getReportPhotos(limit);
+      const result = await reportService.getReportPhotos(paginationOption);
 
       res.status(200).json(resSuccess(result));
     } catch (err) {
