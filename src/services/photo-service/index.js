@@ -20,6 +20,7 @@ const renderPhotoResponse = require('../helpers/render-photo-response-helper');
 const rateLimiterHelper = require('../../utils/rate-limiter');
 const { postPhotoRateLimit } = require('../../config/config');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
+const resPagination = require('../helpers/response');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, date, userId = null) {
@@ -118,9 +119,7 @@ class PhotoService extends BaseService {
       if (isNil(startPhoto))
         return {
           photos: [],
-          pagination: {
-            cursorId: null,
-          },
+          pagination: resPagination(),
         };
 
       //get other photos
@@ -149,9 +148,7 @@ class PhotoService extends BaseService {
     if (isEmpty(photos.data))
       return {
         photos: [],
-        pagination: {
-          cursorId: null,
-        },
+        pagination: resPagination(),
       };
 
     // get photos which has review
@@ -178,9 +175,7 @@ class PhotoService extends BaseService {
 
     const result = {
       photos: photosData,
-      pagination: {
-        cursorId: photos.cursorId,
-      },
+      pagination: resPagination(photos.cursorId),
     };
     return result;
   }
