@@ -1,4 +1,8 @@
-function resWithPagination(data, dataName, cursorId) {
+function resWithPagination({
+  dataName = 'data',
+  data = null,
+  cursorId = null,
+} = {}) {
   const result = {};
 
   result[dataName] = data;

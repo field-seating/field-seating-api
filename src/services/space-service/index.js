@@ -9,6 +9,7 @@ const renderPhotoResponse = require('../helpers/render-photo-response-helper');
 const sortHelper = require('../helpers/sort-helper');
 const { sizeMap } = require('../../constants/resize-constant');
 const { bucketMap } = require('../../constants/upload-constant');
+const resWithPagination = require('../helpers/response');
 
 class SpaceService extends BaseService {
   async getSpace(id) {
@@ -31,12 +32,9 @@ class SpaceService extends BaseService {
 
       // if no photos data
       if (isEmpty(photos.data))
-        return {
-          photos: [],
-          pagination: {
-            cursorId: null,
-          },
-        };
+        return resWithPagination({
+          dataName: 'photos',
+        });
 
       // get photos which has review
       const photosIds = photos.data.map((photo) => {
@@ -60,13 +58,12 @@ class SpaceService extends BaseService {
         bucketMap.photos
       );
 
-      const result = {
-        photos: photosData,
-        pagination: {
-          cursorId: photos.cursorId,
-        },
+      const dataset = {
+        dataName: 'photos',
+        data: photosData,
+        cursorId: photos.cursorId,
       };
-      return result;
+      return resWithPagination(dataset);
     }
 
     // **if sort by useful, we get all data and sort here
@@ -111,13 +108,12 @@ class SpaceService extends BaseService {
     // select data
     photosData = photosData.slice(0, paginationOption.limit);
 
-    const result = {
-      photos: photosData,
-      pagination: {
-        cursorId: null,
-      },
+    const dataset = {
+      dataName: 'photos',
+      data: photosData,
+      cursorId: null,
     };
-    return result;
+    return resWithPagination(dataset);
   }
 }
 

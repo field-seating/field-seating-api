@@ -70,12 +70,9 @@ class ReportService extends BaseService {
 
     // if no report's photos data
     if (isEmpty(reportPhotos.data))
-      return {
-        reportPhotos: [],
-        pagination: {
-          cursorId: null,
-        },
-      };
+      return resWithPagination({
+        dataName: 'reportPhotos',
+      });
 
     // render report's photos response
     const reportPhotosData = renderReportPhotosResponse(
@@ -83,12 +80,12 @@ class ReportService extends BaseService {
       sizeMap.seatPhoto,
       bucketMap.photos
     );
-
-    return resWithPagination(
-      reportPhotosData,
-      'reportPhoto',
-      reportPhotos.cursorId
-    );
+    const dataset = {
+      dataName: 'reportPhotos',
+      data: reportPhotosData,
+      cursorId: reportPhotos.cursorId,
+    };
+    return resWithPagination(dataset);
   }
 }
 
