@@ -20,7 +20,7 @@ const renderPhotoResponse = require('../helpers/render-photo-response-helper');
 const rateLimiterHelper = require('../../utils/rate-limiter');
 const { postPhotoRateLimit } = require('../../config/config');
 const rateLimiterErrorMap = require('../../errors/rate-limiter-error');
-const resWithPagination = require('../helpers/response');
+const resPagination = require('../helpers/response');
 
 class PhotoService extends BaseService {
   async postPhotos(spaceId, files, uniqueKey, date, userId = null) {
@@ -117,9 +117,10 @@ class PhotoService extends BaseService {
       const startPhoto = await photoModel.getPhoto(startPhotoId);
 
       if (isNil(startPhoto))
-        return resWithPagination({
-          dataName: 'photos',
-        });
+        return {
+          photos: [],
+          pagination: resPagination(),
+        };
 
       //get other photos
       const otherPhotos = await photoModel.getOtherPhotosBySpace(
@@ -145,9 +146,10 @@ class PhotoService extends BaseService {
 
     // if no photos data
     if (isEmpty(photos.data))
-      return resWithPagination({
-        dataName: 'photos',
-      });
+      return {
+        photos: [],
+        pagination: resPagination(),
+      };
 
     // get photos which has review
     const photosIds = photos.data.map((photo) => {
@@ -171,12 +173,11 @@ class PhotoService extends BaseService {
       bucketMap.photos
     );
 
-    const dataset = {
-      dataName: 'photos',
-      data: photosData,
-      cursorId: photos.cursorId,
+    const result = {
+      photos: photosData,
+      pagination: resPagination(photos.cursorId),
     };
-    return resWithPagination(dataset);
+    return result;
   }
 }
 
