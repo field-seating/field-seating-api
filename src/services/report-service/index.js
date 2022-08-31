@@ -17,7 +17,8 @@ class ReportService extends BaseService {
     // check photo exist
     const photoModel = new PhotoModel();
     const hasPhoto = await photoModel.getPhoto(parseInt(photoId));
-    if (!hasPhoto) throw new GeneralError(reportErrorMap['wrongPhotoId']);
+    if (isEmpty(hasPhoto))
+      throw new GeneralError(reportErrorMap['wrongPhotoId']);
 
     // if is a user, check report exist
     const reportModel = new ReportModel();
@@ -87,6 +88,26 @@ class ReportService extends BaseService {
       pagination: resPagination(reportPhotos.cursorId),
     };
     return result;
+  }
+  async putReportsByReportId(reportId, status) {
+    // check report exist and status is pending
+    const reportModel = new ReportModel();
+    const hasReport = await reportModel.getReportByReportId(parseInt(reportId));
+    if (!hasReport) throw new GeneralError(reportErrorMap['wrongReportId']);
+    if (hasReport && hasReport.status !== 'pending')
+      throw new GeneralError(reportErrorMap['reportAlreadyResolve']);
+
+    // put reports by photoId
+    const photoId = hasReport.photoId;
+    const putReports = await reportModel.putReportsByPhotoId(photoId, status);
+
+    // delete photo if status is deleted
+    if (status === 'deleted') {
+      const photoModel = new PhotoModel();
+      await photoModel.deletePhoto(photoId);
+    }
+
+    return putReports;
   }
 }
 

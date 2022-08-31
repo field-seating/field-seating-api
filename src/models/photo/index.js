@@ -27,7 +27,7 @@ class PhotoModel {
     COUNT(if(Reviews.useful=${usefulMap.down},true,null)) AS uselessCount,
     COUNT(if(Reviews.useful=${usefulMap.up},true,null)) - COUNT(if(Reviews.useful=${usefulMap.down},true,null))  AS netUsefulCount
     FROM Reviews
-    WHERE Reviews.photoId IN (select Photos.id FROM Photos where Photos.spaceId = ${spaceId})
+    WHERE Reviews.photoId IN (select Photos.id FROM Photos where Photos.spaceId = ${spaceId} AND Photos.isDeleted = 0)
     group by photoId
     ORDER BY netUsefulCount desc `;
 
@@ -37,6 +37,7 @@ class PhotoModel {
     const photos = await prisma.photos.findMany({
       where: {
         spaceId: Number(spaceId),
+        isDeleted: 0,
       },
       take: limit,
       select: {
@@ -68,6 +69,7 @@ class PhotoModel {
       where: {
         id: { not: Number(photoId) },
         spaceId: Number(spaceId),
+        isDeleted: 0,
       },
       select: {
         id: true,
@@ -93,9 +95,10 @@ class PhotoModel {
     return result;
   }
   async getPhoto(id) {
-    const photo = await prisma.photos.findUnique({
+    const photo = await prisma.photos.findMany({
       where: {
         id: Number(id),
+        isDeleted: 0,
       },
       select: {
         id: true,
@@ -114,7 +117,9 @@ class PhotoModel {
   }
   async getPhotos({ limit } = {}, order = orderMap.desc) {
     const photos = await prisma.photos.findMany({
-      where: {},
+      where: {
+        isDeleted: 0,
+      },
       take: limit,
       select: {
         id: true,
@@ -153,6 +158,23 @@ class PhotoModel {
     ORDER BY netUsefulCount desc `;
 
     return photosWithReviewCount;
+  }
+  async deletePhoto(photoId) {
+    const deletePhoto = await prisma.photos.update({
+      where: { id: photoId },
+      data: {
+        isDeleted: 1,
+        deletedAt: new Date(Date.now()),
+      },
+      select: {
+        id: true,
+        userId: true,
+        spaceId: true,
+        path: true,
+        isDeleted: true,
+      },
+    });
+    return deletePhoto;
   }
   async _truncate() {
     await prisma.photos.deleteMany({});

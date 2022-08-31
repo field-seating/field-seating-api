@@ -11,6 +11,14 @@ const reportErrorMap = {
     message: '您已回報過此張照片',
     code: 'rp003',
   },
+  wrongReportId: {
+    message: '此回報不存在',
+    code: 'rp004',
+  },
+  reportAlreadyResolve: {
+    message: '此回報已結案',
+    code: 'rp005',
+  },
 };
 
 module.exports = reportErrorMap;
