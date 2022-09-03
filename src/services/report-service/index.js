@@ -1,4 +1,4 @@
-const { isEmpty } = require('ramda');
+const { isEmpty, isNil } = require('ramda');
 const GeneralError = require('../../errors/error/general-error');
 const PhotoModel = require('../../models/photo');
 const BaseService = require('../base');
@@ -11,14 +11,14 @@ const renderReportPhotosResponse = require('../helpers/render-report-photos-resp
 const { sizeMap } = require('../../constants/resize-constant');
 const { bucketMap } = require('../../constants/upload-constant');
 const resPagination = require('../helpers/response');
+const { statusMap } = require('../../models/report/constant');
 
 class ReportService extends BaseService {
   async postReport(photoId, content, { ip, userId = null } = {}) {
     // check photo exist
     const photoModel = new PhotoModel();
-    const hasPhoto = await photoModel.getPhoto(parseInt(photoId));
-    if (isEmpty(hasPhoto))
-      throw new GeneralError(reportErrorMap['wrongPhotoId']);
+    const photo = await photoModel.getPhoto(parseInt(photoId));
+    if (isNil(photo)) throw new GeneralError(reportErrorMap['wrongPhotoId']);
 
     // if is a user, check report exist
     const reportModel = new ReportModel();
@@ -92,17 +92,17 @@ class ReportService extends BaseService {
   async putReportsByReportId(reportId, status) {
     // check report exist and status is pending
     const reportModel = new ReportModel();
-    const hasReport = await reportModel.getReportByReportId(parseInt(reportId));
-    if (!hasReport) throw new GeneralError(reportErrorMap['wrongReportId']);
-    if (hasReport && hasReport.status !== 'pending')
+    const report = await reportModel.getReportByReportId(parseInt(reportId));
+    if (!report) throw new GeneralError(reportErrorMap['wrongReportId']);
+    if (report && report.status !== 'pending')
       throw new GeneralError(reportErrorMap['reportAlreadyResolve']);
 
     // put reports by photoId
-    const photoId = hasReport.photoId;
-    const putReports = await reportModel.putReportsByPhotoId(photoId, status);
+    const photoId = report.photoId;
+    const putReports = await reportModel.putPendingReports(photoId, status);
 
     // delete photo if status is deleted
-    if (status === 'deleted') {
+    if (status === statusMap.deleted) {
       const photoModel = new PhotoModel();
       await photoModel.deletePhoto(photoId);
     }

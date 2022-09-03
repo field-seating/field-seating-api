@@ -115,8 +115,7 @@ class PhotoService extends BaseService {
       // has startPhoto query
       //get start photo
       const startPhoto = await photoModel.getPhoto(startPhotoId);
-
-      if (isEmpty(startPhoto))
+      if (isNil(startPhoto))
         return {
           photos: [],
           pagination: resPagination(),
@@ -124,8 +123,8 @@ class PhotoService extends BaseService {
 
       //get other photos
       const otherPhotos = await photoModel.getOtherPhotosBySpace(
-        startPhoto[0].spaceId,
-        startPhoto[0].id,
+        startPhoto.spaceId,
+        startPhoto.id,
         paginationOption
       );
 
@@ -137,7 +136,7 @@ class PhotoService extends BaseService {
 
       const limitData = otherPhotos.data.slice(0, exceedMount);
 
-      const combineData = [startPhoto[0]].concat(limitData);
+      const combineData = [startPhoto].concat(limitData);
       photos = {
         data: combineData,
         cursorId: null,

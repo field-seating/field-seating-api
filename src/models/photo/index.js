@@ -1,3 +1,5 @@
+const R = require('ramda');
+const { isNil } = require('ramda');
 const prisma = require('../../config/prisma');
 const { Prisma } = require('prisma/prisma-client');
 const { usefulMap } = require('../review/constant');
@@ -95,13 +97,13 @@ class PhotoModel {
     return result;
   }
   async getPhoto(id) {
-    const photo = await prisma.photos.findMany({
+    const photo = await prisma.photos.findUnique({
       where: {
         id: Number(id),
-        isDeleted: 0,
       },
       select: {
         id: true,
+        isDeleted: true,
         user: {
           select: {
             id: true,
@@ -113,7 +115,10 @@ class PhotoModel {
         path: true,
       },
     });
-    return photo;
+    if (isNil(photo) || photo.isDeleted === 1) return null;
+
+    const result = R.omit(['isDeleted'], photo);
+    return result;
   }
   async getPhotos({ limit } = {}, order = orderMap.desc) {
     const photos = await prisma.photos.findMany({

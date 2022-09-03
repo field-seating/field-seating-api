@@ -83,7 +83,7 @@ class ReportModel {
     });
     return report;
   }
-  async putReportsByPhotoId(photoId, status) {
+  async putPendingReports(photoId, status) {
     const putReports = await prisma.reports.updateMany({
       where: {
         photoId: photoId,

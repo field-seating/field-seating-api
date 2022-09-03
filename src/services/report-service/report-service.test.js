@@ -1,5 +1,5 @@
 const assert = require('assert/strict');
-const { isEmpty } = require('ramda');
+const { isNil } = require('ramda');
 const PhotoModel = require('../../models/photo');
 const FieldModel = require('../../models/field');
 const LevelModel = require('../../models/level');
@@ -188,7 +188,7 @@ describe('report-service.postReport', () => {
     });
   });
 
-  describe('with not existed photo', () => {
+  describe('without existed photo', () => {
     it('should return wrongPhotoId error', async () => {
       // create space
       const fieldModel = new FieldModel();
@@ -380,7 +380,7 @@ describe('report-service.putReportsByReportId', () => {
 
       // data check photo was deleted
       const deletedPhoto = await photoModel.getPhoto(newPhoto.id);
-      const photoDeleted = isEmpty(deletedPhoto);
+      const photoDeleted = isNil(deletedPhoto);
 
       expect(putReports.count).toBe(2);
       expect(photoDeleted).toBe(true);
@@ -453,7 +453,7 @@ describe('report-service.putReportsByReportId', () => {
       const reportPhoto = await photoModel.getPhoto(newPhoto.id);
 
       expect(putReports.count).toBe(2);
-      expect(reportPhoto[0].id).toBe(newPhoto.id);
+      expect(reportPhoto.id).toBe(newPhoto.id);
     });
   });
   describe('with initial status not pending', () => {
@@ -527,7 +527,7 @@ describe('report-service.putReportsByReportId', () => {
       );
     });
   });
-  describe('with not exist reportId', () => {
+  describe('without exist reportId', () => {
     it('should return wrongReportId error ', async () => {
       // create space
       const fieldModel = new FieldModel();
