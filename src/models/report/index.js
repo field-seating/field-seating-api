@@ -67,6 +67,34 @@ class ReportModel {
     };
     return result;
   }
+  async getReportByReportId(reportId) {
+    const report = await prisma.reports.findUnique({
+      where: {
+        id: reportId,
+      },
+      select: {
+        id: true,
+        userId: true,
+        photoId: true,
+        status: true,
+        content: true,
+        createdAt: true,
+      },
+    });
+    return report;
+  }
+  async putPendingReports(photoId, status) {
+    const putReports = await prisma.reports.updateMany({
+      where: {
+        photoId: photoId,
+        status: 'pending',
+      },
+      data: {
+        status: status,
+      },
+    });
+    return putReports;
+  }
   async _truncate() {
     await prisma.reports.deleteMany({});
   }

@@ -18,6 +18,20 @@ const adminController = {
       next(err);
     }
   },
+  putReportsByReportId: async (req, res, next) => {
+    try {
+      const reportId = req.params.id;
+      const status = req.body.status;
+
+      // put reports
+      const reportService = new ReportService({ logger: req.logger });
+      const result = await reportService.putReportsByReportId(reportId, status);
+
+      res.status(200).json(resSuccess(result));
+    } catch (err) {
+      next(err);
+    }
+  },
 };
 
 module.exports = adminController;

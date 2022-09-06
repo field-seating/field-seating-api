@@ -181,8 +181,10 @@ model Photos {
   recordId   Int?
   path String   @unique @db.VarChar(255)
   date      DateTime @db.Date
+  isDeleted Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime? @db.DateTime()
   reviews Reviews[]
   reports Reports[]
 }

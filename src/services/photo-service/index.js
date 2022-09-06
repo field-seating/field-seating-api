@@ -115,7 +115,6 @@ class PhotoService extends BaseService {
       // has startPhoto query
       //get start photo
       const startPhoto = await photoModel.getPhoto(startPhotoId);
-
       if (isNil(startPhoto))
         return {
           photos: [],
