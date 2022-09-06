@@ -94,7 +94,7 @@ class ReportService extends BaseService {
     const reportModel = new ReportModel();
     const report = await reportModel.getReportByReportId(parseInt(reportId));
     if (!report) throw new GeneralError(reportErrorMap['wrongReportId']);
-    if (report && report.status !== 'pending')
+    if (report && report.status !== statusMap.pending)
       throw new GeneralError(reportErrorMap['reportAlreadyResolve']);
 
     // put reports by photoId

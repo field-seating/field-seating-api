@@ -169,7 +169,7 @@ class PhotoModel {
       where: { id: photoId },
       data: {
         isDeleted: 1,
-        deletedAt: new Date(Date.now()),
+        deletedAt: new Date(),
       },
       select: {
         id: true,
