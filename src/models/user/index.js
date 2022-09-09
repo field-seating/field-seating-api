@@ -1,5 +1,5 @@
 const prisma = require('../../config/prisma');
-const { statusMap } = require('../user/constants');
+const { statusMap, roleMap } = require('../user/constants');
 
 class UserModel {
   constructor() {}
@@ -142,6 +142,24 @@ class UserModel {
     });
 
     return user;
+  }
+  async updateToAdmin(id) {
+    const adminUser = await prisma.users.update({
+      where: {
+        id,
+      },
+      data: {
+        role: roleMap.admin,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        status: true,
+      },
+    });
+    return adminUser;
   }
 
   async _truncate() {

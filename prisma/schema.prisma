@@ -28,6 +28,7 @@ model Users {
   photos    Photos[]
   collections Collections[]
   reviews Reviews[]
+  reports    Reports[]
   passwordResetTokens PasswordResetTokens[]
 }
 
@@ -172,17 +173,20 @@ model Records {
 
 model Photos {
   id        Int      @id @default(autoincrement())
-  user     Users    @relation(fields: [userId], references: [id])
-  userId   Int
+  user     Users?    @relation(fields: [userId], references: [id])
+  userId   Int?
   space     Spaces    @relation(fields: [spaceId], references: [id])
   spaceId   Int
   record     Records?    @relation(fields: [recordId], references: [id])
   recordId   Int?
   path String   @unique @db.VarChar(255)
   date      DateTime @db.Date
+  isDeleted Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  deletedAt DateTime? @db.DateTime()
   reviews Reviews[]
+  reports Reports[]
 }
 
 model Collections {
@@ -218,6 +222,19 @@ model PasswordResetTokens {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   @@index([state])
+}
+
+model Reports {
+  id        Int      @id @default(autoincrement())
+  user     Users?    @relation(fields: [userId], references: [id])
+  userId   Int?
+  photo     Photos    @relation(fields: [photoId], references: [id])
+  photoId   Int
+  status    String   @db.VarChar(20)
+  content   String   @db.VarChar(255)
+  resolvedTime DateTime? @db.DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 enum PasswordResetTokenState {

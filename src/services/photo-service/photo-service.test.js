@@ -126,8 +126,8 @@ describe('photo-service.postPhoto', () => {
         spaceId,
         file,
         uniqueKey,
-        userId,
-        dateTime
+        dateTime,
+        userId
       );
 
       const expectedResult = [
@@ -225,8 +225,8 @@ describe('photo-service.postPhoto', () => {
             spaceId,
             file,
             uniqueKey,
-            userId,
-            dateTime
+            dateTime,
+            userId
           );
         },
         {
@@ -319,21 +319,110 @@ describe('photo-service.postPhoto', () => {
             spaceId,
             file,
             uniqueKey,
-            userId,
-            dateTime
+            dateTime,
+            userId
           );
           await photoService.postPhotos(
             spaceId,
             file,
             uniqueKey,
-            userId,
-            dateTime
+            dateTime,
+            userId
           );
         },
         {
           code: postPhotoErrorMap.duplicatePath.code,
         }
       );
+    });
+  });
+  describe('with no userId input', () => {
+    it('should return desired values with url', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // creat file
+      const file = [
+        {
+          fieldname: 'images',
+          originalname: 'test.jpeg',
+          encoding: '7bit',
+          mimetype: 'image/jpeg',
+          buffer: Buffer.from('whatever'),
+        },
+      ];
+      const uniqueKey = 'testReqId';
+      const userId = null;
+      const spaceId = newSpace.id;
+      const dateTime = new Date();
+
+      // mock utils
+      randomHashName.mockImplementation(() => {
+        return 'testPath';
+      });
+      resizeImages.mockImplementation(() => {
+        return [
+          {
+            data: Buffer.from('whatever'),
+            info: {
+              format: 'jpeg',
+              width: 3200,
+              height: 3200,
+              channels: 3,
+              premultiplied: false,
+              size: 743823,
+            },
+            filename: 'testPath',
+          },
+        ];
+      });
+      uploadS3.mockImplementation(() => {
+        return true;
+      });
+
+      // create photo
+      const newPhoto = await photoService.postPhotos(
+        spaceId,
+        file,
+        uniqueKey,
+        dateTime,
+        userId
+      );
+
+      const expectedResult = [
+        {
+          spaceId,
+        },
+      ];
+
+      expect(newPhoto).toMatchObject(expectedResult);
+      expect(newPhoto[0]).toHaveProperty('dataset');
     });
   });
 });
