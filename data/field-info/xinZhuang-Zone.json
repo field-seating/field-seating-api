@@ -1,7 +1,7 @@
 {
   "fields": [
     {
-      "name": "樂天桃園棒球場",
+      "name": "新莊棒球場",
       "img": "",
       "levels": ["下層", "上層"],
       "orientations": ["一壘側", "三壘側"]
@@ -9,355 +9,336 @@
   ],
   "zones": [
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下A",
+      "name": "A1",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下B",
+      "name": "A2",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下C",
+      "name": "A3",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下D",
+      "name": "A4",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下E",
+      "name": "A5",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下F",
+      "name": "A6",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下G",
+      "name": "A7",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下H",
+      "name": "A8",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下I",
+      "name": "A9",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下J",
+      "name": "A10",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下K",
+      "name": "A11",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下L",
+      "name": "A12",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "下層",
-      "name": "東下M",
+      "name": "A13",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "東下R1"
-    },
-    {
-      "field": "樂天桃園棒球場",
-      "orientation": "一壘側",
-      "level": "下層",
-      "name": "東下R2"
-    },
-    {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下A"
+      "name": "B1"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下B"
+      "name": "B2"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下C"
+      "name": "B3"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下D"
+      "name": "B4"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下E"
+      "name": "B5"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下F"
+      "name": "B6"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下G"
+      "name": "B7"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下H"
+      "name": "B8"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下I"
+      "name": "B9"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下J"
+      "name": "B10"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "下層",
-      "name": "西下K"
+      "name": "B11"
     },
     {
-      "field": "樂天桃園棒球場",
-      "orientation": "三壘側",
-      "level": "下層",
-      "name": "西下L"
-    },
-    {
-      "field": "樂天桃園棒球場",
-      "orientation": "三壘側",
-      "level": "下層",
-      "name": "西下M"
-    },
-    {
-      "field": "樂天桃園棒球場",
-      "orientation": "三壘側",
-      "level": "下層",
-      "name": "西下R1",
-      "xMirror": true
-    },
-    {
-      "field": "樂天桃園棒球場",
-      "orientation": "三壘側",
-      "level": "下層",
-      "name": "西下R2",
-      "xMirror": true
-    },
-    {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上B",
+      "name": "D1",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上C",
+      "name": "D2",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上D",
+      "name": "D3",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上E",
+      "name": "D4",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上F",
+      "name": "D5",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上G",
+      "name": "D6",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上H",
+      "name": "D7",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上I",
+      "name": "D8",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上J",
+      "name": "D9",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上K",
+      "name": "D10",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上L",
+      "name": "D11",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "一壘側",
       "level": "上層",
-      "name": "東上M",
+      "name": "D12",
       "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
-      "orientation": "三壘側",
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
       "level": "上層",
-      "name": "西上B"
+      "name": "D13",
+      "xMirror": true
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上C"
+      "name": "C1"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上D"
+      "name": "C2"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上E"
+      "name": "C3"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上F"
+      "name": "C4"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上G"
+      "name": "C5"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上H"
+      "name": "C6"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上I"
+      "name": "C7"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上J"
+      "name": "C8"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上K"
+      "name": "C9"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上L"
+      "name": "C10"
     },
     {
-      "field": "樂天桃園棒球場",
+      "field": "新莊棒球場",
       "orientation": "三壘側",
       "level": "上層",
-      "name": "西上M"
+      "name": "C11"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "C12"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "三壘側",
+      "level": "上層",
+      "name": "C13"
+    },
+    {
+      "field": "新莊棒球場",
+      "orientation": "一壘側",
+      "level": "下層",
+      "name": "E"
     }
   ]
 }
