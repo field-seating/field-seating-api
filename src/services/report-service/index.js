@@ -14,7 +14,7 @@ const resPagination = require('../helpers/response');
 const { statusMap } = require('../../models/report/constant');
 
 class ReportService extends BaseService {
-  async postReport(photoId, content, { ip, userId = null } = {}) {
+  async postReport(photoId, { ip, userId = null } = {}, content = null) {
     // check photo exist
     const photoModel = new PhotoModel();
     const photo = await photoModel.getPhoto(parseInt(photoId));
@@ -33,8 +33,8 @@ class ReportService extends BaseService {
     async function createReport() {
       const newReport = await reportModel.createReport(
         photoId,
-        content,
-        userId
+        userId,
+        content
       );
       return newReport;
     }

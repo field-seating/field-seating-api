@@ -54,11 +54,11 @@ const photoController = {
         userId: userId,
       };
 
-      const content = req.body.content;
+      const content = req.body.content ? req.body.content : null;
       const photoId = Number(req.params.id);
 
       const reportService = new ReportService({ logger: req.logger });
-      const report = await reportService.postReport(photoId, content, reporter);
+      const report = await reportService.postReport(photoId, reporter, content);
 
       res.status(200).json(resSuccess(report));
     } catch (err) {

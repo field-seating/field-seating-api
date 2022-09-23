@@ -2,7 +2,7 @@ const prisma = require('../../config/prisma');
 const { statusMap } = require('./constant');
 
 class ReportModel {
-  async createReport(photoId, content, userId = null) {
+  async createReport(photoId, userId = null, content = null) {
     const newReport = await prisma.reports.create({
       data: {
         userId: userId,

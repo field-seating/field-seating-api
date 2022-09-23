@@ -102,8 +102,8 @@ describe('report-service.postReport', () => {
       };
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport.photoId).toBe(newPhoto.id);
@@ -170,14 +170,14 @@ describe('report-service.postReport', () => {
         userId: userId,
       };
       // create first time
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
       // create again
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
       //create again and again (to check only one data in DB)
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport).toHaveLength(1); //to check only one data in DB
@@ -241,7 +241,7 @@ describe('report-service.postReport', () => {
       };
       await assert.rejects(
         async () => {
-          await reportService.postReport(fakePhotoId, content, reporter);
+          await reportService.postReport(fakePhotoId, reporter, content);
         },
         {
           code: reportErrorMap.wrongPhotoId.code,
@@ -302,13 +302,71 @@ describe('report-service.postReport', () => {
       };
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport.photoId).toBe(newPhoto.id);
       expect(newReport.userId).toBe(userId);
       expect(newReport.content).toBe(content);
+      expect(newReport.status).toBe(statusMap.pending);
+    });
+  });
+
+  describe('with regular input by a visitor without content', () => {
+    it('should return report data with userId=null and status pending', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const spaceId = newSpace.id;
+      const userId = null;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const newPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create report
+      const reporter = {
+        ip: '0.0.0',
+        userId: userId,
+      };
+      const newReport = await reportService.postReport(newPhoto.id, reporter);
+
+      expect(newReport.photoId).toBe(newPhoto.id);
+      expect(newReport.userId).toBe(userId);
+      expect(newReport.content).toBe(null);
       expect(newReport.status).toBe(statusMap.pending);
     });
   });
@@ -367,10 +425,10 @@ describe('report-service.putReportsByReportId', () => {
       };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       const putReports = await reportService.putReportsByReportId(
@@ -438,10 +496,10 @@ describe('report-service.putReportsByReportId', () => {
       };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       const putReports = await reportService.putReportsByReportId(
@@ -508,10 +566,10 @@ describe('report-service.putReportsByReportId', () => {
       };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       await reportService.putReportsByReportId(report.id, 'no_issue');
@@ -579,12 +637,12 @@ describe('report-service.putReportsByReportId', () => {
       };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       // put report
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // make a fake reportId
       const fakeReportId = report.id + 100;
