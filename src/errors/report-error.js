@@ -19,6 +19,14 @@ const reportErrorMap = {
     message: '此回報已結案',
     code: 'rp005',
   },
+  reporterDoesNotExist: {
+    message: '沒有回報者資訊',
+    code: 'rp006',
+  },
+  wrongReporterType: {
+    message: '回報者資訊類別錯誤',
+    code: 'rp007',
+  },
 };
 
 module.exports = reportErrorMap;

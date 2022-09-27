@@ -3,5 +3,9 @@ const statusMap = {
   deleted: 'deleted',
   noIssue: 'no_issue',
 };
+const reporterTypeMap = {
+  USERID: 'USERID',
+  IP: 'IP',
+};
 
-module.exports = { statusMap };
+module.exports = { statusMap, reporterTypeMap };

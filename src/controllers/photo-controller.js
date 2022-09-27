@@ -1,8 +1,12 @@
+const { isNil } = require('ramda');
 const PhotoService = require('../services/photo-service');
 const ReportService = require('../services/report-service');
 const resSuccess = require('./helpers/response');
 const getUser = require('./helpers/get-user');
 const { paginationLimitMap } = require('../constants/pagination-constant');
+const GeneralError = require('../errors/error/general-error');
+const reportErrorMap = require('../errors/report-error');
+const { reporterTypeMap } = require('../models/report/constant');
 
 const photoController = {
   postPhotos: async (req, res, next) => {
@@ -49,10 +53,13 @@ const photoController = {
     try {
       const reportIp = req.ip;
       const userId = getUser(req) ? getUser(req).id : null;
-      const reporter = {
-        ip: reportIp,
-        userId: userId,
-      };
+
+      if (isNil(reportIp) && isNil(userId))
+        throw new GeneralError(reportErrorMap['reporterDoesNotExist']);
+
+      const reporter = userId
+        ? { id: userId, type: reporterTypeMap.USERID }
+        : { id: reportIp, type: reporterTypeMap.IP };
 
       const content = req.body.content ? req.body.content : null;
       const photoId = Number(req.params.id);
