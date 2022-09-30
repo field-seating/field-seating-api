@@ -11,46 +11,58 @@ const renderReportPhotosResponse = require('../helpers/render-report-photos-resp
 const { sizeMap } = require('../../constants/resize-constant');
 const { bucketMap } = require('../../constants/upload-constant');
 const resPagination = require('../helpers/response');
-const { statusMap } = require('../../models/report/constant');
+const { statusMap, reporterTypeMap } = require('../../models/report/constant');
+
+// practice Map
+const reporterTypeJsMap = new Map(Object.entries(reporterTypeMap));
 
 class ReportService extends BaseService {
-  async postReport(photoId, content, { ip, userId = null } = {}) {
+  async postReport(photoId, reporter, content) {
+    // if no reporter
+    if (isNil(reporter))
+      throw new GeneralError(reportErrorMap['reporterDoesNotExist']);
+
+    const { id, type } = reporter;
+
+    // judge type
+    if (!reporterTypeJsMap.has(type))
+      throw new GeneralError(reportErrorMap['wrongReporterType']);
+
     // check photo exist
     const photoModel = new PhotoModel();
     const photo = await photoModel.getPhoto(parseInt(photoId));
     if (isNil(photo)) throw new GeneralError(reportErrorMap['wrongPhotoId']);
 
-    // if is a user, check report exist
-    const reportModel = new ReportModel();
-
-    const reports = userId
-      ? await reportModel.getReportsByPhotoIdAndUserId(photoId, userId)
-      : [];
-
-    if (!isEmpty(reports)) return reports;
-
-    // post report
+    // create report function
     async function createReport() {
-      const newReport = await reportModel.createReport(
-        photoId,
-        content,
-        userId
-      );
-      return newReport;
+      const reportModel = new ReportModel();
+      // if reporter is user
+      if (type === reporterTypeJsMap.get('USER_ID')) {
+        // check the user has reported before or not
+        const reports = await reportModel.getReportsByPhotoIdAndUserId(
+          photoId,
+          id
+        );
+
+        if (!isEmpty(reports)) return reports;
+
+        // post report
+        const newReport = await reportModel.createReport(photoId, content, id);
+        return newReport;
+      }
+      // if reporter is visitor
+      if (type === reporterTypeJsMap.get('IP')) {
+        const newReport = await reportModel.createReport(photoId, content);
+        return newReport;
+      }
     }
 
-    // set rate limit use userId or ip by auth or not
-    const withRateLimit = userId
-      ? rateLimiterHelper({
-          windowSize: postReportRateLimit.windowSize,
-          limit: postReportRateLimit.limit,
-          key: `postReportService:${userId}-${photoId}`,
-        })
-      : rateLimiterHelper({
-          windowSize: postReportRateLimit.windowSize,
-          limit: postReportRateLimit.limit,
-          key: `postReportService:${ip}-${photoId}`,
-        });
+    // set rate limit by id
+    const withRateLimit = rateLimiterHelper({
+      windowSize: postReportRateLimit.windowSize,
+      limit: postReportRateLimit.limit,
+      key: `postReportService:${id}-${photoId}`,
+    });
 
     try {
       //create report with rate limit

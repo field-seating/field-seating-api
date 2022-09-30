@@ -231,7 +231,7 @@ model Reports {
   photo     Photos    @relation(fields: [photoId], references: [id])
   photoId   Int
   status    String   @db.VarChar(20)
-  content   String   @db.VarChar(255)
+  content   String?   @db.VarChar(255)
   resolvedTime DateTime? @db.DateTime
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

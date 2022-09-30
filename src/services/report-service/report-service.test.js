@@ -12,7 +12,7 @@ const UserService = require('../user-service');
 const ReportModel = require('../../models/report');
 const ReportService = require('../report-service');
 const reportErrorMap = require('../../errors/report-error');
-const { statusMap } = require('../../models/report/constant');
+const { statusMap, reporterTypeMap } = require('../../models/report/constant');
 
 afterEach(async () => {
   const userModel = new UserModel();
@@ -96,14 +96,11 @@ describe('report-service.postReport', () => {
 
       // create report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport.photoId).toBe(newPhoto.id);
@@ -165,19 +162,14 @@ describe('report-service.postReport', () => {
 
       // create report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       // create first time
-      await reportService.postReport(newPhoto.id, content, reporter);
-      // create again
-      await reportService.postReport(newPhoto.id, content, reporter);
-      //create again and again (to check only one data in DB)
+      await reportService.postReport(newPhoto.id, reporter, content);
+      //create again (to check only one data in DB)
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport).toHaveLength(1); //to check only one data in DB
@@ -235,13 +227,10 @@ describe('report-service.postReport', () => {
       // create report
       const content = '回報測試';
       const fakePhotoId = newPhoto.id + 1;
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       await assert.rejects(
         async () => {
-          await reportService.postReport(fakePhotoId, content, reporter);
+          await reportService.postReport(fakePhotoId, reporter, content);
         },
         {
           code: reportErrorMap.wrongPhotoId.code,
@@ -285,6 +274,7 @@ describe('report-service.postReport', () => {
       const path = 'testPhotoPath';
       const spaceId = newSpace.id;
       const userId = null;
+      const reportIp = '0.0.0';
       const dateTime = new Date();
       const photoModel = new PhotoModel();
       const newPhoto = await photoModel.createPhoto(
@@ -296,20 +286,190 @@ describe('report-service.postReport', () => {
 
       // create report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
       const newReport = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       expect(newReport.photoId).toBe(newPhoto.id);
       expect(newReport.userId).toBe(userId);
       expect(newReport.content).toBe(content);
       expect(newReport.status).toBe(statusMap.pending);
+    });
+  });
+
+  describe('with regular input by a visitor without content', () => {
+    it('should return report data with userId=null and status pending', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const spaceId = newSpace.id;
+      const userId = null;
+      const reportIp = '0.0.0';
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const newPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create report
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
+      const newReport = await reportService.postReport(newPhoto.id, reporter);
+
+      expect(newReport.photoId).toBe(newPhoto.id);
+      expect(newReport.userId).toBe(userId);
+      expect(newReport.content).toBe(null);
+      expect(newReport.status).toBe(statusMap.pending);
+    });
+  });
+
+  describe('without reporter', () => {
+    it('should return reporterDoesNotExist error', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const spaceId = newSpace.id;
+      const userId = null;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const newPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create report with no reporter
+      const reporter = null;
+
+      await assert.rejects(
+        async () => {
+          await reportService.postReport(newPhoto.id, reporter);
+        },
+        {
+          code: reportErrorMap.reporterDoesNotExist.code,
+        }
+      );
+    });
+  });
+
+  describe('with wrong reporter type', () => {
+    it('should return reporterDoesNotExist error', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create test photo data
+      const path = 'testPhotoPath';
+      const spaceId = newSpace.id;
+      const userId = null;
+      const reportIp = '0.0.0';
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const newPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create report with no reporter
+      const reporter = { id: reportIp, type: 'fakeType' };
+
+      await assert.rejects(
+        async () => {
+          await reportService.postReport(newPhoto.id, reporter);
+        },
+        {
+          code: reportErrorMap.wrongReporterType.code,
+        }
+      );
     });
   });
 });
@@ -349,6 +509,7 @@ describe('report-service.putReportsByReportId', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = null;
+      const reportIp = '0.0.0';
       const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
@@ -361,16 +522,13 @@ describe('report-service.putReportsByReportId', () => {
 
       // create  two report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       const putReports = await reportService.putReportsByReportId(
@@ -420,6 +578,7 @@ describe('report-service.putReportsByReportId', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = null;
+      const reportIp = '0.0.0';
       const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
@@ -432,16 +591,13 @@ describe('report-service.putReportsByReportId', () => {
 
       // create  two report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       const putReports = await reportService.putReportsByReportId(
@@ -490,6 +646,7 @@ describe('report-service.putReportsByReportId', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = null;
+      const reportIp = '0.0.0';
       const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
@@ -502,16 +659,13 @@ describe('report-service.putReportsByReportId', () => {
 
       // create  two report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // put report by status: deleted
       await reportService.putReportsByReportId(report.id, 'no_issue');
@@ -561,6 +715,7 @@ describe('report-service.putReportsByReportId', () => {
       // create test photo data
       const path = 'testPhotoPath';
       const userId = null;
+      const reportIp = '0.0.0';
       const spaceId = newSpace.id;
       const dateTime = new Date();
       const photoModel = new PhotoModel();
@@ -573,18 +728,15 @@ describe('report-service.putReportsByReportId', () => {
 
       // create one report
       const content = '回報測試';
-      const reporter = {
-        ip: '0.0.0',
-        userId: userId,
-      };
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
       const report = await reportService.postReport(
         newPhoto.id,
-        content,
-        reporter
+        reporter,
+        content
       );
 
       // put report
-      await reportService.postReport(newPhoto.id, content, reporter);
+      await reportService.postReport(newPhoto.id, reporter, content);
 
       // make a fake reportId
       const fakeReportId = report.id + 100;
