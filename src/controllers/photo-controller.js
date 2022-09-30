@@ -58,7 +58,7 @@ const photoController = {
         throw new GeneralError(reportErrorMap['reporterDoesNotExist']);
 
       const reporter = userId
-        ? { id: userId, type: reporterTypeMap.USERID }
+        ? { id: userId, type: reporterTypeMap.USER_ID }
         : { id: reportIp, type: reporterTypeMap.IP };
 
       const content = req.body.content ? req.body.content : null;

@@ -96,7 +96,7 @@ describe('report-service.postReport', () => {
 
       // create report
       const content = '回報測試';
-      const reporter = { id: userId, type: reporterTypeMap.USERID };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       const newReport = await reportService.postReport(
         newPhoto.id,
         reporter,
@@ -162,7 +162,7 @@ describe('report-service.postReport', () => {
 
       // create report
       const content = '回報測試';
-      const reporter = { id: userId, type: reporterTypeMap.USERID };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       // create first time
       await reportService.postReport(newPhoto.id, reporter, content);
       //create again (to check only one data in DB)
@@ -227,7 +227,7 @@ describe('report-service.postReport', () => {
       // create report
       const content = '回報測試';
       const fakePhotoId = newPhoto.id + 1;
-      const reporter = { id: userId, type: reporterTypeMap.USERID };
+      const reporter = { id: userId, type: reporterTypeMap.USER_ID };
       await assert.rejects(
         async () => {
           await reportService.postReport(fakePhotoId, reporter, content);

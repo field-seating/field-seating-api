@@ -37,7 +37,7 @@ class ReportService extends BaseService {
     async function createReport() {
       const reportModel = new ReportModel();
       // if reporter is user
-      if (type === reporterTypeJsMap.get('USERID')) {
+      if (type === reporterTypeJsMap.get('USER_ID')) {
         // check the user has reported before or not
         const reports = await reportModel.getReportsByPhotoIdAndUserId(
           photoId,

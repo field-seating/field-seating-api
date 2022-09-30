@@ -4,7 +4,7 @@ const statusMap = {
   noIssue: 'no_issue',
 };
 const reporterTypeMap = {
-  USERID: 'USERID',
+  USER_ID: 'USER_ID',
   IP: 'IP',
 };
 
