@@ -77,6 +77,11 @@ class ReportService extends BaseService {
     }
   }
   async getReportPhotos(paginationOption) {
+    // check filter word
+    if (
+      !Object.prototype.hasOwnProperty.call(statusMap, paginationOption.filter) // https://eslint.org/docs/latest/rules/no-prototype-builtins
+    )
+      throw new GeneralError(reportErrorMap['wrongReportStatusType']);
     // get reportPhotos
     const reportModel = new ReportModel();
     const reportPhotos = await reportModel.getReportsPhotos(paginationOption);
