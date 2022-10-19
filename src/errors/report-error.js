@@ -27,10 +27,6 @@ const reportErrorMap = {
     message: '回報者資訊類別錯誤',
     code: 'rp007',
   },
-  wrongReportStatusType: {
-    message: '篩選不存在的狀態',
-    code: 'rp008',
-  },
 };
 
 module.exports = reportErrorMap;

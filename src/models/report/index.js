@@ -42,7 +42,7 @@ class ReportModel {
     const reportPhotos = await prisma.reports.findMany({
       take: limit,
       where: {
-        status: filter,
+        status: filter ? filter : {},
       },
       select: {
         id: true,

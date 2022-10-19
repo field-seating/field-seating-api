@@ -836,7 +836,7 @@ describe('report-service.getReportsPhotos', () => {
     });
   });
   describe('with wrong filter', () => {
-    it('should throw wrong statusType error', async () => {
+    it('should show all report ', async () => {
       // create space
       const fieldModel = new FieldModel();
       const levelModel = new LevelModel();
@@ -903,17 +903,14 @@ describe('report-service.getReportsPhotos', () => {
       // check getReportsPhotos with wrong filter word
       const paginationOption = {
         limit: paginationLimitMap.reports,
-        filter: 'wrongFilter',
+        filter: 'fakeWord',
       };
 
-      await assert.rejects(
-        async () => {
-          await reportService.getReportPhotos(paginationOption);
-        },
-        {
-          code: reportErrorMap.wrongReportStatusType.code,
-        }
+      const getReportsPhotos = await reportService.getReportPhotos(
+        paginationOption
       );
+
+      expect(getReportsPhotos.reportPhotos).toHaveLength(2);
     });
   });
 });
