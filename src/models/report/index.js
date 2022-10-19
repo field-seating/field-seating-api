@@ -59,7 +59,7 @@ class ReportModel {
         },
       },
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
     });
 

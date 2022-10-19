@@ -12,6 +12,7 @@ const UserService = require('../user-service');
 const ReportModel = require('../../models/report');
 const ReportService = require('../report-service');
 const reportErrorMap = require('../../errors/report-error');
+const { paginationLimitMap } = require('../../constants/pagination-constant');
 const { statusMap, reporterTypeMap } = require('../../models/report/constant');
 
 afterEach(async () => {
@@ -748,6 +749,169 @@ describe('report-service.putReportsByReportId', () => {
         },
         {
           code: reportErrorMap.wrongReportId.code,
+        }
+      );
+    });
+  });
+});
+
+describe('report-service.getReportsPhotos', () => {
+  describe('with filter pending', () => {
+    it('should return reports which status is pending', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create two test photo data
+      const path = 'testPhotoPath';
+      const path2 = 'testPhotoPath2';
+      const userId = null;
+      const reportIp = '0.0.0';
+      const spaceId = newSpace.id;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const firstPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+      const secondPhoto = await photoModel.createPhoto(
+        path2,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create  two report
+      const content = '回報測試';
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
+      const firstReport = await reportService.postReport(
+        firstPhoto.id,
+        reporter,
+        content
+      );
+      await reportService.postReport(secondPhoto.id, reporter, content);
+
+      // put first report's status be no_issue
+      await reportService.putReportsByReportId(firstReport.id, 'no_issue');
+
+      // check getReportsPhotos with filter: pending
+      const paginationOption = {
+        limit: paginationLimitMap.reports,
+        filter: statusMap.pending,
+      };
+
+      const getReportsPhotos = await reportService.getReportPhotos(
+        paginationOption
+      );
+
+      expect(getReportsPhotos.reportPhotos).toHaveLength(1);
+      expect(getReportsPhotos.reportPhotos[0].status).toBe('pending');
+    });
+  });
+  describe('with wrong filter', () => {
+    it('should throw wrong statusType error', async () => {
+      // create space
+      const fieldModel = new FieldModel();
+      const levelModel = new LevelModel();
+      const orientationModel = new OrientationModel();
+      const zoneModel = new ZoneModel();
+      const spaceModel = new SpaceModel();
+
+      const newField = await fieldModel.createField('testField', '');
+      const newLevel = await levelModel.createLevel('testLevel');
+      const newOrientation = await orientationModel.createOrientation(
+        'testOrientation'
+      );
+      const newZone = await zoneModel.createZone(
+        newField.id,
+        newOrientation.id,
+        newLevel.id,
+        'testZone'
+      );
+      const newSpace = await spaceModel.createSpace(
+        newZone.id,
+        'seat',
+        'testVersion',
+        1,
+        1,
+        '',
+        1,
+        1
+      );
+
+      // create two test photo data
+      const path = 'testPhotoPath';
+      const path2 = 'testPhotoPath2';
+      const userId = null;
+      const reportIp = '0.0.0';
+      const spaceId = newSpace.id;
+      const dateTime = new Date();
+      const photoModel = new PhotoModel();
+      const firstPhoto = await photoModel.createPhoto(
+        path,
+        userId,
+        spaceId,
+        dateTime
+      );
+      const secondPhoto = await photoModel.createPhoto(
+        path2,
+        userId,
+        spaceId,
+        dateTime
+      );
+
+      // create  two report
+      const content = '回報測試';
+      const reporter = { id: reportIp, type: reporterTypeMap.IP };
+      const firstReport = await reportService.postReport(
+        firstPhoto.id,
+        reporter,
+        content
+      );
+      await reportService.postReport(secondPhoto.id, reporter, content);
+
+      // put first report's status be no_issue
+      await reportService.putReportsByReportId(firstReport.id, 'no_issue');
+
+      // check getReportsPhotos with wrong filter word
+      const paginationOption = {
+        limit: paginationLimitMap.reports,
+        filter: 'wrongFilter',
+      };
+
+      await assert.rejects(
+        async () => {
+          await reportService.getReportPhotos(paginationOption);
+        },
+        {
+          code: reportErrorMap.wrongReportStatusType.code,
         }
       );
     });
