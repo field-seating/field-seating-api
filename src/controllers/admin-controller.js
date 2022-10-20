@@ -1,13 +1,17 @@
 const resSuccess = require('./helpers/response');
 const ReportService = require('../services/report-service');
 const { paginationLimitMap } = require('../constants/pagination-constant');
+const { statusMap } = require('../models/report/constant');
 
 const adminController = {
   getReportPhotos: async (req, res, next) => {
     try {
       const limit = req.query.limit;
+      const filter = req.query.filter;
+
       const paginationOption = {
         limit: limit ? Number(limit) : paginationLimitMap.reports,
+        filter: filter ? filter.toLowerCase() : statusMap.pending,
       };
       // get reportPhotos
       const reportService = new ReportService({ logger: req.logger });
