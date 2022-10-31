@@ -77,6 +77,11 @@ class ReportService extends BaseService {
     }
   }
   async getReportPhotos(paginationOption) {
+    // check filter word
+    if (isNil(statusMap[paginationOption.filter])) {
+      paginationOption.filter = null;
+    }
+
     // get reportPhotos
     const reportModel = new ReportModel();
     const reportPhotos = await reportModel.getReportsPhotos(paginationOption);

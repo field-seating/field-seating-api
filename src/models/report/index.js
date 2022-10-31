@@ -38,10 +38,12 @@ class ReportModel {
     });
     return report;
   }
-  async getReportsPhotos({ limit }) {
+  async getReportsPhotos({ limit, filter }) {
     const reportPhotos = await prisma.reports.findMany({
       take: limit,
-      where: {},
+      where: {
+        status: filter ? filter : {},
+      },
       select: {
         id: true,
         userId: true,
@@ -57,7 +59,7 @@ class ReportModel {
         },
       },
       orderBy: {
-        createdAt: 'desc',
+        createdAt: 'asc',
       },
     });
 
