@@ -9,6 +9,7 @@ const LevelModel = require('../../src/models/level');
 const OrientationModel = require('../../src/models/orientation');
 const ZoneModel = require('../../src/models/zone');
 const SpaceModel = require('../../src/models/space/index');
+const FieldsCache = require('../../src/cache/fields');
 
 const POOL_SIZE = 10;
 
@@ -148,6 +149,13 @@ async function createData(fieldData, folder) {
     });
 
   logger.info('the create job is successful');
+
+  logger.info('start to purge cache');
+
+  const fieldsCache = new FieldsCache({ logger });
+  await fieldsCache.purgeAll();
+
+  logger.info('finish purging cache');
 }
 
 module.exports = createData;
