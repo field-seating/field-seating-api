@@ -31,6 +31,7 @@ class FieldService extends BaseService {
     return orientationList;
   }
   async getLevelsByField(fieldId) {
+    console.log('go');
     const levelModel = new LevelModel();
     const levelList = await levelModel.getLevelsByField(fieldId);
 
