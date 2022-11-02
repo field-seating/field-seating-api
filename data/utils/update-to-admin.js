@@ -2,17 +2,17 @@ const UserModel = require('../../src/models/user');
 const logger = require('../../src/config/logger');
 const { isNil } = require('ramda');
 
-async function updateToAdmin(ownerId) {
+async function updateToAdmin(ownerIds) {
   const userModel = new UserModel();
-  ownerId.forEach(async (owner) => {
-    logger.info(`update user:${owner} to admin`);
+  ownerIds.forEach(async (ownerId) => {
+    logger.info(`update user:${ownerId} to admin`);
 
     // check userId existed
-    const user = await userModel.getUserById(owner);
+    const user = await userModel.getUserById(ownerId);
 
     // if userId is not existed
     if (isNil(user)) {
-      return logger.info(`user:${owner} not found`);
+      return logger.info(`user:${ownerId} not found`);
     }
 
     // update to admin
