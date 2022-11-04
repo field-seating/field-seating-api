@@ -1,5 +1,5 @@
 const updateToAdmin = require('./utils/update-to-admin');
 
-const ownerId = [1, 2];
+const ownerIds = [1, 5];
 
-updateToAdmin(ownerId);
+updateToAdmin(ownerIds);
