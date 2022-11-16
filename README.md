@@ -62,8 +62,12 @@ ctrl + c
 1. 測試範圍：針對商業邏輯主要存在的service層及相關工具    
 2. 執行測試：
 
+
+
 ```
-npm run container:test  
+請先安裝docker
+
+npm run container:test  // 測試
 npm run container:test:watch  // 測試並持續監聽
 ```
 
