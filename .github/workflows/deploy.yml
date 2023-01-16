@@ -50,20 +50,20 @@ jobs:
           build-args: |
             BUILD_VERSION=${{ github.sha }}
 
-  dispatch:
-    needs: build-and-push-image
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/github-script@v6
-      with:
-        github-token: ${{ secrets.PAT_TOKEN }}
-        script: |
-          await github.rest.actions.createWorkflowDispatch({
-            owner: 'field-seating',
-            repo: 'devops-ansible',
-            workflow_id: 'api-deployment.yml',
-            ref: 'main',
-            inputs: {
-              deployEnv: 'staging'
-            }
-          })
+  # dispatch:
+  #   needs: build-and-push-image
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/github-script@v6
+  #     with:
+  #       github-token: ${{ secrets.PAT_TOKEN }}
+  #       script: |
+  #         await github.rest.actions.createWorkflowDispatch({
+  #           owner: 'field-seating',
+  #           repo: 'devops-ansible',
+  #           workflow_id: 'api-deployment.yml',
+  #           ref: 'main',
+  #           inputs: {
+  #             deployEnv: 'staging'
+  #           }
+  #         })
