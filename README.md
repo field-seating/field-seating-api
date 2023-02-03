@@ -1,4 +1,4 @@
-## Field Seating 球場坐座 - 座位視野共享平台 API
+## Field Seating 球場坐座-座位視野共享平台 API
 
 [![Test](https://github.com/field-seating/field-seating-api/actions/workflows/test.yml/badge.svg)](https://github.com/field-seating/field-seating-api/actions/workflows/test.yml)
 
